@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="redis–操作【1】启动redis123cd &#x2F;usr&#x2F;local&#x2F;binredis-server &#x2F;opt&#x2F;redis-5.0.4&#x2F;redis.conf  -- 已配置文件的方式启动redis-cli  -- 进入客户端       【2】redis基础操作123456789101112131415161718192021222324252627282930313233343536373839">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis--操作">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/09/24/%E5%90%8E%E7%AB%AF/%E6%93%8D%E4%BD%9C/redis--%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="redis–操作【1】启动redis123cd &#x2F;usr&#x2F;local&#x2F;binredis-server &#x2F;opt&#x2F;redis-5.0.4&#x2F;redis.conf  -- 已配置文件的方式启动redis-cli  -- 进入客户端       【2】redis基础操作123456789101112131415161718192021222324252627282930313233343536373839">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-23T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.578Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>redis--操作 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="redis--操作"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-24 00:19" pubdate>
+          2022年9月24日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          132 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">redis--操作</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="redis–操作"><a href="#redis–操作" class="headerlink" title="redis–操作"></a>redis–操作</h2><h3 id="【1】启动redis"><a href="#【1】启动redis" class="headerlink" title="【1】启动redis"></a>【1】启动redis</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">cd /usr/local/bin<br>redis-server /opt/redis-<span class="hljs-number">5.0</span><span class="hljs-number">.4</span>/redis.conf  -- 已配置文件的方式启动<br>redis-cli  -- 进入客户端    <br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="【2】redis基础操作"><a href="#【2】redis基础操作" class="headerlink" title="【2】redis基础操作"></a>【2】redis基础操作</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">&lt;dependencies&gt;</span><br>        <span class="hljs-string">&lt;!--java和redis打交道的API客户端--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;3.1.0&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br>        <span class="hljs-string">&lt;!--redis的连接池技术--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;commons-pool&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;commons-pool&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;1.6&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br>        <span class="hljs-string">&lt;!--添加该依赖一个新增xml</span> <span class="hljs-string">spring</span> <span class="hljs-string">config</span> <span class="hljs-string">文件--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;5.2.7.RELEASE&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br><br>        <span class="hljs-string">&lt;!--实现分布式锁的工具类--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;org.redisson&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;redisson&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;3.6.1&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br>        <span class="hljs-string">&lt;!--spring操作redis的工具类--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;org.springframework.data&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;2.3.2.RELEASE&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br>        <span class="hljs-string">&lt;!--json解析工具--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;2.9.8&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br><br>        <span class="hljs-string">&lt;!--单元测试的依赖--&gt;</span><br>        <span class="hljs-string">&lt;dependency&gt;</span><br>            <span class="hljs-string">&lt;groupId&gt;junit&lt;/groupId&gt;</span><br>            <span class="hljs-string">&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br>            <span class="hljs-string">&lt;version&gt;4.12&lt;/version&gt;</span><br>        <span class="hljs-string">&lt;/dependency&gt;</span><br>    <span class="hljs-string">&lt;/dependencies&gt;</span><br>    <span class="hljs-string">&lt;!--添加内嵌的Tomcat--&gt;</span><br>    <span class="hljs-string">&lt;build&gt;</span><br>        <span class="hljs-string">&lt;plugins&gt;</span><br>            <span class="hljs-string">&lt;plugin&gt;</span><br>                <span class="hljs-string">&lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;</span><br>                <span class="hljs-string">&lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;</span><br>                <span class="hljs-string">&lt;configuration&gt;</span><br>                    <span class="hljs-string">&lt;port&gt;8080&lt;/port&gt;</span><br>                    <span class="hljs-string">&lt;path&gt;/&lt;/path&gt;</span><br>                <span class="hljs-string">&lt;/configuration&gt;</span><br>                <span class="hljs-string">&lt;executions&gt;</span><br>                    <span class="hljs-string">&lt;execution&gt;</span><br>                        <span class="hljs-string">&lt;!--</span> <span class="hljs-string">打包完成后,运行服务</span> <span class="hljs-string">--&gt;</span><br>                        <span class="hljs-string">&lt;phase&gt;package&lt;/phase&gt;</span><br>                        <span class="hljs-string">&lt;goals&gt;</span><br>                            <span class="hljs-string">&lt;goal&gt;run&lt;/goal&gt;</span><br>                        <span class="hljs-string">&lt;/goals&gt;</span><br>                    <span class="hljs-string">&lt;/execution&gt;</span><br>                <span class="hljs-string">&lt;/executions&gt;</span><br>            <span class="hljs-string">&lt;/plugin&gt;</span><br>        <span class="hljs-string">&lt;/plugins&gt;</span><br>    <span class="hljs-string">&lt;/build&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.liu;<br><br><span class="hljs-keyword">import</span> com.liu.utils.JedisPoolUtil;<br><span class="hljs-keyword">import</span> org.junit.Test;<br><span class="hljs-keyword">import</span> redis.clients.jedis.Jedis;<br><span class="hljs-keyword">import</span> redis.clients.jedis.Transaction;<br><br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Iterator;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Set;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestRedis</span> &#123;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testString</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">/*-----------------功能:连接redis 2022-09-24 -----------------*/</span><br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">pong</span> <span class="hljs-operator">=</span> jedis.ping();<br>        System.out.println(<span class="hljs-string">&quot;pong=&quot;</span> + pong);  <span class="hljs-comment">// pong=PONG</span><br>        <span class="hljs-comment">/*-----------------功能:设置值 2022-09-24 -----------------*/</span><br>        jedis.set(<span class="hljs-string">&quot;k1&quot;</span>,<span class="hljs-string">&quot;v1&quot;</span>);<br>        jedis.set(<span class="hljs-string">&quot;k2&quot;</span>,<span class="hljs-string">&quot;v2&quot;</span>);<br>        jedis.set(<span class="hljs-string">&quot;k3&quot;</span>,<span class="hljs-string">&quot;v3&quot;</span>);<br>        <span class="hljs-comment">/*-----------------功能:模糊查询+迭代器遍历集合 2022-09-24 -----------------*/</span><br>        Set&lt;String&gt; set = jedis.keys(<span class="hljs-string">&quot;*&quot;</span>);<br>        Iterator&lt;String&gt; iterator = set.iterator();<br>        <span class="hljs-keyword">for</span>(set.iterator();iterator.hasNext();)&#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> iterator.next();<br>            System.out.println(k + <span class="hljs-string">&quot;-&gt;&quot;</span> + jedis.get(k));<br>        &#125;<br>        <span class="hljs-comment">/*-----------------功能:查看键值是否存在 2022-09-24 -----------------*/</span><br>        <span class="hljs-type">Boolean</span> <span class="hljs-variable">k1Exists</span> <span class="hljs-operator">=</span> jedis.exists(<span class="hljs-string">&quot;k1&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;k1Exists=&quot;</span> + k1Exists);<br>        <span class="hljs-comment">/*-----------------功能:查看键值的过期时间 2022-09-24 -----------------*/</span><br>        System.out.println(jedis.ttl(<span class="hljs-string">&quot;k1&quot;</span>));  <span class="hljs-comment">//k1Exists=true</span><br>        <span class="hljs-comment">/*-----------------功能:一次设置多个值 2022-09-24 -----------------*/</span><br>        jedis.mset(<span class="hljs-string">&quot;k4&quot;</span>,<span class="hljs-string">&quot;v4&quot;</span>,<span class="hljs-string">&quot;k5&quot;</span>,<span class="hljs-string">&quot;v5&quot;</span>);  <span class="hljs-comment">// -1</span><br>        <span class="hljs-comment">/*-----------------功能:一次获取多个值 2022-09-24 -----------------*/</span><br>        System.out.println(jedis.mget(<span class="hljs-string">&quot;k1&quot;</span>,<span class="hljs-string">&quot;k2&quot;</span>,<span class="hljs-string">&quot;k3&quot;</span>,<span class="hljs-string">&quot;k4&quot;</span>,<span class="hljs-string">&quot;k5&quot;</span>)); <span class="hljs-comment">// 得到是一个集合  [v1, v2, v3, v4, v5]</span><br>    &#125;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testList</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-comment">/*-----------------功能:向列表中放入元素 2022-09-24 -----------------*/</span><br>        jedis.lpush(<span class="hljs-string">&quot;list01&quot;</span>,<span class="hljs-string">&quot;l1&quot;</span>,<span class="hljs-string">&quot;l2&quot;</span>,<span class="hljs-string">&quot;l3&quot;</span>);<br>        <span class="hljs-comment">/*-----------------功能:查询列表中的元素(查询list01中的全部数据0表示开始，-1表示结尾) 2022-09-24 -----------------*/</span><br>        List&lt;String&gt; list01 = jedis.lrange(<span class="hljs-string">&quot;list01&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (String s : list01) &#123;  <span class="hljs-comment">// l3 l2 l1</span><br>            System.out.println(s);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSet</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-comment">/*-----------------功能:向set中放值 2022-09-24 -----------------*/</span><br>        jedis.sadd(<span class="hljs-string">&quot;order&quot;</span>,<span class="hljs-string">&quot;jd001&quot;</span>);<br>        jedis.sadd(<span class="hljs-string">&quot;order&quot;</span>,<span class="hljs-string">&quot;jd002&quot;</span>);<br>        jedis.sadd(<span class="hljs-string">&quot;order&quot;</span>,<span class="hljs-string">&quot;jd003&quot;</span>);<br>        <span class="hljs-comment">/*-----------------功能:查询set的值 2022-09-24 -----------------*/</span><br>        Set&lt;String&gt; order = jedis.smembers(<span class="hljs-string">&quot;order&quot;</span>);<br>        Iterator&lt;String&gt; iterator = order.iterator();<br>        <span class="hljs-keyword">for</span>(order.iterator();iterator.hasNext();)&#123; <span class="hljs-comment">// jd002 jd001 jd003</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> iterator.next();<br>            System.out.println(s);<br>        &#125;<br>        <span class="hljs-comment">/*-----------------功能:移除set的某元素 2022-09-24 -----------------*/</span><br>        jedis.srem(<span class="hljs-string">&quot;order&quot;</span>,<span class="hljs-string">&quot;jd003&quot;</span>);<br>        System.out.println(jedis.smembers(<span class="hljs-string">&quot;order&quot;</span>).size()); <span class="hljs-comment">// 2</span><br>    &#125;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testHash</span><span class="hljs-params">()</span>&#123; <span class="hljs-comment">// 类似于一张表了</span><br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-comment">/*-----------------功能:向hashSet中新增元素（key field value） 2022-09-24 -----------------*/</span><br>        jedis.hset(<span class="hljs-string">&quot;user&quot;</span>,<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;张三&quot;</span>);<br>        jedis.hset(<span class="hljs-string">&quot;user&quot;</span>,<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;李四&quot;</span>);<br>        <span class="hljs-comment">// 获取值</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">hget</span> <span class="hljs-operator">=</span> jedis.hget(<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>);<br>        System.out.println(hget);  <span class="hljs-comment">// 李四</span><br><br>        <span class="hljs-comment">/*-----------------功能:向hashMap中放值 2022-09-24 -----------------*/</span><br>        HashMap&lt;String,String&gt; user2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String,String&gt;();<br>        user2.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;张三&quot;</span>);<br>        user2.put(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;18&quot;</span>);<br>        user2.put(<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;13333333333&quot;</span>);<br>        jedis.hmset(<span class="hljs-string">&quot;user2&quot;</span>,user2);<br>        <span class="hljs-comment">/*-----------------功能:获取HashMap的值 2022-09-24 -----------------*/</span><br>        List&lt;String&gt; list = jedis.hmget(<span class="hljs-string">&quot;user2&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;phone&quot;</span>);<br>        <span class="hljs-keyword">for</span> (String s : list) &#123;  <span class="hljs-comment">// 张三 18 13333333333</span><br>            System.out.println(s);<br>        &#125;<br>    &#125;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testZSet</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        jedis.zadd(<span class="hljs-string">&quot;zSet01&quot;</span>,<span class="hljs-number">10d</span>,<span class="hljs-string">&quot;zs1&quot;</span>);<br>        jedis.zadd(<span class="hljs-string">&quot;zSet01&quot;</span>,<span class="hljs-number">20d</span>,<span class="hljs-string">&quot;zs2&quot;</span>);<br>        jedis.zadd(<span class="hljs-string">&quot;zSet01&quot;</span>,<span class="hljs-number">30d</span>,<span class="hljs-string">&quot;zs3&quot;</span>);<br>        Set&lt;String&gt; zSet01 = jedis.zrange(<span class="hljs-string">&quot;zSet01&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        Iterator&lt;String&gt; iterator = zSet01.iterator();<br>        <span class="hljs-keyword">while</span>(iterator.hasNext())&#123; <span class="hljs-comment">// zs1  zs2</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> iterator.next();<br>            System.out.println(s);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 测试redis事务</span><br><span class="hljs-comment">     * 介绍：redis中存有余额及累计支出字段，支出-》余额减少-》累计支出增加</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testWork</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-comment">/*-----------------功能:初始化余额、累计消费 2022-09-24 -----------------*/</span><br>        jedis.set(<span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-string">&quot;1000&quot;</span>); <span class="hljs-comment">// 有1000块钱</span><br>        jedis.set(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>); <span class="hljs-comment">// 累计消费初始0元</span><br><br>        <span class="hljs-comment">/*-----------------功能:开启事务并进行消费 2022-09-24 -----------------*/</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">money</span> <span class="hljs-operator">=</span> Integer.parseInt(jedis.get(<span class="hljs-string">&quot;money&quot;</span>));<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zhiChu</span> <span class="hljs-operator">=</span><span class="hljs-number">100</span>; <span class="hljs-comment">// 支出100元</span><br>        <span class="hljs-comment">// @问题：为什么使用监控</span><br>        <span class="hljs-comment">// -在exec之前，我开启了另一个窗口（线程），对监控的in做了修改，所以本次的事务将被打断（失效），类似于“乐观锁</span><br>        jedis.watch(<span class="hljs-string">&quot;money&quot;</span>); <span class="hljs-comment">// 监控余额</span><br>        Thread.sleep(<span class="hljs-number">5000</span>); <span class="hljs-comment">// 模拟网络延迟</span><br>        <span class="hljs-keyword">if</span>(zhiChu&gt;money)&#123;<br>            jedis.unwatch(); <span class="hljs-comment">// 取消监控</span><br>            System.out.println(<span class="hljs-string">&quot;余额不足！&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 进行扣费</span><br>            <span class="hljs-type">Transaction</span> <span class="hljs-variable">transaction</span> <span class="hljs-operator">=</span> jedis.multi(); <span class="hljs-comment">// 开启事务</span><br>            transaction.decrBy(<span class="hljs-string">&quot;money&quot;</span>,zhiChu);<br>            transaction.incrBy(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>,zhiChu);<br>            transaction.exec(); <span class="hljs-comment">// 提交事务 // 一旦执行了exec命令，那么之前加的所有监控自动失效！</span><br>            System.out.println(<span class="hljs-string">&quot;money=&quot;</span> + jedis.get(<span class="hljs-string">&quot;money&quot;</span>));  <span class="hljs-comment">//money=900</span><br>            System.out.println(<span class="hljs-string">&quot;xiaoFeiNum=&quot;</span> + jedis.get(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>)); <span class="hljs-comment">//xiaoFeiNum=100</span><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 测试jedis连接池</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testJedisPool</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> JedisPoolUtil.getJedis();<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis1</span> <span class="hljs-operator">=</span> JedisPoolUtil.getJedis();<br>        System.out.println(jedis==jedis1); <span class="hljs-comment">// 获取的jedis连接是同一个连接</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="【3】redis事务"><a href="#【3】redis事务" class="headerlink" title="【3】redis事务"></a>【3】redis事务</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 测试redis事务</span><br><span class="hljs-comment">     * 介绍：redis中存有余额及累计支出字段，支出-》余额减少-》累计支出增加</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testWork</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>        <span class="hljs-comment">/*-----------------功能:初始化余额、累计消费 2022-09-24 -----------------*/</span><br>        jedis.set(<span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-string">&quot;1000&quot;</span>); <span class="hljs-comment">// 有1000块钱</span><br>        jedis.set(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>); <span class="hljs-comment">// 累计消费初始0元</span><br><br>        <span class="hljs-comment">/*-----------------功能:开启事务并进行消费 2022-09-24 -----------------*/</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">money</span> <span class="hljs-operator">=</span> Integer.parseInt(jedis.get(<span class="hljs-string">&quot;money&quot;</span>));<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zhiChu</span> <span class="hljs-operator">=</span><span class="hljs-number">100</span>; <span class="hljs-comment">// 支出100元</span><br>        <span class="hljs-comment">// @问题：为什么使用监控</span><br>        <span class="hljs-comment">// -在exec之前，我开启了另一个窗口（线程），对监控的in做了修改，所以本次的事务将被打断（失效），类似于“乐观锁</span><br>        jedis.watch(<span class="hljs-string">&quot;money&quot;</span>); <span class="hljs-comment">// 监控余额</span><br>        Thread.sleep(<span class="hljs-number">5000</span>); <span class="hljs-comment">// 模拟网络延迟</span><br>        <span class="hljs-keyword">if</span>(zhiChu&gt;money)&#123;<br>            jedis.unwatch(); <span class="hljs-comment">// 取消监控</span><br>            System.out.println(<span class="hljs-string">&quot;余额不足！&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 进行扣费</span><br>            <span class="hljs-type">Transaction</span> <span class="hljs-variable">transaction</span> <span class="hljs-operator">=</span> jedis.multi(); <span class="hljs-comment">// 开启事务</span><br>            transaction.decrBy(<span class="hljs-string">&quot;money&quot;</span>,zhiChu);<br>            transaction.incrBy(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>,zhiChu);<br>            transaction.exec(); <span class="hljs-comment">// 提交事务 // 一旦执行了exec命令，那么之前加的所有监控自动失效！</span><br>            System.out.println(<span class="hljs-string">&quot;money=&quot;</span> + jedis.get(<span class="hljs-string">&quot;money&quot;</span>));  <span class="hljs-comment">//money=900</span><br>            System.out.println(<span class="hljs-string">&quot;xiaoFeiNum=&quot;</span> + jedis.get(<span class="hljs-string">&quot;xiaoFeiNum&quot;</span>)); <span class="hljs-comment">//xiaoFeiNum=100</span><br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="【4】redis连接池"><a href="#【4】redis连接池" class="headerlink" title="【4】redis连接池"></a>【4】redis连接池</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.liu.utils;<br><br><span class="hljs-keyword">import</span> redis.clients.jedis.Jedis;<br><span class="hljs-keyword">import</span> redis.clients.jedis.JedisPool;<br><span class="hljs-keyword">import</span> redis.clients.jedis.JedisPoolConfig;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Jedis连接池</span><br><span class="hljs-comment"> * 单例设计模式优化jedis连接池</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JedisPoolUtil</span> &#123;<br>    <span class="hljs-comment">/*-----------------功能:私有化成员方法 2022-09-24 -----------------*/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">JedisPoolUtil</span><span class="hljs-params">()</span>&#123;&#125;<br>    <span class="hljs-comment">/*-----------------功能:成员变量使用private static修饰 2022-09-24 -----------------*/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> JedisPool jedisPool=<span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> Jedis jedis=<span class="hljs-literal">null</span>;<br>    <span class="hljs-comment">/*-----------------功能:返回一个连接池 2022-09-24 -----------------*/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> JedisPool <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">/*-----------------功能:使用双层检测锁（企业中使用的非常的频繁） 2022-09-24 -----*/</span><br>        <span class="hljs-keyword">if</span>(jedisPool==<span class="hljs-literal">null</span>)&#123; <span class="hljs-comment">// 第一层：检测体温</span><br>            <span class="hljs-keyword">synchronized</span> (JedisPoolUtil.class)&#123; <span class="hljs-comment">// 排队进站</span><br>                <span class="hljs-keyword">if</span>(jedisPool==<span class="hljs-literal">null</span>)&#123; <span class="hljs-comment">// 第二层：查看健康码</span><br>                    <span class="hljs-type">JedisPoolConfig</span> <span class="hljs-variable">jedisPoolConfig</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JedisPoolConfig</span>();<br>                    jedisPoolConfig.setMaxTotal(<span class="hljs-number">1000</span>); <span class="hljs-comment">// 资源连接池中最大的链接数</span><br>                    jedisPoolConfig.setMaxIdle(<span class="hljs-number">30</span>); <span class="hljs-comment">// 资源池允许的最大空闲连接数</span><br>                    jedisPoolConfig.setMaxWaitMillis(<span class="hljs-number">60</span>*<span class="hljs-number">1000</span>); <span class="hljs-comment">// 当资源池链接用尽后，调用者的最大等待时间</span><br>                    jedisPoolConfig.setTestOnBorrow(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 向资源池列用连接是，是否做连接有效检验(如果业务量很大的时候建议设置为false,减少一次ping的开销)</span><br>                    jedisPool = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JedisPool</span>(jedisPoolConfig, <span class="hljs-string">&quot;192.168.37.128&quot;</span>, <span class="hljs-number">6379</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> jedisPool;<br>    &#125;<br>    <span class="hljs-comment">/*-----------------功能:对外提供一个调用的接口 2022-09-24 -----------------*/</span><br>    <span class="hljs-comment">// @-问题：资源为null代表什么？是没有闲着的jedis连接吗？</span><br>    <span class="hljs-comment">//连接池中只有一个jedis吗？</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Jedis <span class="hljs-title function_">getJedis</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">if</span> (jedis == <span class="hljs-literal">null</span>) &#123;<br>            jedis=getInstance().getResource();<br>        &#125;<br>        <span class="hljs-keyword">return</span> jedis;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 测试jedis连接池</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testJedisPool</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> JedisPoolUtil.getJedis();<br>        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis1</span> <span class="hljs-operator">=</span> JedisPoolUtil.getJedis();<br>        System.out.println(jedis==jedis1); <span class="hljs-comment">// 获取的jedis连接是同一个连接</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="【5】redis锁-redis秒杀功能"><a href="#【5】redis锁-redis秒杀功能" class="headerlink" title="【5】redis锁-redis秒杀功能"></a>【5】redis锁-redis秒杀功能</h3><p>【redis-redisson】</p>
+<h4 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>springmvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>contextConfigLocation<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>classpath:springConfig.xml<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>springmvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="springConfig-xml"><a href="#springConfig-xml" class="headerlink" title="springConfig.xml"></a>springConfig.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="hljs-string"><span class="hljs-tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="hljs-string"><span class="hljs-tag">        http://www.springframework.org/schema/context</span></span><br><span class="hljs-string"><span class="hljs-tag">        http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.liu.controller&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stringRedisTemplate&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.data.redis.core.StringRedisTemplate&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;connectionFactory&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;connectionFactory&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;connectionFactory&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;hostName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;192.168.204.141&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;port&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;6379&quot;</span>/&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="TestKill"><a href="#TestKill" class="headerlink" title="TestKill"></a>TestKill</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.liu.controller;<br><br><span class="hljs-keyword">import</span> org.redisson.Redisson;<br><span class="hljs-keyword">import</span> org.redisson.api.RLock;<br><span class="hljs-keyword">import</span> org.redisson.config.Config;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;<br><br><span class="hljs-keyword">import</span> java.util.concurrent.TimeUnit;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 测试redis秒杀功能</span><br><span class="hljs-comment"> * 问题：如果两个人先后获取了库存数，然后先后将库存数更新，那两个人操作了，库存数只减少了1？</span><br><span class="hljs-comment"> * 代码存在问题</span><br><span class="hljs-comment"> * 单机的不会出现这种问题，集群情况下就会出现一个商品被两个人抢了的情况</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestKill</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> StringRedisTemplate stringRedisTemplate;<br>    <span class="hljs-keyword">private</span> Redisson redisson;<br><br>    <span class="hljs-comment">// 只能解决一个tomcat的并发问题：synchronized锁的一个进程下的线程并发，如果分布式环境，多个进程并发，这种方案就失效了！</span><br>    <span class="hljs-meta">@RequestMapping(&quot;kill&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">kill</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">/*-----------------功能:从redis中获取手机库存数量 2022-09-25 -----------------*/</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">phoneCount</span> <span class="hljs-operator">=</span> Integer.parseInt(stringRedisTemplate.opsForValue().get(<span class="hljs-string">&quot;phone&quot;</span>));<br>        <span class="hljs-comment">/*-----------------功能:判断手机数量是否可以参与秒杀 2022-09-25 -----------------*/</span><br>        <span class="hljs-keyword">if</span>(phoneCount&lt;=<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;库存不足！&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            phoneCount--;<br>            <span class="hljs-comment">/*-----------------功能:库存减少后将数据存到数据库中 2022-09-25 -----------------*/</span><br>            stringRedisTemplate.opsForValue().set(<span class="hljs-string">&quot;phone&quot;</span>,phoneCount+<span class="hljs-string">&quot;&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;over!&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Redisson <span class="hljs-title function_">redisson</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Config</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Config</span>();<br>        <span class="hljs-comment">// 使用单个redis服务器</span><br>        config.useSingleServer().setAddress(<span class="hljs-string">&quot;redis://192.168.37.128:6379&quot;</span>).setDatabase(<span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// 使用集群redis</span><br>        <span class="hljs-comment">//config.useClusterServers().setScanInterval(2000).addNodeAddress(&quot;redis://192.168.37.128:6379&quot;,&quot;redis://192.168.37.128:6379&quot;,&quot;redis://192.168.37.128:6379&quot;);</span><br>        <span class="hljs-keyword">return</span> (Redisson)Redisson.create(config);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * redis秒杀优化-针对集群的情况</span><br><span class="hljs-comment">     * 适用于分布式的情况</span><br><span class="hljs-comment">     * 原理：使用setnx命令实现锁</span><br><span class="hljs-comment">     * 目前分布式锁，应用最多的仍然是“Redis”</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@RequestMapping(&quot;kill2&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">kill2</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">/*-----------------功能:定义商品ID 2022-09-25 -----------------*/</span><br>        String productKey=<span class="hljs-string">&quot;HUAWEI-P40&quot;</span>;<br>        <span class="hljs-comment">/*-----------------功能:通过redisson获取锁 2022-09-25 -----------------*/</span><br>        <span class="hljs-type">RLock</span> <span class="hljs-variable">rLock</span> <span class="hljs-operator">=</span> redisson.getLock(<span class="hljs-string">&quot;productKey&quot;</span>);<br>        <span class="hljs-comment">/*-----------------功能:上锁并设置过期时间 2022-09-25 -----------------*/</span><br>        rLock.lock(<span class="hljs-number">30</span>, TimeUnit.SECONDS);<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">/*-----------------功能:从redis中获取手机库存数量 2022-09-25 -----------------*/</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">phoneCount</span> <span class="hljs-operator">=</span> Integer.parseInt(stringRedisTemplate.opsForValue().get(<span class="hljs-string">&quot;phone&quot;</span>));<br>            <span class="hljs-comment">/*-----------------功能:判断手机数量是否可以参与秒杀 2022-09-25 -----------------*/</span><br>            <span class="hljs-keyword">if</span>(phoneCount&lt;=<span class="hljs-number">0</span>)&#123;<br>                System.out.println(<span class="hljs-string">&quot;库存不足！&quot;</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                phoneCount--;<br>                <span class="hljs-comment">/*-----------------功能:库存减少后将数据存到数据库中 2022-09-25 ------*/</span><br>                stringRedisTemplate.opsForValue().set(<span class="hljs-string">&quot;phone&quot;</span>,phoneCount+<span class="hljs-string">&quot;&quot;</span>);<br>                System.out.println(<span class="hljs-string">&quot;库存-1，剩余：&quot;</span>+phoneCount);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (NumberFormatException e) &#123;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">// 释放锁</span><br>            rLock.unlock();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;over!&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%90%8E%E7%AB%AF/" class="category-chain-item">后端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/redis/">#redis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>redis--操作</div>
+      <div>https://xuebaqiang.github.io/2022/09/24/后端/操作/redis--操作/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/24/%E5%90%8E%E7%AB%AF/%E6%93%8D%E4%BD%9C/nginx--%E6%93%8D%E4%BD%9C/" title="nginx--操作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">nginx--操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/" title="idea--开发工具的使用">
+                        <span class="hidden-mobile">idea--开发工具的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

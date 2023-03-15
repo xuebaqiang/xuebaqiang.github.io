@@ -1,0 +1,1148 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="任务一： SpringBoot基本应用SpringBoot课程内容介绍微服务架构是使用比较多的 springboot是微服务的基石 需要了解springboot约定优于配置的软件范式 大大简化了对配置文件与依赖管理的开发 了解springboot的相关概念  springboot减少了对配置的编写，springboot是如何做的呢 springboot整合mybatis springboot整合r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第九阶段-SpringBoot基本应用">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="任务一： SpringBoot基本应用SpringBoot课程内容介绍微服务架构是使用比较多的 springboot是微服务的基石 需要了解springboot约定优于配置的软件范式 大大简化了对配置文件与依赖管理的开发 了解springboot的相关概念  springboot减少了对配置的编写，springboot是如何做的呢 springboot整合mybatis springboot整合r">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652375947464.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376036674.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376232033.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376294894.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376659167.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376697355.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376780001.png">
+<meta property="article:published_time" content="1000-08-31T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:12.061Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="就业-第九阶段模块一">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652375947464.png">
+  
+  
+  
+  <title>第九阶段-SpringBoot基本应用 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第九阶段-SpringBoot基本应用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-09-01 00:20" pubdate>
+          1000年9月1日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          143 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第九阶段-SpringBoot基本应用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="任务一：-SpringBoot基本应用"><a href="#任务一：-SpringBoot基本应用" class="headerlink" title="任务一： SpringBoot基本应用"></a>任务一： SpringBoot基本应用</h2><h3 id="SpringBoot课程内容介绍"><a href="#SpringBoot课程内容介绍" class="headerlink" title="SpringBoot课程内容介绍"></a>SpringBoot课程内容介绍</h3><p>微服务架构是使用比较多的</p>
+<p>springboot是微服务的基石</p>
+<p>需要了解springboot约定优于配置的软件范式</p>
+<p>大大简化了对配置文件与依赖管理的开发</p>
+<p>了解springboot的相关概念</p>
+<hr>
+<p>springboot减少了对配置的编写，springboot是如何做的呢</p>
+<p>springboot整合mybatis</p>
+<p>springboot整合redis</p>
+<p>springboot整合Thymeleaf</p>
+<p>springboot整合ssm</p>
+<p>springboot项目的部署</p>
+<hr>
+<h3 id="约定优于配置"><a href="#约定优于配置" class="headerlink" title="约定优于配置"></a>约定优于配置</h3><p>springboot就是实现了约定优于配置这样的框架</p>
+<p>springBoot是所有基于spring开发项目的起点；</p>
+<p>可以尽可能快的跑起来；</p>
+<p>尽可能的减少配置文件；</p>
+<p>因为springboot的约定优于配置；</p>
+<p>约定优于配置：就是一个约定，就像我们生活中的民俗一样，像我们开车一样（靠右行驶） 是一下好姑娘软件设计范式；</p>
+<p>系统、类库都有默认的配置</p>
+<p>springboot提供了大量了默认配置；</p>
+<p>想要有特殊的配置，还是需要我们去修改配置文件的；</p>
+<hr>
+<h3 id="Spring-Boot核心概念"><a href="#Spring-Boot核心概念" class="headerlink" title="Spring Boot核心概念"></a>Spring Boot核心概念</h3><p><strong>起步依赖</strong>与<strong>自动配置</strong>（springboot的<strong>作用</strong>，<strong>核心概念</strong>）</p>
+<p>springboot简化了原有的开发方式</p>
+<p>原有的开发方式存在弊端</p>
+<p>spring的优缺点：</p>
+<p>优点：ioc(依赖注入)：实现组件间的解耦</p>
+<p>aop(面向切面编程)：实现组件的增强处理引入了组件</p>
+<p>缺点：代码是轻量级的，</p>
+<p>但是配置文件特别多</p>
+<p>虽然spring2.5开始引入了组件扫描（大大简化了配置文件），但是配置文件还是很多</p>
+<p>项目的依赖管理也是一件耗时耗力的事情</p>
+<p>SSM整合需要很多的jar包：spring\springMVC\mybatis\spring-mybatis整合包</p>
+<p>特别多的jar包，可能还存在版本冲突问题</p>
+<p>springboot就解决了这些问题</p>
+<p>springboot有起步依赖：将某种功能相同或相似的依赖打包在一起（我们不需要处理版本冲突问题）</p>
+<p>将这些jar包打包在一起作为一个独立的项目，使用的时候直接引入即可</p>
+<p>springboot有自动配置：会自动的将一些配置类bean注册进ioc容器，直接引入jar包就会自动将配置类注册到ioc容器中；</p>
+<hr>
+<h3 id="Spring-Boot入门案例"><a href="#Spring-Boot入门案例" class="headerlink" title="Spring Boot入门案例"></a>Spring Boot入门案例</h3><p>需求：调用controller层的一个方法，并将返回值返回到页面中</p>
+<p>使用idea create project</p>
+<p>创建一个空的一个项目</p>
+<p>创建一个模块，选择maven</p>
+<p>对模块编写一个名称；</p>
+<p>接触一个新的技术的时候，最好的方法是进入它的官网进行学习；</p>
+<p>spring官网：<a target="_blank" rel="noopener" href="https://spring.io/">https://spring.io/</a></p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652375947464.png" srcset="/img/loading.gif" lazyload alt="1652375947464"></p>
+<p>我们不快速开始，使用正式的版本进行学习，其他的是快照版本</p>
+<p>文档中会告诉如何开始及使用springboot</p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376036674.png" srcset="/img/loading.gif" lazyload alt="1652376036674"></p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376232033.png" srcset="/img/loading.gif" lazyload alt="1652376232033"></p>
+<p>开发你的第一个springboot项目</p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376294894.png" srcset="/img/loading.gif" lazyload alt="1652376294894"></p>
+<p>开发最大的不同，使用的依赖不一样</p>
+<p>引入父依赖；</p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376659167.png" srcset="/img/loading.gif" lazyload alt="1652376659167"></p>
+<p>所有的springboot项目都会直接或者间接的继承 spring-boot-starter-parent </p>
+<p>好处：（四个好处）</p>
+<p>会指定项目的编码格式为utf-8(项目的版本就统一了)</p>
+<p>指定了jdk的版本：1.8（可以又该）</p>
+<p>对项目依赖的版本进行管理，当前项目再引入其它常用的依赖时就不需要再指定版本号了（避免了版本冲突问题）</p>
+<p>默认的资源过滤和插件管理（这个后面再说）</p>
+<hr>
+<p>引入web模块j及springmvc相关的依赖</p>
+<p>看到starter就不是一个依赖，引入的是一个依赖集合（一系列依赖）</p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376697355.png" srcset="/img/loading.gif" lazyload alt="1652376697355"></p>
+<hr>
+<p>还需要打包能够运行</p>
+<p>可以将我们的project打包为可以运行的jar</p>
+<p><img src="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/1652376780001.png" srcset="/img/loading.gif" lazyload alt="1652376780001"></p>
+<hr>
+<p>@RestController 定义返回的都是json串</p>
+<p>jar包有启动的入口</p>
+<p>通常会放在二级包的下面</p>
+<p>Java是一级包</p>
+<p>com.lagou是二级包</p>
+<p>因为springboot项目在做包扫描的时候，会扫描启动类所在包及其子包的所有内容</p>
+<p>表示当前类为springbooot项目的启动类</p>
+<p>@SpringBootApplication</p>
+<p>两个参数：（当前类的字节码文件，main函数的方法参数）样板代码，都一样</p>
+<hr>
+<p>还没有做配置：包扫描</p>
+<p>springboot会自动配置</p>
+<p>也没有定义容器</p>
+<p>运行main函数就会将当前项目打包</p>
+<p>分析日志：</p>
+<p>项目启动时tomcat显示初始化（包含端口号）</p>
+<p>tomcat服务启动，与tomcat服务器已经启动；</p>
+<p>直接根据端口号及映射路径访问即可</p>
+<hr>
+<h3 id="快速构建SpringBoot项目"><a href="#快速构建SpringBoot项目" class="headerlink" title="快速构建SpringBoot项目"></a>快速构建SpringBoot项目</h3><p>这次学习如何快速的构建springboot项目；</p>
+<p>springboot自带的快速构建的方式；</p>
+<p>前提：电脑必须联网</p>
+<p>new Model )&gt;搜sring initializr</p>
+<p>使用JDK11</p>
+<p>选择初始化服务器的url:</p>
+<p>如果使用快速构建springboot项目的方式，必须联网</p>
+<p>构建的方式底层：开发工具指定个项参数后，有spring提供的url所对应的服务器自动生成；idea将服务器生成的springboot项目下载到本地空间中；</p>
+<p>参数提交到指定的url中，服务器会自动生成springboot项目，idea下载生成的springboot项目；</p>
+<p>packaging:jar war都是可以的（这里我们先使用jar吧）</p>
+<p>项目会自动生成启动类；所以要自动哪个包；</p>
+<p>需要选择要引入的依赖；</p>
+<p>如果还是想要通过浏览器访问的时候，还是需要引入web包；</p>
+<p>web-&gt;spring Web（下面会有这个包的介绍）</p>
+<p>finned，在服务端会生成这个项目，idea会将这个springboot项目下载下来；</p>
+<p>多了一些点mvn文件,我们可以将这些文件给删除掉【五个】；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">(.mvn|.gitignore|.HELP.md|mvnw|mvnw.cmd)<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>知道启动类的位置；</p>
+<p>static：下面我们经常放置一些静态资源文件（例如：css,js）</p>
+<p>templates:我们经常放置一些网页或者网页模板</p>
+<p>application.properties：springboot的配置文件</p>
+<p>配置文件可以是properties结尾，也可以是其他格式的结尾；</p>
+<p>springboot已经帮助我们自动配置了；</p>
+<p>如果想要修改端口号；需要再配置文件中修改；</p>
+<p>server.port&#x3D;8888</p>
+<p>会有提示的；</p>
+<p>启动的是项目编译的路径；</p>
+<hr>
+<h3 id="Spring-Boot单元测试"><a href="#Spring-Boot单元测试" class="headerlink" title="Spring Boot单元测试"></a>Spring Boot单元测试</h3><p> 每次完成一个功能，都要完成自测（自测就是单元测试） 【重要】</p>
+<p>springboot会自动给我们创建一个测试类</p>
+<p>首先，我们需要引入测试的依赖：spring-boot-starter-test</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;<br>&lt;scope&gt;test&lt;/scope&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>@SpringBootTest </code></p>
+<p>标记为当前类为springBoot测试类，加载项目的applicationContext上下文环境；</p>
+<p>同时还使用了一个@RunWith()注解</p>
+<p><code>@RunWith()</code>：表示一个启动器（运行器）</p>
+<p>处于什么的运行环境，取决于参数</p>
+<p>@RunWith(JUnit4.class) 使用JUnit4的运行环境；</p>
+<p>@RunWith(SpringJUnit4ClassRunner.class) 使用的是spring运行环境；</p>
+<p>我们的项目是springboot项目,所以应该使用springboot的运行环境；</p>
+<p><code>@RunWith(SpringRunner.class) </code>使用springboot的运行环境</p>
+<p>测试controller的方法，需要将controller引入进来；（@Autowired）</p>
+<p>@SpringBootTest会扫描，加载项目的applicationContext上下文环境</p>
+<hr>
+<p>总结：完成单元测试，需要引入依赖，使用@SpringBootTest（加载项目的applicationContext上下文环境）@RunWith(SpringRunner.class) 指明使用springboot的运行环境</p>
+<hr>
+<h3 id="SpringBoot项目热部署"><a href="#SpringBoot项目热部署" class="headerlink" title="SpringBoot项目热部署"></a>SpringBoot项目热部署</h3><p> springboot对热部署的支持</p>
+<p>项目上线之后， 发现有bug;</p>
+<p>传统的方式：修完bug,需要重启，这对用户的体验非常不好；</p>
+<p>需要发公告，某某日要发布；到时间重启项目；</p>
+<p>如果要对项目进行一个微调，感觉不太友好；</p>
+<p>这里可以使用热部署，在不重启服务的时候就可以完成项目的重新部署；</p>
+<p>在修改完代码之后，不需要重启我们的容器，就可以实现更新；</p>
+<p>一个方法，返回的是“hello spring boot”;</p>
+<p>springboot是支持特部署的；</p>
+<p>1）添加springboot的特部署依赖启动器；（引入依赖）</p>
+<p>2）开启idea的自动编译；【settings-&gt;bulid-&gt;compiler-&gt;Build project automatically(勾选)（允许项目的自动编译）】</p>
+<p>3）开启idea的在运行中自动编译功能；【ctrl+shift+alt+&#x2F;-&gt;registry-&gt;compiler.automake.allow.when.app.running(当程序处于运行状态的时候允许自动编译)（勾选）】</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;!-- 引入热部署依赖 --&gt;<br>&lt;dependency&gt;<br>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>启动之后对接口中的文字进行修改；</p>
+<p>如何看是否重新编译了呢？会打印重新编译的日志</p>
+<p>initializing …. （正在初始话。。。）</p>
+<p>如果出现（completed initialization in 3 ms）后则重新编译完成；</p>
+<p>是不是我们发布到服务器上，修改代码后也会自动编译呢，不用重新重启项目；</p>
+<hr>
+<h3 id="properties全局配置文件（上）"><a href="#properties全局配置文件（上）" class="headerlink" title="properties全局配置文件（上）"></a>properties全局配置文件（上）</h3><p>我们会使用三种结尾格式的配置文件（properties,yaml,yml）；</p>
+<p>yml是yaml的简写；</p>
+<p>如何知道是支持这三种格式呢？如何知道名字要是application呢？</p>
+<p>在父工程中查看，点开</p>
+<p>实现start-partent的好处：</p>
+<p>1）约定jdk的版本为1.8；</p>
+<p>2）项目的指定的编码格式为UTF-8；</p>
+<p>3）引入其它的依赖不用再指定版本号；</p>
+<p>spring-boot-dependencies已经定义好了很多组件的版本号</p>
+<p>这个文件特别的大，这些版本号都是spring官方经过兼容性测试的</p>
+<p>spring-boot-starter-parent中定义了yml、yaml、properties</p>
+<p>配置文件：需要配置属性和属性值</p>
+<p>在spring中可以定义的内容，在springboot的配置文件中都是可以定义的；</p>
+<p>案例：定义数据库的连接信息</p>
+<p>spring定义登录一个模板类“：JdbcTemplate</p>
+<p>连接数据库需要需要到数据库的驱动-》需要引入驱动包</p>
+<p>mvnrepository.com中输入：mysql</p>
+<p>MySQL connector&#x2F;J(选择这个)（6.0.6）这个版本使用人数较多；</p>
+<p>驱动包，可以使用原始的jdbc,太原始了，这里使用jdbcTemplate;</p>
+<p>所以还需要引入：spring-boot-starter-jdbc（跟其他包很类似，直接将最后一位改为jdbcj就好了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">spring.datasoruce.driver-class-name=com.mysql.cj.jdbc.Driver<br>spring.datasoruce.url=jdbc:mysql:<span class="hljs-comment">//localhost:3306/lagou</span><br>spring.datasoruce.username=root<br>spring.datasoruce.password=wu7787879  <br></code></pre></td></tr></table></figure>
+
+<p>springboot 的启动一个核心功能，就是帮我们注入；</p>
+<p>只需要对应的jar包引入进来，并定义属性与属性值会自动帮我们在容器中注入进（jdbcTemplate）来；</p>
+<p>验证是否配置jdbcTemplate成功：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowored</span><br><span class="hljs-keyword">private</span> JdbcTemplate jdbcTemplate;<br><span class="hljs-meta">@RequestMapping(&quot;/jdbc&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">jdbc</span><span class="hljs-params">()</span>&#123;<br>  <span class="hljs-keyword">return</span> jdbcTemplate.toString();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="properties全局配置文件（下）"><a href="#properties全局配置文件（下）" class="headerlink" title="properties全局配置文件（下）"></a>properties全局配置文件（下）</h3><p>这里尝试自定义属性并注入到person实体类中；</p>
+<p>首先要有一个Person类；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Pet</span> &#123;<br>	<span class="hljs-keyword">private</span> String type;<br>	<span class="hljs-keyword">private</span> String name;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> id; <span class="hljs-comment">//id</span><br>	<span class="hljs-keyword">private</span> String name; <span class="hljs-comment">//名称</span><br>	<span class="hljs-keyword">private</span> List hobby; <span class="hljs-comment">//爱好</span><br>	<span class="hljs-keyword">private</span> String[] family; <span class="hljs-comment">//家庭成员</span><br>	<span class="hljs-keyword">private</span> Map map;<br>	<span class="hljs-keyword">private</span> Pet pet; <span class="hljs-comment">//宠物</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>生成getset方法、toString();</p>
+<p>效果：使用测试类，打印person对象</p>
+<p>需要将Person交给容器管理：使用@Component注解</p>
+<p>@Component：将该类交给容器管理；可以被容器扫描到；</p>
+<p>在配置文件中自定义配置信息注入到Person对象中；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">#自定义配置信息<br>person.id=<span class="hljs-number">1</span><br>person.name=王二麻子<br>person.hobby=read,write<br>person.family=father,mather<br>person.map.key1=value1<br>person.map.key2=value2<br>person.pet.type=dog<br>person.pet.name=哈士奇<br></code></pre></td></tr></table></figure>
+
+<p>list使用逗号分隔就好了（private List hobby; &#x2F;&#x2F;爱好）</p>
+<p>数组也使用逗号分隔就好了（private String[] family; &#x2F;&#x2F;家庭成员）</p>
+<p>map需要使用key&#x3D;value的形式（private Map map;）</p>
+<hr>
+<p>@ConfigurationProperties(prefix&#x3D;”person”):将配置文件中所有以person开头的信息注入到下面的类中；</p>
+<p>前提（两个）：</p>
+<p>1）必须保证配置文件中person.xx与当前Person类的<strong>属性名一致</strong>；</p>
+<p>2）使用的是设值注入（要注入的属性需要有set方法）；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@ConfigurationProperties(prefix =&quot;person&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> id; <span class="hljs-comment">//id</span><br>	<span class="hljs-keyword">private</span> String name; <span class="hljs-comment">//名称</span><br>	<span class="hljs-keyword">private</span> List hobby; <span class="hljs-comment">//爱好</span><br>	<span class="hljs-keyword">private</span> String[] family; <span class="hljs-comment">//家庭成员</span><br>	<span class="hljs-keyword">private</span> Map map;<br>	<span class="hljs-keyword">private</span> Pet pet; <span class="hljs-comment">//宠物</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>测试是否Person类的属性值被注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RunWith(SpringRunner.class)</span> <span class="hljs-comment">// 测试启动器，并加载Spring Boot测试注解</span><br><span class="hljs-meta">@SpringBootTest</span> <span class="hljs-comment">// 标记为Spring Boot单元测试类，并加载项目的ApplicationContext上下文环境</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringbootDemoApplicationTests</span> &#123;<br>	<span class="hljs-comment">// 配置测试</span><br>	<span class="hljs-meta">@Autowired</span><br>	<span class="hljs-keyword">private</span> Person person;<br>	<span class="hljs-meta">@Test</span><br>	<span class="hljs-keyword">void</span> <span class="hljs-title function_">configurationTest</span><span class="hljs-params">()</span> &#123;<br>		System.out.println(person);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可以在controller层进行测试；</p>
+<p>如果通过浏览器访问出现中文乱码的时候(四个设置)：</p>
+<p>settings-&gt;editor-&gt;file encodings(Global Encoding(全局)、Project encoding（项目）、properties Files、Transparent native-to-ascii conversior)</p>
+<p>如果还不能解决的话,将下面配置信息粘贴到配置文件中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">#解决中文乱码<br>server.tomcat.uri-encoding=UTF-<span class="hljs-number">8</span><br>spring.http.encoding.force=<span class="hljs-literal">true</span><br>spring.http.encoding.charset=UTF-<span class="hljs-number">8</span><br>spring.http.encoding.enabled=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="yaml全局配置文件"><a href="#yaml全局配置文件" class="headerlink" title="yaml全局配置文件"></a>yaml全局配置文件</h3><p>配置文件可以以yaml结尾；</p>
+<p>yaml的简化格式是yml;</p>
+<p>yaml是一种json文件格式；</p>
+<p>yaml是以数据为核心的，说明更加简洁；</p>
+<p>key:空格value的形式；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">server<br>  port= <span class="hljs-number">8080</span><br></code></pre></td></tr></table></figure>
+
+<p>server中的port属性，点击配置文件中的port属性，可以定位到这个类的setPort方法</p>
+<p>![1652517991073](..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;我的博客&#x2F;test&#x2F;source&#x2F;_posts&#x2F;Java就业训练营&#x2F;第九阶段 微服务技术核心&#x2F;模块一 SpringBoot&amp;SpringCloud@Docker&#x2F;1652517991073.png)</p>
+<p>使用properties，看层级关系是不明确的</p>
+<p>使用yaml或yml,看层级关系是很明确的；</p>
+<p>peoperties、yaml、yml是可以共存的；</p>
+<p>修改完配置文件后需要重启；</p>
+<p>springboot的三钟配置文件，为什么文件可以共存：</p>
+<p>starter-parent 中定义了加载这三种配置文件；</p>
+<p>spring-boot-starter-parent（点击不进去不知道是什么原因）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java">#对实体类对象Person进行属性配置<br>person:<br>	id: <span class="hljs-number">1</span><br>	name: 王二麻子<br>	family:<br>		- 妻<br>		- 妾<br>	hobby:<br>		- play<br>		- read<br>		- sleep<br>	map:<br>		k1: value1<br>		k2: value2<br>	pet:<br>		type: 狗<br>		name: 哈士奇<br></code></pre></td></tr></table></figure>
+
+<p>list使用缩进法（建议使用）（private List hobby; &#x2F;&#x2F;爱好）</p>
+<p>当然也可以使用下面的方式;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">person:<br>	hobby: [play,read,sleep]<br></code></pre></td></tr></table></figure>
+
+<p>数组也使用缩进法（建议使用）（private String[] family; &#x2F;&#x2F;家庭成员）</p>
+<p>map需要使用key: value的形式（private Map map;）</p>
+<p>springboot可以存在0-N个配置文件，但是名称都是application，后缀名为properties、yaml、yml,但是存在优先级的关系；</p>
+<p>使用yaml与yml都可以</p>
+<hr>
+<h3 id="配置文件属性值的注入"><a href="#配置文件属性值的注入" class="headerlink" title="配置文件属性值的注入"></a>配置文件属性值的注入</h3><p>使用<code>@ConfigurationProperties</code>注解【加载类上的注解】的情况不是很多，因为要么来源于关系型数据库，要么来源于非关系型数据库，要么来源于缓存，很少通过属性直接注入；</p>
+<p><code>@Value</code>的方式更加实用;</p>
+<p>这两种方式都需要掌握；</p>
+<p>使用Student类来学习；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> &#123;<br>	<span class="hljs-meta">@Value(&quot;$&#123;person.id&#125;&quot;)</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> id;<br>	<span class="hljs-meta">@Value(&quot;$&#123;person.name&#125;&quot;)</span><br>	<span class="hljs-keyword">private</span> String name; <span class="hljs-comment">//名称</span><br>	<span class="hljs-comment">//省略toString</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而<code>@Value</code>注解对于包含Map集合、对象以及YAML文件格式的行内式写法的配置文件的属性注入都不支持，如果赋值会出现错误</p>
+<p><code>@Value</code>不支持list、数组、map、对象的注入，如果强行注入会报异常</p>
+<hr>
+<h3 id="配置文件优先级问题"><a href="#配置文件优先级问题" class="headerlink" title="配置文件优先级问题"></a>配置文件优先级问题</h3><p>配置文件有三种格式；</p>
+<p>可以使用tomcat版本号来测试；</p>
+<p>优先级properties&gt;yml；</p>
+<p>yml的文件与properties文件共存的时候，properties优先级更高</p>
+<p>原因：starter-parent定义了配置文件的加载顺序；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;includes&gt;<br>	&lt;include&gt;**/application*.yml&lt;/include&gt;<br>	&lt;include&gt;**/application*.yaml&lt;/include&gt;<br>	&lt;include&gt;**/application*.properties&lt;/include&gt;<br>&lt;/includes&gt;<br></code></pre></td></tr></table></figure>
+
+<p>properties配置文件最后加载，如果有重复的，会替换前面配置文件中的值；</p>
+<p>谁在最后优先级最高；</p>
+<p>在开发高使用一种配置文件就好（yml,层次性好，易于阅读）；</p>
+<hr>
+<h3 id="加载读取自定义配置"><a href="#加载读取自定义配置" class="headerlink" title="加载读取自定义配置"></a>加载读取自定义配置</h3><p>这种使用自定义的配置文件的情况很少；官方定义的配置文件已经够用了</p>
+<p>配置文件中已经定义好了配置文件的名称及后缀；</p>
+<p>如果我们自己定义配置文件，是不会别加载的（也没有配置文件小标志）；</p>
+<p>我们可以使用<code>@PropertySource(&quot;&quot;)</code>注解将外部自定义的配置文件加载到容器中；</p>
+<p><code>@PropertySource(&quot;classpath:my.properties&quot;)</code></p>
+<hr>
+<h3 id="自定义配置类"><a href="#自定义配置类" class="headerlink" title="自定义配置类"></a>自定义配置类</h3><p>编写自定义的配置类；</p>
+<p>使用注解<code>@Configuration</code>；【加载类上的注解】</p>
+<p>官方推荐使用配置类的方式向容器中添加和配置组件</p>
+<p><strong>好处：</strong>指名当前的类使用配置类，springboot会自动扫描该类(其实扫描是方法)并将<code>@Bean</code>注解的方法的返回值注入到容器中</p>
+<p>一个配置类中可以定义多个配置信息；【重要】</p>
+<p>使用时非常的方便的；</p>
+<p><code>@Bean </code> 注入的名称就是方法的名称，注入的类型就是返回值的类型</p>
+<p>注入的名称是可以修改的(其实就是注入到上下文中了【ApplicationContext(spring上下文环境)】)</p>
+<p>测试:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> ApplicationContext applicationContext;<br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">iocTest</span><span class="hljs-params">()</span> &#123;<br>	System.out.println(applicationContext.containsBean(<span class="hljs-string">&quot;myService&quot;</span>));  <span class="hljs-comment">// true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="SpringBoot原理剖析及高级实战"><a href="#SpringBoot原理剖析及高级实战" class="headerlink" title="SpringBoot原理剖析及高级实战"></a>SpringBoot原理剖析及高级实战</h2><h3 id="源码剖析-依赖管理-spring-boot-starter-parent"><a href="#源码剖析-依赖管理-spring-boot-starter-parent" class="headerlink" title="源码剖析-依赖管理-spring-boot-starter-parent"></a>源码剖析-依赖管理-spring-boot-starter-parent</h3><p>这节讲解springboot如何实现依赖管理？</p>
+<p>传统的spring服务，需要导入大量的jar包</p>
+<p>使用springboot非常的方便；</p>
+<p>为生命导入依赖的时候不需要导入版本？</p>
+<p>引入父依赖后再引入依赖不需要再引入版本；</p>
+<p>starter-partends-&gt;dependencies</p>
+<p><code>spring-boot-dependencies</code>中定义了大量的配置文件（版本信息）(依赖版本)</p>
+<p>这些依赖再引入的时候不需要再指定版本号</p>
+<p>代码非常多，有三千多行；</p>
+<p>这些版本都是springboot官方经过版本冲突测试的；</p>
+<p><code>spring-boot-starter-parent</code>中指定了项目的编码格式；</p>
+<p>如果我们键项目的时候选中了JDK11则，使用新的版本；【有待确认】</p>
+<p><code>spring-boot-starter-parent</code>中也定义了资源路径</p>
+<p>是否过滤、资源目录、资源名称</p>
+<p>如果springboot引入了，我们也引入了，以我们引入的为准；</p>
+<p>2）spring-boot-starter-parent父依赖启动器的主要作用是进行版本统一管理，那么项目运行依赖的JAR包是从何而来的？</p>
+<p>只有jar中带有stater，就不再是一个依赖，而是一个依赖集合</p>
+<p>例如：<code>spring-boot-starter-web</code></p>
+<p>我们根据<code>spring-boot-starter-web</code>进行分析；</p>
+<p>里面有<code>spring-boot-starter-json</code></p>
+<p><code>spring-boot-starter-json</code>中的三个包一定会支持</p>
+<p><code>jackson-databind</code></p>
+<p><code>jackson-datatype-jdk8</code></p>
+<p><code>jackson-datatype-jsr310</code></p>
+<p><code>spring-boot-starter-json</code>中又依赖了spring-web【需要验证】</p>
+<p>只要引入的<code>spring-boot-starter-web</code>包，跟web相关的久不需要再依赖了；</p>
+<p>starter是一堆依赖，不只是一个依赖</p>
+<p>3）有哪些starter我们可以选择呢？</p>
+<p>可以在spring的官网中进行查找；</p>
+<p>【更加常见的方法】也可以在github中搜索<code>spring-boot</code>进行查找（选中里面的spring-boot-project-》spring-boot-starters）【需要验证】</p>
+<p>这就是我们项目中可以使用的所有的starters；</p>
+<p>![1652596049573](..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;我的博客&#x2F;test&#x2F;source&#x2F;_posts&#x2F;Java就业训练营&#x2F;第九阶段 微服务技术核心&#x2F;模块一 SpringBoot&amp;SpringCloud@Docker&#x2F;1652596049573.png)</p>
+<p>根据Github-url查看starters：<a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters">https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters</a></p>
+<p>第三种方法：在mvnrepository.com中搜索  starter</p>
+<p><a target="_blank" rel="noopener" href="https://mvnrepository.com/search?q=starter">https://mvnrepository.com/search?q=starter</a></p>
+<hr>
+<h3 id="源码剖析-自动配置-SpringBootConfiguration"><a href="#源码剖析-自动配置-SpringBootConfiguration" class="headerlink" title="源码剖析-自动配置-SpringBootConfiguration"></a>源码剖析-自动配置-SpringBootConfiguration</h3><p>这节讲解springboot如何实现配置？</p>
+<p>需要知道springboot程序开始的入口；</p>
+<p><code>@SpringBootApplication</code>指明springboot的启动类</p>
+<p>该类中还含有大量的注解</p>
+<p><code>@Target(ElementType.TYPE)</code>作用：指明当前注解的作用范围，Type标识可以描述类、接口、注解、枚举类型等 </p>
+<p><code>@Retention(RetentionPolicy.RUNTIOME)</code>作用：注解的声明周期，Runntime标识运行时</p>
+<p><code>Documentc</code>作用：标识可以记录到java doc文档中</p>
+<p><code>@Inherited</code>作用：标识可以被子类继承</p>
+<p>上面四个描述的是元数据信息，没有太核心的作用；</p>
+<p><code>@SpringBootConfiguration</code>作用：标识该类是一个配置类</p>
+<p><code>@EnableAutoConfiguration</code>作用：启动自动配置功能;</p>
+<p><code>@ComponentScan</code>启动组件扫描功能；</p>
+<p>下面三个是核心注解，需要重点讲解；</p>
+<hr>
+<h4 id="SpringBootConfiguration"><a href="#SpringBootConfiguration" class="headerlink" title="@SpringBootConfiguration"></a>@SpringBootConfiguration</h4><p>内部使用了一个<code>@Configuration</code>注解</p>
+<p>指明是一个配置类，进行了一个重新命名，可读型高一点了；因为是一个springboot的项目中；</p>
+<p>对组件的扫描，那还需要<code>@ComponentScan</code>干嘛</p>
+<hr>
+<h3 id="源码剖析-自动配置-AutoConfigurationPackage"><a href="#源码剖析-自动配置-AutoConfigurationPackage" class="headerlink" title="源码剖析-自动配置-AutoConfigurationPackage"></a>源码剖析-自动配置-AutoConfigurationPackage</h3><h4 id="EnableAutoConfiguration"><a href="#EnableAutoConfiguration" class="headerlink" title="@EnableAutoConfiguration"></a>@EnableAutoConfiguration</h4><p>内部含有两个核心注解：</p>
+<p><code>@AutoConfigurationPackage</code>注解</p>
+<p><code>Import(AutoConfigurationImportSelector.class)</code>注解</p>
+<h5 id="AutoConfigurationPackage"><a href="#AutoConfigurationPackage" class="headerlink" title="@AutoConfigurationPackage"></a>@AutoConfigurationPackage</h5><p>自动配置包，可以进入里面查看</p>
+<p><code>@Import(AutoConfigurationPackages.Registar.class)</code>作用：经常用于spring底层，给容器中导入某一组件</p>
+<p>子类是：Registar</p>
+<p>可以 进入 这个类中查看：</p>
+<p>Registar是一个静态类，所以可以点的形式；</p>
+<p>Registar中有两个方法：</p>
+<p><code>registerBeanDefinitions</code>【重点关注】【在项目启动的时候会调用这个类】</p>
+<p><code>determineImport</code></p>
+<hr>
+<p><code>registerBeanDefinitions</code>参数：</p>
+<p>注解的元数据：AnnotationMetadata</p>
+<p>引入了基础的包；</p>
+<p>主要是将启动类的当前类所在的包及其子包；中的所有组件；扫描到了容器中；</p>
+<p>可以使用debug的形式启动项目；</p>
+<p>启动的时候一定会加载这个类中的方法；</p>
+<p>元数据中包含，当前类的名称（com.lagou.SpringBootDemo1Application）</p>
+<p>packageName&#x3D;”com.lagou”(启动类的当前包)</p>
+<hr>
+<h3 id="源码剖析-自动配置-AutoConfigurationImportSelector"><a href="#源码剖析-自动配置-AutoConfigurationImportSelector" class="headerlink" title="源码剖析-自动配置-AutoConfigurationImportSelector"></a>源码剖析-自动配置-AutoConfigurationImportSelector</h3><p><code>@Import</code>spring框架底层的注解</p>
+<p>selectImports 方法，真正实现自动配置的方法；</p>
+<p>AnnotationMetadata 判断是否实现自动配置</p>
+<p>获取元数据对象；（使用类加载器获取）</p>
+<p>需要传入路径；（自动配置文件路径）（自动配置的类所对应的条件）</p>
+<p>非常大，大约4000多行；</p>
+<p>如何看这个文件？</p>
+<p>不是自动配置的文件，是自动配置元数据的一个文件；</p>
+<p>等号前面最后一个逗号前面，是一个类，逗号后面是一个注解；</p>
+<p>会将整个文件都加载进来；</p>
+<p>将所有的内容都放到了properties对象中；</p>
+<p>文件的内容都封装到了AutoConfigurationMetadata中；</p>
+<p>spring-autoconfigure-metadata.properties属性文件中，存在的是自动配置的类及所对应的条件，只有满足对应的条件才会自动配置；</p>
+<p>获取到了自动配置类及自动配置类及对应的条件；</p>
+<p>很重要的一段代码；（AutoConfigurationImportSelector类 getAutoConfigurationEntry方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> AutoConfigurationEntry<br><span class="hljs-title function_">getAutoConfigurationEntry</span><span class="hljs-params">(AutoConfigurationMetadata autoConfigurationMetadata,</span><br><span class="hljs-params">AnnotationMetadata annotationMetadata)</span> &#123;<br><span class="hljs-comment">//判断EnabledAutoConfiguration注解有没有开启,默认开启</span><br><span class="hljs-keyword">if</span> (!isEnabled(annotationMetadata)) &#123;<br><span class="hljs-keyword">return</span> EMPTY<br>_<br>ENTRY;<br>&#125;<br><span class="hljs-comment">//获得注解的属性信息</span><br><span class="hljs-type">AnnotationAttributes</span> <span class="hljs-variable">attributes</span> <span class="hljs-operator">=</span> getAttributes(annotationMetadata);<br><span class="hljs-comment">//获取默认支持的自动配置类列表</span><br>List&lt;String&gt; configurations =<br>getCandidateConfigurations(annotationMetadata, attributes);<br><span class="hljs-comment">//去重</span><br>configurations = removeDuplicates(configurations);<br><span class="hljs-comment">//去除一些多余的配置类，根据EnabledAutoConfiguratio的exclusions属性进行排除</span><br>Set&lt;String&gt; exclusions = getExclusions(annotationMetadata, attributes);<br>checkExcludedClasses(configurations, exclusions);<br>configurations.removeAll(exclusions);<br><span class="hljs-comment">//根据pom文件中加入的依赖文件筛选中最终符合当前项目运行环境对应的自动配置类</span><br>configurations = filter(configurations, autoConfigurationMetadata);<br><span class="hljs-comment">//触发自动配置导入监听事件</span><br>fireAutoConfigurationImportEvents(configurations, exclusions);<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AutoConfigurationEntry</span>(configurations, exclusions);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>得到自动配置的列表；</p>
+<p>使用spring工厂的加载器加载，内部有加载了一个资源文件（spring.factories）这个文件就是自动配置的文件，只看自动配置的就好了（20行开始）；</p>
+<p>加载这些类干什么？</p>
+<p>例如：</p>
+<p>org,springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\</p>
+<p>点进去查看文件；</p>
+<p><code>@ConditionalOnClass(&#123;RabbitTemplate.class,Channel.Class&#125;)</code></p>
+<p>如果要自动配置，<code>RabbitAutoConfiguration</code>（类）需保证classPath下有<code>RabbitTemplate.class,Channel.Class</code></p>
+<p>我们可以在<code>spring-autoconfigure-metadata.properties</code>中搜索；<code>RabbitAutoConfiguration</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration.ConditionalOnClass=com.rabbitmq.client.Channel,org.springframework.amqp.rabbit.core.RabbitTemplate<br></code></pre></td></tr></table></figure>
+
+<p><code>spring-autoconfigure-metadata.properties</code>文件其实就是一个对照关系；</p>
+<p>将<code>spring.factories</code>（内部有非常多的配置类）文件加载了，会获取默认自动配置的一个列表-》去重-》去除一些多余的配置类（@EnableAutoConfiguration）-》pom文件中有哪些依赖并且符合注入条件的才进行自动配置；</p>
+<p>如何看这些事多余的配置类呢？</p>
+<p><code>@EnableAutoConfiguration</code>通过这个注解就可以添加一个属性exclusions,就会将这些给排除出去；</p>
+<p><code>spring.factories</code>（内部有非常多的配置类），不能全部都加载，pom文件中有哪些依赖并且符合注入条件的才进行自动配置；</p>
+<p>总结：自动配置步骤（这是为什么springboot能够进行自动配置的原理）</p>
+<p>1）启动springboot应用；</p>
+<p>2）@SpringBootApplication起作用</p>
+<p>3）@EnableAutoConfiguration中有两个注解</p>
+<p>4）@AutoConfigurationPackage：中使用@Import(AutoConfigutationPackages,Registrar.class)，通过将Registrar类导入到容器中，而Registrar类的作用是扫描主配置类同级目录及子包，并将相应的组件导入到springBoot创建管理的容器中；</p>
+<p>5）@Import(AutoConfigurationImportSelector.class)：通过将AutoCongigurationImportSelector类导入到容器中，AutoConfigurationImportSelector类作用：通过selectImports方法执行的过程中，使用内部工具类SpringFactoriesLoader，查找classpath上所有jar包中的META-INF&#x2F;spring.factories进行加载，实现将【配置类信息交给SpringFactory加载器进行一系列的容器创建过程；</p>
+<hr>
+<h3 id="源码剖析-自动配置-ComponentScan"><a href="#源码剖析-自动配置-ComponentScan" class="headerlink" title="源码剖析-自动配置-ComponentScan"></a>源码剖析-自动配置-ComponentScan</h3><p>前面对springBootApplication注解中的注解进行了剖析</p>
+<p>下面讲解最后一个注解，<code>@ComponentScan </code></p>
+<p>作用：就是进行自动扫描的；(实现包扫描)</p>
+<p>三个核心注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">|- <span class="hljs-meta">@SpringBootConfiguration</span><br>	|- <span class="hljs-meta">@Configuration</span> <span class="hljs-comment">//通过javaConfig的方式来添加组件到IOC容器中</span><br>|- <span class="hljs-meta">@EnableAutoConfiguration</span><br>	|- <span class="hljs-meta">@AutoConfigurationPackage</span> <span class="hljs-comment">//自动配置包，与@ComponentScan扫描到的添加到IOC</span><br>	|- <span class="hljs-meta">@Import(AutoConfigurationImportSelector.class)</span> <span class="hljs-comment">//到META-INF/spring.factories中定义的bean添加到IOC容器中</span><br>|- <span class="hljs-meta">@ComponentScan</span> <span class="hljs-comment">//包扫描</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>注解就是分析的入口</p>
+<p>例如：SpringBootApplication注解</p>
+<p>通过注解，就知道它到底有什么作用；</p>
+<p>如果Import引入了什么类，这就是我们分析的重点；</p>
+<hr>
+<h3 id="SpringBoot整合MyBatis-环境准备"><a href="#SpringBoot整合MyBatis-环境准备" class="headerlink" title="SpringBoot整合MyBatis-环境准备"></a>SpringBoot整合MyBatis-环境准备</h3><p>需要引入对应的启动器，并设计数据库的参数就可以；</p>
+<p>创建数据库；</p>
+<p>新建一个模块：</p>
+<p>定义组织编号及坐标；</p>
+<p>引入依赖：SQL-MyBatis Framework、Mysql-Driver、wb-&gt;spring web（可以通过浏览器访问）</p>
+<p>版本不要使用快照版（注意啊）</p>
+<p>启动器里面引入了一系列的依赖；</p>
+<p>编写实体类（pojo）(Comment)，toString()</p>
+<p>配置数据库的连接信息(application.yml):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"># MySQL数据库连接配置<br>spring:<br>	datasource:<br>		url: jdbc:mysql:<span class="hljs-comment">//localhost:3306/springbootdata?</span><br>		serverTimezone=UTC&amp;characterEncoding=UTF-<span class="hljs-number">8</span><br>		username: root<br>		password: wu7787879<br></code></pre></td></tr></table></figure>
+
+<p>驱动类可以不用指定，或默认指定的</p>
+<hr>
+<h3 id="SpringBoot整合MyBatis-注解方式"><a href="#SpringBoot整合MyBatis-注解方式" class="headerlink" title="SpringBoot整合MyBatis-注解方式"></a>SpringBoot整合MyBatis-注解方式</h3><p>需求：通过评论的ID查询评论的对象；</p>
+<p>interFace CommentMapper</p>
+<p>@Select(“select * from t_comment where id &#x3D; #{id}”)</p>
+<p>Comment findById(Integer id)</p>
+<p>需要程序在运行中，对这个接口生成一个动态代理类，这样才可以去访问数据库；<code>@MapperScan</code></p>
+<p>在启动类上使用<code>@MapperScan(&quot;com.lagou.bootmybatis.mapper&quot;)</code>，这样当我们启动这个项目的时候就会去这个包的下面查找mapper接口并且生成对应的动态代理类；</p>
+<p>在测试类中测试；</p>
+<p>默认是不开启驼峰规则的；(默认值是false)需要我们开启（application.yml）；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">#开启驼峰命名匹配映射<br>mybatis:<br>	configuration:<br>		map-underscore-to-camel-<span class="hljs-keyword">case</span>: <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="SpringBoot整合MyBatis-配置文件方式"><a href="#SpringBoot整合MyBatis-配置文件方式" class="headerlink" title="SpringBoot整合MyBatis-配置文件方式"></a>SpringBoot整合MyBatis-配置文件方式</h3><p>使用配置文件的方式整合mybatis</p>
+<p>接口中使用<code>@Mapper</code>注解</p>
+<p>建议使用插件<code>Free Mybatis plugin</code>，可以快速的生成</p>
+<p>配置连接数据库的信息就可以使用了；</p>
+<p>选中要生成的表-》右击-》mybatis-generator</p>
+<p>table setting</p>
+<p>表的名称  表的主键   将生成在实体、mapper接口、映射文件放在哪个项目中；</p>
+<p>model setting:针对实体进行设置；</p>
+<p>类名    实体所在的包  包所在的文件目录</p>
+<p>dao  setting :Mapper接口的设置</p>
+<p>mapper的名称  mapper所在的包</p>
+<p>xml mapper setting:映射文件的设置</p>
+<p>名称不需要指定</p>
+<p>生成后实体类报错；因为这个插件是Lombok的插件；</p>
+<p>需要设置mapper加载路径：（application.yml）</p>
+<p>mapper-locations: classpath:mapper&#x2F;*.xml</p>
+<p>插件生成的xml默认使用的是全限定类名，如果使用别名的方式需要我们自己设置（applciation.yml）</p>
+<p>type-aliases-package: com.lagou.bootmybatis.pojo</p>
+<p>使用配置文件：所有的项目都使用配置文件方式</p>
+<hr>
+<h3 id="SpringBoot整合Redis"><a href="#SpringBoot整合Redis" class="headerlink" title="SpringBoot整合Redis"></a>SpringBoot整合Redis</h3><p>只需要引入redis启动器就可以；</p>
+<p>如果redis安装在本机并且使用6379端口号的话，不许要配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;!-- redis依赖包 --&gt;<br>&lt;dependency&gt;<br>	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>	&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">#redis配置<br>#Redis服务器地址<br>spring.redis.host=<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>#Redis服务器连接端口<br>spring.redis.port=<span class="hljs-number">6379</span><br>#Redis数据库索引（默认为<span class="hljs-number">0</span>）<br>spring.redis.database=<span class="hljs-number">0</span><br>#连接池最大连接数（使用负值表示没有限制）<br>spring.redis.jedis.pool.max-active=<span class="hljs-number">50</span><br>#连接池最大阻塞等待时间（使用负值表示没有限制）<br>spring.redis.jedis.pool.max-wait=<span class="hljs-number">3000</span><br>#连接池中的最大空闲连接<br>spring.redis.jedis.pool.max-idle=<span class="hljs-number">20</span><br>#连接池中的最小空闲连接<br></code></pre></td></tr></table></figure>
+
+
+
+<p>编写Redis工具类：</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B0%B1%E4%B8%9A-%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%E6%A8%A1%E5%9D%97%E4%B8%80/">#就业-第九阶段模块一</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第九阶段-SpringBoot基本应用</div>
+      <div>https://xuebaqiang.github.io/1000/09/01/Java就业训练营/第九阶段 微服务技术核心/模块一 SpringBoot&amp;SpringCloud@Docker/第九阶段-SpringBoot基本应用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年9月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1022/03/31/K8s%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F/" title="K8s容器编排系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">K8s容器编排系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/" title="前端进阶-jQuery">
+                        <span class="hidden-mobile">前端进阶-jQuery</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

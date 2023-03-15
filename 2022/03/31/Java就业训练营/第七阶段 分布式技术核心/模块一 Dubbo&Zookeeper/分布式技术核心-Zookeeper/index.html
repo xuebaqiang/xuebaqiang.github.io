@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="任务一：Zookeeperzookeeper一定要掌握 Zookeeper简介美团、饿了吗、58同城都在使用zookeeper【zookeeper很火】 想吃饭，不想做饭，饭店在美团上注册下，用户在美团上的小模块里面都可以下订单 美团：商家的入驻，消费者的消费 商家入驻就是zookeeper，zookeeper就是美团等服务平台，提供协调服务的； zookeeper提供协调服务的一个开源的分布式项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式技术核心-Zookeeper">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="任务一：Zookeeperzookeeper一定要掌握 Zookeeper简介美团、饿了吗、58同城都在使用zookeeper【zookeeper很火】 想吃饭，不想做饭，饭店在美团上注册下，用户在美团上的小模块里面都可以下订单 美团：商家的入驻，消费者的消费 商家入驻就是zookeeper，zookeeper就是美团等服务平台，提供协调服务的； zookeeper提供协调服务的一个开源的分布式项">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652024418482.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652025393558.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652026042534.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652026990979.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027393222.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027798672.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027923469.png">
+<meta property="article:published_time" content="2022-03-30T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:11.932Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="就业-第七阶段模块一">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652024418482.png">
+  
+  
+  
+  <title>分布式技术核心-Zookeeper - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分布式技术核心-Zookeeper"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-31 00:19" pubdate>
+          2022年3月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          46 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">分布式技术核心-Zookeeper</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="任务一：Zookeeper"><a href="#任务一：Zookeeper" class="headerlink" title="任务一：Zookeeper"></a>任务一：Zookeeper</h2><p>zookeeper一定要掌握</p>
+<h3 id="Zookeeper简介"><a href="#Zookeeper简介" class="headerlink" title="Zookeeper简介"></a>Zookeeper简介</h3><p>美团、饿了吗、58同城都在使用zookeeper【zookeeper很火】</p>
+<p>想吃饭，不想做饭，饭店在美团上注册下，用户在美团上的小模块里面都可以下订单</p>
+<p>美团：商家的入驻，消费者的消费</p>
+<p>商家入驻就是zookeeper，zookeeper就是美团等服务平台，提供协调服务的；</p>
+<p>zookeeper提供协调服务的一个开源的分布式项目；</p>
+<p>查询北京政府的电话、全国的所有的电话区号</p>
+<p>使用zookeeper平台刚好有这个服务，帮助你完成这个功能</p>
+<p>在一个陌生的地方，想理发，登录服务平台，搜索，查找附近的商家</p>
+<p>zookeeper就是服务平台【重要】</p>
+<p>婚姻介绍平台，找不到对象，将信息入驻到婚姻介绍所，想结婚的进入婚姻介绍所，条件比较匹配，两者就连上线了</p>
+<p>分布式和集群要理解，是不一样的</p>
+<p>刚开始在大数据生态圈中最先出现的；</p>
+<p>zookeeper(动物管理员)</p>
+<p>用什么技术都要通过zookeeper来管理应用，例如：Hadoop（大象），Hive（蜜蜂），Pig（猪）等技术</p>
+<p>zookeeper就是美团、饿了吗等、服务型的应用平台</p>
+<p>zookeeper提供协调服务用的；</p>
+<hr>
+<h3 id="Zookeeper工作机制"><a href="#Zookeeper工作机制" class="headerlink" title="Zookeeper工作机制"></a>Zookeeper工作机制</h3><p>是一种观察者模式的一种框架</p>
+<p>有人干活就有人盯着的人；zookeeper就是盯着的角色（观察者）；</p>
+<p>zookeeper提供观察者的注册；（有疑问：zookeeper不就是观察者吗）</p>
+<p>zookeeper也提供通知注册的观察者；</p>
+<p>zookeeper&#x3D;文件系统+通知机制</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652024418482.png" srcset="/img/loading.gif" lazyload alt="1652024418482"></p>
+<p>商家营业并入驻</p>
+<p>用户可以获取当前营业的饭店列表</p>
+<p>服务器节点下线（商家下线）</p>
+<p>服务器节点上下线事件通知（商家打样，显示打样在页面上，上线通知客户，下线通知客户）</p>
+<p>重新再去获取服务器列表，并注册监听</p>
+<p>商家注册zookeeper</p>
+<p>zookeeper进行监听</p>
+<p>商家有任何的变化对观察者通知（对用户进行通知）</p>
+<hr>
+<h3 id="Zookeeper特点"><a href="#Zookeeper特点" class="headerlink" title="Zookeeper特点"></a>Zookeeper特点</h3><p>zookeeper是一个集群</p>
+<p>集群与分布式的区别：【重要、面试题】</p>
+<p>分布式：有一个饭店，人越来越多，多招聘一些人员，一个厨师、一个服务员、一个前台</p>
+<p>他们负责的工作不一样，但是目的都是为饭店工作；</p>
+<p>集群：招聘五个服务员，工作是一样的</p>
+<p>无论分布式还是集群，都是很多人在做事情，几个人工作是否一样</p>
+<hr>
+<p>系统：订单系统、商品系统、用户模块、三个模块是三个不同的应用程序</p>
+<p>三个应用程序是不一样的，三个合作完成一件事，这就是分布式</p>
+<p>用的人很多，一个系统支持不来，订单系统部署在多台服务器上，这就是集群</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652025393558.png" srcset="/img/loading.gif" lazyload alt="1652025393558"></p>
+<p>众多的服务器上，只有一个领导者（leader），其他的都是（follower）</p>
+<p>集群的特点：只有一个老大</p>
+<p>zookeeper集群的特点，只有半数以上的节点存货，zookeeper才能正常工作</p>
+<p>例如：五台服务器，两台挂掉还是可以工作的，三个挂掉就不能工作了</p>
+<p>所以zookeeper集群搭建的时候都是使用奇数台服务器；</p>
+<p>第一个孙悟空在第一个follwer上创建了一个数据X，其他服务器会立即同步数据</p>
+<p>-操作数据要么都成功，要么都失败</p>
+<p>不可能出现，一个或多个follwer成功，一个失败，这就是强一致性</p>
+<p>数据的查询可能有一定的延迟，会有网络通讯的（实时性，在一定范围内，client读取的数据是一样的）</p>
+<p>请求按照顺序执行（发123，执行123）-发送怎样的</p>
+<p>六个特点一定要了解，否则不可能将zookeeper玩的666；</p>
+<hr>
+<h3 id="Zookeeper数据结构"><a href="#Zookeeper数据结构" class="headerlink" title="Zookeeper数据结构"></a>Zookeeper数据结构</h3><p>zookeeper数据结构跟linux文件系统很类似，是一个树状结构</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652026042534.png" srcset="/img/loading.gif" lazyload alt="Zookeeper数据结构 "></p>
+<p>每一个目录就是一个节点</p>
+<p>所有的操作都会在很节点下进行</p>
+<p>一个节点下可以创建多个节点，就像目录树一样</p>
+<p>每个节点都可以存储1M的数据</p>
+<p>zookeeper不是数据库，能存储数据就已经很强大了</p>
+<p>zookeeper节点存储的数据时元数据</p>
+<p>元数据：为描述的数据，</p>
+<p>显示描述：黑帮老大，很多毒品、枪支弹药</p>
+<p>东西不能随身携带，放到一个仓库中，会有一个钥匙，怕钥匙丢失，就把钥匙存储到银行的保险库里；如果不是本人到位，就取不出钥匙</p>
+<p>存储的是，哪个银行+密码（地址+密码）</p>
+<p>根据地址+密码就可以找到财富</p>
+<p>主要描述的是属性信息，存储位置1M足以</p>
+<hr>
+<h3 id="Zookeeper应用场景"><a href="#Zookeeper应用场景" class="headerlink" title="Zookeeper应用场景"></a>Zookeeper应用场景</h3><p>zookeeper提供的服务有：统一命名服务、统一配置服务、统一集群服务、服务器节点上下线、负载均衡等</p>
+<p>如果开发中需要用到这几个需求的话，可以使用zookeeper来解决</p>
+<h4 id="统一命名服务"><a href="#统一命名服务" class="headerlink" title="统一命名服务"></a>统一命名服务</h4><p>服务器的ip不好记，比域名比ip地址好记忆</p>
+<p>例如：<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>ip地址不好背；</p>
+<p>拉钩网的背后有很多服务器，给客户说想要注册需要访问这个ip服务器里注册</p>
+<p>访问哪个服务器访问这个域名都是一样的，集群，提供公共的域名</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652026990979.png" srcset="/img/loading.gif" lazyload alt="1652026990979"></p>
+<hr>
+<h4 id="统一配置管理"><a href="#统一配置管理" class="headerlink" title="统一配置管理"></a>统一配置管理</h4><p>分布式的环境下，很多服务器配置文件</p>
+<p>修改一处快速同步到每台服务器上；</p>
+<p>怎样才能做到牵一发而动全身呢；</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027393222.png" srcset="/img/loading.gif" lazyload alt="1652027393222"></p>
+<p>把配置信息写入到zookeeper的某个几点上</p>
+<p>每个客户端都监听这个节点</p>
+<p>一旦节点中的数据文件被修改，zookeeper这个话匣子就会通知咩太客户端服务器</p>
+<p>一千台服务器，改动这个数据，一千台服务器配置文件数据都会更改</p>
+<p>zookeeper节点上存的是配置文件的元数据，zookeeper监听配置文件吗？如果配置文件被修改，zookeeper就会通知这些监听的服务器吗？</p>
+<hr>
+<h4 id="服务器节点动态上下线"><a href="#服务器节点动态上下线" class="headerlink" title="服务器节点动态上下线"></a>服务器节点动态上下线</h4><p>客户端能够实时的获取服务器上下线的变化；</p>
+<p>原因：美团入驻zookeeper的时候会给美团一个监听器</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027798672.png" srcset="/img/loading.gif" lazyload alt="1652027798672"></p>
+<p>如果想做一个外卖服务平台，第一建议使用zookeeper</p>
+<hr>
+<h4 id="软负载均衡"><a href="#软负载均衡" class="headerlink" title="软负载均衡"></a>软负载均衡</h4><p>zookeeper会记录每台服务器的访问次数，让访问数最少的服务器去处理最新的请求</p>
+<p>想知道如何记录的？</p>
+<p>雨露均沾；各个服务器访问次数尽可能的一样</p>
+<p><img src="/2022/03/31/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20Dubbo&Zookeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83-Zookeeper/1652027923469.png" srcset="/img/loading.gif" lazyload alt="1652027923469"></p>
+<hr>
+<h3 id="Zookeeper下载与安装"><a href="#Zookeeper下载与安装" class="headerlink" title="Zookeeper下载与安装"></a>Zookeeper下载与安装</h3><p><a class="btn" target="_blank" rel="noopener" href="http://archive.apache.org/dist/zookeeper/" title="镜像库地址">镜像库地址</a></p>
+<p>千万不要用最新的，不稳定(建议使用倒数第二个)</p>
+<p>这里使用 3.6.0版本；</p>
+<p>linux部署有两种类型的包：tar.gz  bin.tar.gz</p>
+<p>安装bin.tar.gz  tar.gz需要安装一些jar包比较麻烦</p>
+<p>直接下载bin.tar.gz很方便</p>
+<p><a href="apache-zookeeper-3.6.0-bin.tar.gz" title="apache-zookeeper-3.6.0-bin.tar.gz">apache-zookeeper-3.6.0-bin.tar.gz下载</a> </p>
+<p>我们目前的安装属于单击安装</p>
+<p>前提需要安装JDK</p>
+<p>在根目录的opt文件下安装（将安装包下载到这个里面）</p>
+<p>解压安装包（tar -zxvf）</p>
+<p>给解压后的文件重命名（mv）</p>
+<p>创建配置文件（zoo.cfg  cp）(cp zoo_sample.cfg  zoo.cfg)</p>
+<p>修改数据的目录【dataDir】（&#x2F;opt&#x2F;zookeeper&#x2F;zkData）</p>
+<p>创建日志目录（注意是创建，前是没有的）【dataLogDir】（&#x2F;opt&#x2F;zookeeper&#x2F;zkLog）</p>
+<p>需要创建数据目录及日志目录</p>
+<p>启动zookeeper（bin )( zkServer.sh start）(status)</p>
+<p>zookeeper访问的端口是：2180</p>
+<p>服务型的应用程序都有方访问的端口号</p>
+<p>孤独的运行着(Mode: standalone)</p>
+<p>查看进程（jps）(Quor…)</p>
+<p>进入客户端（zkCli.sh）(进入zookeeper)</p>
+<p>查看当前目录下都有哪些节点（树状节点）（ls &#x2F;）</p>
+<p>退出客户端（quit）</p>
+<hr>
+<h3 id="配置参数详解"><a href="#配置参数详解" class="headerlink" title="配置参数详解"></a>配置参数详解</h3><p>讲解配置文件zoo.cfg的参数</p>
+<p>除了dataDir与dataLogDir其他的配置我们一般不动</p>
+<p><strong>tickTime：</strong> zookeeper和客户端的心跳时间</p>
+<p>很多的服务器入驻到zookpper,如何保证服务器和zookeeper连接着的呢？</p>
+<p>每个多长时间，谁向谁发啊，没有弄清楚</p>
+<p><strong>initLimit:</strong>  LF初始通信时限</p>
+<p>与tickTime相关（是tickTime的倍数），多长事件还没有发送心跳，领导与跟随着彻底断开连接</p>
+<p><strong>synclimit</strong>：</p>
+<p>与tickTime相关（是tickTime的倍数），多长时间还没有发送心跳，认为跟随着死亡，将跟随着送列表中剔除</p>
+<p><strong>dataDir:</strong>  数据目录</p>
+<p><strong>dataLogDir</strong>：日志目录</p>
+<p><strong>clientPort</strong> &#x3D;2181：客户端连接端口</p>
+<hr>
+<h3 id="内部原理-选举机制"><a href="#内部原理-选举机制" class="headerlink" title="内部原理-选举机制"></a>内部原理-选举机制</h3><p><strong>半数机制：</strong>zookeeper集群有半数以上服务器存活，zookeeper都可用</p>
+<p><strong>注意：</strong>是半数以上，这也是为什么zookeeper集群服务器个数常为奇数的原因</p>
+<p>一个领导者，其他都是跟随着；</p>
+<p>内部有选举机制</p>
+<p>半数以上的票数，才能成为领导</p>
+<p><strong>五台服务器：</strong></p>
+<p>第一台服务器给自己投一票，没有方法成为老大，将票投给了老二</p>
+<p>老二给自己投一票，也没有方法成为老大，将两张票给老三</p>
+<p>老三给自己投一票，可以成为老大</p>
+<p>老四给自己投一票（老大已经出来了），承认老三是老大</p>
+<p>老五给自己投一票（老大已经出来了），承认老三是老大</p>
+<hr>
+<h3 id="内部原理-节点类型"><a href="#内部原理-节点类型" class="headerlink" title="内部原理-节点类型"></a>内部原理-节点类型</h3><p>一共有<strong>四种类型</strong></p>
+<p>可以分为两大类，四小类</p>
+<p>两大类：持久型（永久的）与短暂型（临时的）</p>
+<p>持久型可分为：持久的、持久顺序的、</p>
+<p>短暂型可分为：短暂的、短暂顺序的</p>
+<p>序号是i++,跟数据库中的自增长类似</p>
+<hr>
+<h3 id="内部原理-监听器的原理"><a href="#内部原理-监听器的原理" class="headerlink" title="内部原理-监听器的原理"></a>内部原理-监听器的原理</h3><p>监听器是如何工作的：</p>
+<p><strong>zookeeper客户端</strong>（main方法）</p>
+<p>创建zookeeper客户端的同时会创建两个进程</p>
+<p>一个负责<strong>网络通信</strong>、一个<strong>负责监听</strong></p>
+<p>网络通信发送信息（监听敌人），给监听列表</p>
+<p>敌人有变化（敌人数据有变化与增减变化），将改变给监听进行</p>
+<p>监听进程调用内部的process方法（执行应对方案）（需要我们我们自己写）</p>
+<hr>
+<h3 id="内部原理-写数据流程"><a href="#内部原理-写数据流程" class="headerlink" title="内部原理-写数据流程"></a>内部原理-写数据流程</h3><p>这个流程需要我们理解</p>
+<p>1、客户端向服务器写数据</p>
+<p>2、服务器不是leader,没有权利，会去询问leader</p>
+<p>3、leader将这个请求发送给所有的服务器去写数据，请求操作成功后会通知leader</p>
+<p>4、当leader收到半数以上数据写成功了，那么数据就写成功了；</p>
+<p>5、leader告诉原先的服务器操作数据写成功；</p>
+<p>6、服务器通知客户端数据写成功了；</p>
+<hr>
+<h3 id="分布式安装部署（上）"><a href="#分布式安装部署（上）" class="headerlink" title="分布式安装部署（上）"></a>分布式安装部署（上）</h3><p>这是一个重点</p>
+<p>在zkData目录下创建一个文件（myid）(vim myid)</p>
+<p>第一台服务器写一个1，第二台服务器写一个2,…..</p>
+<p>可以使用cat命令查看是否写成功了</p>
+<p><strong>新增配置</strong>（zoo.cfg）,所有的服务器这个配置文件都要改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">server<span class="hljs-number">.1</span>=ip:<span class="hljs-number">2888</span>:<span class="hljs-number">3888</span><br>server<span class="hljs-number">.2</span>=ip:<span class="hljs-number">2888</span>:<span class="hljs-number">3888</span><br>server<span class="hljs-number">.3</span>=ip:<span class="hljs-number">2888</span>:<span class="hljs-number">3888</span><br></code></pre></td></tr></table></figure>
+
+<p>第一台、第二台、第三台服务器的ip</p>
+<p>2888 集群中leader<strong>服务器交换信息的端口</strong></p>
+<p>3888 集群中<strong>选举leader的端口</strong></p>
+<hr>
+<p>配置其余两台服务器</p>
+<p>如果是虚拟机的话，找到配置文件的位置</p>
+<p>在虚拟机数据目录vms下，创建zk02文件夹；</p>
+<p><code>.vmx </code>与所有的<code>.vmdk</code>文件分别复制到zk02文件夹下；</p>
+<p>进去新建的服务器（我已复制虚拟机），修改liunux中的ip（zoo.cfg 文件中的ip对应）</p>
+<p>修改<code>myid</code>文件内容</p>
+<hr>
+<h3 id="分布式安装部署（下）"><a href="#分布式安装部署（下）" class="headerlink" title="分布式安装部署（下）"></a>分布式安装部署（下）</h3><p>使用xshell链接三台创建好的服务器</p>
+<p>ifconfig 查看ip地址</p>
+<p>每台服务器的<strong>防火墙是必须关闭</strong>的(集群启动会导致失败)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">systemctl stop firewalld.service<br></code></pre></td></tr></table></figure>
+
+<p>启动zookeeper</p>
+<p>查看zookeeper状态</p>
+<p>Error contacting service,It is probably not running</p>
+<p>原因：启动半数以上才可以成功启动起来</p>
+<p>启动第二台服务器</p>
+<p>Mode:follwer   查看第一台服务i去</p>
+<p>Mode:leader  查看第二台服务器</p>
+<p>半数以上没有启动会导致失败</p>
+<p>防火墙没有关闭也会导致失败</p>
+<hr>
+<h3 id="客户端命令"><a href="#客户端命令" class="headerlink" title="客户端命令"></a>客户端命令</h3><p>启动客户端</p>
+<p>进入客户端  zkCli.sh</p>
+<p>pwd 查看当前文件目录</p>
+<p>显示所有的命令：help</p>
+<p>zookeeper的命令都在里面</p>
+<p>查询zookeeper的(根目录下的)节点信息：ls &#x2F;</p>
+<p>查看根目录下节点详情：ls -s &#x2F;</p>
+<p>账号、密码都在这个里面记录的（了解即可）</p>
+<p>事务ID：cZxid   修改的总的次数，记录操作事务的过程</p>
+<p>当前节点被创建的节点数：ctime</p>
+<p>mtime:最后修改的时间</p>
+<p>cversion:创建的版本号，子节点别修改的次数</p>
+<p>aclVersion：权限版本后（后面会说下）</p>
+<p>numChildren:子节点的个数</p>
+<hr>
+<p>根目录下创建节点：create &#x2F;china</p>
+<p>create &#x2F;usa</p>
+<p>查看根目录的节点  ls &#x2F;</p>
+<p>查看根目录的节点详情：ls -s &#x2F;</p>
+<p>创建节点并存数据(创建目录+保存数据)：create &#x2F;ru “pujing”</p>
+<p>获取目录数据：get &#x2F;ru</p>
+<p>目录必须一级一级的创建，否则会报错：create &#x2F;japan&#x2F;Tokyo “hot”(没有jspan节点的话会报错)</p>
+<p>必须先创建japan节点</p>
+<p>默认创建的节点都是永久的</p>
+<p>如何创建临时节点？ create -e &#x2F;uk</p>
+<p>退出zookeeper窗口（退出zookeeper客户端，临时节点消失）</p>
+<p>-s 顺序节点</p>
+<p>-s -e 短暂的顺序节点</p>
+<p>create -s &#x2F;ru&#x2F;city</p>
+<p>city0000000000..0  city000000…1  city00000…2</p>
+<hr>
+<p>给节点设置值：set &#x2F;japan&#x2F;Tokyo “too hot”</p>
+<hr>
+<p>添加监听节点：addWatch &#x2F;usa</p>
+<p>在另一台服务器上给这个节点设置值（set ）</p>
+<p>在原先的服务器上会出现：NodeDataChanged path:.usa(节点数据改变)</p>
+<p>在另一台服务器上在这个节点上创建新的节点（create &#x2F;usa&#x2F;NewYork）</p>
+<p>在原先的服务器上会出现：NodeCreate path:&#x2F;usa&#x2F;NewYork(节点创建的变化)</p>
+<hr>
+<p>删除节点（delete &#x2F;uas&#x2F;NewYork）</p>
+<p>这种方式需要一步一步来，否则会报错</p>
+<p>如果需要递归的删除：需要使用deleteall(deleteall &#x2F;uas)</p>
+<p>一定要记住help命令</p>
+<hr>
+<p>【未完成】</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B0%B1%E4%B8%9A-%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%E6%A8%A1%E5%9D%97%E4%B8%80/">#就业-第七阶段模块一</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>分布式技术核心-Zookeeper</div>
+      <div>https://xuebaqiang.github.io/2022/03/31/Java就业训练营/第七阶段 分布式技术核心/模块一 Dubbo&amp;Zookeeper/分布式技术核心-Zookeeper/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea-git%E7%9A%84%E8%BF%90%E7%94%A8/" title="idea-git的运用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">idea-git的运用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E5%85%B6%E4%BB%96/%E5%AF%86%E7%A0%81/%E5%AF%86%E7%A0%81--mysql/" title="密码--mysql">
+                        <span class="hidden-mobile">密码--mysql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

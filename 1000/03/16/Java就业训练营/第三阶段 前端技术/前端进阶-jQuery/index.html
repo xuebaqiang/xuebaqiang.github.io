@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="任务一：jQueryjQuery介绍美国人创建的 2006年创建的 很多框架都是基于jQuery开发的 jquery是js对象和函数的封装 jquery代码越来越少 jquery只需要一句带代码就可以实现隔行变色  jquery能做什么： 访问和操作DOM元素对象  控制页面样式 控制页面时间 扩展了新了jquery插件（鼠标放大镜效果、日历控件、地图控件、报表控件） 与Ajax技术完美结合  j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端进阶-jQuery">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="任务一：jQueryjQuery介绍美国人创建的 2006年创建的 很多框架都是基于jQuery开发的 jquery是js对象和函数的封装 jquery代码越来越少 jquery只需要一句带代码就可以实现隔行变色  jquery能做什么： 访问和操作DOM元素对象  控制页面样式 控制页面时间 扩展了新了jquery插件（鼠标放大镜效果、日历控件、地图控件、报表控件） 与Ajax技术完美结合  j">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651655932260.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651656145575.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651657874707.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651675677268.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651676252974.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651677402755.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651678762017.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651761252635.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762063044.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762666707.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762748937.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651763536001.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651763553498.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764589813.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764609006.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764352484.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764366027.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651766961779.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651766926269.png">
+<meta property="article:published_time" content="1000-03-15T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:12.041Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="第三阶段">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651655932260.png">
+  
+  
+  
+  <title>前端进阶-jQuery - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="前端进阶-jQuery"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-03-16 00:20" pubdate>
+          1000年3月16日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          78 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端进阶-jQuery</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="任务一：jQuery"><a href="#任务一：jQuery" class="headerlink" title="任务一：jQuery"></a>任务一：jQuery</h1><h2 id="jQuery介绍"><a href="#jQuery介绍" class="headerlink" title="jQuery介绍"></a>jQuery介绍</h2><p>美国人创建的</p>
+<p>2006年创建的</p>
+<p>很多框架都是基于jQuery开发的</p>
+<p>jquery是js对象和函数的封装</p>
+<p>jquery代码越来越少</p>
+<p>jquery只需要一句带代码就可以实现隔行变色</p>
+<hr>
+<p class="note note-primary">jquery能做什么：</p>
+访问和操作DOM元素对象
+
+<p>控制页面样式</p>
+<p>控制页面时间</p>
+<p>扩展了新了jquery插件（鼠标放大镜效果、日历控件、地图控件、报表控件）</p>
+<p>与Ajax技术完美结合</p>
+<hr>
+<p class="note note-primary">jquery是什么：</p>
+使用jquery可以提高开发效率
+
+<p>jquery是成语</p>
+<p>js是白话文</p>
+<p>成语是白话文的深度压缩</p>
+<p>烽火戏诸侯与一个故事</p>
+<div class="note note-success">
+            <p>jquery就是js</p><p>jquery能做的js都是可以做的，js能做的事情jquery不一定能做</p><p>成语能描述的事情，记叙文可不可以描述</p><p>js是大王，jQuery是js下的小王爷</p>
+          </div>
+
+<hr>
+<p class="note note-primary">jquery的优势：</p>
+体积小，压缩后只有100KB左右（jquery中有很多的方法，特别特别好yogn）
+
+<p>强大的选择器（遍历节点）</p>
+<p>出色的DOM封装（创建节点、修改节点，改变节点的颜色或样式）</p>
+<p>可靠的事件处理机制</p>
+<p>出色的浏览器兼容性（浏览器运行效果都是一样的）</p>
+<hr>
+<h2 id="jQuery的使用"><a href="#jQuery的使用" class="headerlink" title="jQuery的使用"></a>jQuery的使用</h2><p><a class="btn" target="_blank" rel="noopener" href="http://jQuery.com" title="下载jquery">下载jquery</a></p>
+<p>不要使用最新的版本，使用第二个版本</p>
+<p>最新的东西，不是很稳定，前一个版本比较稳定一些</p>
+<p>也可以在网络上查询哪个版本更稳定一些</p>
+<p>是国外的网站，下载比较慢</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651655932260.png" srcset="/img/loading.gif" lazyload alt="1651655932260"></p>
+<p>compressed:压缩过的（代码一行显示）</p>
+<p>production:发布</p>
+<p>development:开发版本</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651656145575.png" srcset="/img/loading.gif" lazyload alt="1651656145575"></p>
+<p>拿过来就可以了，拿压缩过的发布版本就可以了</p>
+<p>3.4.1版本，是比较稳定的（开发中我们就使用这个版本）</p>
+<p><a href="jquery-3.4.1.min.js" title="查看jquery-3.4.1.min.js">查看jquery-3.4.1.min.js</a> </p>
+<p><a href="jquery-3.4.1.min.js.zip" title="下载jquery-3.4.1.min.js">下载jquery-3.4.1.min.js</a> </p>
+<hr>
+<p>引入jquery</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;script src=<span class="hljs-string">&quot;js/jquery-3.4.1.min.js&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>工厂函数：将DOM对象转化为jquery对象</p>
+<p>选择器selector:获取需要操作的DOM元素对象</p>
+<p>获取p标签中的文字</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">$(<span class="hljs-string">&quot;p&quot;</span>).<span class="hljs-title function_">text</span>();<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="js对象和jQuery对象转换"><a href="#js对象和jQuery对象转换" class="headerlink" title="js对象和jQuery对象转换"></a>js对象和jQuery对象转换</h2><p>DOM对象（HTML对象） 与jquery对象</p>
+<p class="note note-primary">dom对象与jquery对象自己都有一套自己的方法，不能混用</p>
+使用dom对象和jquery对象获取元素中的内容
+
+<p>dom对象使用 innerHTML()</p>
+<p>jquery对象使用 html()</p>
+<p>方法不能混用</p>
+<p class="note note-primary">如果dom对象想使用jquery的方法，需要将js对象转换成jquery对象</p>
+使用工厂函数($(js对象))，转换一下
+
+<p>jquery对象转化为js对象：jqDom.get(0);</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>测试信息<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-keyword">var</span> jsDom = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;title&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jsDom.<span class="hljs-property">innerHTML</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// js对象转化为jquery对象</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-keyword">var</span> jqDom = $(jsDom);</span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jqDom.<span class="hljs-title function_">html</span>());</span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// jquery对象转化为js对象</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jqDom.<span class="hljs-title function_">get</span>(<span class="hljs-number">0</span>).<span class="hljs-property">innerHTML</span>);</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651657874707.png" srcset="/img/loading.gif" lazyload alt="1651657874707"></p>
+<p>特别注意：js对象使用innerHTML的时候，后面不要加上();</p>
+<hr>
+<h2 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h2><p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651675677268.png" srcset="/img/loading.gif" lazyload alt="1651675677268"></p>
+<p>p标签变为红色   .css(“color”,”red”)</p>
+<p>id选择器，具备唯一性；</p>
+<p>一个页面有对个ID，只是第一个会生效吗？ – 只有第一个才会生效</p>
+<p>类选择器不具备唯一性；</p>
+<p>并集选择器：两个标签元素都会修改</p>
+<p>交集选择器：即是又是  交在一起的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;p&gt;中国&lt;/p&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>武汉<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;jy&quot;</span>&gt;</span>加油<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;wan&quot;</span>&gt;</span>祖国万岁<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;jy&quot;</span>&gt;</span>祖国万岁<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;js/jquery-3.4.1.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//$(&quot;p&quot;).css(&quot;color&quot;,&quot;red&quot;); // 标签选择器，获得所有的p</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//$(&quot;.jy&quot;).css(&quot;color&quot;,&quot;red&quot;); //类选择器</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//$(&quot;#wan&quot;).css(&quot;color&quot;,&quot;red&quot;); //ID选择器,更具备唯一性</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//$(&quot;.jy,#wan&quot;).css(&quot;color&quot;,&quot;red&quot;); // 并集选择器，.jy和#wan</span></span></span><br><span class="language-javascript"><span class="language-xml">$(<span class="hljs-string">&quot;h3.jy&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;color&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>); <span class="hljs-comment">// 交集选择器，既是h3标签，又拥有.jy的元素</span></span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h2><p>后代、子代、相邻的、</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651676252974.png" srcset="/img/loading.gif" lazyload alt="1651676252974"></p>
+<p>后代元素选择器（空格），忽略层级</p>
+<p>子代元素选择器（&gt;），只负责子元素</p>
+<p>同辈元素选择器（~），兄弟姐妹，下面的所有兄弟元素</p>
+<p>​		注意：不包含上面的兄弟</p>
+<p>相邻元素选择器（+），紧邻的兄弟h3</p>
+<p>​		注意是下一个紧邻的兄弟元素，不包含上一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>000<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;x&quot;</span>&gt;</span></span><br><span class="language-xml">		111</span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>222<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>333<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 后代元素选择器</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;#x p&quot;).css(&quot;color&quot;,&quot;red&quot;); // p1 p2 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 子代元素选择器</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">//  $(&quot;#x&gt;p&quot;).css(&quot;color&quot;,&quot;red&quot;); // p1 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 同辈元素选择器</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;#x~h3&quot;).css(&quot;color&quot;,&quot;red&quot;); // 222 333 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 相邻元素选择器</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;#x+h3&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;color&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>);<span class="hljs-comment">// 222 红</span></span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<p>需要注意：script标签需要写在标签元素的下面，否则不会有效果的（因为js是解释型语言，是一行一行解释并执行的）</p>
+<hr>
+<h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h2><p>可以对属性进行一次或多次过滤（元素属性过滤）</p>
+<p>标签中可能是有很多的属性的</p>
+<p>属性的各种过滤特别的强悍</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651677402755.png" srcset="/img/loading.gif" lazyload alt="1651677402755"></p>
+<p>属性的引用使用的是[]</p>
+<p>属性的值使用单引号‘’，使用等号连接</p>
+<p>属性值不等于使用！</p>
+<p>属性值以什么开头使用^(类似于正则表达式的开头)</p>
+<p>属性值以什么结尾使用$（类似于正则表达式的结尾）</p>
+<p>属性值包含某值使用*（包含）</p>
+<p>多属性使用多个[]</p>
+<p>可以和基础选择器一起使用，中间不需要加任何的符号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;www.lagou.com&quot;</span>&gt;</span>拉勾网<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;www.sina.com.cn&quot;</span>&gt;</span>新浪网<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://www.163.com&quot;</span>&gt;</span>网易<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;x&quot;</span>&gt;</span>哈哈1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;x&quot;</span>&gt;</span>哈哈2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 全红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href=&#x27;x&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 哈哈1 哈哈2 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href!=&#x27;x&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 全红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;a[href!=&#x27;x&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 拉勾网 新浪网 网易 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href^=&#x27;www&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 拉勾网 新浪网 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href$=&#x27;com&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;);  //  拉勾网 网易 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href*=&#x27;www&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 拉勾网 新浪网 网易 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;[href^=&#x27;www&#x27;][href$=&#x27;cn&#x27;]&quot;).css(&quot;color&quot;,&quot;red&quot;); // 新浪网 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;a[href^=&#x27;www&#x27;][href$=&#x27;cn&#x27;]&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;color&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>);  <span class="hljs-comment">// 新浪网 红</span></span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>不理解：$(“[href!&#x3D;’x’]”).css(“color”,”red”); &#x2F;&#x2F; 全红  为什么全红</p>
+<p>原因：p标签是不拥有这个元素的，也会将其选取出来，解决：使用标签要符合规范，属性不要乱用；标签允许使用的标签才可以使用</p>
+<hr>
+<h2 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h2><p>过滤选择器重行啊</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651678762017.png" srcset="/img/loading.gif" lazyload alt="1651678762017"></p>
+<p>标签选择器的基础上使用过滤选择器</p>
+<p>选择标签的偶数行元素【:even】（0,2,4。。。）</p>
+<p>选择标签的奇数行元素【:odd】（1,3,5.。。）</p>
+<p>选择标签的第一个元素【:first】</p>
+<p>选择标签的最后一个元素【:last】</p>
+<p>选择标签某行的元素【:eq(行下标)】</p>
+<p>选择标签下标大于某行的元素【:gt(行下标)】</p>
+<p>选择标签下标小于某行的元素【:lt(行下标)】</p>
+<p>id等属性值不要使用特殊字符，否则无法识别，如果非要使用，需使用转义字符</p>
+<p>转义符：<code>\\</code>这里需要使用两个，负责还认为有含义呢</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;h2#x&quot;</span>&gt;</span>修仙小说<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>凡人修仙传<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>遮天<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>神墓<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>残袍<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>大主宰<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:even&quot;).css(&quot;color&quot;,&quot;red&quot;); // 0 2 4 行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:odd&quot;).css(&quot;color&quot;,&quot;red&quot;); // 1 3 行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:first&quot;).css(&quot;color&quot;,&quot;red&quot;); // 第一行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:last&quot;).css(&quot;color&quot;,&quot;red&quot;); // 最后一行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:eq(2)&quot;).css(&quot;color&quot;,&quot;red&quot;); // 第三行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:gt(2)&quot;).css(&quot;color&quot;,&quot;red&quot;); // 4 5 行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// $(&quot;li:lt(2)&quot;).css(&quot;color&quot;,&quot;red&quot;); // 0 1 行 红</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;#h2\\#x&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;color&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>); <span class="hljs-comment">// 修仙小说 红</span></span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>注意：gt是大于，不是大于等于；lt是小于，不是小于等于</p>
+<hr>
+<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><p>常用鼠标事件有：</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651761252635.png" srcset="/img/loading.gif" lazyload alt="1651761252635"></p>
+<p>某个元素绑定单击事件，事件中写一个函数</p>
+<p>函数：点击一下，换照片（换的是点中的元素）</p>
+<p>使用this关键字，this就是事件触发的那一个</p>
+<p>移上，边框颜色为红色，</p>
+<p>移出，边框颜色为白色</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	&lt;img src=&quot;testImg02.png&quot;&gt;<br>	&lt;img src=&quot;testImg02.png&quot;&gt;<br>	&lt;img src=&quot;testImg02.png&quot;&gt;<br>	&lt;script&gt;<br>		// 鼠标点中图片，换图片<br>		$(&quot;img&quot;).click(function()&#123;<br>			$(this).attr(&quot;src&quot;,&quot;testImg.jpg&quot;);<br>		&#125;)<br>		// 鼠标移动到图片上(移上)，给图片加上红边框<br>		$(&quot;img&quot;).mouseover(function()&#123;<br>			$(this).css(&quot;border&quot;,&quot;2px solid red&quot;)<br>		&#125;)<br>		// 鼠标移出到图片(移出)，给图片加上白边框<br>		$(&quot;img&quot;).mouseout(function()&#123;<br>			$(this).css(&quot;border&quot;,&quot;2px solid white&quot;)<br>		&#125;)<br>	&lt;/script&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h2><p>常用键盘事件有：</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762063044.png" srcset="/img/loading.gif" lazyload alt="1651762063044"></p>
+<p>在输入框中输入什么，在h3中打印什么</p>
+<p>键盘按下去的，获得input框中的值并放到h3标签中显示</p>
+<p>里边的文字，使用text()方法</p>
+<p>按下去的时候，input框中是空值，会将空值给复制到h3中</p>
+<p>如果使用keydown会有一个延迟的效果</p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762666707.png" srcset="/img/loading.gif" lazyload alt="1651762666707"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	&lt;input&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 键盘按下去的时候将input框中的值赋值到h3中</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;input&quot;</span>).<span class="hljs-title function_">keyup</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// $(&quot;h3&quot;).val($(this).val()); 错误的写法，h3没有val方法</span></span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-string">&quot;h3&quot;</span>).<span class="hljs-title function_">text</span>($(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">val</span>());</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651762748937.png" srcset="/img/loading.gif" lazyload alt="1651762748937"></p>
+<hr>
+<h2 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h2><p>表单常用事件：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>执行时机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>focus( )</td>
+<td>触发或将函数绑定到指定元素的focus事件</td>
+<td>获得焦点</td>
+</tr>
+<tr>
+<td>blur( )</td>
+<td>触发或将函数绑定到指定元素的blur事件</td>
+<td>失去焦点</td>
+</tr>
+</tbody></table>
+<p>获取焦点的时候，input值清空；</p>
+<p>失去焦点的时候，input恢复默认值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>帐号: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;a&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;请输入帐号...&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>电话: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;b&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 获取焦点的时候，input值清空；</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;#a&quot;</span>).<span class="hljs-title function_">focus</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">val</span>(<span class="hljs-string">&quot;&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 失去焦点的时候，input恢复默认值</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;#a&quot;</span>).<span class="hljs-title function_">blur</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">val</span>(<span class="hljs-string">&quot;请输入帐号...&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651763536001.png" srcset="/img/loading.gif" lazyload alt="1651763536001"></p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651763553498.png" srcset="/img/loading.gif" lazyload alt="1651763553498"></p>
+<hr>
+<h2 id="复合事件"><a href="#复合事件" class="headerlink" title="复合事件"></a>复合事件</h2><p>jquery专有的，有两个</p>
+<h3 id="鼠标悬停复合事件"><a href="#鼠标悬停复合事件" class="headerlink" title="鼠标悬停复合事件"></a>鼠标悬停复合事件</h3><p>hover()方法相当于mouseover与mouseout事件的组合</p>
+<p>移上加红边框，移出加白边框</p>
+<p>第一个函数是移上</p>
+<p>第二个函数是移出</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;testImg02.png&quot;</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 移上加红边框，移出加白边框</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;img&quot;</span>).<span class="hljs-title function_">hover</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;border&quot;</span>,<span class="hljs-string">&quot;2px solid red&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;border&quot;</span>,<span class="hljs-string">&quot;2px solid white&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764589813.png" srcset="/img/loading.gif" lazyload alt="移上"></p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764609006.png" srcset="/img/loading.gif" lazyload alt="移出"></p>
+<hr>
+<h3 id="连续点击复合事件"><a href="#连续点击复合事件" class="headerlink" title="连续点击复合事件"></a>连续点击复合事件</h3><p>toggle()可以模拟鼠标的连续单击事件</p>
+<p>第一次点击，隐藏</p>
+<p>第二次点击，显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>修仙小说<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>凡人修仙传<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>遮天<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>神墓<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>残袍<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>大主宰<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		<span class="hljs-comment">// 点击一次隐藏，再点击一次显示</span></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;h2&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-string">&quot;ul&quot;</span>).<span class="hljs-title function_">toggle</span>();</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764352484.png" srcset="/img/loading.gif" lazyload alt="默认显示"></p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651764366027.png" srcset="/img/loading.gif" lazyload alt="点击一次隐藏"></p>
+<hr>
+<h2 id="动态绑定事件"><a href="#动态绑定事件" class="headerlink" title="动态绑定事件"></a>动态绑定事件</h2><p>绑定事件的另一种写法</p>
+<p>之前对元素绑定时间</p>
+<p>动态绑定时间：使用on()函数，</p>
+<p>第一个参数，是事件的名称</p>
+<p>第二个函数，是绑定的事件</p>
+<p class="note note-primary">动态绑定的强大之处：</p>
+
+<p>可以绑定多种类型的事件，可以一次绑定多个事件</p>
+<p>既可以绑定点击事件，也可以绑定移上事件</p>
+<p>事件与事件之间使用空格隔开</p>
+<hr>
+<h2 id="隐藏和显示"><a href="#隐藏和显示" class="headerlink" title="隐藏和显示"></a>隐藏和显示</h2><p>显示及隐藏并含有动画效果</p>
+<h3 id="改变元素的宽和高（带动画效果）"><a href="#改变元素的宽和高（带动画效果）" class="headerlink" title="改变元素的宽和高（带动画效果）"></a>改变元素的宽和高（带动画效果）</h3><ul>
+<li><p>show( speed )：显示</p>
+</li>
+<li><p>hide( speed )：隐藏</p>
+</li>
+<li><p>toggle( speed )等价于show+hide : 显示的隐藏，隐藏的显示</p>
+<p>speed可以不使用</p>
+</li>
+</ul>
+<p>如果想要动画效果，需要将速度变慢</p>
+<p class="note note-primary">可以向方法中传入参数：</p>
+
+<p>fast：快速的</p>
+<p>slow：缓慢的</p>
+<p>毫秒：自定义</p>
+<hr>
+<h3 id="改变元素的高（拉伸效果）"><a href="#改变元素的高（拉伸效果）" class="headerlink" title="改变元素的高（拉伸效果）"></a>改变元素的高（拉伸效果）</h3><ul>
+<li>slideDown( speed ) ：显示</li>
+<li>slideUp( speed )：隐藏</li>
+<li>slideToggle( speed )等价于slideDown+slideUp</li>
+</ul>
+<p>可选的 speed 参数规定隐藏&#x2F;显示的速度，可以取以下值：”slow”<br>、”fast” 或毫秒</p>
+<hr>
+<h3 id="不改变元素的大小（淡入淡出效果）"><a href="#不改变元素的大小（淡入淡出效果）" class="headerlink" title="不改变元素的大小（淡入淡出效果）"></a>不改变元素的大小（淡入淡出效果）</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fadeIn( speed )</td>
+<td>显示</td>
+</tr>
+<tr>
+<td>fadeOut( speed )</td>
+<td>隐藏</td>
+</tr>
+<tr>
+<td>fadeToggle( speed )</td>
+<td>等价于fadeIn+fadeOut动画</td>
+</tr>
+<tr>
+<td>fadeTo( speed , 透明度 )</td>
+<td>方法允许渐变为给定的不透明度（值介于 0 与 1 之间）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="链式编程"><a href="#链式编程" class="headerlink" title="链式编程"></a>链式编程</h2><p>可以实现将代码写到一行</p>
+<p>使用点点点的方式</p>
+<p>连着完成四个操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">$(<span class="hljs-string">&quot;div&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;background-color&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>).<span class="hljs-title function_">css</span>(<span class="hljs-string">&quot;color&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>).<span class="hljs-title function_">slideUp</span>(<span class="hljs-number">1000</span>).<span class="hljs-title function_">slideDown</span>(<span class="hljs-number">1000</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="属性函数"><a href="#属性函数" class="headerlink" title="属性函数"></a>属性函数</h2><p>DOM和CSS的操作</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attr( “属性” );</td>
+<td>获得元素的属性值</td>
+</tr>
+<tr>
+<td>attr( “属性” , “新值” );</td>
+<td>修改元素的属性值</td>
+</tr>
+<tr>
+<td>attr( 样式参数 ) ：</td>
+<td>样式参数可以写成json格式，修改多个属性的值</td>
+</tr>
+</tbody></table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;body&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;btn1&quot;</span>&gt;</span>点我试试<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br>	&lt;hr&gt;<br>	<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;testImg02.png&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;美女大图&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">		$(<span class="hljs-string">&quot;#btn1&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// 获取属性的值</span></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-keyword">var</span> title = $(<span class="hljs-string">&quot;img&quot;</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&quot;title&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(title);  <span class="hljs-comment">// 美女大图</span></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// 给属性赋值</span></span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-string">&quot;img&quot;</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&quot;title&quot;</span>,<span class="hljs-string">&quot;新的图片&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>($(<span class="hljs-string">&quot;img&quot;</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&quot;title&quot;</span>)); <span class="hljs-comment">// 新的图片</span></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// 给多个属性赋值</span></span></span><br><span class="language-javascript"><span class="language-xml">			$(<span class="hljs-string">&quot;img&quot;</span>).<span class="hljs-title function_">attr</span>(&#123;<span class="hljs-attr">width</span>:<span class="hljs-string">&quot;150&quot;</span>,<span class="hljs-attr">height</span>:<span class="hljs-string">&quot;150&quot;</span>&#125;);</span></span><br><span class="language-javascript"><span class="language-xml">		&#125;)</span></span><br><span class="language-javascript"><span class="language-xml">	</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651766961779.png" srcset="/img/loading.gif" lazyload alt="点击前的效果"></p>
+<p><img src="/1000/03/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6-jQuery/1651766926269.png" srcset="/img/loading.gif" lazyload alt="点击后的效果"></p>
+<hr>
+<h2 id="文本函数"><a href="#文本函数" class="headerlink" title="文本函数"></a>文本函数</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/">#第三阶段</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>前端进阶-jQuery</div>
+      <div>https://xuebaqiang.github.io/1000/03/16/Java就业训练营/第三阶段 前端技术/前端进阶-jQuery/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年3月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1000/09/01/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83/%E6%A8%A1%E5%9D%97%E4%B8%80%20SpringBoot&amp;SpringCloud@Docker/%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5-SpringBoot%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" title="第九阶段-SpringBoot基本应用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第九阶段-SpringBoot基本应用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1000/03/09/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-JavaScript/" title="前端基础-JavaScript">
+                        <span class="hidden-mobile">前端基础-JavaScript</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

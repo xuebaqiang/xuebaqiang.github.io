@@ -1,0 +1,765 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第一阶段 JavaSE模块一:Java 语言基础本模块将会介绍Java语言的环境搭建和编程基础，通过流程控制语句和数组锻炼逻辑思维能力。 JavaSE_01初识计算机和Java语言.pdf JavaSE_02变量和数据类型.pdf JavaSE_03运算符.pdf JavaSE_04流程控制语句.pdf JavaSE_05数组以及应用k.pdf  模块二:Java 面向对象编程本模块通过现实中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java就业训练营模板-学习文档">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/08/06/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5%E6%A8%A1%E6%9D%BF-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="第一阶段 JavaSE模块一:Java 语言基础本模块将会介绍Java语言的环境搭建和编程基础，通过流程控制语句和数组锻炼逻辑思维能力。 JavaSE_01初识计算机和Java语言.pdf JavaSE_02变量和数据类型.pdf JavaSE_03运算符.pdf JavaSE_04流程控制语句.pdf JavaSE_05数组以及应用k.pdf  模块二:Java 面向对象编程本模块通过现实中的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-05T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:10.500Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="学习文档">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Java就业训练营模板-学习文档 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java就业训练营模板-学习文档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 00:19" pubdate>
+          2022年8月6日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java就业训练营模板-学习文档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h1 id="第一阶段-JavaSE"><a href="#第一阶段-JavaSE" class="headerlink" title="第一阶段 JavaSE"></a>第一阶段 JavaSE</h1><h2 id="模块一-Java-语言基础"><a href="#模块一-Java-语言基础" class="headerlink" title="模块一:Java 语言基础"></a>模块一:Java 语言基础</h2><p>本模块将会介绍Java语言的环境搭建和编程基础，通过流程控制语句和数组锻炼逻辑思维能力。</p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_01%E5%88%9D%E8%AF%86%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%92%8CJava%E8%AF%AD%E8%A8%80.pdf" title="JavaSE_01初识计算机和Java语言.pdf">JavaSE_01初识计算机和Java语言.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_02%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.pdf" title="JavaSE_02变量和数据类型.pdf">JavaSE_02变量和数据类型.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_03%E8%BF%90%E7%AE%97%E7%AC%A6.pdf" title="JavaSE_03运算符.pdf">JavaSE_03运算符.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_04%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5.pdf" title="JavaSE_04流程控制语句.pdf">JavaSE_04流程控制语句.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_05%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8k.pdf" title="JavaSE_05数组以及应用k.pdf">JavaSE_05数组以及应用k.pdf</a></p>
+<hr>
+<h2 id="模块二-Java-面向对象编程"><a href="#模块二-Java-面向对象编程" class="headerlink" title="模块二:Java 面向对象编程"></a>模块二:Java 面向对象编程</h2><p>本模块通过现实中的案例来展现和剖析面向对象编程的思想，并掌握面向对象编程的语法规则。</p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_06%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.pdf" title="JavaSE_06类和对象.pdf">JavaSE_06类和对象.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_07%E6%96%B9%E6%B3%95%E5%92%8C%E5%B0%81%E8%A3%85.pdf" title="JavaSE_07方法和封装.pdf">JavaSE_07方法和封装.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_08static%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E7%BB%A7%E6%89%BF.pdf" title="JavaSE_08static关键字和继承.pdf">JavaSE_08static关键字和继承.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_09%E5%A4%9A%E6%80%81%E5%92%8C%E7%89%B9%E6%AE%8A%E7%B1%BB.pdf" title="JavaSE_09多态和特殊类.pdf">JavaSE_09多态和特殊类.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_10%E7%89%B9%E6%AE%8A%E7%B1%BB.pdf" title="JavaSE_10特殊类.pdf">JavaSE_10特殊类.pdf</a></p>
+<hr>
+<h2 id="模块三-Java-核心类库（上）"><a href="#模块三-Java-核心类库（上）" class="headerlink" title="模块三:Java 核心类库（上）"></a>模块三:Java 核心类库（上）</h2><p>本模块学习Java语言中常用类和String类以及集合类等，并掌握内存中的增删改查操作。</p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_11%E5%B8%B8%E7%94%A8%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8.pdf" title="JavaSE_11常用类的概述和使用.pdf">JavaSE_11常用类的概述和使用.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_12String%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8.pdf" title="JavaSE_12String类的概述和使用.pdf">JavaSE_12String类的概述和使用.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_13%E5%8F%AF%E5%8F%98%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3%E7%B1%BB.pdf" title="JavaSE_13可变字符串类和日期相关类.pdf">JavaSE_13可变字符串类和日期相关类.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_14%E9%9B%86%E5%90%88%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8A%EF%BC%89.pdf" title="JavaSE_14集合类库（上）.pdf">JavaSE_14集合类库（上）.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_15%E9%9B%86%E5%90%88%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89.pdf" title="JavaSE_15集合类库（下）.pdf">JavaSE_15集合类库（下）.pdf</a></p>
+<hr>
+<h2 id="模块四-Java-核心类库（下）"><a href="#模块四-Java-核心类库（下）" class="headerlink" title="模块四:Java 核心类库（下）"></a>模块四:Java 核心类库（下）</h2><p>本模块学习IO流和线程以及网络编程等，并掌握多设备之间一对一和一对多的通信方式。</p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_16%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6%E5%92%8CFile%E7%B1%BB.pdf" title="JavaSE_16异常机制和File类.pdf">JavaSE_16异常机制和File类.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_17IO%E6%B5%81.pdf" title="JavaSE_17IO流.pdf">JavaSE_17IO流.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_18%E5%A4%9A%E7%BA%BF%E7%A8%8B.pdf" title="JavaSE_18多线程.pdf">JavaSE_18多线程.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_19%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.pdf" title="JavaSE_19网络编程.pdf">JavaSE_19网络编程.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6.pdf" title="JavaSE_20反射机制.pdf">JavaSE_20反射机制.pdf</a></p>
+<hr>
+<h2 id="模块五-Java-新特性和项目"><a href="#模块五-Java-新特性和项目" class="headerlink" title="模块五:Java 新特性和项目"></a>模块五:Java 新特性和项目</h2><p>通过该模块可以将Java语言中的所有内容学以致用，初步建立项目架构和设计的思想。</p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_21%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E5%92%8C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.pdf" title="JavaSE_21常用设计原则和设计模式.pdf">JavaSE_21常用设计原则和设计模式.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_22%E6%96%B0%E7%89%B9%E6%80%A7.pdf" title="JavaSE_22新特性.pdf">JavaSE_22新特性.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/JavaSE_23%E9%A1%B9%E7%9B%AE.pdf" title="JavaSE_23项目.pdf">JavaSE_23项目.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/NIO.pdf" title="NIO.pdf">NIO.pdf</a></p>
+<hr>
+<h1 id="第二阶段-数据库技术"><a href="#第二阶段-数据库技术" class="headerlink" title="第二阶段 数据库技术"></a>第二阶段 数据库技术</h1><h2 id="模块一-MySQL数据库"><a href="#模块一-MySQL数据库" class="headerlink" title="模块一:MySQL数据库"></a>模块一:MySQL数据库</h2><p>本模块主要讲解:MySQL的安装与使用，以及SQL语言的基本语法，高级语法，并且通过SQL语言对数据库中的数据进行各种常用操作</p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/%E4%BB%BB%E5%8A%A1%E4%B8%80_MySql%E5%9F%BA%E7%A1%80&SQL%E5%85%A5%E9%97%A8.pdf" title="任务一_MySql基础&amp;SQL入门.pdf">任务一_MySql基础&amp;SQL入门.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/%E4%BB%BB%E5%8A%A1%E4%BA%8C_MySql%E5%8D%95%E8%A1%A8&%E7%BA%A6%E6%9D%9F&%E4%BA%8B%E5%8A%A1.pdf" title="任务二_MySql单表&amp;约束&amp;事务.pdf">任务二_MySql单表&amp;约束&amp;事务.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/%E4%BB%BB%E5%8A%A1%E4%B8%89_Mysql%E5%A4%9A%E8%A1%A8&%E5%A4%96%E9%94%AE&%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1.pdf" title="任务三_Mysql多表&amp;外键&amp;数据库设计.pdf">任务三_Mysql多表&amp;外键&amp;数据库设计.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/%E4%BB%BB%E5%8A%A1%E5%9B%9B_MySql%E7%B4%A2%E5%BC%95&%E8%A7%86%E5%9B%BE&%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B.pdf" title="任务四_MySql索引&amp;视图&amp;存储过程.pdf">任务四_MySql索引&amp;视图&amp;存储过程.pdf</a></p>
+<hr>
+<h2 id="模块二-JDBC技术和XML"><a href="#模块二-JDBC技术和XML" class="headerlink" title="模块二:JDBC技术和XML"></a>模块二:JDBC技术和XML</h2><p>本模块主要讲解JDBC相关技术，能够使用Java程序对数据库进行访问，并操作数据表中的数据。通过对XML的学习，掌握配置文件的基本定义方式。</p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E4%BB%BB%E5%8A%A1%E4%B8%80_JDBC.pdf" title="任务一_JDBC.pdf">任务一_JDBC.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E4%BB%BB%E5%8A%A1%E4%BA%8C_%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0&DBUtils.pdf" title="任务二_数据库连接池&amp;DBUtils.pdf">任务二_数据库连接池&amp;DBUtils.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E4%BB%BB%E5%8A%A1%E4%B8%89_XML.pdf" title="任务三_XML.pdf">任务三_XML.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E4%BB%BB%E5%8A%A1%E5%9B%9B_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.md" title="任务四 _综合案例.md">任务四_综合案例.md</a></p>
+<hr>
+<h1 id="第三阶段-前端技术"><a href="#第三阶段-前端技术" class="headerlink" title="第三阶段 前端技术"></a>第三阶段 前端技术</h1><h2 id="模块一-前端基础"><a href="#模块一-前端基础" class="headerlink" title="模块一:前端基础"></a>模块一:前端基础</h2><p>本模块主要讲解: HTML超文本标记语言、CSS样式、以及脚本语言JavaScript，通过三者相结合，完成常见的页面效果的展示，比如页面轮播图, 定时弹出广告等等。</p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/HTML%E8%AF%A6%E8%A7%A3.pdf" title="HTML详解.pdf">HTML详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/CSS%E8%AF%A6%E8%A7%A3.pdf" title="CSS详解.pdf">CSS详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/JavaScript%E8%AF%A6%E8%A7%A3.pdf" title="JavaScript详解.pdf">JavaScript详解.pdf</a></p>
+<hr>
+<h2 id="模块二-前端进阶"><a href="#模块二-前端进阶" class="headerlink" title="模块二:前端进阶"></a>模块二:前端进阶</h2><p>本模块主要讲解 JS框架jQuery、响应式框架BootStrap、以及ES6的新特性,通过Jquery与BootStrap相结合,开发出适应不同终端的响应式页面。</p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/jQuery%E8%AF%A6%E8%A7%A3.pdf" title="jQuery详解.pdf">jQuery详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/ECMAScript6%E8%AF%A6%E8%A7%A3.pdf" title="ECMAScript6详解.pdf">ECMAScript6详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/Bootstrap%E8%AF%A6%E8%A7%A3.pdf" title="Bootstrap详解.pdf">Bootstrap详解.pdf</a></p>
+<hr>
+<h1 id="第四阶段-JavaWEB核心"><a href="#第四阶段-JavaWEB核心" class="headerlink" title="第四阶段 JavaWEB核心"></a>第四阶段 JavaWEB核心</h1><p>该阶段为分布式学习提供理论基础，如分布式一致性协议Paxos、远程过程调用RPC等，并对分布式中间件Dubbo和SpringCloud进行深入剖析。</p>
+<h2 id="模块二：JavaWeb核心（下）"><a href="#模块二：JavaWeb核心（下）" class="headerlink" title="模块二：JavaWeb核心（下）"></a>模块二：JavaWeb核心（下）</h2><h3 id="01任务一-EL和JSTL核心技术"><a href="#01任务一-EL和JSTL核心技术" class="headerlink" title="01任务一 EL和JSTL核心技术"></a>01任务一 EL和JSTL核心技术</h3><p><a href="%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E7%AC%AC%E5%9B%9B%E7%AB%A0-EL%E5%92%8CJSTL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf" title="第四章-EL和JSTL核心技术.pdf">第四章-EL和JSTL核心技术.pdf</a></p>
+<hr>
+<h3 id="02任务二-Filter-Listener核心技术"><a href="#02任务二-Filter-Listener核心技术" class="headerlink" title="02任务二 Filter+Listener核心技术"></a>02任务二 Filter+Listener核心技术</h3><p><a href="%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E7%AC%AC%E4%BA%94%E7%AB%A0-Filter+Listener%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf" title="第五章-Filter+Listener核心技术.pdf">第五章-Filter+Listener核心技术.pdf</a></p>
+<hr>
+<h3 id="03任务三-Linux系统概述和编程基础"><a href="#03任务三-Linux系统概述和编程基础" class="headerlink" title="03任务三 Linux系统概述和编程基础"></a>03任务三 Linux系统概述和编程基础</h3><p><a href="%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/VMware%E5%AE%89%E8%A3%85CentOS7%E6%95%99%E7%A8%8B_%E5%A5%87%E7%82%B9.pdf" title="VMware安装CentOS7教程_奇点.pdf">VMware安装CentOS7教程_奇点.pdf</a></p>
+<p><a href="%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E7%AC%AC%E5%85%AD%E7%AB%A0-Linux%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%E5%92%8C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.pdf" title="第六章-Linux系统概述和编程基础.pdf">第六章-Linux系统概述和编程基础.pdf</a></p>
+<p>【linux常用命令】</p>
+<hr>
+<h3 id="04任务四-开发环境搭建和Shell编程"><a href="#04任务四-开发环境搭建和Shell编程" class="headerlink" title="04任务四 开发环境搭建和Shell编程"></a>04任务四 开发环境搭建和Shell编程</h3><p><a href="%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8CShell%E7%BC%96%E7%A8%8B.pdf" title="第七章-开发环境搭建和Shell编程.pdf">第七章-开发环境搭建和Shell编程.pdf</a></p>
+<p>【linux配置】【jdk配置】【mysql配置】【shell编程】</p>
+<hr>
+<h1 id="第六阶段-企业级开发框架SSM"><a href="#第六阶段-企业级开发框架SSM" class="headerlink" title="第六阶段 企业级开发框架SSM"></a>第六阶段 企业级开发框架SSM</h1><h2 id="模块一：Mybatis"><a href="#模块一：Mybatis" class="headerlink" title="模块一：Mybatis"></a>模块一：Mybatis</h2><p>本模块将对持久层框架mybatis重点讲解，涉及配置深入、原理分析，复杂映射、注解开发等相关内容</p>
+<p><a href="%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/Mybatis_%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8.pdf" title="Mybatis_任务一：基本应用.pdf">Mybatis_任务一：基本应用.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/Mybatis%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B7%B1%E5%85%A5.pdf" title="Mybatis任务二：配置文件深入.pdf">Mybatis任务二：配置文件深入.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/Mybatis%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%9A%E5%8A%A0%E8%BD%BD%E7%AD%96%E7%95%A5%E5%8F%8A%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91.pdf" title="Mybatis任务三：加载策略及注解开发.pdf">Mybatis任务三：加载策略及注解开发.pdf</a></p>
+<hr>
+<h1 id="第七阶段-分布式技术核心"><a href="#第七阶段-分布式技术核心" class="headerlink" title="第七阶段 分布式技术核心"></a>第七阶段 分布式技术核心</h1><h2 id="模块一：Dubbo-amp-Zookeeper"><a href="#模块一：Dubbo-amp-Zookeeper" class="headerlink" title="模块一：Dubbo&amp;Zookeeper"></a>模块一：Dubbo&amp;Zookeeper</h2><p>本模块将对分布式服务治理和协调服务的Zookeeper，高性能RPC框架Apache Dubbo进行详细介绍</p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/zookeeper%E8%AF%A6%E8%A7%A3.pdf" title="zookeeper详解.pdf">zookeeper详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/Dubbo%E8%AF%A6%E8%A7%A3.pdf" title="Dubbo详解.pdf">Dubbo详解.pdf</a></p>
+<hr>
+<h2 id="模块二：Redis-amp-RabbitMQ"><a href="#模块二：Redis-amp-RabbitMQ" class="headerlink" title="模块二：Redis&amp;RabbitMQ"></a>模块二：Redis&amp;RabbitMQ</h2><p>本模块将对高性能分布式缓存 Redis和分布式消息通讯RabbitMQ进行详细介绍。</p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/Redis%E8%AF%A6%E8%A7%A3.pdf" title="Redis详解.pdf">Redis详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/RabbitMQ%E8%AF%A6%E8%A7%A3.pdf" title="RabbitMQ详解.pdf">RabbitMQ详解.pdf</a></p>
+<hr>
+<h2 id="模块三：FastDFS-amp-MongoDB【选修】"><a href="#模块三：FastDFS-amp-MongoDB【选修】" class="headerlink" title="模块三：FastDFS&amp;MongoDB【选修】"></a>模块三：FastDFS&amp;MongoDB【选修】</h2><p>本模块将对分布式文件存储系统FastDFS和分布式文档数据库MongoDB进行详细介绍。</p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/FastDFS%E8%AF%A6%E8%A7%A3.pdf" title="FastDFS详解.pdf">FastDFS详解.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/Mongo%E8%AE%B2%E4%B9%89.pdf" title="Mongo讲义.pdf">Mongo讲义.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/Mongo%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86.pdf" title="Mongo高级部分.pdf">Mongo高级部分.pdf</a></p>
+<hr>
+<h1 id="第九阶段-微服务技术核心"><a href="#第九阶段-微服务技术核心" class="headerlink" title="第九阶段 微服务技术核心"></a>第九阶段 微服务技术核心</h1><h2 id="模块一：SpringBoot-amp-SpringCloud-Docker"><a href="#模块一：SpringBoot-amp-SpringCloud-Docker" class="headerlink" title="模块一：SpringBoot&amp;SpringCloud@Docker"></a>模块一：SpringBoot&amp;SpringCloud@Docker</h2><p>本模块将对约定优于配置的SpringBoot、微服务一站式解决方案的SpringCloud以及Docker容器技术进行详细介绍。</p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/SpringBoot%E8%AE%B2%E4%B9%89.pdf" title="SpringBoot讲义.pdf">SpringBoot讲义.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%B2%E4%B9%89.pdf" title="SpringCloud微服务讲义.pdf">SpringCloud微服务讲义.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%80/Docker.pdf" title="Docker.pdf">Docker.pdf</a></p>
+<p><strong>centos-docker.txt:</strong></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">链接：https://pan.baidu.com/s/1KinO8hRPF8KPffky7krfhA <br>提取码：4x53 <br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="模块二：ElasticSearch-amp-Kafka【选修】"><a href="#模块二：ElasticSearch-amp-Kafka【选修】" class="headerlink" title="模块二：ElasticSearch&amp;Kafka【选修】"></a>模块二：ElasticSearch&amp;Kafka【选修】</h2><p>本模块将对分布式搜索ElasticSearch、消息通讯Kafka进行详细介绍。</p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/01-lucene&elasticsearch.pdf" title="01-lucene&amp;elasticsearch.pdf">01-lucene&amp;elasticsearch.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/Kafka-lagou.pdf" title="Kafka-lagou.pdf">Kafka-lagou.pdf</a></p>
+<p>Kafka资料下载地址.txt</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">链接：https:<span class="hljs-comment">//pan.baidu.com/s/1CyTvvyVjMyvgDnbnEaIXTw </span><br>提取码：wk4x <br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="模块三：MySQL分库分表和优化"><a href="#模块三：MySQL分库分表和优化" class="headerlink" title="模块三：MySQL分库分表和优化"></a>模块三：MySQL分库分表和优化</h2><p>本模块将对分库分表设计及实现技术ShardingSphere、MyCat等进行详细介绍。</p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98%E4%B9%8BMyCat.pdf" title="分库分表技术实战之MyCat.pdf">分库分表技术实战之MyCat.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98%E4%B9%8BShardingJDBC.pdf" title="分库分表技术实战之ShardingJDBC.pdf">分库分表技术实战之ShardingJDBC.pdf</a></p>
+<p><a href="%E7%AC%AC%E4%B9%9D%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%B8%89/MySQL%E9%AB%98%E7%BA%A7.pdf" title="MySQL高级.pdf">MySQL高级.pdf</a></p>
+<hr>
+<h1 id="第十阶段-微服务项目：拉勾教育学习平台（微服务架构）"><a href="#第十阶段-微服务项目：拉勾教育学习平台（微服务架构）" class="headerlink" title="第十阶段 微服务项目：拉勾教育学习平台（微服务架构）"></a>第十阶段 微服务项目：拉勾教育学习平台（微服务架构）</h1><p>01_概述与搭建服务中心</p>
+<hr>
+<h1 id="第十一阶段-数据结构算法与调优"><a href="#第十一阶段-数据结构算法与调优" class="headerlink" title="第十一阶段 数据结构算法与调优"></a>第十一阶段 数据结构算法与调优</h1><h2 id="模块一：数据结构和算法【选修】"><a href="#模块一：数据结构和算法【选修】" class="headerlink" title="模块一：数据结构和算法【选修】"></a>模块一：数据结构和算法【选修】</h2><p>本模块会讲解面试中常见的数据结构、排序、递归与回溯、深度与广度优先搜索与二分搜索等。</p>
+<p><a href="%E7%AC%AC%E5%8D%81%E4%B8%80%E9%98%B6%E6%AE%B5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.pdf" title="数据结构与算法.pdf">数据结构与算法.pdf</a></p>
+<hr>
+<h2 id="模块二：并发编程和系统调优【选修】"><a href="#模块二：并发编程和系统调优【选修】" class="headerlink" title="模块二：并发编程和系统调优【选修】"></a>模块二：并发编程和系统调优【选修】</h2><p>本模块会深入讲解线程高级部分，例如线程状态机制分析与线程池实现原理、抽象队列化同步器AQS等，还会深入JVM分析与调优。</p>
+<p><a href="%E7%AC%AC%E5%8D%81%E4%B8%80%E9%98%B6%E6%AE%B5/ConcurrentProgramming.pdf" title="ConcurrentProgramming.pdf">ConcurrentProgramming.pdf</a></p>
+<p><a href="%E7%AC%AC%E5%8D%81%E4%B8%80%E9%98%B6%E6%AE%B5/JVM%E4%BC%98%E5%8C%96.pdf" title="JVM优化.pdf">JVM优化.pdf</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5%E6%A8%A1%E6%9D%BF/" class="category-chain-item">Java就业训练营模板</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/">#学习文档</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java就业训练营模板-学习文档</div>
+      <div>https://xuebaqiang.github.io/2022/08/06/Java就业训练营/Java就业训练营模板-学习文档/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/07/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/linux/linux--mysql%E6%9F%A5%E7%9C%8B%E4%B8%B4%E6%97%B6%E5%AF%86%E7%A0%81/" title="linux--mysql查看临时密码">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux--mysql查看临时密码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/14/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85-linux%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85/" title="软件安装-linux镜像安装">
+                        <span class="hidden-mobile">软件安装-linux镜像安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

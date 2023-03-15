@@ -1,0 +1,1053 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92oracle作业处理1.选择部门30中的所有员工. 1select * from emp where deptno&#x3D;30  2.列出所有办事员(CLERK)的姓名，编号和部门编号. 1select empno,ename,deptno from emp where job &#x3D; &amp;#x27;CLERK&amp;#x27;  【数字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92oracle作业处理1.选择部门30中的所有员工. 1select * from emp where deptno&#x3D;30  2.列出所有办事员(CLERK)的姓名，编号和部门编号. 1select empno,ename,deptno from emp where job &#x3D; &amp;#x27;CLERK&amp;#x27;  【数字">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978036701.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978416186.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978593239.png">
+<meta property="article:published_time" content="2022-03-30T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.601Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="oracle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978036701.png">
+  
+  
+  
+  <title>3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-31 00:19" pubdate>
+          2022年3月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="oralce的函数学习-amp-分组-amp-增加删除修改-amp-SQL92"><a href="#oralce的函数学习-amp-分组-amp-增加删除修改-amp-SQL92" class="headerlink" title="oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92"></a>oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92</h2><h3 id="oracle作业处理"><a href="#oracle作业处理" class="headerlink" title="oracle作业处理"></a>oracle作业处理</h3><p>1.选择部门30中的所有员工.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+
+<p>2.列出所有办事员(CLERK)的姓名，编号和部门编号.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> empno,ename,deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;CLERK&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>【数字不加引号不会报错，字符不加一定会报错】</p>
+<p>3.找出佣金高于薪金的员工.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm<span class="hljs-operator">&gt;</span>sal<br></code></pre></td></tr></table></figure>
+
+<p>4.找出佣金高于薪金的60%的员工.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm<span class="hljs-operator">&gt;</span>sal<span class="hljs-operator">*</span><span class="hljs-number">0.6</span><br></code></pre></td></tr></table></figure>
+
+<p>5.找出部门10中所有经理(MANAGER)和部门20中所有办事员(CLERK)的详细资料.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MANAGER&#x27;</span>) <span class="hljs-keyword">or</span> (deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>6.找出部门10中所有经理(MANAGER),部门20中所有办事员(CLERK),既不是经理又不是办事员但其薪金大于或等于2000的所有员工的详细资料.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> (deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MANAGER&#x27;</span>) <span class="hljs-keyword">or</span> (deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>) <span class="hljs-keyword">or</span> (job<span class="hljs-operator">&lt;&gt;</span><span class="hljs-string">&#x27;MANAGER&#x27;</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">&lt;&gt;</span><span class="hljs-string">&#x27;CLERK&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">sql</span><span class="hljs-operator">&gt;=</span><span class="hljs-number">2000</span>) <br></code></pre></td></tr></table></figure>
+
+<p>为什么使用or呢？没问题了；</p>
+<p>7.找出收取佣金的员工的不同工作.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+
+<p>【不同工作-需要去重】</p>
+<p>8.找出不收取佣金或收取的佣金低于100的员工.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">or</span> comm<span class="hljs-operator">&lt;</span><span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+
+<p>10.找出早于12年前受雇的员工.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> hiredate<span class="hljs-operator">&lt;</span><span class="hljs-string">&#x27;01-1月-1982&#x27;</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> hiredate<br></code></pre></td></tr></table></figure>
+
+<p>11.以首字母大写的方式显示所有员工的姓名.</p>
+<p>13.显示不带有”R”的员工的姓名.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%R%&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>17.显示员工的详细资料,按姓名排序.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> ename<br></code></pre></td></tr></table></figure>
+
+<p>18.显示员工的姓名和受雇日期,根据其服务年限,将最老的员工排在最前面.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,hiredate <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> hiredate<br></code></pre></td></tr></table></figure>
+
+<p>19.显示所有员工的姓名、工作和薪金,按工作的降序排序,若工作相同则按薪金排序.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,job,sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> job <span class="hljs-keyword">desc</span>,sal <span class="hljs-keyword">asc</span><br></code></pre></td></tr></table></figure>
+
+<p>20.显示所有员工的姓名、加入公司的年份和月份,按受雇日期所在月排序,若月份相同则将最早年份的员工排在最前面.</p>
+<p>24.显示姓名字段的任何位置包含”A”的所有员工的姓名.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%A%&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>汉语读不通；</p>
+<p>读通汉语后蒙了；</p>
+<p>有思路不敢写；</p>
+<p>目前我们对汉语中隐藏的逻辑性不敏感，看的多了就好了；</p>
+<p>写的太少；</p>
+<p>放心大胆的写就好，出错再写；</p>
+<hr>
+<h3 id="oracle-单行函数学习"><a href="#oracle-单行函数学习" class="headerlink" title="oracle-单行函数学习"></a>oracle-单行函数学习</h3><p>查询工作为SALESMAN,MANAGER并且工资大于2500的员工信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SALESMAN&#x27;</span> <span class="hljs-keyword">or</span> job <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;MANAGER&#x27;</span>) <span class="hljs-keyword">and</span> sal<span class="hljs-operator">&gt;</span><span class="hljs-number">2500</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>oracle函数的学习；</p>
+<p>【单行函数、多行函数、转换函数、其他函数】</p>
+<p>单行函数学习</p>
+<p>– 查询所有的员工信息，员工姓名小写显示；</p>
+<p>oracle管理系统中用的，mysql中不一定好使；</p>
+<table>
+<thead>
+<tr>
+<th>单行函数分类</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符函数</td>
+<td>大小写、剪裁、翻译、查找、取、连接</td>
+</tr>
+<tr>
+<td>数值函数</td>
+<td></td>
+</tr>
+<tr>
+<td>日期函数</td>
+<td></td>
+</tr>
+<tr>
+<td>转换函数</td>
+<td></td>
+</tr>
+<tr>
+<td>通用函数</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="字符函数："><a href="#字符函数：" class="headerlink" title="字符函数："></a>字符函数：</h4><p><img src="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978036701.png" srcset="/img/loading.gif" lazyload alt="1652978036701"></p>
+<table>
+<thead>
+<tr>
+<th><strong>函 数</strong></th>
+<th><strong>功 能</strong></th>
+<th><strong>示 例</strong></th>
+<th><strong>结 果</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>INITCAP (char)</strong></td>
+<td><strong>首字母大写</strong></td>
+<td><strong>initcap</strong> <strong>(‘hello’)</strong></td>
+<td><strong>Hello</strong></td>
+</tr>
+<tr>
+<td><strong>LOWER (char)</strong></td>
+<td><strong>转换为小写</strong></td>
+<td><strong>lower (‘FUN’)</strong></td>
+<td><strong>fun</strong></td>
+</tr>
+<tr>
+<td><strong>UPPER (char)</strong></td>
+<td><strong>转换为大写</strong></td>
+<td><strong>upper (‘sun’)</strong></td>
+<td><strong>SUN</strong></td>
+</tr>
+<tr>
+<td><strong>LTRIM (char, set)</strong></td>
+<td><strong>左剪裁</strong></td>
+<td><strong>ltrim</strong> **(‘**xyzadams’, ‘xyz’)</td>
+<td><strong>adams</strong></td>
+</tr>
+<tr>
+<td><strong>RTRIM (char, set)</strong></td>
+<td><strong>右剪裁</strong></td>
+<td><strong>rtrim</strong> **(‘**xyzadams’, ‘ams’)</td>
+<td><strong>xyzad</strong></td>
+</tr>
+<tr>
+<td><strong>TRANSLATE (char, from, to)</strong></td>
+<td><strong>按字符翻译</strong></td>
+<td>**translate (‘jack’, ‘**abcd’, ‘1234’)</td>
+<td><strong>j13k</strong></td>
+</tr>
+<tr>
+<td><strong>REPLACE (char,</strong> <strong>search_str</strong>, <strong>replace_str</strong>)</td>
+<td><strong>字符串替换</strong></td>
+<td><strong>replace (‘jack and</strong> <strong>jue</strong>‘, ‘j’, ‘bl’)</td>
+<td><strong>black and blue</strong></td>
+</tr>
+<tr>
+<td><strong>INSTR (char,</strong> <strong>substr</strong>[, pos])</td>
+<td><strong>查找子串位置</strong></td>
+<td><strong>instr</strong> <strong>(‘worldwide’, ‘d’)</strong></td>
+<td><strong>5</strong></td>
+</tr>
+<tr>
+<td><strong>SUBSTR (char, pos,</strong> <strong>len</strong>)</td>
+<td><strong>取子字符串</strong></td>
+<td><strong>substr</strong> <strong>(‘abcdefg’,3,2)</strong></td>
+<td><strong>cd</strong></td>
+</tr>
+<tr>
+<td><strong>CONCAT (char1, char2)</strong></td>
+<td><strong>连接字符串</strong></td>
+<td><strong>concat</strong> <strong>(‘Hello’, ‘world’)</strong></td>
+<td><strong>Helloworld</strong></td>
+</tr>
+</tbody></table>
+<p>– 查询所有员工信息，员工姓名小写显示；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> empno,ename <span class="hljs-built_in">lower</span>(ename),job,mgr,sal,<span class="hljs-built_in">lower</span>(<span class="hljs-string">&#x27;HH&#x27;</span>) <span class="hljs-keyword">from</span> emp<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="数值函数："><a href="#数值函数：" class="headerlink" title="数值函数："></a>数值函数：</h4><p>dual:伪表，不存数据，为了方便我们运算的</p>
+<p><img src="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978416186.png" srcset="/img/loading.gif" lazyload alt="1652978416186"></p>
+<hr>
+<h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p><img src="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&%E5%88%86%E7%BB%84&%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&SQL92/1652978593239.png" srcset="/img/loading.gif" lazyload alt="1652978593239"></p>
+<p>根据DAY四舍五入的话，是显示的是周日的时间；</p>
+<hr>
+<h3 id="oracle-多行函数学习"><a href="#oracle-多行函数学习" class="headerlink" title="oracle-多行函数学习"></a>oracle-多行函数学习</h3><p>单行函数不改变数据库中的原有数据；</p>
+<p>各种函数中有很多，用的时候能想起来有字符函数就好；</p>
+<p>有有什么，可以来看看；</p>
+<hr>
+<p>多行函数（max,min,avg,sum,count）</p>
+<p>对多行数据集中显示，显示出一条；</p>
+<p>单行对每一行都改；多行</p>
+<table>
+<thead>
+<tr>
+<th>多行函数的使用</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>max</td>
+<td>– 查询员工的最高工资<br>select max(sal) from emp</td>
+</tr>
+<tr>
+<td>min</td>
+<td>– 查询员工的最低工资<br/>select min(sal) from emp</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>–查询所有的员工工资之和<br>select avg(sal) from emp;</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>– 查询所有的员工工资之和<br>select sum(sal) from emp;</td>
+</tr>
+<tr>
+<td>count<br>count(*)-返回表的记录数<br>count(字段名)-返回非空数<br>count(distinct 字段名)-去重复后的字段数</td>
+<td>– 查询公司有多少员工<br>select count(*) from emp<br>– 查询有津贴员工人数<br>select count(comm) from emp<br>【null会自动过滤】<br>– 查询公司有多少工作种类<br>select count(distinct job) from emp</td>
+</tr>
+</tbody></table>
+<p>sum()  avg()   仅适用数值型；</p>
+<p>count()   max()   min()   适用任何类型数据</p>
+<p>多行函数不能喝字段直接混用，除非分组操作的时候；</p>
+<p>多行函数不能和单行函数使用；</p>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">lower</span>(ename),<span class="hljs-built_in">max</span>(sal) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>多行函数的作用：对查询的数据进行统计；</p>
+<p>统计学，最高、最低、平均</p>
+<p>使用方法：select 多行函数名(字段名),多行函数名(字段名),多行函数名(字段名)…. from 表名;</p>
+<p>多行函数不能和不同字段和单行函数一起使用，除非分组；</p>
+<hr>
+<h3 id="oralce-转换函数-amp-其他函数"><a href="#oralce-转换函数-amp-其他函数" class="headerlink" title="oralce-转换函数&amp;其他函数"></a>oralce-转换函数&amp;其他函数</h3><p>日期转字符串等；</p>
+<table>
+<thead>
+<tr>
+<th>转换函数分类</th>
+<th>解释说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>to_number(数值类型的字符)</td>
+<td>将字符转换为数值</td>
+</tr>
+<tr>
+<td>to_char(数值或者日期)</td>
+<td>将数值或者日期转换为字符</td>
+</tr>
+<tr>
+<td>to_date(日期格式的字符)</td>
+<td>将字符转换为日期</td>
+</tr>
+</tbody></table>
+<p>to_cahr类似于中介，to_number与to_date的转换通过to_char来转换；</p>
+<table>
+<thead>
+<tr>
+<th>转换函数的使用</th>
+<th>SQL案例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char-&gt;number</td>
+<td>select to_number(‘123’) from dual;</td>
+</tr>
+<tr>
+<td>number-&gt;char</td>
+<td>select to_char(123) from dual;<br>【数值转类型-》可以指定显示格式】<br>select to_char(123456789,’L999,999,999’) from dual;<br>select to_char(12345678,’000,000,000’) from dual;<br>【to_number-&gt;to_char的转换可以不写(隐式转换)】<br>select * from emp where sal&gt;’2000’</td>
+</tr>
+<tr>
+<td>char-&gt;date</td>
+<td>– 查询员工入职日期在82年后的信息<br>select * from emp where hiredate&gt;to_date(‘1982-01-01’,’yyyy-mm-dd’)<br>【需要给一个日期格式-需要匹配上】【01-1月-2018oracle认为是一个日期】</td>
+</tr>
+<tr>
+<td>date-&gt;char</td>
+<td>select to_char(hiredate,’yyyy-mm-dd’) from emp;<br>select to_char(hiredate,’yyyy&#x2F;mm&#x2F;dd’) from emp;<br>select to_char(hiredate,’yyyy”年”mm”月”dd”日”‘);<br>select * from emp where to_char(hiredate,’yyyy-mm-dd’)&gt;’1997-05-05’;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>$:表示位置的占位，例如999,999,999会将数字按照三个一组使用逗号隔开；</p>
+<p>L:表示人民币符号；</p>
+<p>$:表示美元符号；</p>
+<p>0:可以进行占位分组，但是如果真是数据位数不足，会使用0进行部位（注意：真实位数不要超过后面的补位的位数）</p>
+<p>sql的底层有自动转型；</p>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;2000&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>其他函数的使用；</p>
+<p>nvl();</p>
+<p>nvl2();</p>
+<p>decode()</p>
+<table>
+<thead>
+<tr>
+<th>其他函数</th>
+<th>SQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nvl()</td>
+<td></td>
+</tr>
+<tr>
+<td>nvl2()</td>
+<td></td>
+</tr>
+<tr>
+<td>decode()</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>– 查询其他员工的工资信息</p>
+<p>select  ename,job,sal from emp;</p>
+<p>– 查询员工的薪水信息</p>
+<p>select ename,job,sal+comm from emp;</p>
+<p>想实现如果没有提成，就默认显示为0；</p>
+<p>如果不为null,返回自己；</p>
+<p>如果为null,返回设定的值；</p>
+<p>–nvl(字段名,默认值)：如果字段值部位null,返回字段值；如果字段值为null，返回默认值；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,job,sal<span class="hljs-operator">+</span>nvl(com,<span class="hljs-number">0</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-keyword">select</span> ename,job,nvl(sal<span class="hljs-operator">+</span>com,sal) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+
+<p>–nvl2(字段名,处理1,处理2):如果字段值不为null,执行处理一；为null执行处理二；【不是太理解】</p>
+<p>–decode(字段名，值1，处理1，值2，处理2，值三，处理三，。。。公共处理)：如果字段的值和docode中的条件值相同则执行对象的处理，如果都没有则执行公共处理；【感觉类似于switch】</p>
+<hr>
+<h3 id="oracle-分组-amp-分组筛选学习"><a href="#oracle-分组-amp-分组筛选学习" class="headerlink" title="oracle-分组&amp;分组筛选学习"></a>oracle-分组&amp;分组筛选学习</h3><p>多行函数使用的时候不能使用单行函数，除非分组；</p>
+<p>–查询不同部门最高工资和员工数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ssql">select * from emp order by deptno,sal<br></code></pre></td></tr></table></figure>
+
+<p>– 分组关键字：group by</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno<br></code></pre></td></tr></table></figure>
+
+<p>select 后只能使用group by后的字段【这是规定】</p>
+<p>分完组后，之后组叠了；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> deptno,<span class="hljs-built_in">max</span>(sal) <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno;<br></code></pre></td></tr></table></figure>
+
+<p>使用分组是，select后只能使用分组字段和多行函数【这是规定】</p>
+<p>当然可以对这个分组字段使用单行函数；</p>
+<p>where中不允许使用多行函数；</p>
+<p>因为先筛选完成后才能再统计；</p>
+<p>where中使用多远函数就会报错；</p>
+<p>根据原因是先where后count；</p>
+<p>可以使用having来实现；</p>
+<p>查询完成后，再筛选再排序；</p>
+<p>针对分组后的数据进行筛选；</p>
+<p>having必须和分组结合进行使用，不能单独使用；</p>
+<p>where 后只能使用单行函数</p>
+<p>having后可以使用单行函数也可以使用多行函数；</p>
+<p>where的执行效率一定高与having；</p>
+<p>所以基础条件的筛选使用having，多行函数的筛选使用having；</p>
+<p>where的执行顺序：from-&gt;where-&gt;group by-&gt;select-&gt;order by;</p>
+<p>having的执行顺序: from-&gt;group by -&gt;select-&gt;having-&gt;order by;</p>
+<hr>
+<h3 id="oracle-增删改"><a href="#oracle-增删改" class="headerlink" title="oracle-增删改"></a>oracle-增删改</h3><h4 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h4><p>–在部门表中新增一个新的部门信息，部门信息的内容为：编号：56，名称：LOL学院，地址：北京；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> dept(deptno,dname,loc) <span class="hljs-keyword">values</span>(<span class="hljs-number">50</span>,<span class="hljs-string">&#x27;LOL学院&#x27;</span>,<span class="hljs-string">&#x27;北京&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>执行后，数据还是在内存中（还没有存储到数据库中）；</p>
+<p>点击提交后，才会将数据写入到数据库中；</p>
+<p>也可以进行回滚操作（给一个返反悔的机会）;</p>
+<p>注意：增删改的数据SQL语句执行完毕后，不会立马进行数据的写入</p>
+<p>还需要手动对数据进行提交；</p>
+<p>主键：在一张表中，某个字段的值是非空并是唯一的，将这个字段设置为主键；【非空唯一、不重复】</p>
+<p>这就是一个约束（保证数据的正确性）</p>
+<p>可能表中有多个字段是非空唯一的，选择一个作为主键即可；</p>
+<p>主键的作用：唯一的标识一条数据；</p>
+<p>前面有几个值，后面必须有几个值；</p>
+<p>如果是全字段插入（每个字段都插入），可以省略字段名部分；</p>
+<p>如果表中有20个字段，那么就疯了；节省了工作量；</p>
+<p>【作为一个过来人，还是建议将字段名写上去】</p>
+<p>字段的个数和顺序都要匹配上；</p>
+<hr>
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><p>delete from 表名 where 条件【删除的是表中的数据】-清空表数据</p>
+<p>truncate table dept【也是可以删的】-清空表中数据</p>
+<p>truncate table 表名 -删除表中的所有数据，效率高与delete;</p>
+<p>drop table 表名 【删除的是表】</p>
+<p>部门中有员工的就不让删除；</p>
+<hr>
+<h4 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h4><p>update dept set dname&#x3D;’java学院’,loc&#x3D;’上海’ where deotno&#x3D;50;</p>
+<hr>
+<h4 id="数据的备份"><a href="#数据的备份" class="headerlink" title="数据的备份"></a>数据的备份</h4><p>全部备份：create table 新的表名 as select * from 备份表名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> deptBak <span class="hljs-keyword">as</span> <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> dept<br></code></pre></td></tr></table></figure>
+
+<p>数据的备份：只会备份表结构和表的数据，约束不会备份【注意：主键约束是不会备份的】</p>
+<p>部分备份：</p>
+<p>create table 新的表名 as select 字段名。。。 from 备份表名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> deptBak2 <span class="hljs-keyword">as</span> <span class="hljs-keyword">select</span> deptno,dname <span class="hljs-keyword">from</span> dept<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> deptBak2 <span class="hljs-keyword">select</span> deptno,dname <span class="hljs-keyword">from</span> dept<br></code></pre></td></tr></table></figure>
+
+<p>插入的顺序及数据的类型要一致；</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/oracle/">#oracle</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92</div>
+      <div>https://xuebaqiang.github.io/2022/03/31/数据库/oracle/3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/2.%20oralce%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5/" title="2. oralce账户管理和查询语句">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2. oralce账户管理和查询语句</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea-git%E7%9A%84%E8%BF%90%E7%94%A8/" title="idea-git的运用">
+                        <span class="hidden-mobile">idea-git的运用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

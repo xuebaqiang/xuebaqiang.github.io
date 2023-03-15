@@ -1,0 +1,1442 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="任务一：SpringBoot基础回顾课程内容介绍自动配置springMVC; 约定优于配置springBoot基于约定优于配置的； 又称按约定变成，是一种软件设计规范； 开车，靠右行驶； java，放在src目录下； 带来一些好处，带来一些便利； 就可以省下来很多的配置； 约定优于配置：本质上是对系统、类库或框架中一些东西假定一个大众化合理的默认值（缺省值） User实体类   User表 有一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务一：SpringBoot基础回顾">
+<meta property="og:url" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="任务一：SpringBoot基础回顾课程内容介绍自动配置springMVC; 约定优于配置springBoot基于约定优于配置的； 又称按约定变成，是一种软件设计规范； 开车，靠右行驶； java，放在src目录下； 带来一些好处，带来一些便利； 就可以省下来很多的配置； 约定优于配置：本质上是对系统、类库或框架中一些东西假定一个大众化合理的默认值（缺省值） User实体类   User表 有一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653322585137.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653401197377.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653402523494.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653402573927.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403408479.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403479024.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403567960.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403724945.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403737182.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653404166709.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653404178194.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653407338044.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653407414669.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653486168006.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653494040822.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653494274292.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653495958861.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653526016525.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653495958861.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653526586385.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653545050235.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653545118731.png">
+<meta property="article:published_time" content="2000-01-20T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.292Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="第一阶段-开源框架源码剖析">
+<meta property="article:tag" content="模块四-约定优于配置设计范式及Spring Boot源码剖析">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653322585137.png">
+  
+  
+  
+  <title>任务一：SpringBoot基础回顾 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="任务一：SpringBoot基础回顾"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2000-01-21 00:19" pubdate>
+          2000年1月21日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          140 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">任务一：SpringBoot基础回顾</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="任务一：SpringBoot基础回顾"><a href="#任务一：SpringBoot基础回顾" class="headerlink" title="任务一：SpringBoot基础回顾"></a>任务一：SpringBoot基础回顾</h1><h2 id="课程内容介绍"><a href="#课程内容介绍" class="headerlink" title="课程内容介绍"></a>课程内容介绍</h2><p>自动配置springMVC;</p>
+<h2 id="约定优于配置"><a href="#约定优于配置" class="headerlink" title="约定优于配置"></a>约定优于配置</h2><p>springBoot基于约定优于配置的；</p>
+<p>又称按约定变成，是一种软件设计规范；</p>
+<p>开车，靠右行驶；</p>
+<p>java，放在src目录下；</p>
+<p>带来一些好处，带来一些便利；</p>
+<p>就可以省下来很多的配置；</p>
+<p><strong>约定优于配置</strong>：本质上是对系统、类库或框架中一些东西假定一个大众化合理的默认值（缺省值）</p>
+<p>User实体类   User表</p>
+<p>有一个默认约定；</p>
+<p>如果表名叫t_user,这叫做偏移约定；</p>
+<p>需要我们额外添加一些配置的；</p>
+<p>总结：期望的配置和约定的配置一致，那么就可以不做任何的配置；约定不符合期待时才需要进行替换配置；</p>
+<p><strong>约定优于配置的好处</strong>：大大减少了配置项；</p>
+<hr>
+<h2 id="SpringBoot概念"><a href="#SpringBoot概念" class="headerlink" title="SpringBoot概念"></a>SpringBoot概念</h2><p>什么是springBoot？</p>
+<p>学习框架最好使去官网中学习；</p>
+<p>会提供学习玩的那个；</p>
+<p>spring官方文档：<a target="_blank" rel="noopener" href="http://spring.io/">http://spring.io/</a></p>
+<p>springboot是在spring的基础上诞生的一个框架；</p>
+<p>Projects-&gt;Spring Boot（可以看到最新版本）-》OVERVIEW（spingboot介绍）</p>
+<p>快速运行spring的方式；</p>
+<p>之前需要编写大量的配置文件；</p>
+<p>spring很强大，但是配置是十分的繁琐的；</p>
+<p>通过springboot可以快速的</p>
+<p>通常和springcloud一起使用；</p>
+<hr>
+<p>要知道springboot由Pivotal团队在2013年开发研制的；</p>
+<p>spring3.0开始就无需编写application_config.xml文件，还是建议保留；</p>
+<p>spring4.0开始就可以舍弃到所有的配置文件；</p>
+<p>springboot解决了依赖包的冲去和引用的不稳定型问题；</p>
+<hr>
+<h2 id="SpringBoot特性之Starter"><a href="#SpringBoot特性之Starter" class="headerlink" title="SpringBoot特性之Starter"></a>SpringBoot特性之Starter</h2><p>springboot是快速使用spring的方式；</p>
+<p>springboot都是围绕几个特性进行学习；</p>
+<h3 id="SpringBoot-Starter"><a href="#SpringBoot-Starter" class="headerlink" title="SpringBoot Starter:"></a>SpringBoot Starter:</h3><p>【这是springBoot的第一个特性】</p>
+<p>将依赖进行分组，整合在一起</p>
+<p>也称为起步依赖；</p>
+<p>起步依赖：就是把具备某种功能的坐标打包到一起，并提供默认功能；</p>
+<p>创建一个基于maven的web工程，</p>
+<p>需要引入大量的依赖，</p>
+<p>在pom.xml中编写关于web场景所需要用的坐标信息；</p>
+<p>dependency需要用到多少个jar包就需要引入多少个dependency; </p>
+<p>是存在问题的：</p>
+<p>1）记忆和找这些坐标信息都比价麻烦；</p>
+<p>2）maven有依赖传递的特性的，可能引入一个dependency依赖了很多的jar包-》容易产生依赖冲突（版本问题）-》排查问题很难；</p>
+<p>springboot工程：</p>
+<p>在pom.xml中</p>
+<p>将实现相同功能的jar包进行了一个打包；</p>
+<p>spring-web-starter工程；</p>
+<p>中存在pom.xml;</p>
+<p>直接依赖了很多的jar包；</p>
+<p>这就是打包；</p>
+<p>进行web场景开发；</p>
+<p>直接需要引入spring-web-starter坐标就好了；</p>
+<p>spring-web-starter直接依赖了这些jar包；</p>
+<p>省去了直接依赖了很多jar包的过程；</p>
+<p>spring-web-starter就解决了依赖版本冲突的问题；</p>
+<hr>
+<h2 id="SpringBoot特性之JavaConfig配置"><a href="#SpringBoot特性之JavaConfig配置" class="headerlink" title="SpringBoot特性之JavaConfig配置"></a>SpringBoot特性之JavaConfig配置</h2><h3 id="使编码变得简单"><a href="#使编码变得简单" class="headerlink" title="使编码变得简单"></a>使编码变得简单</h3><p>【这是springboot的第二个特性】</p>
+<p>springBoot采用JavaConfig的方式对Spring进行配置，并提供了大量的注解，极大的提高了开发效率；</p>
+<p>springboot为什么采用javaConfig的方式对spring进行了配置了呢？</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653322585137.png" srcset="/img/loading.gif" lazyload alt="1653322585137"></p>
+<p>查看spring版本历史：</p>
+<p>spring3.0其实已经舍弃掉了配置文件的编写；</p>
+<p>已经可以采用javaConfig方式进行配置；</p>
+<p>但还是建议保留web.xml</p>
+<p>spring4.0，可以舍弃掉所有的xml文件，同事采用javaConfig方式进行配置；</p>
+<p>springBoot是在spring4.0的基础上设计出来的全新的轻量级框架；</p>
+<p>所以springboot在完成bean对象的创建并存储到ioc容器的时候，它采用的机制也是javaConfig这种方式；</p>
+<p>springboot如果想创建并存储到loc容器中我们怎么办？</p>
+<p>可以去创建一个配置类，例如SpringBootConfiguration</p>
+<p>在类的上面添加一个注解@Configuration，说明是一个配置类；</p>
+<p>想创建一个对象放到容器中，可以写一个方法；</p>
+<p>public User user（）{return new User()};</p>
+<p>@Bean启动的会后，会进行一个包扫描，会将创建出来的对象放到loc容器中</p>
+<p>要知道springBoot采用JavaConfig的方式对Spring进行配置；</p>
+<p>还要知道为什么，springboot使用这种方式；</p>
+<hr>
+<h2 id="SpringBoot特性之自动配置"><a href="#SpringBoot特性之自动配置" class="headerlink" title="SpringBoot特性之自动配置"></a>SpringBoot特性之自动配置</h2><h3 id="自动配置："><a href="#自动配置：" class="headerlink" title="自动配置："></a>自动配置：</h3><p>【第三个特性】</p>
+<p>利用了spring对条件化配置的支持，合理地推测应用所需的bean并自动化配置他们；【比较抽象】</p>
+<p>springBoot在启动的过程中，会自动的将一些配置类的bean进行创建，并添加到IOC容器中；</p>
+<p>之间使用spring的时候，会编写一个appkication.xml文件；</p>
+<p>如果想要第三方jar包中生成实例对象放到loc容器中；</p>
+<p>写一个bean标签，id class;</p>
+<p>要写很多的bean标签；</p>
+<p>配置繁琐；</p>
+<p>要解决这个问题，springboot</p>
+<p>不会编写applicationContext.xml文件；</p>
+<p>只需要在pom.xml文件中引入依赖就可以；</p>
+<p>springboot会根据依赖的引入情况，会自动的完成一些配置类bean对象的创建，同事添加到loc容器中；</p>
+<p>如果想要使用的时候，直接使用@autowire直接使用即可；</p>
+<p>启动过程中完成bean对象的自动装配；</p>
+<p>问题：springboot在启动的过程中都会对那些配置类里面的bean进行自动装配？</p>
+<p>自动装配的原理是什么？</p>
+<p>源码部分会说明这些问题；</p>
+<h3 id="使部署变的简单："><a href="#使部署变的简单：" class="headerlink" title="使部署变的简单："></a>使部署变的简单：</h3><p>【第四个主要特性】</p>
+<p>之前是打成war包；</p>
+<p>现在是将项目打成jar包；</p>
+<p>里面内置了三种servlet容器，tomcat、Jetty、undertow</p>
+<hr>
+<h2 id="SpringBoot案例实现"><a href="#SpringBoot案例实现" class="headerlink" title="SpringBoot案例实现"></a>SpringBoot案例实现</h2><p>案例需求，使用Spring initializr方式创建Spring Boot项目，并请求Controller中的目标方法，将返回值相应到页面中；</p>
+<p>会携带些目录结构，带些配置文件</p>
+<p>选择初始话服务地址，选择默认的地址就可以；</p>
+<p>下一步需要联网，否则一直会卡到那个页面；</p>
+<p>创建该工程时选择依赖；</p>
+<p>需要springMVC的一些jar包；</p>
+<p>没有必要一个一个的引入；</p>
+<p>直接将web的starter引入就好了；</p>
+<p>在左侧选择web，在右侧选择Spring Web;</p>
+<p>在左侧选择SQL,在右侧选择Mysql Driver;</p>
+<p>看下持久层的技术选型，如果用mybatis选择MyBatis Framework</p>
+<p>这里我们只需要一个spring web就好了；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653401197377.png" srcset="/img/loading.gif" lazyload alt="1653401197377"></p>
+<p>version:2.4.0;</p>
+<p>在选择dependencies的时候还可以选择版本；</p>
+<p>选择最新的稳定版本；</p>
+<p>默认给我们生成了一些默认的目录结构；</p>
+<p>项目的一个主程序启动类；</p>
+<p>运行项目就是要执行主程序项目类中的miain方法；</p>
+<p>resources下生成了两个目录：</p>
+<p>static:存储静态文件的；</p>
+<p>templaates:模板页面文件夹；</p>
+<p>application.properties是一个非常重要的文件；</p>
+<p>springboot的全局配置文件，核心配置文件；</p>
+<p>项目启动的时候就加载配置文件中的配置项；</p>
+<p>test文件夹：可以在项目中编写测试方法；</p>
+<hr>
+<p> <a href="lagou%5Ccontroller%5CDemoController.java" title="DemoController.java">DemoController.java</a>  </p>
+<p>@RestController是@Controller与@Response组合注解；</p>
+<p>在controller层编写一个方法：</p>
+<p>return “hello springboot”;</p>
+<p>@requestMapping(“&#x2F;demo”);</p>
+<p>启动项目；</p>
+<p>启动过程中，可以看下控制台；</p>
+<p>看表日志信息；</p>
+<p>可以看到启动了一个Tomcat；</p>
+<p>对应的端口是8080；</p>
+<p>Start Spring  说明项目已经可以启动了；</p>
+<p>可以在浏览器地址栏中访问地址；</p>
+<p>访问得到的是404；</p>
+<p>原因：项目启动类的位置不对；</p>
+<p>@RestController注解没有被扫描到；</p>
+<p>为什么这个注解没有起作用的；</p>
+<p>只会扫描，项目启动类值会扫描同级目录及其子包下的文件；</p>
+<p>如果产生中文乱码：</p>
+<p>解决方案：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(produces =&quot;application/json; charset=utf-8&quot;)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>方法二：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">#设置响应为utf-<span class="hljs-number">8</span><br>spring.http.encoding.force-response=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>疑问：</p>
+<ol>
+<li>starter是什么？我们如何去使用这些starter？</li>
+<li>为什么包扫描只会扫描核心启动类所在的包及其子包</li>
+<li>在springBoot启动的过程中，是如何完成自动装配的？</li>
+<li>内嵌Tomcat是如何被创建及启动的？</li>
+<li>使用了web场景对应的starter，springmvc是如何自动装配？</li>
+</ol>
+<p>（保留疑问：在源码剖析部分，主要将以上疑问进行解答）</p>
+<p>主要的是要将这些疑问解决下；</p>
+<hr>
+<h2 id="SpringBoot热部署"><a href="#SpringBoot热部署" class="headerlink" title="SpringBoot热部署"></a>SpringBoot热部署</h2><p>如果一个修改时候生效；</p>
+<p>需要重启；</p>
+<p>这种方式叫做冷启动；</p>
+<p>不仅会重新加载我们自己写的类文件，也会加载第三方jar的类文件；</p>
+<p>如果项目比较大的话就会很消耗时间；</p>
+<p>如果对类路径下的文件进行修改，会自动的对类路径下的文件进行加载；</p>
+<p>spring开发团队给我们带来了一个插件：spring-boot-devtools</p>
+<p>这个启动仅仅会启动类路径下的文件，第三方jar包下的类文件是不会重新加载的，这就是热部署</p>
+<p>使用热部署，需要我们引入一个jar包【spring-boot-devtools】</p>
+<p>建议我们在开发环境下使用；</p>
+<p>生产环境下是不建议我们使用这个插件的；</p>
+<p>这个插件可以在spring官网中查找；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;!-- 引入热部署依赖 --&gt;<br>&lt;dependency&gt;<br>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+<p>如果采用的是idea，需要我们将自动编译打开；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653402523494.png" srcset="/img/loading.gif" lazyload alt="1653402523494"></p>
+<p>使用组合快捷键“Ctrl+Shift+Alt+&#x2F;”打开Maintenance选项框，选中并打开<br>Registry页面</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653402573927.png" srcset="/img/loading.gif" lazyload alt="1653402573927"></p>
+<p>允许在运行的时候开启自动编译；</p>
+<p>再重新启动下这个web服务；</p>
+<p>先访问下；</p>
+<p>然后修改下返回的值；</p>
+<p> <a href="lagou%5Ccontroller%5CDemoController.java" title="DemoController.java">DemoController.java</a>  </p>
+<p>修改后会自动触发应用程序的修改；</p>
+<p>那特部署的原理是什么呢？</p>
+<p>下节讲；</p>
+<hr>
+<h2 id="SpringBoot热部署原理"><a href="#SpringBoot热部署原理" class="headerlink" title="SpringBoot热部署原理"></a>SpringBoot热部署原理</h2><p>官方文档中就有对热部署的一些描述</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403408479.png" srcset="/img/loading.gif" lazyload alt="1653403408479"></p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403479024.png" srcset="/img/loading.gif" lazyload alt="1653403479024"></p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403567960.png" srcset="/img/loading.gif" lazyload alt="1653403567960"></p>
+<p>可以看到，我们引入了插件后，插件会监控我们classpath的资源变化，当classpath有变化后，会触发<br>重启；</p>
+<p>那么重启过程是怎么样的呢？为什么不再加载第三方jar包呢？</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403724945.png" srcset="/img/loading.gif" lazyload alt="1653403724945"></p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653403737182.png" srcset="/img/loading.gif" lazyload alt="1653403737182"></p>
+<p>这里提到了，该插件重启快速的原因：这里对类加载采用了两种类加载器，对于第三方jar包采用<strong>base-classloader</strong>来加载，对于开发人员自己开发的代码则使用<strong>restartClassLoader</strong>来进行加载，这使得比停<br>掉服务重启要快的多，因为使用插件只是重启开发人员编写的代码部分。</p>
+<p>如何进行验证呢？</p>
+<p>在项目中加入一个类：Devtools（自己编写的）继承了InitializingBean接口；</p>
+<p> <a href="lagou%5Cconfig%5CDevtools.java" title="Devtools.java">Devtools.java</a>  </p>
+<p>根据打印的是类加载器的名称来看；</p>
+<p>先将热部署jar包注释掉；</p>
+<p>启动项目；</p>
+<p>看日志；使用的类加载器是同一个；</p>
+<p>加上热部署jar包；</p>
+<p>RestartClassLoader类进行加载</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653404166709.png" srcset="/img/loading.gif" lazyload alt="1653404166709"></p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653404178194.png" srcset="/img/loading.gif" lazyload alt="1653404178194"></p>
+<hr>
+<h2 id="SpringBoot热部署排除资源"><a href="#SpringBoot热部署排除资源" class="headerlink" title="SpringBoot热部署排除资源"></a>SpringBoot热部署排除资源</h2><p>有时候想修改了某些文件，不要去触发重新启动，该如何做呢？</p>
+<p>某些资源在更改后不一定需要触发重新启动。例如，Thymeleaf模板可以就地编辑。默认情况下，改变<br>资源 &#x2F;META-INF&#x2F;maven ， &#x2F;META-INF&#x2F;resources ， &#x2F;resources ， &#x2F;static ， &#x2F;public ，<br>或 &#x2F;templates 不触发重新启动，但确会触发现场重装。如果要自定义这些排除项，则可以使用该<br>spring.devtools.restart.exclude 属性。例如，仅排除 &#x2F;static ， &#x2F;public 您将设置以下属性：</p>
+<p>为什么</p>
+<p>看下jar包：</p>
+<p>spring-boot-devtools-2.4.0.jar-&gt;META_INF-&gt;spring.factories</p>
+<p>这个文件中有一个类：LocalDevToolsAutoConfiguration类，点开</p>
+<p>本地热部署的自动配置类；</p>
+<p>关注点放在DevToolsProperties.class,点进去</p>
+<p>有这样一个属性：DEFAULT_RESTART_EXCLUDES</p>
+<p>通过设置这个属性，排除了一些资源；</p>
+<p>如果想变更它的默认值：比如在resoureces下目录下重新创建了一个文件夹，我们不想让这个文件下触发重新加载；</p>
+<p>在application.properties中修改：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">spring.devtools.restart.exclude</span>=<span class="hljs-string">static/**,public/**</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="SpringBoot全局配置文件"><a href="#SpringBoot全局配置文件" class="headerlink" title="SpringBoot全局配置文件"></a>SpringBoot全局配置文件</h2><p>核心配置文件我们又称为全局配置文件；</p>
+<p>为什么我们需要编写这个全局配置文件呢？</p>
+<p>全局配置文件的作用？</p>
+<p>都支持哪个文件作为㕂配置文件；</p>
+<p>全局配置文件放在哪个目录下才能够被加载到？</p>
+<p>如果存在多个全局配置文件，文件的优先级？</p>
+<p>全局配置文件可以对默认值进行修改；</p>
+<p>main方法的运行中会架子啊内嵌的tomcat，默认端口号是8080；</p>
+<p>编写配置文件，修改内嵌tomcat的默认值；</p>
+<p>启动项目的时候就会加载全局配置文件；</p>
+<p>支持application.properties、application.yaml的文件作为配置文件；</p>
+<p>properties是键值对；</p>
+<p>yaml是</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653407338044.png" srcset="/img/loading.gif" lazyload alt="1653407338044"></p>
+<p>springboot加载配置文件的时候从上面或下面四个目录进行加载；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">–file:./config/<br>–file:./<br>–classpath:/config/<br>–classpath:/<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653407414669.png" srcset="/img/loading.gif" lazyload alt="1653407414669"></p>
+<p>这四个目录下的全局配置文件都会被加载；</p>
+<p>思考：</p>
+<p>（1）如果在四个配置文件中配置了相同的属性，以谁为标准【优先级问题】；</p>
+<p>（2）如果在四个全局配置文件中，配置了不同的属性，能不能都生效呢？</p>
+<p>例如：都配置了server.port&#x3D;8081 8082 8083 8084</p>
+<p>结果是：8081；</p>
+<p>优先级：项目跟目录下的config目录下最先被加载的；最先被加载的，最先配置的为准；</p>
+<p>加载顺序就是上图中的顺序；</p>
+<p>配置：server. path&#x3D;&#x2F;springboot</p>
+<p>配置文件都会被加载，会形成互补配置；</p>
+<p>（3）如果相同目录下，同时存在properties和yaml配置文件，以谁为准？</p>
+<p>先读取application.properties（优先级最高）文件；</p>
+<p>再读取application.yaml</p>
+<p>不建议配置多个yaml文件或者properties文件；</p>
+<p>在多个配置文件中都配置了这个属性，优先级高的生效，低的不生效【这里感觉有歧义-需要验证】；</p>
+<p><strong>我们的配置文件可不可以不按照application呢？</strong></p>
+<p>可以，打jar包的时候需要指定配置文件的名称；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">$ java -jar myproject.jar --spring.config.name=myproject<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>可不可以加载其他位置的配置文件呢？</strong></p>
+<p>也可以，打jar包的时候需要指定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">java -jar run-<span class="hljs-number">0.0</span><span class="hljs-number">.1</span>-SNAPSHOT.jar --spring.config.location=D:/application.properties<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="SpringBoot全局配置文件加载优先级"><a href="#SpringBoot全局配置文件加载优先级" class="headerlink" title="SpringBoot全局配置文件加载优先级"></a>SpringBoot全局配置文件加载优先级</h2><p>做一个知识点补充；</p>
+<p>相同目录下同时存在properties和yaml文件的时候，哪个生效？</p>
+<p>这个需要看版本：</p>
+<p>如果是2.4.0之前的版本：优先级是properties&gt;yaml</p>
+<p>如果是2.4.0的版本，优先级yaml&gt;properties;</p>
+<p>2.4.0之前的版本;</p>
+<p>yaml:8090;</p>
+<p>peroperties:8084</p>
+<p>结果是：8084；</p>
+<p>2.4.0的版本；</p>
+<p>结果是：8090；</p>
+<p>根据当前使用版本的不同，配置文件的优先级是有所不同的；</p>
+<p>2.4.0的版本，如果想继续使用springboot2.3的配置文件配置的话，需要加一个属性配置；</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">spring.config.use-legacy-processing</span> = <span class="hljs-string">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="application-properties配置文件详解"><a href="#application-properties配置文件详解" class="headerlink" title="application.properties配置文件详解"></a>application.properties配置文件详解</h2><p>带有一些目录结构；</p>
+<p>会生成一个application.properties文件；</p>
+<p>可以完成一些属性的配置；</p>
+<p>springboot自带的一些属性；</p>
+<p>注入到某个类的成员变量的；</p>
+<p>如何知道属性的前缀是什么呢？</p>
+<p>可以看一下源码：</p>
+<p>spring-boot-autoconfigure-2.4.0;</p>
+<p>-&gt;spring.factories;</p>
+<p>这些工程类的全路径；</p>
+<p>找到：ServletWebServerFactoryAutoConfiguration,点进去；</p>
+<p>在这个类的上面有一个注解<code>@EnableConfigurationProperties(ServerProperties.class)</code></p>
+<p>点进去：ServerProperties.class</p>
+<p>类的上面使用了@ConfigurationProperties(perfix&#x3D;”server”,…);</p>
+<p>这个注解的作用是：以server开头的这个属性的值给输入到这个类的成员变量中；</p>
+<p>server.port;</p>
+<p>都是通过set方法进行注入的；</p>
+<p>也可以自定义一些属性；</p>
+<p>自定义的属性的值也输入到某个类的成员变量上；</p>
+<p>对@ConfigurationProperties注解的具体使用进行一个详解；</p>
+<p>首先准备两个实体类：Pet、Person</p>
+<p> <a href="lagou%5Cpojo%5CPet.java" title="Pet.java">Pet.java</a>  </p>
+<p> <a href="lagou%5Cpojo%5CPerson.java" title="Person.java">Person.java</a>  </p>
+<p>案例需求：使用@ConfigurationProperties注解将我们在配置文件中配置的属性值注入到指定类的成员变量；</p>
+<p>想要在配置文件中编写属性配置有提示；</p>
+<p>需要引入一个配置处理器依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>&lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;<br>&lt;optional&gt;<span class="hljs-literal">true</span>&lt;/optional&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在配置文件中配置属性的值：</p>
+<p> <a href="lagou%5Cresources%5Capplication.properties" title="application.properties">application.properties</a>  </p>
+<p>编写测试类：</p>
+<p>@RunWith(SpringRunner.class)</p>
+<p>因为SpringRunner继承了SpringJUnit4ClassRunner;</p>
+<p> <a href="lagou%5Ctest%5CSpringboot01DemoApplicationTests.java" title="Springboot01DemoApplicationTests.java">Springboot01DemoApplicationTests.java</a>  </p>
+<p>后面讲解属性注入的时候，还会对@ConfigurationProperties注解进一步进行讲解；</p>
+<hr>
+<h2 id="application-yaml配置文件详解"><a href="#application-yaml配置文件详解" class="headerlink" title="application.yaml配置文件详解"></a>application.yaml配置文件详解</h2><p>yaml是支持的json超集文件格式【是配置文件的趋势】；</p>
+<p>比properties和xml更适合做配置文件；</p>
+<p>yml和xml相比，少了一些结构话的代码；</p>
+<p>与properties，文件更加简洁；</p>
+<p>yaml文件的扩展名可以是yaml或yml</p>
+<p>application.yml语法：</p>
+<p>key:空格 value</p>
+<p>使用缩进控制层次关系；</p>
+<p>缩进：tab</p>
+<p>记得缩进和空格；</p>
+<p>数组形式的写法：</p>
+<p>可以有两种写法：缩进式、行内式</p>
+<p>map类型的写法：</p>
+<p>也有两种写法：缩进式、行内式</p>
+<p> <a href="lagou%5Cresources%5Capplication.yaml" title="application.yaml">application.yaml</a>  </p>
+<hr>
+<h2 id="Value属性值注入"><a href="#Value属性值注入" class="headerlink" title="@Value属性值注入"></a>@Value属性值注入</h2><p>@ConfigurationProperties注解实现批量注入；</p>
+<p>配置文件中配置的属性会覆盖默认属性；</p>
+<p>属性注入的常用注解【重要】</p>
+<p>@Configuration  说明是一个配置类；</p>
+<p>@Bean 放返回的值加入到Bean容器中</p>
+<p>@Value 单个属性注入，一般结合spring el表达式使用</p>
+<p>@ConfigurationProperties(prefix&#x3D;”jdbc”) 属性的批量注入</p>
+<p>@PropertySource(“classpath:&#x2F;jdbc.properties”)  指定外部属性文件，在类上添加</p>
+<h3 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h3><p>给单个属性进行注入；</p>
+<p>指定数据源：</p>
+<p>先导入相关依赖；</p>
+<p>在application.properties中配置数据源属性相关的值：</p>
+<p>创建JdbcConfiguration类；</p>
+<p>使用@Value注解可以不使用set方法；</p>
+<p> <a href="lagou%5Cconfig%5CJdbcConfiguration.java" title="JdbcConfiguration.java">JdbcConfiguration.java</a>  </p>
+<p>先将这个类变成配置类；@Configuration</p>
+<p>使用@Bean注解创建DruidDataSource对象并添加到IOC容器中；</p>
+<p>引入在雷伤添加了@Configuration，也会将这个添加到loc容器中；</p>
+<p>在测试类中打印这个这两个对象；</p>
+<hr>
+<h2 id="ConfigurationProperties批量注入"><a href="#ConfigurationProperties批量注入" class="headerlink" title="@ConfigurationProperties批量注入"></a>@ConfigurationProperties批量注入</h2><p>在JdbcConfiguration类上加上这个注解 prefix&#x3D;”jdbc”;</p>
+<p>放到这个注解上会有一个提示（没有生效）；</p>
+<p>需要添加@EnableConfigurationProperties(JdbcConfiguration.class)【使 @ConfigurationProperties注解生效】</p>
+<p>不会报错的，但是还需要在上面加一个@Configuration</p>
+<p>直接将上面两个注解替换成@Component;</p>
+<p>不能单独使用@ConfigurationProperties进行批量注入的；</p>
+<p> <a href="lagou%5Cconfig%5CJdbcConfiguration.java" title="JdbcConfiguration.java">JdbcConfiguration.java</a>  </p>
+<p>出现一个提示条：Spring Boot Configuration Annotation Processor not configured【springboot配置注解处理器未配置】【红色】【在配置文件中编写配置是没有配置信息的】</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653486168006.png" srcset="/img/loading.gif" lazyload alt="1653486168006"></p>
+<p>添加spring-boot-configuration-processor后出现提示，加完依赖后通过Ctrl+F9来使之生效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>&lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;<br>&lt;optional&gt;<span class="hljs-literal">true</span>&lt;/optional&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>第三方jar包中的类；【AnotherComponent.java】</p>
+<p>有想自定义的属性注入到这个类中；</p>
+<p>通过@Bean注解，生成实例对象并将定义的属性注入；</p>
+<p> <a href="lagou%5Cpojo%5CAnotherComponent.java" title="AnotherComponent.java">AnotherComponent.java</a>  </p>
+<p>MyService,将这个类变成配置类：@Configuration</p>
+<p>@Bean new AnotherComponent();</p>
+<p>将属性值进行注入：</p>
+<p>使用注解：@ConfigurationProperties(prefix&#x3D;”another”)【注意这个注解是写在方法上的】</p>
+<p> <a href="lagou%5Cconfig%5CMyService.java" title="MyService.java">MyService.java</a>  </p>
+<p>测试属性是否注入到对象中： <a href="lagou%5Ctest%5CSpringboot01DemoApplicationTests.java" title="Springboot01DemoApplicationTests.java">Springboot01DemoApplicationTests.java</a>  </p>
+<hr>
+<h2 id="ConfigurationProperties和-Value对比"><a href="#ConfigurationProperties和-Value对比" class="headerlink" title="@ConfigurationProperties和@Value对比"></a>@ConfigurationProperties和@Value对比</h2><p>这节介绍属性注入中的：松散绑定；</p>
+<p>Spring Boot使用一些宽松的规则将环境属性绑定到@ConfigurationProperties bean，因此环境属性名<br>和bean属性名之间不需要完全匹配</p>
+<p>先创建一个OwnerProperties类；</p>
+<p>上面使用注解：@ConfigurationProperties(“acme.my-person.person”)</p>
+<p>编写一个成员变量：firstName 【需要采用驼峰命名】；</p>
+<p>配置文件中使用的是羊肉串模式；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">acme:<br>	my-person:<br>		person:<br>			first-name: 泰森<br></code></pre></td></tr></table></figure>
+
+
+
+<p>能否注入到这个属性中呢？</p>
+<p>是可以的，并不需要完整匹配；</p>
+<p> <a href="lagou%5Cpojo%5COwnerProperties.java" title="MyService.java">OwnerProperties.java</a>  </p>
+<p>在测试类中打印对象OwnerProperties.java</p>
+<p> <a href="lagou%5Ctest%5CSpringboot01DemoApplicationTests.java" title="Springboot01DemoApplicationTests.java">Springboot01DemoApplicationTests.java</a>  </p>
+<p>不仅支持羊肉串模式，还支持其他模式：</p>
+<table>
+<thead>
+<tr>
+<th>属性文件中配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>acme.my-project.person.first-name</td>
+<td>羊肉串模式case, 推荐使用</td>
+</tr>
+<tr>
+<td>acme.myProject.person.firstName</td>
+<td>标准驼峰模式</td>
+</tr>
+<tr>
+<td>acme.my_project.person.first_name</td>
+<td>下划线模式</td>
+</tr>
+<tr>
+<td>ACME_MYPROJECT_PERSON_FIRSTNAME</td>
+<td>大写下划线，如果使用系统环境时候推荐使用</td>
+</tr>
+</tbody></table>
+<p>下划线模式经常用于数据库表中字段的模式，但是这里也是支持的；</p>
+<p> <a href="lagou%5Cresources%5Capplication.yaml" title="application.yaml">application.yaml</a>  </p>
+<p>@ConfigurationProperties vs @Value</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>@ConfigurationProperties</th>
+<th>@Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宽松的绑定</td>
+<td>yes</td>
+<td>Limited（详见下方官网截图）</td>
+</tr>
+<tr>
+<td>元数据支持</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>SpEL 表达式</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>批量属性绑定</td>
+<td>单个属性绑定</td>
+</tr>
+</tbody></table>
+<p>宽松的绑定、元数据支持想查看链接的话请看pdf文档</p>
+<p>json内容就是一个元数据；</p>
+<p>SpEl表达式是啥呀？</p>
+<hr>
+<h2 id="SpringBoot日志框架"><a href="#SpringBoot日志框架" class="headerlink" title="SpringBoot日志框架"></a>SpringBoot日志框架</h2><p>对日志框架本身一个介绍；</p>
+<p>日志在项目的开发中，是必不可少的组件；</p>
+<p>构建的时候是怎样的构架设计思想？</p>
+<p>小张：开发一个大型的项目；</p>
+<p>想记录重要变量的一个变化</p>
+<p>System.out.println(“”);</p>
+<p>记录运行时的关键信息；</p>
+<p>将关键信息打印到控制台上；</p>
+<p>这种输出语句并包含任何的业务逻辑；</p>
+<p>要将这些语句给删除掉；</p>
+<p>都删除掉了也不太好；</p>
+<p>让这些信息都可以输出出来，但是输出到一个文件中；</p>
+<p>将打印语句进行修改，将打印语句输入到文件中；</p>
+<p>就想自己去实现贵日志框架</p>
+<p>通过日志框架来记录运行时的关键信息；</p>
+<p>实现最初版功能添加的日志框架；zhang_logging.jar</p>
+<p>在使用的过程中，功能感觉太简陋了；</p>
+<p>想实现异步模式+自动归档的功能（每天一个文件）</p>
+<p>又重新编写了编写了一个日志框架：zhang_logging-good.jar</p>
+<p>使用的api和原来的api就有所不同的；</p>
+<p>需要将原来的日志框架给替换掉；</p>
+<p>因为api的不同，需要重新修改相关的api;</p>
+<p>知道了这个问题，再设计一个新的日志框架；</p>
+<p>需要替换jar包的同事，还需要重新修改相关的API；</p>
+<p>针对于这个问题，想进行解决，是怎样的思想呢？</p>
+<p>JDBC–数据库驱动的一个关系；</p>
+<p>编写相关代码的时候编写的是JDBC的api</p>
+<p>看使用的是哪个数据库；</p>
+<p>mysql就引入mysql的相关依赖；</p>
+<p>如果使用的是oracle，就引入oracle的相关依赖；</p>
+<p>但是对于我们程序中编写的jdbc代码就不用修改；</p>
+<p>基于这种思想，小张也想使用这种思想；</p>
+<p>编写统一的接口层：（日志抽象层）logging-absract.jar</p>
+<p>写代码的时候，统一使用接口层里面相关的API,具体实现就用那个导入的那个jar包；</p>
+<p>不管我们导入的那个jar包，代码中使用的API是无需改变的；</p>
+<p>需要知道这个思想；</p>
+<p><strong>日志抽象层+日志实现层</strong>；</p>
+<p>想用哪个实现就用哪个jar包；</p>
+<p><strong>而市面上常见的日志框架</strong>有很多，比如：JCL、SLF4J、Jboss-logging、jUL、log4j、log4j2、logback等等，我们该如何选择呢？</p>
+<p>通常情况下，日志是由一个抽象层+实现层的组合来搭建的。</p>
+<table>
+<thead>
+<tr>
+<th>日志-抽象层</th>
+<th>日志-实现层</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JCL（Jakarta Commons Logging）、SLF4J（Simple LoggingFacade for Java）、jboss-logging</td>
+<td>jul（java.util.logging）、log4j、logback、log4j2</td>
+</tr>
+</tbody></table>
+<p>抽象层要用哪个，实现层要用哪个？</p>
+<p>Commons Logging，不会陌生；</p>
+<p>在spring的时候就会导入Commons Logging相关jar包；</p>
+<p>Jakarta：apache下的一个小组；</p>
+<p>日志的选择，可以使用排除法：</p>
+<p>jboss-logging：准地特定的框架来使用的，使用的机会很少，排除；</p>
+<p>JCL:最后一次的更新是2014年，排除；</p>
+<p><strong>日志抽象层就使用SLF4J</strong></p>
+<p>日志-实现层</p>
+<p>我们比较熟悉的就是：log4j</p>
+<p>但是存在一定的问题；</p>
+<p>如果在log4j上修改，改动就太大了；</p>
+<p>就重新设计了logback；</p>
+<p>SLF4J、log4j、logback是同一个作者；</p>
+<p>logback是log4j的升级版本</p>
+<p>jul（java.util.logging）日志包下的实现，功能没有其他的强大；</p>
+<p>log4j2：功能强大，但是还没有和其他框架整合的太广泛；</p>
+<p><strong>日志-实现层使用logback</strong>；</p>
+<p>spring框架爱默认选择私用JCL作为日志输出；</p>
+<p>springboot默认选择了SLF4j结合logBack作为日志的输出；</p>
+<p>要知道日志框架为什么有抽象层+实现层的组合来搭建的；</p>
+<p>原因是什么？</p>
+<p>要知道市面上有哪些常见的日志康佳；</p>
+<p>框架默认的日志框架组合策略（spring、springboot）；</p>
+<hr>
+<h2 id="SLF4J日志工具的使用"><a href="#SLF4J日志工具的使用" class="headerlink" title="SLF4J日志工具的使用"></a>SLF4J日志工具的使用</h2><p>springboot默认选择了SLF4j结合logBack作为日志的输出；</p>
+<p>SLF4J的使用方式；</p>
+<p>开发中不应该使用日志实现类的；</p>
+<p>应该使用日志抽象层的；</p>
+<p>统一使用日志抽象层；</p>
+<p>使用哪个实现层就引入哪个jar包就好；</p>
+<p>参考SLF4J官方文档：<a target="_blank" rel="noopener" href="https://www.slf4j.org/">https://www.slf4j.org/</a></p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653494040822.png" srcset="/img/loading.gif" lazyload alt="1653494040822"></p>
+<p>当然也可以直接访问网址：<a target="_blank" rel="noopener" href="https://www.slf4j.org/manual.html">https://www.slf4j.org/manual.html</a></p>
+<p>使用之前先下载SLF4J相关jar包；</p>
+<p>可以查看文档中的示例；</p>
+<p>只是使用到了日志的抽象层；</p>
+<p>在结合实现层的时候，我们又如何来操作呢？</p>
+<p>去选择切换日志的时候，需要切换</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653494274292.png" srcset="/img/loading.gif" lazyload alt="1653494274292"></p>
+<p> 单独使用SLF4J；</p>
+<p>结合logback一起使用，不仅需要导入slf4j-api.jar,还需要导入logback-classic.jar、logback-core.jar；</p>
+<p>SLF4J结合log4j:出现比较早的，不知道之后会出现日志抽象层的概念，需要使用到适配器（slf4j-log412.jar）,;</p>
+<p>起到了承上启下的作用；</p>
+<p>SLF4J结合logging也是一样的：需要一个适配器；</p>
+<p>SLF4J的简单实现</p>
+<p>切换的时候如何去做；</p>
+<p>可以清晰的看到，SLF4J作为日志的实现，针对不同的实现导入不同的jar包；</p>
+<p>深蓝色：具体实现</p>
+<p>墨绿色：适配器</p>
+<p>注意点：每个日志框架都有自己的配置文件；</p>
+<p>都需要使用具体实现框架的配置文件；</p>
+<p>要知道为什么有这个适配器？</p>
+<hr>
+<h2 id="统一日志框架的使用"><a href="#统一日志框架的使用" class="headerlink" title="统一日志框架的使用"></a>统一日志框架的使用</h2><p>上面还存在一个遗留的为题；</p>
+<p>例如在项目中需要使用日志框架</p>
+<p>A项目（slf4+logback）</p>
+<p>spring（commons logging）</p>
+<p>Hibernate(jboss-logging)</p>
+<p>如果想在A项目中引入spring的相关依赖的时候，</p>
+<p>commons logging相关jar包也会被引入到A项目中</p>
+<p>A项目中引入Hibernate相关依赖也是一样的；</p>
+<p>这样会造成什么情况？</p>
+<p>项目中存在多个日志框架；</p>
+<p>这种是不利于使用日志框架的；</p>
+<p>需要我们在项目中设置统一的日志框架；</p>
+<p>如何完成统一日志框架的设置呢？</p>
+<p>SLF4J中给了我们一个案例；</p>
+<p>我们所依赖的外部组件如果不是log4j或者java.util.logging的时候，需要去看SLF4J的二进制支持</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">In <span class="hljs-keyword">case</span> an externally-maintained component you depend on uses a logging API other than SLF4J, such as commons logging, log4j or java.util.logging, have a look at SLF4J<span class="hljs-string">&#x27;s binary-support for legacy APIs.</span><br></code></pre></td></tr></table></figure>
+
+<p>里面有一张图，就是介绍如何设置统一的日志框架；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653495958861.png" srcset="/img/loading.gif" lazyload alt="1653495958861"></p>
+<p>对日志框架进行替换；</p>
+<p>例如Spring，将commons-logging.jar进行排除</p>
+<p>但是会报错；</p>
+<p>需要引入jcl-over-slf4.jar;</p>
+<p>spring找的就是jcl-over-slf4.jar中的类；</p>
+<p>所谓替换就是将原先的进行排除，替换成slf4的装换包；</p>
+<p>当然了，其他的也是一样的；</p>
+<p>先竖着看，再横着看；</p>
+<p>先排除再替换；</p>
+<p>从图中我们得到一种统一日志框架使用的方式，可以使用一种和要替换的日志框架类完全一样的 jar 进行替换，这样不至于原来的第三方 jar 报错，而这个替换的 jar 其实使用了 SLF4J API. 这样项目中的日<br>志就都可以通过 SLF4J API 结合自己选择的框架进行日志输出。</p>
+<p>统一日志框架使用步骤归纳如下：</p>
+<ol>
+<li><strong>排除</strong>系统中的其他日志框架。</li>
+<li>使用<strong>中间包替换</strong>要替换的日志框架。</li>
+<li>导入我们选择的 SLF4J 实现。</li>
+</ol>
+<hr>
+<h2 id="SpringBoot日志关系"><a href="#SpringBoot日志关系" class="headerlink" title="SpringBoot日志关系"></a>SpringBoot日志关系</h2><p>统一日志框架使用步骤归纳如下：</p>
+<ol>
+<li><strong>排除</strong>系统中的其他日志框架。</li>
+<li>使用<strong>中间包替换</strong>要替换的日志框架。</li>
+<li>导入我们选择的 SLF4J 实现。</li>
+</ol>
+<p>如果在springboot中引入了第三方框架如何排除第三方的日志框架呢？</p>
+<h3 id="排除其他日志框架"><a href="#排除其他日志框架" class="headerlink" title="排除其他日志框架"></a>排除其他日志框架</h3><p>查看父依赖启动器；</p>
+<p>父依赖启动器里面还有一个依赖；</p>
+<p>当前工程引入第三方框架的时候第三方jar包版本的管理；</p>
+<p>properties标签可以做版本的声明；</p>
+<p>从而接近了版本冲突问题；</p>
+<p>真正做版本锁定的是：dependencyManagement标签；</p>
+<p>排除需要用到：exclusions标签；</p>
+<p>依赖的排除；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653526016525.png" srcset="/img/loading.gif" lazyload alt="1653526016525"></p>
+<p>我们排除日志的时候也可以使用这个标签进行日志依赖的排除；</p>
+<p>查看依赖关系图：右击-》Diagrams-&gt;show dependencies</p>
+<p>spring-boog-starter:就是一个核心的依赖启动器；</p>
+<p>还会去用到：spring-boot-starter-logging</p>
+<p>点进去；</p>
+<p>可以看到组合了哪些dependency;【logback-core、slf4j-api】</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653495958861.png" srcset="/img/loading.gif" lazyload alt="1653495958861"></p>
+<p>springboot中默认使用的是logback-core+slf4j-api</p>
+<p>可以看到有一个logback-core依赖；</p>
+<p>点进去，可以看到的转换包也是有引入的；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653526586385.png" srcset="/img/loading.gif" lazyload alt="1653526586385"></p>
+<p>由此可见，Spring Boot 可以自动的适配日志框架，而且底层使用 SLF4j + LogBack 记录日志，如果我们自行引入其他框架，需要排除其日志框架。</p>
+<p>查看是否已经进行了排除，如果已经进行了排除，查看是否已经引入了替换包；</p>
+<hr>
+<h2 id="SpringBoot日志使用"><a href="#SpringBoot日志使用" class="headerlink" title="SpringBoot日志使用"></a>SpringBoot日志使用</h2><p>springboot默认的日志级别是什么？</p>
+<p>springboot默认的日志输出格式是什么？</p>
+<p>控制台中是为什么打印的日志是那样的？</p>
+<p>可以进入日志启动器中查看：</p>
+<p>spring-boot-starter-logging:2.4.0;</p>
+<p>-&gt;</p>
+<p>在这个logging启动器中就有SLF4j+logback所需的jar包；</p>
+<p>编写相应的api-在测试类中；</p>
+<p>编写SLF4j的API；</p>
+<p>在测试类中编写：</p>
+<p>之前都是通过System.out.println来输出重要的日志；</p>
+<p>现在我们通过：</p>
+<p>Logger logger &#x3D; LoggerFactory.getLogger(this.getClass());</p>
+<p>获取一个计数器对象；</p>
+<p>调用对应的方法：</p>
+<p>logger.trace(“”);  &#x2F;&#x2F; trace 追踪的意思</p>
+<p>logger.debug(“”);</p>
+<p>logger.info(“”); 可以查看自定义的一些信息；</p>
+<p>logger.warn(“”) ;  属性的值不是预期的属性值，可以抛出警告；</p>
+<p>logger.error(“”);  如果出现异常，打印error日志；</p>
+<p> <a href="lagou%5Ctest%5CSpringboot01DemoApplicationTests.java" title="Springboot01DemoApplicationTests.java">Springboot01DemoApplicationTests.java</a>  </p>
+<p>日志的级别：从小到大：trace&lt;debug&lt;info&lt;warn&lt;error</p>
+<p>日志级别是可以进行调整的；</p>
+<p>日志输出的时候是按照日志级别进行输出；</p>
+<p>只能输出比当前级别更高级别的日志：</p>
+<p>例如：infor级别，只能输出info、warn、error级别的日志</p>
+<p>springboot的默认输出级别是info级别，也就是root级别；</p>
+<p>当前的默认输入级别是info级别；</p>
+<p>当前默认的日志输出格式是：</p>
+<p>日志的组成由五部分组成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-number">2020</span>-<span class="hljs-number">11</span>-<span class="hljs-number">16</span> <span class="hljs-number">19</span>:<span class="hljs-number">58</span>:<span class="hljs-number">43.094</span> INFO <span class="hljs-number">39940</span> --- [ main]<br>com.lagou.Springboot01DemoApplicationTests : Info 日志...<br><span class="hljs-number">2020</span>-<span class="hljs-number">11</span>-<span class="hljs-number">16</span> <span class="hljs-number">19</span>:<span class="hljs-number">58</span>:<span class="hljs-number">43.094</span> WARN <span class="hljs-number">39940</span> --- [ main]<br>com.lagou.Springboot01DemoApplicationTests : Warn 日志...<br><span class="hljs-number">2020</span>-<span class="hljs-number">11</span>-<span class="hljs-number">16</span> <span class="hljs-number">19</span>:<span class="hljs-number">58</span>:<span class="hljs-number">43.094</span> ERROR <span class="hljs-number">39940</span> --- [ main]<br>com.lagou.Springboot01DemoApplicationTests : Error 日志...<br></code></pre></td></tr></table></figure>
+
+<p>从上面的日志结合 Logback 日志格式可以知道 Spring Boot 默认日志格式是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;<span class="hljs-number">50</span>&#125; - %msg%n<br># %d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; 时间<br># %thread 线程名称 【日志级别】<br># %-5level 日志级别从左显示<span class="hljs-number">5</span>个字符宽度<br># %logger&#123;<span class="hljs-number">50</span>&#125; 类名<br># %msg%n 日志信息加换行<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653545050235.png" srcset="/img/loading.gif" lazyload alt="1653545050235"></p>
+<p>base.xml</p>
+<p>配置文件中有，include标签</p>
+<p>有一段配置；</p>
+<p><img src="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ASpringBoot%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/1653545118731.png" srcset="/img/loading.gif" lazyload alt="1653545118731"></p>
+<p>针对这些格式都在源码中进行了配置；</p>
+<p>base.xml配置了日志级别：info,root级别</p>
+<hr>
+<h2 id="SpringBoot自定义日志输出"><a href="#SpringBoot自定义日志输出" class="headerlink" title="SpringBoot自定义日志输出"></a>SpringBoot自定义日志输出</h2><p>可以直接在配置文件中修改，默认的日志级别及默认的日志输出格式的；</p>
+<p>指定日志输出级别：</p>
+<p>logger.level.com.lagou&#x3D;trace</p>
+<p>可以看到包名变成了斜体；</p>
+<p> <a href="lagou%5Ctest%5CSpringboot01DemoApplicationTests.java" title="Springboot01DemoApplicationTests.java">Springboot01DemoApplicationTests.java</a>  </p>
+<p>可以看到日志全部进行了一个打印：</p>
+<p>注意：只针对com.lagou的包下的文件的日志输出级别是trace，其他的还是默认的日志级别info;</p>
+<p>指定控制台日志输出格式：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.pattern.console</span>=<span class="hljs-string">%d&#123;yyyy-MM-dd&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看到已经没有时分秒了；</p>
+<p>可不可以将日志内容输入到文件中呢？不输出到控制台；</p>
+<p>有两个属性都可以将日志文件输入到文件中；</p>
+<p>关于日志的输出路径，可以使用 logging.file 或者 logging.path 进行定义，两者存在关系如下表。</p>
+<table>
+<thead>
+<tr>
+<th>logging.file</th>
+<th>logging.path</th>
+<th>例子</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（没有）</td>
+<td>（没有）</td>
+<td></td>
+<td>仅控制台记录。</td>
+</tr>
+<tr>
+<td>具体文件</td>
+<td>（没有）</td>
+<td>my.log</td>
+<td>写入指定的日志文件，名称可以是精确位置或相对于当前目录。</td>
+</tr>
+<tr>
+<td>（没有）</td>
+<td>具体目录</td>
+<td>&#x2F;var&#x2F;log</td>
+<td>写入 spring.log 指定的目录，名称可以是精确位置或相对于当前目录。</td>
+</tr>
+</tbody></table>
+<p>（没有）：都没有配置的情况下；</p>
+<p><strong>指定将日志信息输入到指定文件</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.file.name</span>=<span class="hljs-string">my.log</span><br></code></pre></td></tr></table></figure>
+
+<p>在项目就会生成一个my.log的一个文件</p>
+<p>日志文件默认是生成在工程中的；</p>
+<p>但是也可以生成在其他的地方；</p>
+<p>例如：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.file.name</span>=<span class="hljs-string">d:/my.log</span><br></code></pre></td></tr></table></figure>
+
+<p>也可以指定logging.path</p>
+<p>logging.path指定的是具体的目录；</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.file.path</span>=<span class="hljs-string">/var/log</span><br></code></pre></td></tr></table></figure>
+
+<p>文件会自动的创建；</p>
+<p>打开该项目所在的目录；</p>
+<p>会自动生成目录；</p>
+<p>spring.log 中可以看到日志的内容；</p>
+<p>注意：看下springboot使用的是哪个版本，版本不一样，配置也是不一样的</p>
+<p>也可以在文件中指定日志输出格式；</p>
+<p><strong>指定文件日志输出格式</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.pattern.file</span>=<span class="hljs-string">%d&#123;yyyy-MM-dd&#125; ======= [%thread]  === %-5level %logger&#123;50&#125; - %msg%n</span><br></code></pre></td></tr></table></figure>
+
+<p>还有很多的日志配置，我们可以在使用的时候进行配置；</p>
+<hr>
+<h2 id="SpringBoot替换日志框架"><a href="#SpringBoot替换日志框架" class="headerlink" title="SpringBoot替换日志框架"></a>SpringBoot替换日志框架</h2><p>如何替换日志框架；</p>
+<p>日志抽象层默认使用SLF4j</p>
+<p>日志实现层使用的是</p>
+<p>日志抽象层，替换具体的实现；</p>
+<p>替换具体的实现；</p>
+<p>log4j已经好长时间了，开发人也认为有缺陷；</p>
+<p>log4j2:可以使用这一个；</p>
+<p>springboot中提供了两个starter:</p>
+<p>spring-boot-starter-logging:使用logback作为日志启动器‘；</p>
+<p>spring-boot-starter-log4j2:使用log4j2作为日志启动器；</p>
+<p>如果想要使用log4j2,需要排除spring-boot-starter-logging启动器的；</p>
+<p>查看：依赖关系图</p>
+<p>找到spring-boot-starter-logging</p>
+<p>选中-》右击-》Exclude【spring-boot-starter-logging将这个jar给去除】</p>
+<p>在pom.xml中会自动添加exclusions标签，将对应的依赖移除；</p>
+<p>验证是否排除成功；</p>
+<p>只打印了一个log,没有打印日志信息；</p>
+<p>切换log4j2,需要引入log4j2依赖；</p>
+<p>然后启动项目就可以在控制台看到日志输出了；</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java工程师高薪训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">#第一阶段-开源框架源码剖析</a>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring-Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">#模块四-约定优于配置设计范式及Spring Boot源码剖析</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>任务一：SpringBoot基础回顾</div>
+      <div>https://xuebaqiang.github.io/2000/01/21/Java工程师高薪训练营/第一阶段-开源框架源码剖析/模块四-约定优于配置设计范式及Spring Boot源码剖析/任务一：SpringBoot基础回顾/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2000年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/01/%E6%8B%89%E9%92%A9%E7%BB%83%E4%B9%A0/1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E6%8B%89%E9%92%A9%E7%BB%83%E4%B9%A0)/" title="1-数据结构与算法(拉钩练习)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1-数据结构与算法(拉钩练习)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E6%A8%A1%E5%9D%97%E5%9B%9B-%E7%BA%A6%E5%AE%9A%E4%BC%98%E4%BA%8E%E9%85%8D%E7%BD%AE%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%E5%8F%8ASpring%20Boot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%9ASpringBoot%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="任务二：SpringBoot源码剖析">
+                        <span class="hidden-mobile">任务二：SpringBoot源码剖析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

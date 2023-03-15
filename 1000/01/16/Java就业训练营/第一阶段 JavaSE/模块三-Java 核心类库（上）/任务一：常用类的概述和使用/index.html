@@ -1,0 +1,1320 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第十一章：常用类的概述和使用 点击查看  API的使用和常用包的概述开始学习java官方提供的类与接口及异常； 需要使用jdkAPI文档； 课程中我们提供了一个中文版的jdkAPI文档； 翻译出来的结果不一定特备的精确； 不一定特别的完整、严谨； 如果想要使用严谨的需要下载官方提供的【诠释中文的】； 可以两个都用； 中文版的如果感觉不对不够完整，可以使用英文版进行查看； 引入java官方提供的类和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十一章：常用类的概述和使用">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/01/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%B8%89-Java%20%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8A%EF%BC%89/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="第十一章：常用类的概述和使用 点击查看  API的使用和常用包的概述开始学习java官方提供的类与接口及异常； 需要使用jdkAPI文档； 课程中我们提供了一个中文版的jdkAPI文档； 翻译出来的结果不一定特备的精确； 不一定特别的完整、严谨； 如果想要使用严谨的需要下载官方提供的【诠释中文的】； 可以两个都用； 中文版的如果感觉不对不够完整，可以使用英文版进行查看； 引入java官方提供的类和">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1000-01-15T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:11.817Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="第一阶段JavaSE">
+<meta property="article:tag" content="模块三-Java 核心类库（上）">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>第十一章：常用类的概述和使用 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第十一章：常用类的概述和使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-01-16 00:20" pubdate>
+          1000年1月16日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          86 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第十一章：常用类的概述和使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第十一章：常用类的概述和使用"><a href="#第十一章：常用类的概述和使用" class="headerlink" title="第十一章：常用类的概述和使用"></a>第十一章：常用类的概述和使用</h1><p> <a href="%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8.pdf" title="第十一章：常用类的概述和使用.pdf">点击查看</a> </p>
+<h2 id="API的使用和常用包的概述"><a href="#API的使用和常用包的概述" class="headerlink" title="API的使用和常用包的概述"></a>API的使用和常用包的概述</h2><p>开始学习java官方提供的类与接口及异常；</p>
+<p>需要使用jdkAPI文档；</p>
+<p>课程中我们提供了一个中文版的jdkAPI文档；</p>
+<p>翻译出来的结果不一定特备的精确；</p>
+<p>不一定特别的完整、严谨；</p>
+<p>如果想要使用严谨的需要下载官方提供的【诠释中文的】；</p>
+<p>可以两个都用；</p>
+<p>中文版的如果感觉不对不够完整，可以使用英文版进行查看；</p>
+<p>引入java官方提供的类和方法太多，从java9开始将java官方提供的类库生成多个模块；</p>
+<p>java.base 基础API；</p>
+<p>我们基本上用这个就够了；</p>
+<p>下面有个包【包就是目录】【解决相同目录下同名问题】</p>
+<p>下面有各种各种的方法、异常、接口；</p>
+<p>可以使用索引、搜索【使用索引】</p>
+<p>如果感觉中文版中的描述描述怪怪的话就使用中文版；</p>
+<p>使用java官方提供的类和方法，大大提高了开发效率；</p>
+<p>课堂上不会将所有的都学过；有三千多个；</p>
+<p>java官方提供的类库考虑到各个的业务的；</p>
+<p>我们在工作中可能就对某些业务进行使用；</p>
+<p>我们学习些常用的类就好；</p>
+<h3 id="java-lang包下的；"><a href="#java-lang包下的；" class="headerlink" title="java.lang包下的；"></a>java.lang包下的；</h3><p>这个包中的类是由java官方自动导入的，不需要我们写import;</p>
+<p>java官方就将我们import完了；</p>
+<p>例如：System类、String类。。。。。</p>
+<p>这个包很浪；【可以这样记忆】</p>
+<h3 id="java-util包"><a href="#java-util包" class="headerlink" title="java.util包"></a>java.util包</h3><p>工具包；</p>
+<p>例如：Scanner类、Random类、List集合。。。</p>
+<h3 id="java-io包"><a href="#java-io包" class="headerlink" title="java.io包"></a>java.io包</h3><p>输入输出包；</p>
+<p>io是input、output的间歇</p>
+<p>可以使用这个包对文件的拷贝等</p>
+<p>可以对文件的内容进行读写；</p>
+<p>例如：FileInputStream类、FileOutPutStream类。。。</p>
+<h3 id="java-net包"><a href="#java-net包" class="headerlink" title="java.net包"></a>java.net包</h3><p> 使用这个包，可以实现网络编程； </p>
+<p>可以使用网络信息的传输</p>
+<p>例如：ServerSocket类、Socket类</p>
+<h3 id="java-sql包"><a href="#java-sql包" class="headerlink" title="java.sql包"></a>java.sql包</h3><p>数据包；</p>
+<p>后面学习数据库的时候讲解；</p>
+<p>学习顺序：lang-&gt;utils-&gt;lang-&gt;io-&gt;lang-&gt;net-&gt;lang</p>
+<p>借助官方提供的类库可以实现快速开发；</p>
+<p>所以我们要经常使用它；开发的时候可以更快的完成功能；</p>
+<hr>
+<h2 id="Object类的概念和构造方法-（重点）"><a href="#Object类的概念和构造方法-（重点）" class="headerlink" title="Object类的概念和构造方法 （重点）"></a>Object类的概念和构造方法 （重点）</h2><p>接下来我们讲解java.lang包；</p>
+<p>我们搞明白类能够实现什么功能，需要的时候能够使用到就好；</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">java.lang.Object类是Java语言中类层次结构的根类，也就是说任何一个类都是该类的直接或者间接子类;<br><br>如果定义一个Java类时没有使用extends关键字声明其父类，则其父类为 java.lang.Object 类。<br><br>Object类定义了“对象”的基本行为, 被子类默认继承。<br></code></pre></td></tr></table></figure>
+
+<p>没有继承其他的类，默认继承Object类；</p>
+<p>有继承其他的类，间接的继承Object类；</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object()</td>
+<td>使用无参方式构造对象【可以通过super的方式来调用】</td>
+</tr>
+<tr>
+<td>boolean equals(Objectobj)</td>
+<td>【多态】用于判断调用对象是否与参数对象相等。该方法默认比较两个对象的地址是否相等，与 &#x3D;&#x3D; 运算符的结果一致 若希望比较两个对象的内容，则需要重写该方法。若该方法被重写后，则应该重写hashCode方法来保证结果的一致 性。</td>
+</tr>
+<tr>
+<td>int hashCode()</td>
+<td>用于获取调用对象的哈希码值(内存地址的编号)。若两个对象调用equals方法相等，则各自调用该方法的结果必须相 同若两个调用对象equals方法不相等，则各自调用该方法的结果应该 不相同。为了使得该方法与equals方法保持一致，需要重写该方法。</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>用于获取调用对象的字符串形式该方法默认返回的字符串为：包名.类名@哈希码值的十六进制 为了返回更有意义的数据，需要重写该方法使用print或println打印引用或字符串拼接引用都会自动调用该方法</td>
+</tr>
+<tr>
+<td>Class&lt;?&gt; getClass()</td>
+<td>用于返回调用对象执行时的Class实例，反射机制使用</td>
+</tr>
+</tbody></table>
+<p>person类构造方法的代码中，可以使用super方法；</p>
+<p>表示调用父类的无参构造方法；</p>
+<p>即Object的午餐构造方法；</p>
+<hr>
+<h2 id="equals方法默认功能的使用"><a href="#equals方法默认功能的使用" class="headerlink" title="equals方法默认功能的使用"></a>equals方法默认功能的使用</h2><p>boolean equals(Objectobj)</p>
+<p>当父类类型的引用指向子类类型的对象，想成多态；</p>
+<p><a href="code/Student.java" title="Student.java">Student.java</a></p>
+<p>equal是public修饰，可以被继承；</p>
+<p>setId中判断学号是否合理；</p>
+<p>有参构造中可以调用set方法对学号进行合理判断；</p>
+<p><a href="code/StudentTest.java" title="StudentTest.java">StudentTest.java</a></p>
+<p>中判断两个对象是否相等；</p>
+<p>继承必须学扎实，否则以后学习会力不从心；</p>
+<p><strong>equals默认比较两个对象的地址；</strong></p>
+<p>知道什么时候生成栈的内存，什么时候生成推的内存；</p>
+<p>比较对象equals跟比较运算符（&#x3D;&#x3D;）是一样的；</p>
+<p>指向同一块堆区空间就相等了；</p>
+<hr>
+<h2 id="equals方法的重写实现"><a href="#equals方法的重写实现" class="headerlink" title="equals方法的重写实现"></a>equals方法的重写实现</h2><p>查看Object的equals源码；</p>
+<p>return (this&#x3D;&#x3D;obj);</p>
+<p>this:当前正在调用的对象；</p>
+<p>源码中确实比较的是地址；</p>
+<p>现实生活中，判断是否是同一个学生判断学号就好了；</p>
+<p>如果现有的方法不能满足我们的需求，就需要重写这个方法了；</p>
+<p><a href="code/Student.java" title="Student.java">Student.java</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getId()==obj.getId() --报错<br></code></pre></td></tr></table></figure>
+
+<p>父类类型的应用不可以直接调用子类类型的应用；需要强转；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Student ts=(Student)obj;<br></code></pre></td></tr></table></figure>
+
+<p>只要做强制类型装换之前需判断，是否是子类类型的对象；</p>
+<p>如果类型不一致，没有可比性，内容一定不相同；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(obj <span class="hljs-keyword">instanceof</span> Student)&#123;<br>  <span class="hljs-keyword">if</span> xxx <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125; <br><span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="equals方法的重写优化"><a href="#equals方法的重写优化" class="headerlink" title="equals方法的重写优化"></a>equals方法的重写优化</h2><p>分析执行流程；</p>
+<p><a href="code/StudentTest.java" title="StudentTest.java">StudentTest.java</a></p>
+<p>栈空间生开辟两块内存；</p>
+<p>推空间开辟两块内存；</p>
+<p>![equals方法的原理分析](01 equals方法的原理分析.png)</p>
+<p>需要注意的点：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown">equals方法在非null对象引用上实现等价关系： <br><br>-- 自反性 ：对于任何非空的参考值x ， x.equals(x)应该返回true 。 <br>-- 它是对称的 ：对于任何非空引用值x和y ， x.equals(y)应该返回true当且仅当y.equals(x)回报true 。 <br>-- 传递性 ：对于任何非空引用值x ， y和z ，如果x.equals(y)回报true个y.equals(z)回报true ，然后x.equals(z)应该返回true 。 <br>它是一致的 ：对于任何非空引用值x和y ，多次调用x.equals(y)始终返回true或始终返回false ，前提是未修改对象上的equals比较中使用的信息。 <br>-- 对于任何非空的参考值x ， x.equals(null)应该返回false 。<br></code></pre></td></tr></table></figure>
+
+<p>有可能出现x.equals(x)的情况；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>==obj) <span class="hljs-keyword">return</span> ture;<br></code></pre></td></tr></table></figure>
+
+<p>有可能出现x.equals(null)的情况；</p>
+<p>如果是空的话就不需要执行instanceof方法了；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-literal">null</span> == obj) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br></code></pre></td></tr></table></figure>
+
+<p>equals方法暂时性的完整实现；</p>
+<p><a href="code/StudentTest.java" title="StudentTest.java">StudentTest.java</a></p>
+<hr>
+<h2 id="hashCode方法的重写实现"><a href="#hashCode方法的重写实现" class="headerlink" title="hashCode方法的重写实现"></a>hashCode方法的重写实现</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">请注意，通常需要在重写此方法时覆盖hashCode方法，以便维护hashCode方法的常规协定，该方法声明相等对象必须具有相等的哈希代码。<br></code></pre></td></tr></table></figure>
+
+<p>hashCode方法:返回对象的哈希码值；</p>
+<p>可以先理解为返回一个内存地址的编号；</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">hashCode的总合同是： <br><br>-- 只要在执行Java应用程序期间多次在同一对象上调用它， hashCode方法必须始终返回相同的整数，前提是不修改对象上的equals比较中使用的信息。 从应用程序的一次执行到同一应用程序的另一次执行，该整数不需要保持一致。 【hashCode和equals保持一致性】<br>-- 如果两个对象根据equals(Object)方法相等，则对两个对象中的每个对象调用hashCode方法必须生成相同的整数结果。【equals相等，hashCode也要相同】 <br>-- 这不是必需的：如果两个对象根据不相等equals(java.lang.Object)方法，然后调用hashCode在各两个对象的方法必须产生不同的整数结果。 但是，程序员应该知道为不等对象生成不同的整数结果可能会提高哈希表的性能。 【equals不相等，hashCode也要不相同】 <br></code></pre></td></tr></table></figure>
+
+<p>可看上面的总结：</p>
+<p>用于获取调用对象的哈希码值(内存地址的编号)。若两个对象调用equals方法相等，则各自调用该方法的结果必须相 同若两个调用对象equals方法不相等，则各自调用该方法的结果应该 不相同。为了使得该方法与equals方法保持一致，需要重写该方法。</p>
+<p>java官方有规定；约定；</p>
+<p>equals判断学号是否相等；</p>
+<p>hashCode也依赖于学号就可以了；</p>
+<p>耍流氓的方式；不能区分是学号还是hashCode；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.id;<br></code></pre></td></tr></table></figure>
+
+<p>这样写就不代表内存地址了；</p>
+<p>与学号保持一致性还能与学号进行区分；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">type</span> <span class="hljs-operator">=</span> <span class="hljs-number">12</span>;<br><span class="hljs-keyword">return</span> type*<span class="hljs-number">31</span>+getId();<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="toString方法的重写实现"><a href="#toString方法的重写实现" class="headerlink" title="toString方法的重写实现"></a>toString方法的重写实现</h2><p>这里讲解toString()方法；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span>:用于获取调用对象的字符串形式该方法默认返回的字符串为：包名.类名@哈希码值的十六进制 为了返回更有意义的数据，需要重写该方法使用print或println打印引用或字符串拼接引用都会自动调用该方法;<br></code></pre></td></tr></table></figure>
+
+<p>从Object类中继承的toString()方法；</p>
+<p>默认打印：包名.类名@哈希码值的十六进制；</p>
+<p>打印没有意义；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">案例题目：<br>-- 编程实现Student类的封装，特征：学号(id)和姓名，要求提供打印所有特征的方法。<br>-- 编程实现StudentTest类，在main方法中使用有参方式构造两个Student类型的对象并打印特征。<br></code></pre></td></tr></table></figure>
+
+<p><a href="code/Student.java" title="Student.java">Student.java</a></p>
+<p><strong>当打印一个引用变量的时候会自动调用toString()方法；</strong></p>
+<p>getClass()方法可以先了解下，后面讲反射的时候会讲到；</p>
+<hr>
+<h2 id="姓名作为基准的重写实现"><a href="#姓名作为基准的重写实现" class="headerlink" title="姓名作为基准的重写实现"></a>姓名作为基准的重写实现</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown">题目扩展:<br>-- 如何实现以姓名作为基准判断两个对象是否相等？以及以学号和姓名同时作为基准判断两个对象是否相等？<br></code></pre></td></tr></table></figure>
+
+<p><a href="code/Student.java" title="Student.java">Student.java</a></p>
+<p>比较姓名字符串的内容是否相同</p>
+<p>学号，int类型，基本数据类型（&#x3D;&#x3D;内存空间中判断的是数据本身）；</p>
+<p>姓名,引用数据类型（放的是地址）（&#x3D;&#x3D;判断地址是否相同）；</p>
+<p>判断姓名是否是一个地址是否相同，不够完美；应该比较内容是否相同；</p>
+<p>String类继承了Object，java官方内部重写了equals方法；– 比较的是字符串的内容是否相同；</p>
+<p>注意：重写了equals后，还需要重写hashCode方法；</p>
+<p>String类的内部，也重写了hashCode方法；</p>
+<p>我们的hashCode依赖于String类的hashCode就好；</p>
+<hr>
+<h2 id="equals方法和hashCode方法的生成"><a href="#equals方法和hashCode方法的生成" class="headerlink" title="equals方法和hashCode方法的生成"></a>equals方法和hashCode方法的生成</h2><p>之前equals与hashCode都是手写的；</p>
+<p>开发中这些方法不需要我们自己写；– 可以自动生成；</p>
+<p>可以选择生成的模板；两个模板【借助objects和普通的模式】；</p>
+<p>开发中我们要生成；</p>
+<p>不是开发中我们就需要自己写（笔试中）；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">getClass()!=o.getClass()<br></code></pre></td></tr></table></figure>
+
+<p><a href="code/Student.java" title="Student.java">Student.java</a></p>
+<p>自己也要会写，自动生成的要理解；</p>
+<p>toString()方法也可以自动生成；</p>
+<hr>
+<h2 id="包装类的概念和分类-（熟悉）"><a href="#包装类的概念和分类-（熟悉）" class="headerlink" title="包装类的概念和分类 （熟悉）"></a>包装类的概念和分类 （熟悉）</h2><p>通常情况下基本数据类型的变量不是对象，为了满足万物皆对象的理念就需要对基本数据类型的变量进行打包封装处理变成对象，而负责将这些变量声明为成员变量进行对象化处理的相关类，叫做包装类。</p>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Person</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br><span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<p>万物接对象，num违背了万物皆对象的理念；</p>
+<p>让变量和类关联起来；</p>
+<p>将num打包中到类中；</p>
+<p>目的：将基本类型的对象变成对象；</p>
+<h3 id="包装类的分类"><a href="#包装类的分类" class="headerlink" title="包装类的分类"></a>包装类的分类</h3><table>
+<thead>
+<tr>
+<th>包装类</th>
+<th>对应的基本类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>java.lang.Byte</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>java.lang.Short</td>
+<td>short</td>
+</tr>
+<tr>
+<td>java.lang.Integer</td>
+<td>int</td>
+</tr>
+<tr>
+<td>java.lang.Long</td>
+<td>long</td>
+</tr>
+<tr>
+<td>java.lang.Float</td>
+<td>ﬂoat</td>
+</tr>
+<tr>
+<td>java.lang.Double</td>
+<td>double</td>
+</tr>
+<tr>
+<td>java.lang.Boolean</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>java.lang.Character</td>
+<td>char</td>
+</tr>
+</tbody></table>
+<p>包装类主要是将我们八种基本类型打包成对象，万物皆对象；</p>
+<h2 id="Integer类的概念和构造方式"><a href="#Integer类的概念和构造方式" class="headerlink" title="Integer类的概念和构造方式"></a>Integer类的概念和构造方式</h2><p>java.lang.Integer类内部包装了一个int类型的变量作为成员变量，主要用于实现对int类型的包装并   提供int类型到String类之间的转换等方法。</p>
+<h3 id="常用的常量"><a href="#常用的常量" class="headerlink" title="常用的常量"></a>常用的常量</h3><table>
+<thead>
+<tr>
+<th>常量类型和名称</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ﬁnal int MAX_VALUE</td>
+<td>表示int类型可以描述的最大值，即2^31-1</td>
+</tr>
+<tr>
+<td>public static ﬁnal int MIN_VALUE</td>
+<td>表示int类型可以描述的最小值，即-2^31</td>
+</tr>
+<tr>
+<td>public static ﬁnal int SIZE</td>
+<td>表示int类型采用二进制补码形式的位数【32位】</td>
+</tr>
+<tr>
+<td>public static ﬁnal int BYTES</td>
+<td>表示int类型所占的字节个数【四个字节】</td>
+</tr>
+<tr>
+<td>public static ﬁnal Class TYPE</td>
+<td>表示int类型的Class实例【理解为类型的名称】</td>
+</tr>
+</tbody></table>
+<p><a href="code/IntegerTest.java" title="IntegerTest.java">IntegerTest.java</a></p>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Integer(int value)</td>
+<td>根据参数指定的整数来构造对象（已过时）</td>
+</tr>
+<tr>
+<td>Integer(String s)</td>
+<td>根据参数指定的字符串来构造对象 （已过时）</td>
+</tr>
+<tr>
+<td>int intValue()</td>
+<td>获取调用对象中的整数值并返回</td>
+</tr>
+<tr>
+<td>static Integer valueOf(int i)</td>
+<td>根据参数指定整数值得到Integer类型对象<br>【代替Integer(int value)、Integer(String s)】<br>【int-&gt;integer】【string-&gt;integer】</td>
+</tr>
+<tr>
+<td>boolean equals(Object obj)</td>
+<td>比较调用对象与参数指定的对象是否相等<br>【比较的是内容】</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回描述调用对象数值的字符串形式</td>
+</tr>
+<tr>
+<td>static int parseInt(String s)</td>
+<td>将字符串类型转换为int类型并返回<br>【string-&gt;int】</td>
+</tr>
+<tr>
+<td>static String toString(int i)</td>
+<td>获取参数指定整数的十进制字符串形式</td>
+</tr>
+<tr>
+<td>static String toBinaryString(int i)</td>
+<td>获取参数指定整数的二进制字符串形式</td>
+</tr>
+<tr>
+<td>static String toHexString(int i)</td>
+<td>获取参数指定整数的十六进制字符串形式</td>
+</tr>
+<tr>
+<td>static String toOctalString(int i)</td>
+<td>获取参数指定整数的八进制字符串形式</td>
+</tr>
+</tbody></table>
+<p><a href="code/IntegerTest.java" title="IntegerTest.java">IntegerTest.java</a></p>
+<p>尽量不要使用已过时的方法；</p>
+<p>Integer(int value):java9后标记为已过时；</p>
+<p>什么时候过时要知道，代码中可以看到；</p>
+<p>使用静态方法就可以得到这个对象;</p>
+<p>因为java9之前有多个相同功能的方法，java9后统一了；</p>
+<p>int-&gt;integer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> Integer.valueOf(<span class="hljs-number">123</span>);<br><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">123</span>;<br></code></pre></td></tr></table></figure>
+
+<p>string-&gt;interger</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> Integer.valueOf(<span class="hljs-string">&quot;123&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Integer类的装箱和拆箱机制"><a href="#Integer类的装箱和拆箱机制" class="headerlink" title="Integer类的装箱和拆箱机制"></a>Integer类的装箱和拆箱机制</h2><p>装箱(打包)：int转integer</p>
+<p>拆箱：integer转int</p>
+<p>java5开始新加了自动装箱，自动拆箱的机制；</p>
+<p>不用再调用Integer.valueOf()等方法；</p>
+<p>自动装箱自动拆箱的底层还是调方法；</p>
+<p><strong>装箱+拆箱笔试考点</strong></p>
+<p><a href="code/IntegerTest.java" title="IntegerTest.java">IntegerTest.java</a></p>
+<p><strong>自动装箱池：</strong>在Integer类的内部提供了自动装箱池技术，将-128到 127 之间的整数已经装箱完毕，当程序中使用该范围之间的整数时，无需装箱直接取用自动装箱池中的对象即可，从而提高效率。</p>
+<p>&#x3D;》建议在开发中使用equals进行判断；</p>
+<p>那么大的装箱也是很消耗性能的；</p>
+<p>这个大小可以调整，后续会讲；</p>
+<hr>
+<h2 id="Integer类的常用方法"><a href="#Integer类的常用方法" class="headerlink" title="Integer类的常用方法"></a>Integer类的常用方法</h2><p>接着讲解Integer类的常用方法；</p>
+<p>Integer.parseInt可能会发生异常；</p>
+<p>编译OK，运行发生NumberFormatException数字格式异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;200a&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p><a href="code/IntegerTest.java" title="IntegerTest.java">IntegerTest.java</a></p>
+<p>integer进制转换；</p>
+<p>这些只是integer常用的一些方法；</p>
+<p>开发中常用的练熟就可以了；</p>
+<hr>
+<h2 id="Double类的概念和使用"><a href="#Double类的概念和使用" class="headerlink" title="Double类的概念和使用"></a>Double类的概念和使用</h2><h3 id="（1）-基本概念"><a href="#（1）-基本概念" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>java.lang.Double类型内部包装了一个double类型的变量作为成员变量，主要用于实现对double类型的包装并提供double类型到String类之间的转换等方法。</p>
+<h3 id="（2）-常用的常量"><a href="#（2）-常用的常量" class="headerlink" title="（2） 常用的常量"></a>（2） 常用的常量</h3><table>
+<thead>
+<tr>
+<th>常量类型和名称</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ﬁnal int SIZE</td>
+<td>表示double类型的二进制位数</td>
+</tr>
+<tr>
+<td>public static ﬁnal int BYTES</td>
+<td>表示double类型的字节个数</td>
+</tr>
+<tr>
+<td>public static ﬁnal Class TYPE</td>
+<td>表示double类型的Class实例</td>
+</tr>
+</tbody></table>
+<h3 id="（3）-常用的方法"><a href="#（3）-常用的方法" class="headerlink" title="（3） 常用的方法"></a>（3） 常用的方法</h3><p>跟Integer类类似；</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Double(double value)</td>
+<td>根据参数指定的浮点数据来构造对象（已过时）</td>
+</tr>
+<tr>
+<td>Double(String s)</td>
+<td>根据参数指定的字符串来构造对象 （已过时）</td>
+</tr>
+<tr>
+<td>double doubleValue()</td>
+<td>获取调用对象中的浮点数据并返回</td>
+</tr>
+<tr>
+<td>static Double valueOf(double d)</td>
+<td>根据参数指定浮点数据得到Double类型对象</td>
+</tr>
+<tr>
+<td>boolean equals(Object obj)</td>
+<td>比较调用对象与参数指定的对象是否相等</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回描述调用对象数值的字符串形式</td>
+</tr>
+<tr>
+<td>static double parseDouble(String s)</td>
+<td>将字符串类型转换为double类型并返回<br>【string-&gt;double】</td>
+</tr>
+<tr>
+<td>boolean isNaN()</td>
+<td>判断调用对象的数值是否为非数字<br>【是数字：false  非数字：true】</td>
+</tr>
+</tbody></table>
+<p> <a href="code/DoubleTest.java" title="DoubleTest.java">DoubleTest.java</a></p>
+<p>从java5开始实现自动装箱和自动拆箱；</p>
+<p>cache-Double中没有提供装箱池；</p>
+<p>算数运算符的时候设计到了非数字；</p>
+<p>【不理解】为什么0&#x2F;0.0是非数字？？？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Double</span> <span class="hljs-variable">db3</span> <span class="hljs-operator">=</span> Double.valueOf(<span class="hljs-number">0</span>/<span class="hljs-number">0.0</span>); <br>db3.isNaN();  <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>扩展：</strong></p>
+<p>java.lang.Number类是个抽象类，是上述类的父类来描述所有类共有的成员。</p>
+<p>![包装类的继承关系](02 包装类的继承关系.png)</p>
+<h2 id="Boolean类的概念和使用"><a href="#Boolean类的概念和使用" class="headerlink" title="Boolean类的概念和使用"></a>Boolean类的概念和使用</h2><h3 id="（1）-基本概念-1"><a href="#（1）-基本概念-1" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>java.lang.Boolean类型内部包装了一个boolean类型的变量作为成员变量，主要用于实现对boolean类型的包装并提供boolean类型到String类之间的转换等方法。</p>
+<h3 id="（2）-常用的常量-1"><a href="#（2）-常用的常量-1" class="headerlink" title="（2） 常用的常量"></a>（2） 常用的常量</h3><table>
+<thead>
+<tr>
+<th>常量类型和名称</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ﬁnal Boolean FALSE</td>
+<td>对应基值为false的对象</td>
+</tr>
+<tr>
+<td>public static ﬁnal Boolean TRUE</td>
+<td>对应基值为true的对象</td>
+</tr>
+<tr>
+<td>public static ﬁnal Class TYPE</td>
+<td>表示boolean类型的Class实例</td>
+</tr>
+</tbody></table>
+<h3 id="（3）-常用的方法-1"><a href="#（3）-常用的方法-1" class="headerlink" title="（3） 常用的方法"></a>（3） 常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean(boolean value)</td>
+<td>根据参数指定的布尔数值来构造对象（已过时）</td>
+</tr>
+<tr>
+<td>Boolean(String s)</td>
+<td>根据参数指定的字符串来构造对象 （已过时）</td>
+</tr>
+<tr>
+<td>boolean booleanValue()</td>
+<td>获取调用对象中的布尔数值并返回</td>
+</tr>
+<tr>
+<td>static Boolean valueOf(boolean b)</td>
+<td>根据参数指定布尔数值得到Boolean类型对象<br>【boolean-&gt;Boolean】<br>【从java5开始支持自动装箱和拆箱】</td>
+</tr>
+<tr>
+<td>boolean equals(Object obj)</td>
+<td>比较调用对象与参数指定的对象是否相等</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回描述调用对象数值的字符串形式</td>
+</tr>
+<tr>
+<td>static boolean parseBoolean(String s)</td>
+<td>将字符串类型转换为boolean类型并返回<br>【String-&gt;boolean】<br>【只要不是true(忽略大小写)都是false】</td>
+</tr>
+</tbody></table>
+<p><a href="code/BooleanTest.java" title="BooleanTest.java">BooleanTest.java</a></p>
+<p>从java5开始支持自动装箱和拆箱；</p>
+<h2 id="Character类的概念和使用"><a href="#Character类的概念和使用" class="headerlink" title="Character类的概念和使用"></a>Character类的概念和使用</h2><h3 id="（1）-基本概念-2"><a href="#（1）-基本概念-2" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>java.lang.Character类型内部包装了一个char类型的变量作为成员变量，主要用于实现对char类型的包装并提供字符类别的判断和转换等方法。</p>
+<h3 id="（2）-常用的常量-2"><a href="#（2）-常用的常量-2" class="headerlink" title="（2） 常用的常量"></a>（2） 常用的常量</h3><table>
+<thead>
+<tr>
+<th>常量类型和名称</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ﬁnal int SIZE</td>
+<td>表示char类型的二进制位数</td>
+</tr>
+<tr>
+<td>public static ﬁnal int BYTES</td>
+<td>表示char类型的字节个数</td>
+</tr>
+<tr>
+<td>public static ﬁnal Class TYPE</td>
+<td>表示char类型的Class实例</td>
+</tr>
+</tbody></table>
+<h3 id="（3）-常用的方法-2"><a href="#（3）-常用的方法-2" class="headerlink" title="（3） 常用的方法"></a>（3） 常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Character(char value)</td>
+<td>根据参数指定的字符数据来构造对象（已过时）</td>
+</tr>
+<tr>
+<td>char charValue()</td>
+<td>获取调用对象中的字符数据并返回</td>
+</tr>
+<tr>
+<td>static Character valueOf(char c)</td>
+<td>根据参数指定字符数据得到Character类型对象</td>
+</tr>
+<tr>
+<td>boolean equals(Object obj)</td>
+<td>比较调用对象与参数指定的对象是否相等</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回描述调用对象数值的字符串形式</td>
+</tr>
+<tr>
+<td>static boolean isUpperCase(char ch)</td>
+<td>判断参数指定字符是否为大写字符</td>
+</tr>
+<tr>
+<td>static boolean isLowerCase(char ch)</td>
+<td>判断参数指定字符是否为小写字符</td>
+</tr>
+<tr>
+<td>static boolean isDigit(char ch)</td>
+<td>判断参数指定字符是否为数字字符</td>
+</tr>
+<tr>
+<td>static char toUpperCase(char ch)</td>
+<td>将参数指定的字符转换为大写字符</td>
+</tr>
+<tr>
+<td>static char toLowerCase(char ch)</td>
+<td>将参数指定的字符转换为小写字符</td>
+</tr>
+</tbody></table>
+<p><a href="code/CharacterTest.java" title="CharacterTest.java">CharacterTest.java</a></p>
+<hr>
+<h2 id="包装类的使用总结"><a href="#包装类的使用总结" class="headerlink" title="包装类的使用总结"></a>包装类的使用总结</h2><p>*@-基本数据类型转换为对应包装类的方式，调用包装类的<strong>构造方法或静态方法</strong>即可</p>
+<p>*@-获取包装类对象中基本数据类型变量数值的方式</p>
+<p>*@-调用包装类中的xxxValue方法即可,字符串转换为基本数据类型的方式调用包装类中的parseXxx方法即可</p>
+<hr>
+<h2 id="Math类的概念和使用-（熟悉）"><a href="#Math类的概念和使用-（熟悉）" class="headerlink" title="Math类的概念和使用 （熟悉）"></a>Math类的概念和使用 （熟悉）</h2><h3 id="（1）-基本概念-3"><a href="#（1）-基本概念-3" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>java.lang.Math类主要用于提供执行数学运算的方法，如：对数，平方根。</p>
+<h3 id="（2）-常用的方法"><a href="#（2）-常用的方法" class="headerlink" title="（2） 常用的方法"></a>（2） 常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static int max(int a, int b)</td>
+<td>返回两个参数中的最大值</td>
+</tr>
+<tr>
+<td>static int min(int a, int b)</td>
+<td>返回两个参数中的最小值</td>
+</tr>
+<tr>
+<td>static double pow(double a, double b)</td>
+<td>返回第一个参数的幂<br>【2的3次方：8.0】</td>
+</tr>
+<tr>
+<td>static int abs(int a)</td>
+<td>返回参数指定数值的绝对值</td>
+</tr>
+<tr>
+<td>static long round(double a)</td>
+<td>返回参数四舍五入的结果</td>
+</tr>
+<tr>
+<td>static double sqrt(double a)</td>
+<td>返回参数的平方根</td>
+</tr>
+<tr>
+<td>static double random()</td>
+<td>返回<strong>0.0到1.0</strong>的随机数</td>
+</tr>
+</tbody></table>
+<p><a href="code/MathTest.java" title="MathTest.java">MathTest.java</a></p>
+<hr>
+<h2 id="BigDecimal类的概念和使用"><a href="#BigDecimal类的概念和使用" class="headerlink" title="BigDecimal类的概念和使用"></a>BigDecimal类的概念和使用</h2><h3 id="（1）-基本概念-4"><a href="#（1）-基本概念-4" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>由于ﬂoat类型和double类型在运算时<strong>可能会有误差</strong>，若希望<strong>实现精确运算</strong>则借助</p>
+<p>java.math.BigDecimal类型加以描述。</p>
+<h3 id="（2）-常用的方法-1"><a href="#（2）-常用的方法-1" class="headerlink" title="（2） 常用的方法"></a>（2） 常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BigDecimal(String val)</td>
+<td>根据参数指定的<strong>字符串</strong>来构造对象</td>
+</tr>
+<tr>
+<td>BigDecimal add(BigDecimal augend)</td>
+<td>用于实现<strong>加法运算</strong></td>
+</tr>
+<tr>
+<td>BigDecimal subtract(BigDecimal subtrahend)</td>
+<td>用于实现<strong>减法运算</strong></td>
+</tr>
+<tr>
+<td>BigDecimal multiply(BigDecimal multiplicand)</td>
+<td>用于实现<strong>乘法运算</strong></td>
+</tr>
+<tr>
+<td>BigDecimal divide(BigDecimal divisor)</td>
+<td>用于实现<strong>除法运算</strong></td>
+</tr>
+</tbody></table>
+<p><a href="code/BigDecimalTest.java" title="BigDecimalTest.java">BigDecimalTest.java</a></p>
+<p>使用之间0.1+0.2是存在误差的，虽然误差很小；</p>
+<p>注意事项：无限循环情况【2&#x2F;0.3】,就报错了；</p>
+<p>可以解决这个问题，根据查中文文档；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">bd5.divide(bd6.RoundingMode.HALF_UP); <span class="hljs-comment">// 7</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="BigInteger类的概念和使用"><a href="#BigInteger类的概念和使用" class="headerlink" title="BigInteger类的概念和使用"></a>BigInteger类的概念和使用</h2><h3 id="（1）-基本概念-5"><a href="#（1）-基本概念-5" class="headerlink" title="（1） 基本概念"></a>（1） 基本概念</h3><p>若希望<strong>表示比long类型范围还大</strong>的整数数据，则需要借助java.math.BigInteger类型描述。</p>
+<h3 id="（2）-常用的方法-2"><a href="#（2）-常用的方法-2" class="headerlink" title="（2） 常用的方法"></a>（2） 常用的方法</h3><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BigInteger(String val)</td>
+<td>根据参数指定的<strong>字符串</strong>来构造对象</td>
+</tr>
+<tr>
+<td>BigInteger add(BigInteger val)</td>
+<td>用于实现加法运算</td>
+</tr>
+<tr>
+<td>BigInteger subtract(BigInteger val)</td>
+<td>用于实现减法运算</td>
+</tr>
+<tr>
+<td>BigInteger multiply(BigInteger val)</td>
+<td>用于实现乘法运算</td>
+</tr>
+<tr>
+<td>BigInteger divide(BigInteger val)</td>
+<td>用于实现除法运算</td>
+</tr>
+<tr>
+<td>BigInteger remainder(BigInteger val)</td>
+<td>用于实现<strong>取余</strong>运算</td>
+</tr>
+<tr>
+<td>BigInteger[] divideAndRemainder(BigInteger val)</td>
+<td>用于实现<strong>取商和余数</strong>的运算</td>
+</tr>
+</tbody></table>
+<p><a href="code/BigIntegerTest.java" title="BigIntegerTest.java">BigIntegerTest.java</a></p>
+<p>需要了解更多，请查看中文jdkAPI文档；</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5JavaSE/">#第一阶段JavaSE</a>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E4%B8%89-Java-%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8A%EF%BC%89/">#模块三-Java 核心类库（上）</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第十一章：常用类的概述和使用</div>
+      <div>https://xuebaqiang.github.io/1000/01/16/Java就业训练营/第一阶段 JavaSE/模块三-Java 核心类库（上）/任务一：常用类的概述和使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年1月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1000/01/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%B8%89-Java%20%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8A%EF%BC%89/%E4%BB%BB%E5%8A%A1%E4%BA%8C%20String%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8/" title="第十一章：常用类的概述和使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第十一章：常用类的概述和使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

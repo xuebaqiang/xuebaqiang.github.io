@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="oracle的子查询和用户管理oralce-作业处理这个作业好像在上节中写过； 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758591.选择部门30中的所有员工.select * from emp where deptno &#x3D; 302">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. oracle的子查询和用户管理">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/05/21/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/4.%20oracle%E7%9A%84%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%92%8C%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="oracle的子查询和用户管理oralce-作业处理这个作业好像在上节中写过； 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758591.选择部门30中的所有员工.select * from emp where deptno &#x3D; 302">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/42/wallhaven-42oqy6.jpg">
+<meta property="article:published_time" content="2022-05-20T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.605Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="oracle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/42/wallhaven-42oqy6.jpg">
+  
+  
+  
+  <title>4. oracle的子查询和用户管理 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="4. oracle的子查询和用户管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-21 00:19" pubdate>
+          2022年5月21日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          79 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">4. oracle的子查询和用户管理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="oracle的子查询和用户管理"><a href="#oracle的子查询和用户管理" class="headerlink" title="oracle的子查询和用户管理"></a>oracle的子查询和用户管理</h2><h3 id="oralce-作业处理"><a href="#oralce-作业处理" class="headerlink" title="oralce-作业处理"></a>oralce-作业处理</h3><p>这个作业好像在上节中写过；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1.</span>选择部门<span class="hljs-number">30</span>中的所有员工.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">30</span><br><span class="hljs-number">2.</span>列出所有办事员(CLERK)的姓名，编号和部门编号.<br><span class="hljs-keyword">select</span> ename,empno,deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>;<br><span class="hljs-number">3.</span>找出佣金高于薪金的员工.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&lt;</span>comm;<br><span class="hljs-number">4.</span>找出佣金高于薪金的<span class="hljs-number">60</span><span class="hljs-operator">%</span>的员工.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">*</span><span class="hljs-number">0.6</span><span class="hljs-operator">&lt;</span>comm<br><span class="hljs-number">5.</span>找出部门<span class="hljs-number">10</span>中所有经理(MANAGER)和部门<span class="hljs-number">20</span>中所有办事员(CLERK)的详细资料.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MANAGER&#x27;</span> <span class="hljs-keyword">and</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span>) <span class="hljs-keyword">or</span>(dept<span class="hljs-operator">=</span><span class="hljs-number">20</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>)<br><span class="hljs-number">6.</span>找出部门<span class="hljs-number">10</span>中所有经理(MANAGER),部门<span class="hljs-number">20</span>中所有办事员(CLERK),既不是经理又不是办事员但其薪金大于或等于<span class="hljs-number">2000</span>的所有员工的详细资料.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span>  (job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MANAGER&#x27;</span> <span class="hljs-keyword">and</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span>) <span class="hljs-keyword">or</span>(dept<span class="hljs-operator">=</span><span class="hljs-number">20</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>) <span class="hljs-keyword">or</span> (job<span class="hljs-operator">&lt;&gt;</span><span class="hljs-string">&#x27;MANAGER&#x27;</span> <span class="hljs-keyword">and</span> job<span class="hljs-operator">&lt;&gt;</span><span class="hljs-string">&#x27;CLERK&#x27;</span> <span class="hljs-keyword">and</span> sal<span class="hljs-operator">&gt;=</span><span class="hljs-number">2000</span>)<br><span class="hljs-number">7.</span>找出收取佣金的员工的不同工作.<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br><span class="hljs-number">8.</span>找出不收取佣金或收取的佣金低于<span class="hljs-number">100</span>的员工.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">or</span> comm<span class="hljs-operator">&lt;</span><span class="hljs-number">100</span><br><span class="hljs-number">9.</span>找出各月倒数第<span class="hljs-number">3</span>天受雇的所有员工.<br>【这个需要查找日期函数】【last_day】【last_day<span class="hljs-number">-2</span>】<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp hiredate<span class="hljs-operator">=</span>last_day(hiredate)<span class="hljs-number">-2</span><br><span class="hljs-number">10.</span>找出早于<span class="hljs-number">12</span>年前受雇的员工.<br>【先不写】<br><span class="hljs-number">11.</span>以首字母大写的方式显示所有员工的姓名.<br><span class="hljs-keyword">select</span> initcap(ename) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-number">12.</span>显示正好为<span class="hljs-number">5</span>个字符的员工的姓名.<br>【需要查找字符函数】【没有直接的函数使用】【百度】【length()】<br><span class="hljs-keyword">select</span> ename <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> length(ename)<span class="hljs-operator">=</span><span class="hljs-number">5</span>;<br><span class="hljs-number">13.</span>显示不带有&quot;R&quot;的员工的姓名.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename <span class="hljs-keyword">not</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%R%&#x27;</span>;<br><span class="hljs-number">14.</span>显示所有员工姓名的前三个字符.<br>【需要查找字符函数】【字符切割】【substr()】<br><span class="hljs-keyword">select</span> substr(ename,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) <span class="hljs-keyword">from</span> emp;【理解了】【函数的后一位是需要截取字符串的位数】<br><span class="hljs-number">15.</span>显示所有员工的姓名,用a替换所有&quot;A&quot;<br><span class="hljs-keyword">select</span> replace(ename,<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-number">16.</span>显示满<span class="hljs-number">10</span>年服务年限的员工的姓名和受雇日期.<br>【需要查找日期函数】【截取年】【获取系统日期】<br><span class="hljs-keyword">select</span> sysdate <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> ename,hiredate,<span class="hljs-built_in">floor</span>((sysdate<span class="hljs-operator">-</span>hiredate)<span class="hljs-operator">/</span><span class="hljs-number">365</span>) <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (sysdate<span class="hljs-operator">-</span>hiredate)<span class="hljs-operator">/</span><span class="hljs-number">365</span><span class="hljs-operator">&gt;</span><span class="hljs-number">10</span>【总感觉不对】<br><span class="hljs-number">17.</span>显示员工的详细资料,按姓名排序.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> ename;<br><span class="hljs-number">18.</span>显示员工的姓名和受雇日期,根据其服务年限,将最老的员工排在最前面.<br>【排序里面可以使用别名】<br><span class="hljs-keyword">select</span> ename,hiredate,<span class="hljs-built_in">floor</span>((sysdate<span class="hljs-operator">-</span>hiredate)<span class="hljs-operator">/</span><span class="hljs-number">365</span>) &quot;years&quot; <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> hiredate <span class="hljs-keyword">desc</span><br><span class="hljs-number">19.</span>显示所有员工的姓名、工作和薪金,按工作的降序排序,若工作相同则按薪金排序.<br><span class="hljs-keyword">select</span> ename,job,sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> job <span class="hljs-keyword">desc</span>,sal;<br><span class="hljs-number">20.</span>显示所有员工的姓名、加入公司的年份和月份,按受雇日期所在月排序,若月份相同则将最早年份的员工排在最前面.<br>【别名不能使用<span class="hljs-keyword">year</span>，<span class="hljs-keyword">year</span>是关键字】<br><span class="hljs-keyword">select</span> ename,hiredate,to_char(hiredate,<span class="hljs-string">&#x27;yyyy&#x27;</span>) years,to_char(hiredate,<span class="hljs-string">&#x27;mm&#x27;</span>) ms <span class="hljs-keyword">from</span> emp ms,years<br><span class="hljs-number">21.</span>显示在一个月为<span class="hljs-number">30</span>天的情况所有员工的日薪金,忽略余数.<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">floor</span>((sal<span class="hljs-operator">+</span>nvl(comm,<span class="hljs-number">0</span>))<span class="hljs-operator">/</span><span class="hljs-number">30</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-number">22.</span>找出在(任何年份的)<span class="hljs-number">2</span>月受聘的所有员工。<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> to_char(hiredate,<span class="hljs-string">&#x27;mm&#x27;</span>)<span class="hljs-operator">=</span><span class="hljs-number">2</span>;<br><span class="hljs-number">23.</span>对于每个员工,显示其加入公司的天数.<br>【函数，返回两个日期间的天数】<br><span class="hljs-keyword">select</span> ename,sysdate<span class="hljs-operator">-</span>hiredate <span class="hljs-keyword">from</span> emp;<br><span class="hljs-number">24.</span>显示姓名字段的任何位置包含&quot;A&quot;的所有员工的姓名.<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%A%&#x27;</span>;<br><span class="hljs-number">25.</span>以年月日的方式显示所有员工的服务年限.<br>【month_between显示的是相差的月】<br><span class="hljs-keyword">select</span> ename,<span class="hljs-built_in">floor</span>(<span class="hljs-built_in">floor</span>(month_between(sysdate,hiredate))<span class="hljs-operator">/</span><span class="hljs-number">12</span>)),<span class="hljs-built_in">mod</span>(<span class="hljs-built_in">floor</span>(month_between(sysdate,hiredate)),<span class="hljs-number">12</span>),<span class="hljs-built_in">mod</span>(sysdate<span class="hljs-operator">-</span>hiredate,<span class="hljs-number">30</span>) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>难点不再SQL语句上，还是写的少；</p>
+<hr>
+<h3 id="多表联合查询SQL92讲解"><a href="#多表联合查询SQL92讲解" class="headerlink" title="多表联合查询SQL92讲解"></a>多表联合查询SQL92讲解</h3><p>知识点1：查看字符长度的函数-length(字段名)，返回字符的长度</p>
+<p>知识点2：获取系统当前时间，关键字 sysdate;</p>
+<p>知识点3：排序中可以使用别名【建议使用】</p>
+<p>sql语句的难点：在于汉语的描述的难度；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、部门名称；</span><br><span class="hljs-comment">-- 部门名称没有在员工表中；</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> dept;<br></code></pre></td></tr></table></figure>
+
+<p>查询的数据分布在多张表中；</p>
+<p>多表联合查询有多种方式：</p>
+<p>SQL92方式； 92年份的标准</p>
+<p>SQL99方式； 99年份的标准</p>
+<p>都可以使用；看自己想用哪种了；</p>
+<p>这节主要学习92方式；</p>
+<p>当需要获取的数据分布在多张表中，考虑使用多表联合查询</p>
+<table>
+<thead>
+<tr>
+<th>92方式</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>笛卡尔积【离散数学中】</td>
+<td>A-》B共有多少中方式【A*B】<br>select * from emp,dept;<br>每一条都挨个对一遍；</td>
+</tr>
+<tr>
+<td>等值连接</td>
+<td>两个表的字段相等</td>
+</tr>
+<tr>
+<td>不等值连接</td>
+<td>两个表的字段不相等</td>
+</tr>
+<tr>
+<td>自连接</td>
+<td>自己连接自己</td>
+</tr>
+<tr>
+<td>外连接</td>
+<td>左外连接，右外连接</td>
+</tr>
+</tbody></table>
+<h4 id="SQL92笛卡尔积"><a href="#SQL92笛卡尔积" class="headerlink" title="SQL92笛卡尔积"></a>SQL92笛卡尔积</h4><p>笛卡尔积所得到的结果：结果的数量是-<strong>多个表数量的乘积</strong>；</p>
+<p><strong>存在正确的数据，还存在错误的数据</strong></p>
+<p>例如：迪达尔积得到的结果的部门和部门名称不对应；</p>
+<p>笛卡尔积的表数据一定存在正确的数据；</p>
+<p>下一步我们需要对数据进行筛选【获取正确的结果】</p>
+<p><strong>使用where进行筛选</strong>；</p>
+<h4 id="SQL92等值连接"><a href="#SQL92等值连接" class="headerlink" title="SQL92等值连接"></a>SQL92等值连接</h4><p>先做笛卡尔积，然后进行筛选，筛选条件为等值筛选；</p>
+<p>又叫做连接条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp,dept <span class="hljs-keyword">where</span> emp.daptno<span class="hljs-operator">=</span>dept.deptno<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、部门名称</span><br><span class="hljs-keyword">select</span> ename,job,sal,dname <span class="hljs-keyword">from</span> emp,dept <span class="hljs-keyword">where</span> emp.deptno<span class="hljs-operator">=</span>dept.deptno<br></code></pre></td></tr></table></figure>
+
+<p>可以直接在select字句中使用字段直接获取数据，但是效率比较低；</p>
+<p><strong>建议查询字段前加上表名</strong>，这样效率会高一些；还可以避免报错</p>
+<p>【<strong>公共字段前必须加表名</strong>】</p>
+<p>如果是公共字段【多个表中都有这个字段】，必须将这个字段前面加上表名；</p>
+<p>可以给表使用别名【单个字母或两个字母】【尽可能的简洁】</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.ename <span class="hljs-keyword">from</span> emp e,dept d;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="SQL92不等值连接"><a href="#SQL92不等值连接" class="headerlink" title="SQL92不等值连接"></a>SQL92不等值连接</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询员工姓名、工作、工资、工资等级</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> salgrade<br><span class="hljs-keyword">select</span> emp.ename,emp.job,emp.dal,dept.dname,emp.deptno <span class="hljs-keyword">from</span> emp e,salgrade s <span class="hljs-keyword">where</span> e.sal<span class="hljs-operator">&gt;=</span>s.losal<br></code></pre></td></tr></table></figure>
+
+<p><strong>字段前尽可能的都加上表的别名</strong>，否则自己看字节或别人的sql就很难受了【不知道是哪个表中的字段】</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> emp.ename,emp.job,emp.dal,dept.dname,emp.deptno <span class="hljs-keyword">from</span> emp e,salgrade s <span class="hljs-keyword">where</span> e.sal<span class="hljs-operator">&gt;=</span>s.losal <span class="hljs-keyword">and</span> e.sal<span class="hljs-operator">&lt;=</span>s.hisal<br></code></pre></td></tr></table></figure>
+
+<p>要知道等值连接、不等值连接、普通筛选的区别；</p>
+<h4 id="SQL92自连接"><a href="#SQL92自连接" class="headerlink" title="SQL92自连接"></a>SQL92自连接</h4><p>A表找B表中的某字段，B表中的某字段找A表中的某字段</p>
+<p>自己对自己做笛卡尔积；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e1.ename,e1.job,e1.sal,e2.ename <span class="hljs-keyword">from</span> emp e1,emp e2 <span class="hljs-keyword">where</span> e1.mgr<span class="hljs-operator">=</span>e2.empno;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="SQL92外连接"><a href="#SQL92外连接" class="headerlink" title="SQL92外连接"></a>SQL92外连接</h4><h5 id="SQL92左外连接"><a href="#SQL92左外连接" class="headerlink" title="SQL92左外连接"></a>SQL92左外连接</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、不能名称及没有部门的员工信息；</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e,dept d <span class="hljs-keyword">where</span> e.deptno<span class="hljs-operator">=</span>d.deptno(<span class="hljs-operator">+</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>加到右边-右边可以显示空数据</strong></p>
+<p>加到右边，显示左边的数据；【右边为空的也可以查出来】</p>
+<h5 id="SQL92右外连接"><a href="#SQL92右外连接" class="headerlink" title="SQL92右外连接"></a>SQL92右外连接</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、不能名称及没员工信息的部门；</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e,dept d <span class="hljs-keyword">where</span> e.deptno(<span class="hljs-operator">+</span>)<span class="hljs-operator">=</span>d.deptno<br></code></pre></td></tr></table></figure>
+
+<p>哪边没有加在哪边；</p>
+<p>92方式没有XXXX？两边都有加号的情况</p>
+<p>92方式最重要的是等值；</p>
+<hr>
+<h3 id="oralce-多表联合查询SQL99-1"><a href="#oralce-多表联合查询SQL99-1" class="headerlink" title="oralce-多表联合查询SQL99(1)"></a>oralce-多表联合查询SQL99(1)</h3><p>sql92不是太好理解；</p>
+<p>SQL92没有SQL99好理解；</p>
+<p>+号加在哪边显示哪边为空的值；</p>
+<p>SQL99多表查询</p>
+<p>第一步都是一样的，查询笛卡尔积</p>
+<p>第二部筛选</p>
+<p>如果想用笛卡尔积，需要使用<code>cross join</code>关键字</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">cross</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
+
+<p>这个没什么用；</p>
+<p>想看笛卡尔积只能使用cross join关键字看</p>
+<h4 id="SQL99自然连接"><a href="#SQL99自然连接" class="headerlink" title="SQL99自然连接"></a>SQL99自然连接</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept<br></code></pre></td></tr></table></figure>
+
+<p><strong>笛卡尔积+等值筛选</strong>；【自动进行等值筛选】</p>
+<p>前提是字段名相同；【必须同名同值】</p>
+<p><strong>问题1</strong>：如果想要过滤部分字段怎么办？</p>
+<p><strong>问题2</strong>：如果想字段名不相同，但是值相同的话是做不到的；</p>
+<p>所以这种方式是不常用的【不可控】；</p>
+<h4 id="SQL99using关键字"><a href="#SQL99using关键字" class="headerlink" title="SQL99using关键字"></a>SQL99using关键字</h4><p>使用<code>using关键字</code>：可以解决问题1；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> dept <span class="hljs-keyword">using</span>(deptno,dname)<br></code></pre></td></tr></table></figure>
+
+<p>前提，指定的字段必须是两个表的字段中都需要有deptno和dname字段</p>
+<p>笛卡尔积+using</p>
+<hr>
+<h3 id="oracle-多表联合查询SQL-2-amp-三表联合查询"><a href="#oracle-多表联合查询SQL-2-amp-三表联合查询" class="headerlink" title="oracle-多表联合查询SQL(2)&amp;三表联合查询"></a>oracle-多表联合查询SQL(2)&amp;三表联合查询</h3><p>那我们需要做的是等值连接、不等值连接、外连接</p>
+<p>sql99我们看笛卡尔积必须要使用<code>cross join关键字</code>来看</p>
+<p>如果想按照字段名不同值相同该如何办？</p>
+<p>自定义筛选使用<code>on关键字</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">inner</span> dept <span class="hljs-keyword">on</span> emp.ename<span class="hljs-operator">=</span>dept.deptno<br></code></pre></td></tr></table></figure>
+
+<p>不建议on后跟普通过滤条件，阅读型极差；</p>
+<p>各种类型的条件混合在一起，不好让人理解</p>
+<p>建议普通筛选条件写在where的后面；</p>
+<h4 id="SQL99外连接"><a href="#SQL99外连接" class="headerlink" title="SQL99外连接"></a>SQL99外连接</h4><p>左外连接</p>
+<p>右外连接</p>
+<p>全外连接</p>
+<h5 id="SQL99左外连接"><a href="#SQL99左外连接" class="headerlink" title="SQL99左外连接"></a>SQL99左外连接</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、部门名称及没有部门的员工信息</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.deptno<span class="hljs-operator">=</span>d.deptno;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.deptno<span class="hljs-operator">=</span>d.deptno;<br></code></pre></td></tr></table></figure>
+
+<p>inner join查询的结果比left join的结果少了一条；</p>
+<p>因为一个员工的部门信息为null；</p>
+<p>left是做边显示全的数据，右边可以显示为空的数据；</p>
+<h5 id="SQL99右外连接"><a href="#SQL99右外连接" class="headerlink" title="SQL99右外连接"></a>SQL99右外连接</h5><p>– 查询员工姓名、工作、薪资、部门名称及没有员工的部门信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">right</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.deptno<span class="hljs-operator">=</span>d.deptno<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="SQL99全外连接"><a href="#SQL99全外连接" class="headerlink" title="SQL99全外连接"></a>SQL99全外连接</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工姓名、工作、薪资、部门名称及没有员工的部门信息及没有部门的员工信息；</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">full</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.deptno<span class="hljs-operator">=</span>d.deptno<br></code></pre></td></tr></table></figure>
+
+
+
+<p>inner 可以不写，建议加上，阅读像更强；</p>
+<p>outer可以不写</p>
+<p>如果使用on或者usering关键字对结果进行筛选的时候，必须使用inner join作用表与表的连接，其中join可以省略；</p>
+<p>外连接outer关键字可以省略不写；</p>
+<p>依然可以使用继续使用分组 having 分组；</p>
+<h4 id="SQL99自连接"><a href="#SQL99自连接" class="headerlink" title="SQL99自连接"></a>SQL99自连接</h4><p>–查询员工及其上级领导姓名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e1.<span class="hljs-operator">*</span>,e2.ename <span class="hljs-keyword">from</span> emp e1 <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> emp  e2 <span class="hljs-keyword">on</span> e1.mgr<span class="hljs-operator">=</span>e2.empno<br></code></pre></td></tr></table></figure>
+
+<p>cross join</p>
+<p>inner join</p>
+<p>using</p>
+<p>left join</p>
+<p>right join</p>
+<p>full join</p>
+<p>sql92&amp;sql99实现三表联合查询；</p>
+<p>使用plsql新建表-》tables-&gt;新建-》列</p>
+<p>类型：只要是数组都是number(10)</p>
+<p>varchar2(100)</p>
+<p>如何设置为主键？</p>
+<p>键-》名称-》类型：Primary-&gt;列：字段-》允许：勾选</p>
+<p>创建city表，直接使用图形操作就好；</p>
+<p>如果想要修改数据，在select的最后加上for update即可；</p>
+<p>将部门表中的loc字段设置为城市表的城市编号</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span> dept <span class="hljs-keyword">set</span> loc<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">50</span><br><span class="hljs-keyword">update</span> dept <span class="hljs-keyword">set</span> loc<span class="hljs-operator">=</span><span class="hljs-string">&#x27;2&#x27;</span> <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">40</span><br>.....<br></code></pre></td></tr></table></figure>
+
+<p>完成三表联合查询</p>
+<p>sql92实现：查询员工信息及部门名称及城市名称；</p>
+<p>思路：先笛卡尔积再筛选</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e,dept d,city c<br></code></pre></td></tr></table></figure>
+
+<p>员工对部门，部门对城市；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询员工信息及部门名称及城市名称；</span><br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span>,d.dname,c.cname <span class="hljs-keyword">from</span> emp e,dept d,city c <span class="hljs-keyword">where</span> e.deptno<span class="hljs-operator">=</span>d.deptno <span class="hljs-keyword">and</span> d.loc <span class="hljs-operator">=</span> c.loc;<br><span class="hljs-comment">-- 查询员工信息及部门名称及城市名称并且员工的工资大于20000或者有奖金</span><br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span>,d.dname,c.cname <span class="hljs-keyword">from</span> emp e,dept d,city c <span class="hljs-keyword">where</span> e.deptno<span class="hljs-operator">=</span>d.deptno <span class="hljs-keyword">and</span> d.loc <span class="hljs-operator">=</span> c.loc <span class="hljs-keyword">and</span> (e.sal<span class="hljs-operator">&gt;</span><span class="hljs-number">2000</span> <span class="hljs-keyword">or</span> e.comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>sql92的特点：<strong>易于书写，难于阅读</strong></p>
+<p>order by 后也建议后面使用表单别名</p>
+<p>sql92的SQL语法结构不清晰【各种过滤条件都混在一起了】</p>
+<p>sql99实现：查询员工信息及部门名称及城市名称；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> dept d one.deptno<span class="hljs-operator">=</span>d.deptno <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> city c <span class="hljs-keyword">on</span> d.loc<span class="hljs-operator">=</span>c.loc;<br></code></pre></td></tr></table></figure>
+
+<p><strong>sql99效率会更高一些</strong>；</p>
+<p>查询员工信息及部门名称及城市名称并且员工的工资大于20000或者有奖金</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> dept d one.deptno<span class="hljs-operator">=</span>d.deptno <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> city c <span class="hljs-keyword">on</span> d.loc<span class="hljs-operator">=</span>c.loc <span class="hljs-keyword">where</span> e.sal<span class="hljs-operator">&gt;</span><span class="hljs-number">2000</span> <span class="hljs-keyword">or</span> e.comm <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>sql99比sql92好阅读</strong>【sql99的结构特别的清晰】</p>
+<p>sql99的特点：难于书写，易于阅读；</p>
+<p>难书写没关系，重要的是好阅读；过些天后能快速的读懂；</p>
+<hr>
+<h3 id="oracle-子查询"><a href="#oracle-子查询" class="headerlink" title="oracle-子查询"></a>oracle-子查询</h3><p><strong>查询筛选条件不明确</strong>的时候使用子查询；</p>
+<p>where字句中允许使用查询语句；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span>(<span class="hljs-keyword">select</span> sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLARK&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>并且<strong>查询结果只有一个</strong>（sal）;</p>
+<h4 id="单行子查询"><a href="#单行子查询" class="headerlink" title="单行子查询"></a>单行子查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询工资高于平均工资的员工姓名和工资</span><br><span class="hljs-keyword">select</span> ename,sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span>(<span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(sal) <span class="hljs-keyword">from</span> emp);<br><span class="hljs-comment">-- 查询和scott属于同一部门且工资低于它的员工资料</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span>(<span class="hljs-keyword">select</span> deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>) <span class="hljs-keyword">and</span> sal<span class="hljs-operator">&lt;</span>(<span class="hljs-keyword">select</span> sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>);<br><span class="hljs-comment">-- 查询工资最高的员工资料</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">=</span>(<span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(sal) <span class="hljs-keyword">from</span> emp)<br><span class="hljs-comment">--查询职务和scott相同，雇佣时间早的员工信息</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span>(<span class="hljs-keyword">select</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>) <span class="hljs-keyword">and</span> hiredate<span class="hljs-operator">&lt;</span>(<span class="hljs-keyword">select</span> hiredate <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>);<br><span class="hljs-comment">-- 查询工资比scott高或者雇佣时间早的员工编号</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span>(<span class="hljs-keyword">select</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>) <span class="hljs-keyword">or</span> hiredate<span class="hljs-operator">&lt;</span>(<span class="hljs-keyword">select</span> hiredate <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SCOTT&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h4><p>子查询的记过只有一个字段但是<strong>字段有n个值</strong>，考虑使用多上子查询；</p>
+<p><code>any关键字</code> :任意</p>
+<p><code>all关键字</code>：所有</p>
+<p><code>in关键字</code>： 任意【相当于any】</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询工资高于任意一个CLERR的所有员工信息</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">&gt;</span>(<span class="hljs-keyword">select</span> <span class="hljs-built_in">min</span>(sal) <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERR&#x27;</span>);<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span><span class="hljs-keyword">any</span>(<span class="hljs-keyword">select</span> sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERR&#x27;</span>);<br><span class="hljs-comment">-- 查询工资过于任意一个SALESMAN的所有员工信息</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span><span class="hljs-keyword">any</span>(<span class="hljs-keyword">select</span> sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SALESMAN&#x27;</span>);<br><span class="hljs-comment">-- 查询工资高于所有SALESMAN的员工信息</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> sal<span class="hljs-operator">&gt;</span><span class="hljs-keyword">all</span>(<span class="hljs-keyword">select</span> sal <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;SALESMAN&#x27;</span>);<br><span class="hljs-comment">-- 查询部门20中同部门10的雇员工作一样的雇员信息</span><br><span class="hljs-keyword">select</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MANAGER&#x27;</span> <span class="hljs-keyword">or</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;PRESIDENT&#x27;</span> <span class="hljs-keyword">or</span> job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CLERK&#x27;</span>) <span class="hljs-keyword">and</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job <span class="hljs-keyword">in</span>(<span class="hljs-keyword">select</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span>) <span class="hljs-keyword">and</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> job <span class="hljs-keyword">any</span>(<span class="hljs-keyword">select</span> job <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">10</span>) <span class="hljs-keyword">and</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="oracle-用户管理"><a href="#oracle-用户管理" class="headerlink" title="oracle-用户管理"></a>oracle-用户管理</h3><p>到现在为止，我们都可以查询了；</p>
+<p>oracle学习：</p>
+<p>oracle管理系统介绍</p>
+<p>oracle数据库的数据管理（crud）</p>
+<p>oracle账户管理</p>
+<p>oracle二维表管理</p>
+<p>oracle的账户管理学习：</p>
+<p>oracle子代账户：</p>
+<p>-system管理账户 【具备大部分oracle的操作权限，主要用于管理普通账户及oracle的数据】【使用人：oracle数据维护工作人员】</p>
+<p>-sys超级管理员【具备system的所有权限，同事又具备其他的权限】【使用人：oracle工程师】</p>
+<h4 id="创建账户："><a href="#创建账户：" class="headerlink" title="创建账户："></a>创建账户：</h4><p>需要使用system账户，并使用dba身份，登录oracle关系系统</p>
+<p>部分同学system账户不能用，可以使用sys</p>
+<p>身份不一样，权限也不一样；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> bjsxt indentified <span class="hljs-keyword">by</span> bjsxt;<br></code></pre></td></tr></table></figure>
+
+<p>创建好用户后还没有登录权限；</p>
+<p>类似于新员工日志，第一次进公司需要有人带进去，没有权限进去；</p>
+<h4 id="赋予权限："><a href="#赋予权限：" class="headerlink" title="赋予权限："></a>赋予权限：</h4><p>Users-》system-&gt;右击-查看-》角色权限</p>
+<p>角色是权限的一系列集合；</p>
+<p>比如说是市长，具备市长的所有权限；</p>
+<p>新建的用户，对象，角色和。。都没有；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 给用户赋予登录权限</span><br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">to</span> bjsxt;<br><span class="hljs-comment">-- 给用户资源操作权限</span><br><span class="hljs-keyword">grant</span> resource <span class="hljs-keyword">to</span> bjsxt;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 说明也可以给添加用户的权限了</span><br><span class="hljs-comment">-- 给用户赋予DBA权限</span><br><span class="hljs-keyword">grant</span> dba <span class="hljs-keyword">to</span> bjsxt;<br><span class="hljs-comment">-- 删除dba权限</span><br><span class="hljs-keyword">revoke</span> dba <span class="hljs-keyword">from</span> bjsxt;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询其他用户的表</span><br><span class="hljs-comment">-- 使用用户名.表名</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> scott.emp;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="删除权限"><a href="#删除权限" class="headerlink" title="删除权限"></a>删除权限</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 删除dba权限</span><br><span class="hljs-keyword">revoke</span> dba <span class="hljs-keyword">from</span> bjsxt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>最大的项目变故：项目重构；</p>
+<p>oracle的二维表管理；</p>
+<p>创建表；</p>
+<p>维护表；</p>
+<p>删除表；</p>
+<hr>
+<h3 id="oracle-简单的二维表创建学习"><a href="#oracle-简单的二维表创建学习" class="headerlink" title="oracle-简单的二维表创建学习"></a>oracle-简单的二维表创建学习</h3><p>oracle的二维表的管理；</p>
+<p>二维表的创建；</p>
+<p>可以先登录其他的用户；</p>
+<p>select * from emp;</p>
+<p>鼠标按住CTRL键，点击下表名；</p>
+<p>右下角有个，查看sql的按钮，点击下，可以看到建表语句；</p>
+<p>oracle的数值类型，只有number；</p>
+<p>number(10,2) 整数+小数总共十位，小数位占两位；</p>
+<p>varchar2(100) 100是长度，后面讲；</p>
+<p>age number(3) 3就够了；</p>
+<p>sex char(2) 或者char(4)</p>
+<p>varchar2和char都代表String的字符；</p>
+<p>birthday data</p>
+<p>to_date增添新数据的时候</p>
+<p>to_char查询数据的时候使用</p>
+<p>number(a,b)  数值类型</p>
+<p>总长度为a，小数长度为b，小数位可以不写；</p>
+<p>number(a) 整型</p>
+<p>number(a,b) 浮点类型</p>
+<p>varchar2(ln) ln表示字符的最大长度，实际存储内存长度是根据字符的大小来分配的，不过最大不能超过ln;</p>
+<p>看编码格式是哪个了，utf-8,gdk</p>
+<p>一个汉字占三个字节，长度为100；</p>
+<p>根据字的大小去开辟空间的，是浮动的；</p>
+<p>char(ln)类型：不管字符数据长度是多大，直接开辟ln大小的空间存储数据；</p>
+<p>char的存储速率一定高于varchar2的（因为底层没有判断的）</p>
+<p>大量字符使用varcahr2，小型数据使用char【例如性别】；</p>
+<p>varchar2：动态分配存储空间，节省空间；</p>
+<p>char：存储效率高于varchar2；</p>
+<p>性别存A也可以，没有数据的限制约束；</p>
+<p>下节课讲解字段的约束；</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/oracle/">#oracle</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>4. oracle的子查询和用户管理</div>
+      <div>https://xuebaqiang.github.io/2022/05/21/数据库/oracle/4. oracle的子查询和用户管理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/21/%E5%A8%B1%E4%B9%90/%E8%BF%BD%E8%BF%87%E7%9A%84%E5%8A%A8%E6%BC%AB%E7%94%B5%E8%A7%86%E5%89%A7%E7%94%B5%E5%BD%B1/" title="追过的动漫电视剧电影">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">追过的动漫电视剧电影</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/18/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/hexo/hexo-fluid%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9/" title="hexo-fluid主题-配置文件修改">
+                        <span class="hidden-mobile">hexo-fluid主题-配置文件修改</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

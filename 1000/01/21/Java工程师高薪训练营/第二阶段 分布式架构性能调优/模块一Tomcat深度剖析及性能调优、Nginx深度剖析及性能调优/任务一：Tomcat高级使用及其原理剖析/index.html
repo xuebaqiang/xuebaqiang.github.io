@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="任务一：Tomcat高级使用及其原理剖析 点击查看   Tomcat课程主要内容第⼀部分：Tomcat 系统架构与原理剖析第⼆部分：Tomcat 服务器核⼼配置详解第三部分：⼿写实现迷你版 Tomcat第四部分：Tomcat 源码构建及核⼼流程源码剖析第五部分：Tomcat 类加载机制剖析（tomcat启动的时候这些类是如何加载进去的）第六部分：Tomcat 对 Https 的⽀持及 Tomcat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务一：Tomcat高级使用及其原理剖析">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="任务一：Tomcat高级使用及其原理剖析 点击查看   Tomcat课程主要内容第⼀部分：Tomcat 系统架构与原理剖析第⼆部分：Tomcat 服务器核⼼配置详解第三部分：⼿写实现迷你版 Tomcat第四部分：Tomcat 源码构建及核⼼流程源码剖析第五部分：Tomcat 类加载机制剖析（tomcat启动的时候这些类是如何加载进去的）第六部分：Tomcat 对 Https 的⽀持及 Tomcat">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655227687849.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655228392074.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655824781058.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655825633697.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655825865827.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655827805587.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655829907431.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655830582465.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655831090766.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655831679091.png">
+<meta property="article:published_time" content="1000-01-20T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.506Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="第二阶段 分布式架构性能调优">
+<meta property="article:tag" content="模块一Tomcat深度剖析及性能调优、Nginx深度剖析及性能调优">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655227687849.png">
+  
+  
+  
+  <title>任务一：Tomcat高级使用及其原理剖析 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="任务一：Tomcat高级使用及其原理剖析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-01-21 00:20" pubdate>
+          1000年1月21日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">任务一：Tomcat高级使用及其原理剖析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="任务一：Tomcat高级使用及其原理剖析"><a href="#任务一：Tomcat高级使用及其原理剖析" class="headerlink" title="任务一：Tomcat高级使用及其原理剖析"></a>任务一：Tomcat高级使用及其原理剖析</h1><p> <a href="Apache-Tomcat-Web%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0.pdf" title="Apache Tomcat Web应用服务器课程笔记.pdf">点击查看</a>  </p>
+<h2 id="Tomcat课程主要内容"><a href="#Tomcat课程主要内容" class="headerlink" title="Tomcat课程主要内容"></a>Tomcat课程主要内容</h2><p>第⼀部分：Tomcat 系统架构与原理剖析<br>第⼆部分：Tomcat 服务器核⼼配置详解<br>第三部分：⼿写实现迷你版 Tomcat<br>第四部分：Tomcat 源码构建及核⼼流程源码剖析<br>第五部分：Tomcat 类加载机制剖析（tomcat启动的时候这些类是如何加载进去的）<br>第六部分：Tomcat 对 Https 的⽀持及 Tomcat 性能优化策略</p>
+<p>说明：本课程基于 8.5.50 版本的 Tomcat 讲解</p>
+<p>企业中主要使用的还是7.X和8.X；</p>
+<hr>
+<h2 id="Tomcat软件包源码包获取及Tomcat标准目录结构"><a href="#Tomcat软件包源码包获取及Tomcat标准目录结构" class="headerlink" title="Tomcat软件包源码包获取及Tomcat标准目录结构"></a>Tomcat软件包源码包获取及Tomcat标准目录结构</h2><p>在浏览器中输入tomcat，找到带有apache的网站（<a target="_blank" rel="noopener" href="https://tomcat.apache.org/%EF%BC%89">https://tomcat.apache.org/）</a></p>
+<p>点击DownLoad中的tomcat 8；</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655227687849.png" srcset="/img/loading.gif" lazyload alt="1655227687849"></p>
+<p>资料中已经给了下载后的软件包、源代码；</p>
+<p><strong>解压软件包，查看目录结构：</strong></p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655228392074.png" srcset="/img/loading.gif" lazyload alt="1655228392074"></p>
+<p><strong>bin:</strong> 启动与关闭的脚本（startrup.bat、startup.sh、shutdown.bat、shutdown.sh）</p>
+<p><strong>conf:</strong> 配置文件存放的目录（logging.properties、server.xml、tomcat-users.xml(tomcat的用户、角色及功能)、web.xml(全局的配置项-index.html跳转)）</p>
+<p><strong>lib:</strong> tomcat基于jar包来开发的，也需要依赖些jar包；</p>
+<p><strong>logs:</strong> 存放日志</p>
+<p><strong>temp：</strong>存放临时文件的；</p>
+<p><strong>webapps:</strong> 发布项目需要的目录；</p>
+<p><strong>work:</strong> jsp解析成java文件，存放解析过程文件（有时间需要研究一下）</p>
+<hr>
+<h2 id="Tomcat总体架构之浏览器请求服务器流程"><a href="#Tomcat总体架构之浏览器请求服务器流程" class="headerlink" title="Tomcat总体架构之浏览器请求服务器流程"></a>Tomcat总体架构之浏览器请求服务器流程</h2><p>浏览器访问服务器的流程-》即http请求的处理过程；</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655824781058.png" srcset="/img/loading.gif" lazyload alt="1655824781058"></p>
+<p><code>http(应用层协议)</code>：定义数据格式的；真正传输使用的TCP协议；</p>
+<p>tcp&#x2F;ip协议用于数据的传输；</p>
+<p>三次握手需要三次连接；</p>
+<p>三次连接发送的就是TCP连接请求；</p>
+<p><code>通信的底层</code>就是socket；</p>
+<p>数据按照http格式进行封装（组织）；</p>
+<p>tcp的数据是按照http格式进行组织的；</p>
+<p>将静态数据通过浏览器呈现给用户；（静态数据：html&#x2F;js&#x2F;图片）</p>
+<p>tomcat运行的时候会将jsp解析成servlet的一个类，在这个类中通过responses输出的还是html代码段；html代码段通过浏览器呈现给用户；</p>
+<p>注意：浏览器访问服务器使⽤的是Http协议，Http是应⽤层协议，⽤于定义数据通信的格式，具体的数据传输使⽤的是TCP&#x2F;IP协议</p>
+<hr>
+<h2 id="Tomcat总体架构之Tomcat处理请求大致流程"><a href="#Tomcat总体架构之Tomcat处理请求大致流程" class="headerlink" title="Tomcat总体架构之Tomcat处理请求大致流程"></a>Tomcat总体架构之Tomcat处理请求大致流程</h2><p>当一个请求来的时候，tomcat进行怎样的处理（也就是上一节的第五步）；</p>
+<p><strong>Tomcat是一个Http服务器（原因：能够接收并且处理http请求，所以tomcat是⼀个http服务器）</strong></p>
+<p><strong>Tomcat不是这样做的：</strong></p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655825633697.png" srcset="/img/loading.gif" lazyload alt="1655825633697"></p>
+<p>如果http服务器接收到http请求的时候，调用java业务处理类；【存在问题，耦合度上升了-tomcat和业务类耦合在一起了】</p>
+<p>tomcat不是这样做的；</p>
+<hr>
+<p><strong>Tomcat是这样做的：</strong></p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655825865827.png" srcset="/img/loading.gif" lazyload alt="1655825865827"></p>
+<p><code>http服务器</code>将请求传递给了<code>Servlet容器</code>;</p>
+<p><code>Servlet容器</code>在容器中找哪个servlet能够处理；</p>
+<p>如果<code>Servlet</code>发现servlet中的<code>java业务处理类</code>没有被加载，会将<code>java业务处理类</code>进行加载；</p>
+<p>HTTP 服务器接收到请求之后把请求交给Servlet容器来处理，<code>Servlet 容器</code>通过<code>Servlet接⼝</code>调⽤业务类。Servlet接⼝和Servlet容器这⼀整套内容叫作<code>Servlet规范</code>。</p>
+<p>整个Tomcat就是Servlet容器；</p>
+<p>注意：Tomcat既按照Servlet规范的要求去实现了Servlet容器，同时它也具有HTTP服务器的功能。<br><strong>Tomcat的两个重要身份</strong><br>1）http服务器<br>2）Tomcat是⼀个Servlet容器</p>
+<hr>
+<h2 id="Tomcat总体架构之Servlet容器处理请求流程"><a href="#Tomcat总体架构之Servlet容器处理请求流程" class="headerlink" title="Tomcat总体架构之Servlet容器处理请求流程"></a>Tomcat总体架构之Servlet容器处理请求流程</h2><p><code>http服务器</code>只是与客户端完成交互；</p>
+<p><code>servlet容器</code>完成业务逻辑；</p>
+<p><strong>Tomcat Servlet容器处理流程</strong></p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655827805587.png" srcset="/img/loading.gif" lazyload alt="1655827805587"></p>
+<p>Request对象转换为ServeltRequest对象；</p>
+<p>【定位Servlet】容器根据传进来的ServletRequest找到能够处理这个请求的Servlet(根据请求的url和servlet进行一个匹配);</p>
+<p>【加载Servlet】底层通过反射机制完成Servlet实例化；</p>
+<blockquote>
+<p>当⽤户请求某个URL资源时<br>1）HTTP服务器会把请求信息使⽤ServletRequest对象封装起来<br>2）进⼀步去调⽤Servlet容器中某个具体的Servlet<br>3）在 2）中，Servlet容器拿到请求后，根据URL和Servlet的映射关系，找到相应的Servlet<br>4）如果Servlet还没有被加载，就⽤反射机制创建这个Servlet，并调⽤Servlet的init⽅法来完成初始化<br>5）接着调⽤这个具体Servlet的service⽅法来处理请求，请求处理结果使⽤ServletResponse对象封装<br>6）把ServletResponse对象返回给HTTP服务器，HTTP服务器会把响应发送给客户端</p>
+</blockquote>
+<hr>
+<h2 id="Tomcat总体架构综述"><a href="#Tomcat总体架构综述" class="headerlink" title="Tomcat总体架构综述"></a>Tomcat总体架构综述</h2><p>对上面两点的汇总（Tomcat处理请求+Servelt处理流程）</p>
+<p>通过上面的讲解，我们奋发tomcat有两个非常重要的功能需要完成；</p>
+<p>1）和客户端浏览器进行交互，进行socket通信，将字节流和Request&#x2F;Response等对象进行转换；</p>
+<p>2）Servlet容器处理业务逻辑；</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655829907431.png" srcset="/img/loading.gif" lazyload alt="1655829907431"></p>
+<p>Tomcat设计了<code>两个重要的组件</code>（重要），完成特定的功能；</p>
+<ul>
+<li><code>连接器组件（Connector）</code>：和客户端交互（socket通信）</li>
+</ul>
+<p>对应角色：http服务器功能</p>
+<ul>
+<li><code>容器组件（Container）</code>：处理业务逻辑（Servlet容器）</li>
+</ul>
+<p>对应角色：servlet容器</p>
+<p>在这两个组件的外部，还存在其他的东西，在后面我们会涉及到；</p>
+<hr>
+<h2 id="连接器组件Coyote简介及支持的协议和IO模型"><a href="#连接器组件Coyote简介及支持的协议和IO模型" class="headerlink" title="连接器组件Coyote简介及支持的协议和IO模型"></a>连接器组件Coyote简介及支持的协议和IO模型</h2><p>Coyote 是Tomcat 中连接器的组件名称 , 是对外的接⼝。客户端通过Coyote与服务器建⽴连接、发送请求并接受响应 。</p>
+<p>Coyote就是处理Socket连接的；</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655830582465.png" srcset="/img/loading.gif" lazyload alt="1655830582465"></p>
+<blockquote>
+<p>（1）Coyote 封装了底层的⽹络通信（Socket 请求及响应处理）<br>（2）Coyote 使Catalina 容器（容器组件）与具体的请求协议及IO操作⽅式完全解耦<br>（3）Coyote 将Socket 输⼊转换封装为 Request 对象，进⼀步封装后交由Catalina 容器进⾏处理，处理请求完成后, Catalina 通过Coyote 提供的Response 对象将结果写⼊输出流<br>（4）Coyote 负责的是具体协议（应⽤层）和IO（传输层）相关内容</p>
+</blockquote>
+<p><strong>对第二步的讲解：</strong></p>
+<ul>
+<li><p>http请求是应用层协议；</p>
+</li>
+<li><p>数据在传输的时候，使用的是io模型（bio，nio等）【传输层】；</p>
+</li>
+</ul>
+<p>在处理请求的时候需要使用到的；</p>
+<p>Coyote进行处理，避免了Catalina 容器进行处理；解耦了；</p>
+<hr>
+<p><strong>对第四步的讲解：</strong></p>
+<p>Coyote的解析处理，需要用到一个应用层，传输层；</p>
+<hr>
+<p>Tomcat Coyote ⽀持的 IO模型与协议</p>
+<p>Tomcat⽀持多种应⽤层协议和I&#x2F;O模型，如下：</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655831090766.png" srcset="/img/loading.gif" lazyload alt="1655831090766"></p>
+<p>在使用的时候可以特定的指定某个协议的；</p>
+<p><strong>BIO：</strong> 阻塞io模型（同步）</p>
+<p><strong>NIO：</strong> 非阻塞io模型（非同步）</p>
+<p>在 8.0 之前 ，Tomcat 默认采⽤的I&#x2F;O⽅式为 BIO，之后改为 NIO。 ⽆论 NIO、NIO2 还是 APR， 在性能⽅⾯均优于以往的BIO。 如果采⽤APR， 甚⾄可以达到 Apache HTTP Server 的影响性能。</p>
+<hr>
+<h2 id="连接器组件Coyote内部组件及工作流程"><a href="#连接器组件Coyote内部组件及工作流程" class="headerlink" title="连接器组件Coyote内部组件及工作流程"></a>连接器组件Coyote内部组件及工作流程</h2><p>详细讲解下Coyote内部组件；</p>
+<p><img src="/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9ATomcat%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/1655831679091.png" srcset="/img/loading.gif" lazyload alt="1655831679091"></p>
+<p>里面有些许子组件：</p>
+<ul>
+<li><code>EndPoint组件</code>：处理传输层协议（TCP&#x2F;IP）的；socket处理（做socket通信编码的），是对传输层的抽象；</li>
+<li><code>Processor组件</code>：处理应用层协议（Http）的；</li>
+<li><code>Adapter组件</code>：将原生的Request转换成ServletRequest;</li>
+</ul>
+<p>三个组件共同完成Coyote的功能；</p>
+<p><code>ProtocolHandler组件</code>：是一个组合组件</p>
+<p>适配器设计模式，开发中经常会使用到；</p>
+<p>以后追踪源码的时候也会看到；</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java工程师高薪训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/">#第二阶段 分布式架构性能调优</a>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E4%B8%80Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E3%80%81Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/">#模块一Tomcat深度剖析及性能调优、Nginx深度剖析及性能调优</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>任务一：Tomcat高级使用及其原理剖析</div>
+      <div>https://xuebaqiang.github.io/1000/01/21/Java工程师高薪训练营/第二阶段 分布式架构性能调优/模块一Tomcat深度剖析及性能调优、Nginx深度剖析及性能调优/任务一：Tomcat高级使用及其原理剖析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5%E6%A8%A1%E6%9D%BF/" title="Java就业训练营模板">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java就业训练营模板</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E4%BB%BB%E5%8A%A1%E4%B8%80%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E5%92%8C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Java新特性和项目-任务一常用设计原则和设计模式">
+                        <span class="hidden-mobile">Java新特性和项目-任务一常用设计原则和设计模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,738 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第二阶段模块一 Nginx课程笔记：点击查看  nginx 是俄罗斯人开发  MAC系统和linux系统有什么区别？ https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;62465468  两者都是类Unix系统，有许多相似之处。  两个系统，内核不一样 ： Mac是基于BSD内核的，Linux是linux内核  Mac的内核叫Darwin，是开源的。但Mac系统本身是商业的，看不到源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lagou高级-Nginx深度剖析及性能调优">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="第二阶段模块一 Nginx课程笔记：点击查看  nginx 是俄罗斯人开发  MAC系统和linux系统有什么区别？ https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;62465468  两者都是类Unix系统，有许多相似之处。  两个系统，内核不一样 ： Mac是基于BSD内核的，Linux是linux内核  Mac的内核叫Darwin，是开源的。但Mac系统本身是商业的，看不到源码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649093717163.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649095665927.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649165789657.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649166092982.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649262063131.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649264279470.png">
+<meta property="article:published_time" content="2022-04-03T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.619Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="lagou高级">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649093717163.png">
+  
+  
+  
+  <title>lagou高级-Nginx深度剖析及性能调优 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="lagou高级-Nginx深度剖析及性能调优"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-04 00:19" pubdate>
+          2022年4月4日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">lagou高级-Nginx深度剖析及性能调优</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>第二阶段模块一</p>
+<p><strong>Nginx课程笔记：</strong><a href="Nginx%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0.pdf" title="Nginx课程笔记.pdf">点击查看</a></p>
+<blockquote>
+<p>nginx 是俄罗斯人开发</p>
+</blockquote>
+<p><strong>MAC系统和linux系统有什么区别？</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/62465468">https://www.zhihu.com/question/62465468</a></p>
+<ul>
+<li>两者都是类Unix系统，有许多相似之处。 </li>
+<li>两个系统，内核不一样 ： Mac是基于BSD内核的，Linux是linux内核 </li>
+<li>Mac的内核叫Darwin，是开源的。但Mac系统本身是商业的，看不到源码的。</li>
+</ul>
+<p>Linux整体都是开源的。</p>
+<p><strong>Nginx 到底是什么？</strong></p>
+<ul>
+<li>⾼性能的HTTP服务器</li>
+<li>反向代理web服务器</li>
+</ul>
+<p><strong>Nginx的特点是什么？</strong></p>
+<ul>
+<li>⾼并发，性能好</li>
+<li>跨平台</li>
+<li>上⼿容易，配置简单</li>
+<li>稳定性也特别好，宕机概率很低</li>
+</ul>
+<p><strong>Nginx ⼜能做什么事情（应⽤场景）？</strong></p>
+<ul>
+<li><p>Http服务器（Web服务器）</p>
+<p>⽀持50000个并发连接数，不仅如此，CPU和内存的占⽤也⾮常的低，</p>
+</li>
+</ul>
+<blockquote>
+<p>并发连接数： 并发连接数指的是客户端向服务器发起请求，并建立了TCP连接。每秒钟服务器链接的总TCP数量，就是并发连接数。 </p>
+</blockquote>
+<ul>
+<li>反向代理服务器</li>
+<li>负载均衡服务器</li>
+<li>动静分离</li>
+</ul>
+<p>擅长静态资源处理的软件：Apache、Nginx</p>
+<p>【未解决】Apache是一个什么软件？知道apache-tomat..</p>
+<p>特别想做一个代理服务器，使用正向代理	</p>
+<p>通过代理服务器进行网站的访问；</p>
+<p><strong>Nginx的安装</strong></p>
+<p>可参考：linux-基础软件安装</p>
+<p><strong>查看nginx是否有进程使用</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ps -ef|grep nginx<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>修改Nginx端口号</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">vim /usr/local/nginx/conf/nginx.conf<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649093717163.png" srcset="/img/loading.gif" lazyload alt="1649093717163"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">cd /usr/local/nginx/sbin<br>./nginx -s reload<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Nginx的核⼼配置⽂件"><a href="#Nginx的核⼼配置⽂件" class="headerlink" title="Nginx的核⼼配置⽂件"></a>Nginx的核⼼配置⽂件</h3><p>Nginx的核⼼配置⽂件conf&#x2F;nginx.conf包含三块内容：全局块、events块、http块</p>
+<p>详情可以看文档开头中的文件</p>
+<p>http块中可以有多个server</p>
+<p> 【未解决】 server-name及root的使用？</p>
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649095665927.png" srcset="/img/loading.gif" lazyload alt="1649095665927"></p>
+<p><strong>nginx配置文件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js">worker_processes  <span class="hljs-number">1</span>; #work的进程数，默认为<span class="hljs-number">1</span><br>#配置 影响nginx服务器与用户的网络连接<br>events &#123;<br>    worker_connections  <span class="hljs-number">1024</span>; #单个work 最大并发连接数<br>&#125;<br><br># http块是配置最频繁的部分 可以嵌套多个server，配置代理，缓存，日志定义等绝大多数功能<br>http &#123;<br>	# 引入mime类型定义文件<br>    include       mime.<span class="hljs-property">types</span>;<br>    default_type  application/octet-stream;<br>    sendfile        on;<br>    keepalive_timeout  <span class="hljs-number">65</span>; # 超时时间<br>	<br>	#server 配置虚拟主机的相关参数 可以有多个,一个server就是一个虚拟主机<br>    server &#123;<br>		# 监听的端口<br>        listen       <span class="hljs-number">80</span>; <br>		#监听地址<br>        server_name  localhost;         <br><br>		# 默认请求配置<br>        location / &#123;<br>            root   html; # 默认网站根目录<br>            index  index.<span class="hljs-property">html</span> index.<span class="hljs-property">htm</span>; # 欢迎页<br>        &#125;<br><br>		# 错误提示页面<br>        error_page   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  /50x.<span class="hljs-property">html</span>;<br>        location = /50x.<span class="hljs-property">html</span> &#123;<br>            root   html;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Nginx反向代理案例"><a href="#Nginx反向代理案例" class="headerlink" title="Nginx反向代理案例"></a>Nginx反向代理案例</h3><p>案例一：浏览器访问nginx,nginx转发给tomcat</p>
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649165789657.png" srcset="/img/loading.gif" lazyload alt="1649165789657"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">proxy_pass http:<span class="hljs-comment">//127.0.0.1:8080;</span><br></code></pre></td></tr></table></figure>
+
+<p>直接访问ip</p>
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649166092982.png" srcset="/img/loading.gif" lazyload alt="1649166092982"></p>
+<p>需求二：再部署⼀台tomcat，保持默认监听8081端⼝</p>
+<p>配置另外一台tomcat服务器时注意配置文件中三个端口号的修改，否则会出现问题</p>
+<p>可能出现的问题：一个tomcat可以访问，一个不可以访问【端口被占用了，端口冲突了】</p>
+<p>在nginx配置文件中，localhost 后根据路径访问  &#x2F;abc&#x2F;  &#x2F;def&#x2F;（注意不是：&#x2F;abc  &#x2F;def）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">location /abc/ &#123;<br>                proxy_pass http:<span class="hljs-comment">//127.0.0.1:8080/;</span><br>            # root   html;<br>            #index  index.html index.htm;<br>        &#125;<br><br>        location /def/ &#123;<br>                proxy_pass http:<span class="hljs-comment">//127.0.0.1:8081/;</span><br>            # root   html;<br>            #index  index.html index.htm;<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p>【异常】：根据路径访问，访问得到的页面没有样式</p>
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649262063131.png" srcset="/img/loading.gif" lazyload alt="1649262063131"></p>
+<p>解决：多加一个&#x2F;就可以了，为什么老师是可以的-不清楚</p>
+<p><img src="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Nginx%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/1649264279470.png" srcset="/img/loading.gif" lazyload alt="1649264279470"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/lagou%E9%AB%98%E7%BA%A7/">#lagou高级</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>lagou高级-Nginx深度剖析及性能调优</div>
+      <div>https://xuebaqiang.github.io/2022/04/04/服务器/lagou高级-Nginx深度剖析及性能调优/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/04/%E5%90%8E%E7%AB%AF/springboot-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" title="springBoot-定时任务">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">springBoot-定时任务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/lagou%E9%AB%98%E7%BA%A7-Tomcat%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" title="lagou高级-Tomcat深度剖析及性能调优">
+                        <span class="hidden-mobile">lagou高级-Tomcat深度剖析及性能调优</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

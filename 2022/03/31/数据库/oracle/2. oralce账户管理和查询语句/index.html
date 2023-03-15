@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="oralce账户管理和查询语句oracle-创建scott用户并导入练习数据真正存储数据的：叫做数据库； 数据库存储的结构：网状、层级、关系、对象 不仅存储数据的关系，还要存储数据的描述； 变量名就是对变量的描述； 数据库：数据库管理系统+库 数据库应用系统： 数据库系统：用户+数据库管理系统+数据库+数据库？？？ 我们安装的是oracleXE版本； 用的时候记得将防火墙给关了； 防火墙拦截的是端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. oralce账户管理和查询语句">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/2.%20oralce%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="oralce账户管理和查询语句oracle-创建scott用户并导入练习数据真正存储数据的：叫做数据库； 数据库存储的结构：网状、层级、关系、对象 不仅存储数据的关系，还要存储数据的描述； 变量名就是对变量的描述； 数据库：数据库管理系统+库 数据库应用系统： 数据库系统：用户+数据库管理系统+数据库+数据库？？？ 我们安装的是oracleXE版本； 用的时候记得将防火墙给关了； 防火墙拦截的是端">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-30T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.600Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="oracle">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>2. oralce账户管理和查询语句 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2. oralce账户管理和查询语句"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-31 00:19" pubdate>
+          2022年3月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2. oralce账户管理和查询语句</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="oralce账户管理和查询语句"><a href="#oralce账户管理和查询语句" class="headerlink" title="oralce账户管理和查询语句"></a>oralce账户管理和查询语句</h2><h3 id="oracle-创建scott用户并导入练习数据"><a href="#oracle-创建scott用户并导入练习数据" class="headerlink" title="oracle-创建scott用户并导入练习数据"></a>oracle-创建scott用户并导入练习数据</h3><p>真正存储数据的：叫做数据库；</p>
+<p>数据库存储的结构：网状、层级、关系、对象</p>
+<p>不仅存储数据的关系，还要存储数据的描述；</p>
+<p>变量名就是对变量的描述；</p>
+<p>数据库：数据库管理系统+库</p>
+<p>数据库应用系统：</p>
+<p>数据库系统：用户+数据库管理系统+数据库+数据库？？？</p>
+<p>我们安装的是oracleXE版本；</p>
+<p>用的时候记得将防火墙给关了；</p>
+<p>防火墙拦截的是端口后；</p>
+<p>否则别人就无法访问你的库；</p>
+<p>服务器和库是在一起的；</p>
+<p>客户端是一部分；</p>
+<p>要知道链接出现问题的时候，是客户端的问题，还是服务器的问题；</p>
+<p>oracle类似与网络游戏</p>
+<p>mysql类似于单机游戏</p>
+<p>oracleXE自带账户：XE</p>
+<p>账户名：system  系统账户</p>
+<p>sys  超级用户</p>
+<p>sys账户比system账户的权限要多；</p>
+<p>sys是给工程师用的；</p>
+<p>system是给管理员用的；</p>
+<p>oracleXE是默认没有普通用户的；</p>
+<p>oracle11g和oracle10g自带一个普通用户scott，默认密码是：tiger；并给用户自带了四张二维表数据；</p>
+<p>用户与用户之间是不能看到对方的信息的；</p>
+<p>练习的话需要建立一个不同用户（我的system是普通用户，这个要解决）</p>
+<p>oracle新建用户，必须使用system账户进行用户创建；</p>
+<p>如果在学习过程中，没有听懂，往后学习，慢慢问题就可能解决了；</p>
+<p>打开plsql，使用system账户登录，登录身份选择sysdba;</p>
+<p>新建sql命令窗口；</p>
+<p>create user 用户名 indentified by 密码;</p>
+<p>create user scott indentified by scott</p>
+<p>给用户赋予权限（相当与给用户上户口）</p>
+<p>– 赋予数据库登录连接欸权限</p>
+<p>grant connect to scott;  f8执行；</p>
+<p>– 赋予资源操纵权限</p>
+<p>grant resource to scott;</p>
+<p>尝试登录scott用户，使用普通用户登录；</p>
+<p>如何删除用户呢？</p>
+<p>oracle11g和Oracle12g给用户了子弟啊了四张二维表</p>
+<p>oralceXE是没有的；</p>
+<p>资料中scott.sql文件；</p>
+<p>将oracle11g和Oracle12g这个用户的数据给导出来了</p>
+<p><code>scott.sql</code>:将数据导入到数据库中？</p>
+<p>plsql-&gt;工具-》导入表 -》SQL插入（使用命令窗口）</p>
+<p>Tables</p>
+<hr>
+<h3 id="oracle-单表查询select-amp-别名"><a href="#oracle-单表查询select-amp-别名" class="headerlink" title="oracle-单表查询select&amp;别名"></a>oracle-单表查询select&amp;别名</h3><p>练习的时候，建议使用scott用户；</p>
+<p>忘记用户密码：</p>
+<p>cmd打开命令窗口：sqlplus &#x2F;nolog</p>
+<p>输入命令：conn &#x2F;as sysdba</p>
+<p>输入命令：alter user 要修改密码的用户名 indentified by 123;</p>
+<p>alter user scott indentified by admin;</p>
+<p>可能会提示：sqlplus不是nebula命令的错误；</p>
+<p>是因为oracle的环境变量配置的问题；</p>
+<p>为什么要配置path?</p>
+<p>bin下有sqlplus.exe命令；</p>
+<p>在窗口中直接输入sqlplus就可以进入oracle命令窗口；</p>
+<p>win操作系统会去path下找，找到了就是内部命令；</p>
+<p>减少我们的操作；</p>
+<p>通过scott用户操作数据；</p>
+<p>SQL语言：结构化语句；</p>
+<p>SQL可以做什么？</p>
+<p>操作数据；</p>
+<p>SQL的分类：</p>
+<p>DDL，DML，DQL,DCL TCL</p>
+<p>通过SQL语句进行数据库中的数据管理；</p>
+<p>通过SQL语句管理用户</p>
+<p>通过SQL语句管理事务；</p>
+<p>数据的读取-》单标查询、多表查询、子查询</p>
+<p>数据的存储-》增加表、数据  删除表数据、修改表数据</p>
+<p>需要学习的：</p>
+<p>完成单表的crud;</p>
+<p>完成多表的查询；</p>
+<p>完成子查询；</p>
+<p>完成用户的管理；</p>
+<p>完成表的管理；</p>
+<p>序列、视图、索引；</p>
+<p>数据库的分页查询；</p>
+<p>数据库的备份；</p>
+<p>事务管理；</p>
+<p>– 查询表的查询学习</p>
+<p>查询表的所有数据：select * from 表明；</p>
+<p>select * from emp;</p>
+<p>– 查询表中自定字段的值</p>
+<table>
+<thead>
+<tr>
+<th>数据库的操作说明</th>
+<th>sql操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询表的所有数据</td>
+<td>select * from emp</td>
+</tr>
+<tr>
+<td>指定字段查询</td>
+<td>select empno from emp;<br>select empno,ename from emp;</td>
+</tr>
+<tr>
+<td>别名查询</td>
+<td>select empno 员工编号 from emp;<br>【前提：中间不能有特殊字符;有加双引号就好】<br>select ename “员工姓名” from emp;<br>select job as 工作 from emp;<br>select mgr as “领导编号” from emp;【官方写法】</td>
+</tr>
+<tr>
+<td>连接符查询</td>
+<td>select empno||’的姓名是’||ename as 信息 from emp;<br>[字段名||’别名’||字段名。。。]</td>
+</tr>
+<tr>
+<td>去重复查询</td>
+<td>select distinct job,mgr from emp;<br>[去的是行重复，多行数据完全一样去重]</td>
+</tr>
+<tr>
+<td>排序查询</td>
+<td>select * from emp order by ename desc;<br>【先查再去重】【默认升序】【只要是字段名就可以】<br>select * from emp order by empno,ename;<br/>【多字段排序-先排字段一，如字段一相同再按字段二排序】</td>
+</tr>
+<tr>
+<td>字段的逻辑运算</td>
+<td>select empno,ename,job,sal*2+100,sal+comm from emp;<br>【可以进行四则运算-必须要是个数字】【先查后做运算】<br>【计算后的字段可能为空，例如：sal+comm】</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="oracle-单表查询连接符-amp-去除重复-amp-排序-amp-字段逻辑运算"><a href="#oracle-单表查询连接符-amp-去除重复-amp-排序-amp-字段逻辑运算" class="headerlink" title="oracle-单表查询连接符&amp;去除重复&amp;排序&amp;字段逻辑运算"></a>oracle-单表查询连接符&amp;去除重复&amp;排序&amp;字段逻辑运算</h3><p>PLSQL如何设置语言？</p>
+<p>PLSQL英文版设置为中文版：<a target="_blank" rel="noopener" href="https://blog.csdn.net/spurs611/article/details/80974850?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-80974850-blog-114846499.pc_relevant_antiscanv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-80974850-blog-114846499.pc_relevant_antiscanv2&utm_relevant_index=2">https://blog.csdn.net/spurs611/article/details/80974850?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-80974850-blog-114846499.pc_relevant_antiscanv2&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-80974850-blog-114846499.pc_relevant_antiscanv2&amp;utm_relevant_index=2</a></p>
+<p>压缩包整理的时候放到文件夹，支持下载；</p>
+<p>安装完成后，重启plsql即可；</p>
+<p>工具-》首选项</p>
+<p>属性：</p>
+<p>元祖等的介绍，用的时候回来看，可以在PPT中查看</p>
+<p>连接符-写到上一节的表格中；</p>
+<p>获取下一页、一直获取到最后；</p>
+<hr>
+<h3 id="oracle-单表查询-amp-单条件where子句"><a href="#oracle-单表查询-amp-单条件where子句" class="headerlink" title="oracle-单表查询&amp;单条件where子句"></a>oracle-单表查询&amp;单条件where子句</h3><p>视频播放错误；</p>
+<hr>
+<h3 id="oracle-where子句关键字学习"><a href="#oracle-where子句关键字学习" class="headerlink" title="oracle-where子句关键字学习"></a>oracle-where子句关键字学习</h3><table>
+<thead>
+<tr>
+<th>使用where子句查询筛选</th>
+<th>SQL操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用运算符进行筛选 &#x3D;,&gt;,&gt;&#x3D;,&lt;,&lt;&#x3D;,&lt;&gt;</td>
+<td>select * from emp where hiredate&gt;&#x3D;’01-1月-1981’<br>对日期进行判断【不理解】</td>
+</tr>
+<tr>
+<td>and,or,like,is null,is not null, in ,between and</td>
+<td>【like ‘%S%’】【like ‘S%’】【like ‘%S’】<code>【like &#39;_S%&#39;】``【like &#39;%/_%&#39; escape &#39;/&#39;】</code>【escape 可以将普通字符转化为转义字符】【转义字符可以将特殊字符转化为普通字符】</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/oracle/">#oracle</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2. oralce账户管理和查询语句</div>
+      <div>https://xuebaqiang.github.io/2022/03/31/数据库/oracle/2. oralce账户管理和查询语句/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95windows%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="登录windows服务器.">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">登录windows服务器.</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/3.%20oralce%E7%9A%84%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0&amp;%E5%88%86%E7%BB%84&amp;%E5%A2%9E%E5%8A%A0%E5%88%A0%E9%99%A4%E4%BF%AE%E6%94%B9&amp;SQL92/" title="3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92">
+                        <span class="hidden-mobile">3. oralce的函数学习&amp;分组&amp;增加删除修改&amp;SQL92</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

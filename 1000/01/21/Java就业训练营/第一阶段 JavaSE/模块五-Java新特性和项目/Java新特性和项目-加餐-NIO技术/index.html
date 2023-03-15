@@ -1,0 +1,1100 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="加餐：NIO技术NIO概念要知道io的概念； io的作用：解决设备与设备之间数据的传输问题； 生活中经常会用到io; 上传图片，下载图片，都会用到技术； 什么是NIO？ NIO的概念：java new io; 新的io, java1.4后提供了IO API； 使用NIO对并发的情况更好一些； 天猫等要解决并发问题，NIO能很好的解决并发问题；    javaAPI中提供了两套NIO：    1）是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java新特性和项目-加餐-NIO技术">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E5%8A%A0%E9%A4%90-NIO%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="加餐：NIO技术NIO概念要知道io的概念； io的作用：解决设备与设备之间数据的传输问题； 生活中经常会用到io; 上传图片，下载图片，都会用到技术； 什么是NIO？ NIO的概念：java new io; 新的io, java1.4后提供了IO API； 使用NIO对并发的情况更好一些； 天猫等要解决并发问题，NIO能很好的解决并发问题；    javaAPI中提供了两套NIO：    1）是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E5%8A%A0%E9%A4%90-NIO%E6%8A%80%E6%9C%AF/1652798820854.png">
+<meta property="article:published_time" content="1000-01-20T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:11.914Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="模块五Java新特性和项目">
+<meta property="article:tag" content="第一阶段JavaSE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E5%8A%A0%E9%A4%90-NIO%E6%8A%80%E6%9C%AF/1652798820854.png">
+  
+  
+  
+  <title>Java新特性和项目-加餐-NIO技术 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java新特性和项目-加餐-NIO技术"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-01-21 00:20" pubdate>
+          1000年1月21日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          67 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java新特性和项目-加餐-NIO技术</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="加餐：NIO技术"><a href="#加餐：NIO技术" class="headerlink" title="加餐：NIO技术"></a>加餐：NIO技术</h2><h3 id="NIO概念"><a href="#NIO概念" class="headerlink" title="NIO概念"></a>NIO概念</h3><p><strong>要知道io的概念；</strong></p>
+<p>io的作用：解决设备与设备之间数据的传输问题；</p>
+<p>生活中经常会用到io;</p>
+<p>上传图片，下载图片，都会用到技术；</p>
+<p><strong>什么是NIO？</strong></p>
+<p>NIO的概念：java new io;</p>
+<p>新的io,</p>
+<p>java1.4后提供了IO API；</p>
+<p>使用NIO对并发的情况更好一些；</p>
+<p>天猫等要解决并发问题，NIO能很好的解决并发问题；</p>
+<table>
+<thead>
+<tr>
+<th>javaAPI中提供了两套NIO：</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1）是针对标准输入输出NIO</td>
+</tr>
+<tr>
+<td>2）网络编程（客户端、服务端）</td>
+</tr>
+</tbody></table>
+<p>一个服务端多个客户端，可以做一个聊天室；</p>
+<p><strong>学习NIO能够做什么事情？</strong></p>
+<p>NIO和IO有相同的作用和目的，但是实现方式不同；</p>
+<p>IO是以流的形式处理数据，NIO是以快的形式处理数据（缓冲流）</p>
+<p>IO一次一个字节的处理数据，NIO是以快的形式处理数据；</p>
+<p>流像水龙头滴水，出来一滴，处理一滴；</p>
+<p>块：像一个水壶在接水，接慢后再进行处理</p>
+<p>NIO的新特性？</p>
+<p>要知道NIO和标准的IO的差异在哪；【重要】</p>
+<table>
+<thead>
+<tr>
+<th>IO</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IO是面向流的操作</td>
+<td>NIO是面向缓冲区的操作</td>
+</tr>
+<tr>
+<td>IO是一个阻塞IO（针对网络IO的）</td>
+<td>NIO是一个非阻塞IO（针对网络IO的）</td>
+</tr>
+<tr>
+<td>无</td>
+<td>NIO有selector选择器</td>
+</tr>
+</tbody></table>
+<p>selector选择器；后面讲</p>
+<hr>
+<p><strong>什么是阻塞IO？什么是非阻塞IO？</strong></p>
+<p>当进程执行的时候，需要的数据还未就绪时，是否要处于一个等待状态；如果是：阻塞IO ，不是：非阻塞（去干别的事情）</p>
+<p>两件事去做：</p>
+<p>买书-》打电话给书店老板（是否有NIO这本书）-》不确定，老板查看书清单</p>
+<p>刷抖音</p>
+<p>老板在找书清单的时候，是否我们去做另一件事情，如果去刷抖音（非阻塞）；</p>
+<p>NIO是一套新的输入输出；</p>
+<p>NIO是以块的形式处理数据，速度会更快一些；</p>
+<p>有两套：一套是标准的输入输出，另一套是针对网络编程</p>
+<hr>
+<h3 id="NIO中核心组件"><a href="#NIO中核心组件" class="headerlink" title="NIO中核心组件"></a>NIO中核心组件</h3><p>NIO中的核心组件有三个</p>
+<ul>
+<li>通道</li>
+<li>缓冲区</li>
+<li>选择器</li>
+</ul>
+<p>将通道、缓冲区在一起看</p>
+<p>将选择器在一起看；</p>
+<p>通道和缓冲区一起使用恶意实现对数据的处理；</p>
+<p>因为多路复用，所以加了一个选择器；</p>
+<p>通道、缓冲区是怎样配合来处理数据？</p>
+<p>buffer缓冲器 channel 管道</p>
+<p>与面向流的操作有什么区别？</p>
+<p>D盘中有一个图片，需要使用程序来读取图片；</p>
+<p>首先需要创建一个链接（new FileInputStream(“d:&#x2F;&#x2F;美女.jpg”)）；</p>
+<p>这个管道就是对字节数据的处理；</p>
+<p>如果想要通过程序在D盘中写一个内容，需要建立一个链接（new FileOutputStream）；</p>
+<p>在面向流的过程中，是一个单向操作，要么读要么写；</p>
+<p>buffer缓冲区如何配置channer管道进行配合呢？</p>
+<p>北京区   广州区</p>
+<p>成吨的货物，需要通过火车运输货物（前提：必须建立铁路轨道）；</p>
+<p>货物需要装到火车上，火车行驶，运输到广州；</p>
+<p>如果货物想从广州运输到北京，也是可以的；</p>
+<p>要处理的数据（d:&#x2F;&#x2F;美女.jdp）  </p>
+<p>铁路轨道（channel管道）</p>
+<p>火车（buffer缓冲区）</p>
+<p>基于NIO对数据进行一个处理，数据都要写入到缓冲区中，管道负责进行一个运输，程序操作的都是buffer缓冲区【重要】，操作的都是buffer缓冲区，读写都是双向的；</p>
+<p>要处理的数据写入到buffer缓冲区中，写满，通过管道运输到另一程序端；</p>
+<p>总结：数据的处理需要管道和buffer缓冲区；</p>
+<p>buffer缓冲区是进行存储的；</p>
+<p>channel管道不与数据进行交互；</p>
+<p>NIO中读写都是双向的；</p>
+<p>通道与缓冲区是如何配合处理数据的？</p>
+<p>通过Channel管道运输存储数据的Buffer缓冲区来实现数据的处理的；</p>
+<p>Channel-&gt;运输</p>
+<p>Buffer-》数据（与数据进行交互）</p>
+<hr>
+<h3 id="ByteBuffer概述及创建"><a href="#ByteBuffer概述及创建" class="headerlink" title="ByteBuffer概述及创建"></a>ByteBuffer概述及创建</h3><p>进行网络io是会用到选择器这个组件；</p>
+<p>buffer缓冲区能实现什么作用？</p>
+<p>货物和火车进行一个交互；</p>
+<p>buffer缓冲区的作用就是和数据进行交互的，就是用来存储数据的；</p>
+<p>之前学习过存储数据的容器？</p>
+<p>例如：数组；</p>
+<p>buffer缓冲区可以理解为就是一个数组；</p>
+<p>有八种基本数据类型，没一钟类型都对应一个buffer，‘</p>
+<p>总共有其中，因为boolean就是一个true,value,不是用来存储数据的；</p>
+<p>所以提供了其中数据类型的buffer，</p>
+<p>都继承了Buffer这个抽象类；</p>
+<p>操作字符数据，使用charBuffer;</p>
+<p><strong>最常用的buffer是</strong>：ByteBuffer;</p>
+<p>使用ByteBuffer来演示如何处理数据的：</p>
+<p>需要先创建ByteBuffer，七种buffer的创建都是类似的；</p>
+<table>
+<thead>
+<tr>
+<th>三种ByteBuffer的创建方式</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1）在堆中创建缓冲区：</td>
+<td>allocate(int capacity)</td>
+</tr>
+<tr>
+<td>2)  在系统内存创建缓冲区</td>
+<td>allocateDirect(int capacity)</td>
+</tr>
+<tr>
+<td>3)  通过普通数组创建缓冲区</td>
+<td>wrap(byte[] arr)</td>
+</tr>
+</tbody></table>
+<p>创建java工程；</p>
+<p>类名不要带有中文；（开发中）</p>
+<hr>
+<p>ByteBuffer的三种创建方式【案例】：</p>
+<p>这种方式是我们要经常使用的，后面两种了解即可；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">by</span> <span class="hljs-operator">=</span> ByteBuffer.allocate(<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+<p>10是容量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">by</span> <span class="hljs-operator">=</span> ByteBuffer.allocateDirect(<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">byte</span>[] arr = &#123;<span class="hljs-number">97</span>,<span class="hljs-number">98</span>,<span class="hljs-number">99</span>&#125;;<br><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">by</span> <span class="hljs-operator">=</span> ByteBuffer.wrap(arr);<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="ByteBuffer数据存取"><a href="#ByteBuffer数据存取" class="headerlink" title="ByteBuffer数据存取"></a>ByteBuffer数据存取</h3><p>上面讲解了ByteBuffer 的创建；</p>
+<p>这节我们要学习操作ByteBuffer对象；</p>
+<table>
+<thead>
+<tr>
+<th>ByteBuffer的两个核心方法：</th>
+<th>ByteBuffer的方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>给数组添加元素</td>
+<td>put(byte b)</td>
+</tr>
+<tr>
+<td>根据索引获取指定索引元素</td>
+<td>get(索引)</td>
+</tr>
+</tbody></table>
+<p>使用Arrays.toString需要使用到字节数组；</p>
+<p>将缓冲区数组转化为普通数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">byteBuffer.put((<span class="hljs-type">byte</span>)<span class="hljs-number">10</span>);  <span class="hljs-comment">// 存储元素</span><br>byteBuffer.put((<span class="hljs-type">byte</span>)<span class="hljs-number">20</span>);  <span class="hljs-comment">// 存储元素</span><br><span class="hljs-type">byte</span>[] array = byteBuffer.array();<br>Arrays.toString(array).sout;<br><span class="hljs-type">byte</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> byteBuffer.get(<span class="hljs-number">1</span>);  <span class="hljs-comment">// 从0开始  // 20</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="Buffer核心属性-01"><a href="#Buffer核心属性-01" class="headerlink" title="Buffer核心属性_01"></a>Buffer核心属性_01</h3><p>这只是简单的存取；</p>
+<p>想进一步的掌握buffer缓冲区；</p>
+<p>需要掌握四个黑心变量</p>
+<p>每个缓冲buffer中都含有四个核心变量（Buffer接口中有四个核心变量）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> capacity;   <span class="hljs-comment">// 容量【重要】 缓冲区中能容纳的缓冲区中的最大容量</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> limit;  <span class="hljs-comment">// 界线（限制）-缓冲区中可以操作的数据大小</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">position</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 位置：下一个要被读或写的位置</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">mark</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+
+<p>学习的过程中需要思考，变量都有什么作用；</p>
+<p>创建ByteBuffer的时候会指定ByteBuffer的最大容量；</p>
+<p>创建ByteBuffer的时候，limit的值就是10；</p>
+<p>limit开始后面的位置是不能进行操作的（只能操作前面的位置）；</p>
+<p>创建ByteBuffer的时候，下一个要操作的元素就是0这个位置；</p>
+<p>注意：capacity一经设定，不能改变；</p>
+<p>limit和position的值会随着一些的操作而改变（例如put、get操作）</p>
+<p>重点放在前三个属性；</p>
+<p>初始化的时候，打印capacity\limit\position这三个值；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">byteBuffer.capacity().sout<br></code></pre></td></tr></table></figure>
+
+<p>经过get\put方法limit及position都是会发生改变的；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">byteBuffer.put((<span class="hljs-type">byte</span>)<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+<p>limit值是不会发生变化的（因为limit值后的元素是不能进行操作的）；</p>
+<p>每次写一个元素，position值是会发生改变的，从零开始；</p>
+<p>写六个元素，值就会变成6；</p>
+<p>写模式下：下一次进行一个操作，</p>
+<p>读模式：要进行一个读取的话：能够读只能读到界线这，读让读几个零食不合适的；读的haul是从position开始读，到limit结束；怎么去读取到javaee这些存进去的数据？（下一节将如何将写模式切断成读模式）</p>
+<hr>
+<h3 id="Buffer核心属性-02"><a href="#Buffer核心属性-02" class="headerlink" title="Buffer核心属性_02"></a>Buffer核心属性_02</h3><p>capacity已经确定不会改变；</p>
+<p>limit与position会根据操作的改变而改变；</p>
+<p>虽然put方法没有改变limit的值，调用其他的方法有可能改变的；</p>
+<p>要进行读取操作；</p>
+<p>读取到的是一片空白，或者几个0；</p>
+<p>而我们不是要这些数据，而是存储的数据；</p>
+<p>如果将position变成0的话是可以将数据读取出来的；</p>
+<p>但是后面还会加上四个000（javaee0000）;</p>
+<p>-》所有不仅要改变position的值，还需要改变limit的值；</p>
+<p>那如何修改position与limit的值呢；</p>
+<p>可以使用<code>flip()</code>方法;</p>
+<p>调用这个方法后，limit变成了6，position的值变成了0；</p>
+<p>变化的情况：</p>
+<p>（1）limit的值会变成position的值；</p>
+<p>（2）position变成0；</p>
+<p>注意：<code>filp()</code>方法称为切换成<strong>读模式</strong>；</p>
+<p>我们每次要从缓冲区中读取数据时，就要调用filp方法-切换为读模式（否则读的内容会是一片空白）；【重要】</p>
+<p>进入到读模式后如何去读写到数据呢？</p>
+<p>之前使用的是get(索引的方法)；</p>
+<p>这是使用的是get(byte)方法；</p>
+<p>需要先创建一个数组；new byte[byteBuffer.limit];(byteBuffer.limit&#x3D;6 足够了)；</p>
+<p>使用byteBuffer.limit的原因，只有byteBuffer.limit多个数据可读；</p>
+<table>
+<thead>
+<tr>
+<th>读取缓冲区中的内容</th>
+<th>code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1）创建一个limit()大小的字节数组；(因为只有这个多个数据可读)</td>
+<td>new byte[byteBuffer.limit()]</td>
+</tr>
+<tr>
+<td>2）当读取出来的数据放到字节数组中</td>
+<td>byteBuffer.get(bytes)</td>
+</tr>
+<tr>
+<td>3）输出数据</td>
+<td>new String(bytes,0,bytes.length)</td>
+</tr>
+</tbody></table>
+<p>如果想要向缓冲区中再次写入数据;可以使用<code>clear()</code>方法；</p>
+<p>get方法执行完成后会影响position的变化；</p>
+<p>例如，读模式读取完成后，position的值变成了6；</p>
+<p>使用clear方法后，limit的值变成了10，position的值变成了0；</p>
+<p><code>clear()</code>:清空缓冲区：核心变量回归写模式，重置核心变量的值；</p>
+<p>思考：之前存到缓冲区中的数据，数据是否还存在？</p>
+<p>数据时还会存在的，数据处于被遗忘的状态（不能再根据索引的值进行获取了）；</p>
+<p>执行clear方法后再次使用get()方法，得到一个数值（74），转化为字符(使用char强转下)为（J）;</p>
+<p>这节要清楚读写模式的切换；</p>
+<hr>
+<h3 id="Buffer核心属性-03"><a href="#Buffer核心属性-03" class="headerlink" title="Buffer核心属性_03"></a>Buffer核心属性_03</h3><p>这里讲解最后一个核心变量：mark;</p>
+<p>mark的默认值是-1（标记：一个备忘位置，用于记录上一次的读写位置【position】）</p>
+<p>读写位置就是position的值；</p>
+<p>案例：</p>
+<p>先进行一个put操作（”lagou”）；position的值为5；</p>
+<p>再进行一个put操作（“zimu”）:position的值为9；</p>
+<p>第一次put后调用mark()方法，position的值为5；</p>
+<p>如果想调用第二个put后想还原到第一个put后的位置（<code>reset()</code>）,position的值变成了5；</p>
+<p>mark方法了解记下即可；</p>
+<hr>
+<h3 id="Channel概述"><a href="#Channel概述" class="headerlink" title="Channel概述"></a>Channel概述</h3><p>前面讲解了buffer缓冲区，接下来讲解channel通道的学习；</p>
+<p>也会讲解缓冲区配合通道进行数据处理；</p>
+<p>Channel的作用：配合缓冲区进行数处理；</p>
+<p>Channel标识IO</p>
+<p>源于目标打开的连接，类似于传说中的”流”；</p>
+<p>标准的IO是基于字节流和字符欧进行操作的；</p>
+<p>NIO是基于通道Channel和缓冲区进行操作的；</p>
+<p>Channel通道是一个接口，由java.nio.channels包定义的；</p>
+<p><img src="/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E5%8A%A0%E9%A4%90-NIO%E6%8A%80%E6%9C%AF/1652798820854.png" srcset="/img/loading.gif" lazyload alt="1652798820854"></p>
+<p>如果对本地资源处理，可以使用FileChannel</p>
+<p>其他三个是解决网络资源处理的；</p>
+<p>UDP是不安全的协议；</p>
+<p>TCP是相对安全的协议；</p>
+<p>DatagramChannel：通过UDP读写网络中的数据通道；</p>
+<p>SocketSocketChannel：通过TCP读写网络中国的数据【常用】</p>
+<p>ServerSockerChannel: 可以监听新进来的TCP连接。对每一个新进来的连接都会创建一个SocketChannel;</p>
+<hr>
+<h3 id="FileChannel完成文件复制"><a href="#FileChannel完成文件复制" class="headerlink" title="FileChannel完成文件复制"></a>FileChannel完成文件复制</h3><p>如果想进行本地文件的处理，可以使用FIleCHannel+缓冲区进行对本地数据的处理；</p>
+<p>需求：将本地的图片复制到我们的工程中；</p>
+<p>写时候结合标准IO来写；</p>
+<p>先要创建输入流和输出流；（如果想要获取一个channel,需要依赖于IO流来获取channel）</p>
+<table>
+<thead>
+<tr>
+<th>将本地的图片复制到我们的工程中</th>
+<th>javacode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1)javacode先要创建输入流和输出流；<br/>（如果想要获取一个channel,需要依赖于IO流来获取channel）</td>
+<td>new FileInputStream(“D:\xxx.jpg”);<br/>new FileOutPutStream(“D:\复制.jpg”);</td>
+</tr>
+<tr>
+<td>2)通过IO流获取channel通道</td>
+<td>fileInputStream.getChannel();<br>fileOutPutStream.getChannel();</td>
+</tr>
+<tr>
+<td>3)创建缓冲区</td>
+<td>ByteBuffer.allocate(1024);</td>
+</tr>
+<tr>
+<td>4)循环读写</td>
+<td></td>
+</tr>
+<tr>
+<td>5）关流</td>
+<td>fileInputStream.close();<br>fileOutputStream.class();</td>
+</tr>
+</tbody></table>
+<p>存在的问题，没有结束（程序一直没有结束）；</p>
+<p>手动结束；</p>
+<p>看到图片根据就没有完成（图片中没有内容）（图片无法查看）</p>
+<p>可能出现的问题，就是循环读写中出现了问题；</p>
+<hr>
+<p>对循环读取进行分析：</p>
+<p>要复制的文件；</p>
+<p>复制到的文件；</p>
+<p>缓冲区；</p>
+<p>循环读取；</p>
+<p>缓冲区创建完成后，limit在最后的位置，posiiton的开始的位置；</p>
+<p>进入到循环的时候；channel1.read(byteBuffer)（存入到缓冲区中）</p>
+<p>写入的时候：position在最后的位置，limit也在最后的位置；</p>
+<p>卡着了，放不了，写不了；</p>
+<p>-》需要移动下position，clear();</p>
+<p>在read后调用buffer.clear();</p>
+<p>如果文件只有500个字节，又会写多了；</p>
+<p>buffer.flip()方法， 切换读模式，改变position和limit的值</p>
+<p>将position的值赋值给limit,position的值设置为0；</p>
+<p>byteBuffer.flip();</p>
+<p>-》还是处于死循环中；（复制的文件依旧打不开）</p>
+<p>channel2.write(byteBuffer); 相当于做了一个buffer.get方法；</p>
+<p>position的值又到了最后了；limit也是最后，又没有方法将资源文件写入到缓冲区中了</p>
+<p>-》解决，将position的位置还原到最开始的位置；</p>
+<p>buffer.clear();</p>
+<hr>
+<h3 id="网络编程客户端"><a href="#网络编程客户端" class="headerlink" title="网络编程客户端"></a>网络编程客户端</h3><p>上节完成了对本地文件资源的处理；</p>
+<p>这节完成对网络文件资源的处理；</p>
+<p>在学习NIO网络编程之前，先会不下BIO;</p>
+<p>服务端调用<code>accept()</code>方法，会一直等待客户端的连接；</p>
+<p>客户端，使用ip+端口号，创建Socket对象</p>
+<p>BIO:是一个同步阻塞的（服务器会调用accept进入一个阻塞状态，做不了任何的事情）；</p>
+<p>NIO：同步非阻塞的（有处理，没有做其他事情）并发支持的更好一些，现在的很多的长久都是高并发场景，NIO更受欢迎；</p>
+<table>
+<thead>
+<tr>
+<th>根据BIO客户端代码编写NIO客户端代码；</th>
+<th>javacode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1）创建SocketChannel对象</td>
+<td>SocketChannel.open();<br>socketChannel.connect(new InetSocketAddress(“127.0.0.1”,”9999”))</td>
+</tr>
+<tr>
+<td>2）创建缓冲区数组</td>
+<td>ByteBuffer byteBuffer&#x3D;ByteBuffer.allocate(1024);</td>
+</tr>
+<tr>
+<td>3）设置数据</td>
+<td>byteBuffer.put(“哈哈哈”.getBytes());</td>
+</tr>
+<tr>
+<td>4）输出数据</td>
+<td>socketChannel.write(byteBuffer);</td>
+</tr>
+<tr>
+<td>5) 关闭sockerChannel</td>
+<td>socketChannel.close();</td>
+</tr>
+</tbody></table>
+<p>InetSocketAddress是SocketAddress的子类</p>
+<p>socketChannel相当于一个流；</p>
+<hr>
+<h3 id="网络编程服务器端"><a href="#网络编程服务器端" class="headerlink" title="网络编程服务器端"></a>网络编程服务器端</h3><p>编写客户端后需要编写服务器端的代码；</p>
+<p>可以根据BIO的代码对比着写；</p>
+<table>
+<thead>
+<tr>
+<th>编写服务器端的代码</th>
+<th>javaCode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1)创建服务器端对象，监听对应的端口<br>绑定需要监听的端口</td>
+<td>ServerSocketChannel.open();<br>serverSocketChannel.bind(new InetSocketAddress(9999));</td>
+</tr>
+<tr>
+<td>2)连接客户端</td>
+<td>SocketChannel socketChannel&#x3D;serverSockerChannel.accept();</td>
+</tr>
+<tr>
+<td>3)读取数据<br>读取到的字节长度<br>打印</td>
+<td>ByteBuffer byteBuffer &#x3D; ByteBuffer.allocate(1024);，<br>int len &#x3D; socketChannel.read(byteBuffer);<br>new String(byteBuffer.array(),0,len);</td>
+</tr>
+</tbody></table>
+<p>抽象类：不能直接的new；看是否有静态方法</p>
+<p>NIO是一种同步非阻塞，默认会处于阻塞状态，非阻塞 的需要设置；</p>
+<p>SocketChannel实际就是一个流；</p>
+<p>上面代码存在问题，不是没有数据，打印的都是空格；</p>
+<p>客户端：创建了一个缓冲区数组；（ByteBuffer）</p>
+<p>limit的值在最后面（1024），position在0位置；</p>
+<p>做了一个put操作（“哈哈哈”），汉字对应三个字节；</p>
+<p>position会移动到9的位置；</p>
+<p>write输出的内容是：position开始（9开始），到limit（1024），打印的全是空格；</p>
+<p>调用flip方法，进入读模式；可以解决这个问题；</p>
+<p>读的时候，1024，为什么后面的空格没有进行一个打印呢？</p>
+<p>看服务器端：读取客户端的内容的时候，读取的是字节的长度，打印的时候就是从0打印到9；</p>
+<p>要知道如何才能正常的输出数据；</p>
+<hr>
+<h3 id="accept阻塞问题"><a href="#accept阻塞问题" class="headerlink" title="accept阻塞问题"></a>accept阻塞问题</h3><p>现在客户端与服务器端已经可以正常的进行交互了；</p>
+<p>但是还是会存在问题；</p>
+<p>需要知道如何将网络连接设置为非阻塞连接；【重点】</p>
+<p>服务器端调用accept的方法会进行阻塞状态；不会打印accept后面的代码；</p>
+<p>NIO是同步非阻塞的，如果是组合的和BIO就没什么区别的；</p>
+<p>预约一个快递，京东上门取货，上门之前什么就不做了，会造成资源的浪费；可以在上门取货之前去干其他的事情；</p>
+<p>请求过来的时候处理请你去，没有过来的时候干其他事情；</p>
+<p>如何在服务器端设置为非阻塞状态？</p>
+<p>在调用accept方法之前，将一个参数设置为false；</p>
+<p><code>serverSocketChannel.configureBlocking(false);</code></p>
+<p>但是执行后出现了一个异常；（空指针异常）；</p>
+<p>没有与客户端建立连接，socketChannel就是一个null,null调用方法就会报异常；</p>
+<p>需要对这个异常进行解决：</p>
+<p>在连接客户端的外面进行一个循环（white ture）</p>
+<p>连接客户端的后面加一个判断（判断socketChannel是否为空）；</p>
+<p>如果为空，else,完成其他逻辑的一些代码；</p>
+<p>想要处理完客户端连接后，需要结束循环（break;）</p>
+<p>上面的情况就类似于京东上门取件；</p>
+<p>需要知道如何将网络连接设置为非阻塞连接；【重点】</p>
+<hr>
+<h3 id="多路复用的概念"><a href="#多路复用的概念" class="headerlink" title="多路复用的概念"></a>多路复用的概念</h3><p>后面再学吧；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">byteBuffer.capacity().sout<br></code></pre></td></tr></table></figure>
+
+
+
+<p>经过get\put方法limit及position都是会发生改变的；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">byteBuffer.put((<span class="hljs-type">byte</span>)<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+<p>limit值是不会发生变化的（因为limit值后的元素是不能进行操作的）；</p>
+<p>每次写一个元素，position值是会发生改变的，从零开始；</p>
+<p>写六个元素，值就会变成6；</p>
+<p>写模式下：下一次进行一个操作，</p>
+<p>读模式：要进行一个读取的话：能够读只能读到界线这，读让读几个零食不合适的；读的haul是从position开始读，到limit结束；怎么去读取到javaee这些存进去的数据？（写一节将如何将写模式切断成读模式）</p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E4%BA%94Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/">#模块五Java新特性和项目</a>
+      
+        <a href="/tags/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5JavaSE/">#第一阶段JavaSE</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java新特性和项目-加餐-NIO技术</div>
+      <div>https://xuebaqiang.github.io/1000/01/21/Java就业训练营/第一阶段 JavaSE/模块五-Java新特性和项目/Java新特性和项目-加餐-NIO技术/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E4%BB%BB%E5%8A%A1%E4%B8%80%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E5%92%8C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Java新特性和项目-任务一常用设计原则和设计模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java新特性和项目-任务一常用设计原则和设计模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/" title="第十七章 IO流">
+                        <span class="hidden-mobile">第十七章 IO流</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

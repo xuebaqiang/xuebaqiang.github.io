@@ -1,0 +1,1264 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="idea–开发工具的使用一、编码神器-IDEA（一）IDEA介绍[了解]l 官网：http:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;download&#x2F;#section&#x3D;windows  l 官网教程:  https:&#x2F;&#x2F;www.jetbrains.com&#x2F;help&#x2F;idea&#x2F;install-and-set-up-product.html l 百科介少   l IDEA是 JetBrain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="idea--开发工具的使用">
+<meta property="og:url" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="idea–开发工具的使用一、编码神器-IDEA（一）IDEA介绍[了解]l 官网：http:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;download&#x2F;#section&#x3D;windows  l 官网教程:  https:&#x2F;&#x2F;www.jetbrains.com&#x2F;help&#x2F;idea&#x2F;install-and-set-up-product.html l 百科介少   l IDEA是 JetBrain">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps115.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps116.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps117.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps118.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps119.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps120.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps121.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps122.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps123.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps124.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps125.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps126.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps127.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps128.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps129.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps130.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps131.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps132.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps133.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps134.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps135.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps136.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps137.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps138.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps139.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps140.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps141.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps142.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps143.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps144.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps145.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps146.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps147.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps148.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps149.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps150.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps151.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps152.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps153.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps154.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps155.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps156.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps157.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps158.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps159.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps160.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps161.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps162.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps163.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps164.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps165.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps166.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps167.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps168.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps169.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps170.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps171.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps172.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps173.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps174.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps175.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps176.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps177.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps178.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps179.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps180.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps181.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps182.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps183.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps184.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps185.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps186.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps187.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps188.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps189.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps190.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps191.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps192.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps193.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps194.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps195.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps196.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps197.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps198.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps199.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps200.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps201.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps202.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps203.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps204.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps205.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps206.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps207.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps208.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps209.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps210.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps211.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps212.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps213.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps214.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps215.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps216.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps217.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps218.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps219.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps220.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/1576482299207.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps222.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps223.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps224.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps225.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps226.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps227.jpg">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/image-20220925163305577.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/image-20220925163433968.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps228.jpg">
+<meta property="article:published_time" content="2022-09-23T16:19:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:14.709Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="idea">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps115.jpg">
+  
+  
+  
+  <title>idea--开发工具的使用 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="idea--开发工具的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-24 00:19" pubdate>
+          2022年9月24日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          82 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">idea--开发工具的使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="idea–开发工具的使用"><a href="#idea–开发工具的使用" class="headerlink" title="idea–开发工具的使用"></a><strong>idea–开发工具的使用</strong></h1><h1 id="一、编码神器-IDEA"><a href="#一、编码神器-IDEA" class="headerlink" title="一、编码神器-IDEA"></a>一、<strong>编码神器-IDEA</strong></h1><h2 id="（一）IDEA介绍-了解"><a href="#（一）IDEA介绍-了解" class="headerlink" title="（一）IDEA介绍[了解]"></a>（一）<strong>IDEA介绍[了解]</strong></h2><p>l 官网：<a href="#section=windows">http://www.jetbrains.com/idea/download/#section=windows</a> </p>
+<p>l 官网教程: </p>
+<p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/install-and-set-up-product.html">https://www.jetbrains.com/help/idea/install-and-set-up-product.html</a></p>
+<p>l 百科介少</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps115.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l IDEA是 JetBrains 公司的产品，公司旗下还有其它产品，比如：</p>
+<p>Ø WebStorm：用于开发 JavaScript、HTML5、CSS3 等前端技术；</p>
+<p>Ø PyCharm：用于开发 python</p>
+<p>Ø PhpStorm：用于开发 PHP</p>
+<p>Ø RubyMine：用于开发 Ruby&#x2F;Rails</p>
+<p>Ø AppCode：用于开发 Objective - C&#x2F;Swift	</p>
+<p>Ø CLion：用于开发 C&#x2F;C++</p>
+<p>Ø DataGrip：用于开发数据库和 SQL</p>
+<p>Ø Rider：用于开发.NET</p>
+<p>Ø GoLand：用于开发 Go</p>
+<p>Ø Android Studio：用于开发 android</p>
+<p>l IDEA，全称 IntelliJ IDEA，是 Java 语言的集成开发环境，IDEA 在业界被公认为是最好的 java 开发工具之一，尤其在智能代码助手、代码自动提示、Debug调试、重构、J2EE支持、Ant、JUnit、CVS 整合、代码审查、创新的 GUI 设计等方面的功能可以说是超常的。</p>
+<p>IntelliJ IDEA 在 2015 年的官网上这样介绍自己：</p>
+<p>Excel at enterprise, mobile and web development with Java, Scala and Groovy,with all the latest modern technologies and frameworks available out of thebox.</p>
+<p>翻译：</p>
+<p>IntelliJ IDEA 主要用于支持 Java、Scala、Groovy 等语言的开发工具，同时具备支持目前主流的技术和框架，擅长于企业应用、移动应用和 Web 应用的开发。</p>
+<p>l 注意: IntelliJ IDEA 对硬件的要求</p>
+<p>2G 内存的计算机只适合写小程序、小项目或是开发静态页面。</p>
+<p>Java Web 项目最好的方案是 8G 内存或是以上，硬盘能再用上固态是最好的，因为IntelliJ IDEA 有大量的缓存、索引文件，把 IntelliJ IDEA 的缓存、索引文件放在固态上，IntelliJ IDEA 流畅度也会加快很多。</p>
+<h2 id="（二）下载-安装-掌握"><a href="#（二）下载-安装-掌握" class="headerlink" title="（二）下载-安装[掌握]"></a>（二）<strong>下载-安装[掌握]</strong></h2><h3 id="1．下载"><a href="#1．下载" class="headerlink" title="1．下载"></a>1．<strong>下载</strong></h3><p><a href="#section=windows">https://www.jetbrains.com/idea/download/#section=windows</a></p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps116.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="2．安装"><a href="#2．安装" class="headerlink" title="2．安装"></a>2．<strong>安装</strong></h3><h4 id="（1）点击安装"><a href="#（1）点击安装" class="headerlink" title="（1）点击安装"></a>（1）<strong>点击安装</strong></h4><p>l 本教程所对应的版本2017.3.2版本</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps117.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><strong>注意:所有软件安装路径中不能出现空格和中文！！！</strong>   </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps118.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps119.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 在桌面上创建一个快捷图标，建议勾选上，方便我们在安装后定位 IntelliJ IDEA 安装目录。</p>
+<p>l 关联 Java 和 Groovy 文件，建议都不要勾选，正常我们会在 Windows 的文件系统上打开这类文件都是为了快速查阅文件里面的内容，如果用 IntelliJ IDEA 关联上之后，由于 IntelliJ IDEA 打开速度缓慢，这并不能方便我们查看</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps120.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps121.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h4 id="（2）运行并破解"><a href="#（2）运行并破解" class="headerlink" title="（2）运行并破解"></a>（2）<strong>运行并破解</strong></h4><p>百度idea服务器破解或者idea破解码</p>
+<h4 id="（3）选择UI主题"><a href="#（3）选择UI主题" class="headerlink" title="（3）选择UI主题"></a>（3）<strong>选择UI主题</strong></h4><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps122.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h4 id="（4）选择插件-跳过"><a href="#（4）选择插件-跳过" class="headerlink" title="（4）选择插件(跳过)"></a>（4）<strong>选择插件(跳过)</strong></h4><p>这里可以按默认设置，点击下一步，后续可以在settings中修改</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps123.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="3．目录介绍"><a href="#3．目录介绍" class="headerlink" title="3．目录介绍"></a>3．<strong>目录介绍</strong></h3><h4 id="（1）安装目录"><a href="#（1）安装目录" class="headerlink" title="（1）安装目录"></a>（1）<strong>安装目录</strong></h4><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps124.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>bin：容器，执行文件和启动参数等</p>
+<p>help：快捷键文档和其他帮助文档</p>
+<p>jre64：64 位java 运行环境</p>
+<p>lib：idea 依赖的类库</p>
+<p>license：各个插件许可</p>
+<p>plugins：插件</p>
+<p>其中：bin 目录下：</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps125.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>• idea.exe 文件是 IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的也就是这个执行文件的快捷方式。</p>
+<p>• idea.exe.vmoptions 文件是 IntelliJ IDEA 32 位的可执行文件的 VM 配置文件</p>
+<p>• idea64.exe 文件是 IntelliJ IDEA 64 位的可行执行文件，要求必须电脑上装有 JDK 64 位版本。64 位的系统也是建议使用该文件。</p>
+<p>• idea64.exe.vmoptions 文件是 IntelliJ IDEA 64 位的可执行文件的 VM 配置文件</p>
+<p>• idea.properties 文件是 IntelliJ IDEA 的一些属性配置文件</p>
+<p>配置文件修改的原则主要是根据自己机器的内存情况来判断的，个人是建议 8G 以下的机子或是静态页面开发者都是无需修改的。如果你是开发大型项目、Java 项目或是 Android 项目，并且内存大于 8G，建议进行修改</p>
+<p>-Xms128m，16 G 内存的机器可尝试设置为 -Xms512m	(设置初始的内存数，增加该值可以提高 Java 程序的启动速度。)</p>
+<p>-Xmx750m，16 G 内存的机器可尝试设置为 -Xmx1500m	(设置最大内存数，提高该值，可以减少内存 Garage 收集的频率，提高程序性能)</p>
+<p>-XX:ReservedCodeCacheSize&#x3D;240m，16G 内存的机器可尝试设置为-XX:ReservedCodeCacheSize&#x3D;500m	(缓存大小)</p>
+<h4 id="（2）配置目录"><a href="#（2）配置目录" class="headerlink" title="（2）配置目录"></a>（2）<strong>配置目录</strong></h4><p>l 目录介绍</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps126.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>• 对于这个设置目录有一个特性，就是你删除掉整个目录之后，重新启动 IntelliJ IDEA 会再自动帮你再生成一个全新的默认配置，所以很多时候如果你把 IntelliJ IDEA 配置改坏了，没关系，删掉该目录，一切都会还原到默认，我是很建议新人可以多自己摸索 IntelliJ IDEA 的配置，多几次还原，有助于加深对 IntelliJ IDEA 的了解。</p>
+<p>• config 目录是 IntelliJ IDEA 个性化化配置目录，或者说是整个 IDE 设置目录。也是我个人认为最重要的目录，没有之一，安装新版本的 IntelliJ IDEA 会自动扫描硬盘上的旧配置目录，指的就是该目录。这个目录主要记录了：IDE 主要配置功能、自定义的代码模板、自定义的文件模板、自定义的快捷键、Project 的 tasks 记录等等个性化的设置。</p>
+<p>• system 目录是 IntelliJ IDEA 系统文件目录，是 IntelliJ IDEA 与开发项目一个桥梁目录，里面主要有：缓存、索引、容器文件输出等等，虽然不是最重要目录，但是也是最不可或缺目录之一。</p>
+<p>l 配置文件的位置可以通过修改properties文件进行指定</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps127.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>• 上图是 IntelliJ IDEA 一些属性配置，没有 32 位和 64 位之分，修改原则主要根据个人对 IntelliJ IDEA 的个性化配置情况来分析。常修改的就是下面 4 个参数：</p>
+<p>• idea.config.path&#x3D;${user.home}&#x2F;.IntelliJIdea&#x2F;config ，该属性主要用于指向 IntelliJ IDEA 的个性化</p>
+<p>配置目录，默认是被注释，打开注释之后才算启用该属性，这里需要特别注意的是斜杠方向，这里用的是正斜杠。</p>
+<p>• idea.system.path&#x3D;${user.home}&#x2F;.IntelliJIdea&#x2F;system ，该属性主要用于指向 IntelliJ IDEA 的系统文件目录，默认是被注释，打开注释之后才算启用该属性，这里需要特别注意的是斜杠方向，这里用的是正斜杠。如果你的项目很多，则该目录会很大，如果你的 C 盘空间不够的时候，还是建议把该目录转移到其他盘符下。</p>
+<h2 id="（三）入门案例-掌握"><a href="#（三）入门案例-掌握" class="headerlink" title="（三）入门案例[掌握]"></a>（三）<strong>入门案例[掌握]</strong></h2><h3 id="1．创建普通Java工程"><a href="#1．创建普通Java工程" class="headerlink" title="1．创建普通Java工程"></a>1．<strong>创建普通Java工程</strong></h3><h4 id="（1）创建工程并编写代码"><a href="#（1）创建工程并编写代码" class="headerlink" title="（1）创建工程并编写代码"></a>（1）<strong>创建工程并编写代码</strong></h4><p>l 新建工程</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps128.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>•Create New Project 创建一个新项目。</p>
+<p>•Import Project 导入一个已有项目。</p>
+<p>•Open 打开一个已有项目。</p>
+<p>•Check out from Version Control 可以通过服务器上的项目地址 Checkout Github 上面项目或是其他 Git 托管服务器上的项目。</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps129.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l next</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps130.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 指定名称和位置</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps131.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps132.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 显示工具</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps133.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 界面说明</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps134.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>Ø 工程下的 src 类似于 Eclipse 下的 src 目录，用于存放代码。</p>
+<p>Ø 工程下的.idea 和 .iml 文件都是 IDEA 工程特有的。类似于 Eclipse 工程下的.settings、.classpath、.project 等。</p>
+<p>ü  .idea 即为 Project 的配置文件目录。</p>
+<p>ü  .iml 即为 Module 的配置文件。</p>
+<p>l 设置项目jdk环境</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps135.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 创建类</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps136.jpg" srcset="/img/loading.gif" lazyload alt="img"><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps137.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 注意：不管是创建 class，还是 interface，还是 annotation，都是选择 new – java class</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps138.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 编写代码</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps139.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps140.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps141.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 说明：在 IDEA 里写完代码，不用点击保存。</p>
+<p>l 运行代码</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps142.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps143.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>注意：IntelliJ IDEA 是一个没有 Ctrl + S 的 IDE，所以每次修改完代码你只要管着运行或者调试即可，无需担心保存或者丢失代码。</p>
+<h4 id="（2）添加jar包"><a href="#（2）添加jar包" class="headerlink" title="（2）添加jar包"></a>（2）<strong>添加jar包</strong></h4><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps144.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="2．创建web工程"><a href="#2．创建web工程" class="headerlink" title="2．创建web工程"></a>2．<strong>创建web工程</strong></h3><p>中间件服务器：tomcat、weblogic、websphere、jettyjboss</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps145.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps146.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps147.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps148.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps149.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps150.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps151.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps152.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>现在基本的web项目是创建了，但是目录结构还有很多需要修改的。</p>
+<p>l 创建WEB-INF目录</p>
+<p>在web文件夹上右键–&gt;New-&gt;Directory：WEB-INF</p>
+<p>l 没有lib目录和classes目录</p>
+<p>在WEB-INF文件夹上右键–&gt;New-&gt;Directory:创建两个文件夹：classes和lib，结果如下：</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps153.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 没有web.xml问题解决</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps154.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>编译地址的修改：File–&gt;Project Structure–&gt;Modules–&gt;Paths:选择Use module compile output path：选择classes目录</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps155.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps156.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps157.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps158.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.text.DateFormat;<br><span class="hljs-keyword">import</span> java.text.SimpleDateFormat;<br><span class="hljs-keyword">import</span> java.util.Date;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Created by caowei on 2018/8/10.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(&quot;/hello&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MavenDemo1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>        doGet(request, response);<br>    &#125;<br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>      response.getWriter().print(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().toLocaleString());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps159.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps160.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps161.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>修改配置支持热部署</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps162.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps163.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps164.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps165.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>访问测试</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps166.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>或者在创建完web项目后再添加tomcat支持</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps167.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps168.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h2 id="（四）概念说明-了解"><a href="#（四）概念说明-了解" class="headerlink" title="（四）概念说明[了解]"></a>（四）<strong>概念说明[了解]</strong></h2><h3 id="1．图标"><a href="#1．图标" class="headerlink" title="1．图标"></a>1．<strong>图标</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps169.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>Source root说明：你可以理解为源目录，源码的作用就是用来专门放 Java 类文件，相对于编译出来的 class 文件而言，它就是源。我们一般默认名字叫 src 的目录就是源目录，但是其实并不是这样的，在 IntelliJ IDEA 中，即使叫 srcs 也是可以设置为 Source root ，所以源目录跟目录命名是没有关系的，而是在于 IntelliJ IDEA 支持对任意目录进行设置为 Source root ，作用是标记该目录下的文件是可编译的。</p>
+<h3 id="2．Project和Module"><a href="#2．Project和Module" class="headerlink" title="2．Project和Module"></a>2．<strong>Project和Module</strong></h3><p>l 官网说明</p>
+<p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/help/eclipse.html">https://www.jetbrains.com/idea/help/eclipse.html</a></p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps170.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>IDEA  官网：</p>
+<p>An Eclipse workspace is similar to a project in IntelliJ IDEA</p>
+<p>An Eclipse project maps to a module in IntelliJ IDEA</p>
+<p>翻译 ：</p>
+<p>Eclipse  中 workspace 相当于 IDEA  中的 的 Project</p>
+<p>Eclipse  中 Project 相当于 IDEA  中的 Module</p>
+<p>l 说明</p>
+<p>IntelliJ IDEA 是没有类似 Eclipse 的工作空间的概念（ Workspaces ），最大单元就是 Project 。如果你同时观察多个项目的情况，IntelliJ IDEA 提供的解决方案是打开多个项目实例，你可以理解为开多个项目窗口。</p>
+<p>在 IntelliJ IDEA 中 Project 是最顶级的级别，次级别是 Module。一个 Project可以有多个 Module。</p>
+<p>目前主流的大型项目结构都是类似这种多 Module 结构，这类项目一般是这样划分的，比如：core Module、web Module、plugin Module、solr Module 等等，模块之间彼此可以相互依赖。通过这些 Module 的命名也可以看出，他们之间应该都是处于同一个项目业务情况下的模块，彼此之间是有不可分割的业务关系的。</p>
+<p>所以我们现在总结：一个 Project 是由一个或多个 Module 组成，模块之间尽量是处在同一个项目业务的的情况下，彼此之间互相依赖关联。这里用的是尽量 ，因为 IntelliJ IDEA 的 Project 是一个没有具备任何编码设置、构建等开发功能的，主要起到一个项目定义、范围约束、规范等类型的效果，也许我们可以简单地理解为就是一个单纯的目录，只是这个目录命名上必须有其代表性的意义</p>
+<p>l 但是</p>
+<p>我们可以通过使用Project管理Module的方式，实现类似Eclipse中Workspace的概念，即把 Project当作Eclipse中的Workspace使用，如:</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps171.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 新建空项目作为工作空间</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps172.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps173.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>新建module作为项目</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps174.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps175.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>最后可以实现像Eclipse一样的效果</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps176.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>l 注意：删除模块前需要先移除模块，然后去磁盘目录手动删除即可</p>
+<h2 id="（五）常见设置-应用"><a href="#（五）常见设置-应用" class="headerlink" title="（五）常见设置[应用]"></a>（五）<strong>常见设置[应用]</strong></h2><h3 id="1．显示工具栏图标"><a href="#1．显示工具栏图标" class="headerlink" title="1．显示工具栏图标"></a>1．<strong>显示工具栏图标</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps177.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="2．查看项目配置-项目源目录、输出以及所依赖的jar"><a href="#2．查看项目配置-项目源目录、输出以及所依赖的jar" class="headerlink" title="2．查看项目配置(项目源目录、输出以及所依赖的jar)"></a>2．<strong>查看项目配置(项目源目录、输出以及所依赖的jar</strong><strong>)</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps178.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>或者</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps179.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps180.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps181.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="3．全局默认设置（配置针对整个Idea生效）"><a href="#3．全局默认设置（配置针对整个Idea生效）" class="headerlink" title="3．全局默认设置（配置针对整个Idea生效）"></a>3．<strong>全局默认设置（配置针对整个Idea生效）</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps182.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>或者</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps183.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="4．普通设置（针对Project级别，工作空间级别）"><a href="#4．普通设置（针对Project级别，工作空间级别）" class="headerlink" title="4．普通设置（针对Project级别，工作空间级别）"></a>4．<strong>普通设置（针对Project级别，工作空间级别）</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps184.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>说明</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps185.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>注意：通过settings进行的普通设置有一些可以全局生效</p>
+<h3 id="5．更改字体大小通过ctrl-鼠标滚轮"><a href="#5．更改字体大小通过ctrl-鼠标滚轮" class="headerlink" title="5．更改字体大小通过ctrl+鼠标滚轮"></a>5．<strong>更改字体大小通过ctrl+鼠标滚轮</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps186.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="6．代码提示不区分大小写"><a href="#6．代码提示不区分大小写" class="headerlink" title="6．代码提示不区分大小写"></a>6．<strong>代码提示不区分大小写</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps187.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="7．修改主题"><a href="#7．修改主题" class="headerlink" title="7．修改主题"></a>7．<strong>修改主题</strong></h3><p>l 修改主题</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps188.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="8．修改字体-了解"><a href="#8．修改字体-了解" class="headerlink" title="8．修改字体(了解)"></a>8．<strong>修改字体(了解)</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps189.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>修改控制台输出字体</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps190.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="9．修改控制台字体颜色-了解"><a href="#9．修改控制台字体颜色-了解" class="headerlink" title="9．修改控制台字体颜色(了解)"></a>9．<strong>修改控制台字体颜色(了解)</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps191.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="10．修改注释的字体颜色-了解"><a href="#10．修改注释的字体颜色-了解" class="headerlink" title="10．修改注释的字体颜色(了解)"></a>10．<strong>修改注释的字体颜色(了解)</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps192.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>Ø Doc Comment – Text：修改文档注释的字体颜色</p>
+<p>Ø Block comment(块注释)：修改多行注释的字体颜色</p>
+<p>Ø Line comment：修改当行注释的字体颜色</p>
+<h3 id="11．设置文件编码（重要）"><a href="#11．设置文件编码（重要）" class="headerlink" title="11．设置文件编码（重要）"></a>11．<strong>设置文件编码（重要）</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps193.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>说明：Transparent native-to-ascii conversion 主要用于转换 ascii，一般都要勾选，不然 Properties 文件中的注释显示的都不会是中文</p>
+<h3 id="12．设置鼠标悬浮提示"><a href="#12．设置鼠标悬浮提示" class="headerlink" title="12．设置鼠标悬浮提示"></a>12．<strong>设置鼠标悬浮提示</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps194.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="13．自动导包-amp-优化导包"><a href="#13．自动导包-amp-优化导包" class="headerlink" title="13．自动导包&amp;优化导包"></a>13．<strong>自动导包&amp;优化导包</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps195.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="14．设置自动编译"><a href="#14．设置自动编译" class="headerlink" title="14．设置自动编译"></a>14．<strong>设置自动编译</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps196.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>类似于Eclipse中的自动编译</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps197.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="15．空格与tab缩进设置"><a href="#15．空格与tab缩进设置" class="headerlink" title="15．空格与tab缩进设置"></a>15．<strong>空格与tab缩进设置</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps198.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps199.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="16．显示行号和方法分割线"><a href="#16．显示行号和方法分割线" class="headerlink" title="16．显示行号和方法分割线"></a>16．<strong>显示行号和方法分割线</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps200.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="17．去除单词拼写检查"><a href="#17．去除单词拼写检查" class="headerlink" title="17．去除单词拼写检查"></a>17．<strong>去除单词拼写检查</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps201.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="18．清理缓存和索引"><a href="#18．清理缓存和索引" class="headerlink" title="18．清理缓存和索引"></a>18．<strong>清理缓存和索引</strong></h3><p>随着项目越来越大，新编写的代码没有立即生效（引用等），此时可以清理缓存和索引</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps202.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>通过上面方式清除缓存、索引本质也就是去删除 C 盘下的 system 目录下的对应的文件而已，所以如果你不用上述方法也可以删除整个 system 。当 IntelliJ IDEA 再次启动项目的时候会重新创建新的 system 目录以及对应项目缓存和索引。</p>
+<p>如果你遇到了因为索引、缓存坏了以至于项目打不开，那也建议你可以直接删除 system 目录，一般这样都可以很好地解决你的问题。</p>
+<h3 id="19．设置目录折叠"><a href="#19．设置目录折叠" class="headerlink" title="19．设置目录折叠"></a>19．<strong>设置目录折叠</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps203.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="20．定位到当前文件所在目录"><a href="#20．定位到当前文件所在目录" class="headerlink" title="20．定位到当前文件所在目录"></a>20．<strong>定位到当前文件所在目录</strong><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps204.jpg" srcset="/img/loading.gif" lazyload alt="img"></h3><h3 id="21．配置文件的生成模板"><a href="#21．配置文件的生成模板" class="headerlink" title="21．配置文件的生成模板"></a>21．<strong>配置文件的生成模板</strong></h3> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> $&#123;USER&#125;</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> $&#123;DATE&#125; $&#123;TIME&#125;</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> </span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps205.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="22．Debug"><a href="#22．Debug" class="headerlink" title="22．Debug"></a>22．<strong>Debug</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps206.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps207.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="23．省电模式"><a href="#23．省电模式" class="headerlink" title="23．省电模式"></a>23．<strong>省电模式</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps208.png" srcset="/img/loading.gif" lazyload alt="img">	如上图标注 1 所示，IntelliJ IDEA 有一种叫做 省电模式 的状态，开启这种模式之后 IntelliJ IDEA 会关掉代码检查和代码提示等功能。所以一般我也会认为这是一种 阅读模式</p>
+<p>如果你在开发过程中遇到突然代码文件不能进行检查和提示可以来看看这里是否有开启该功能。 </p>
+<h3 id="24．显示内存占用"><a href="#24．显示内存占用" class="headerlink" title="24．显示内存占用"></a>24．<strong>显示内存占用</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps209.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps210.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="25．设置水平或者垂直分屏编辑"><a href="#25．设置水平或者垂直分屏编辑" class="headerlink" title="25．设置水平或者垂直分屏编辑"></a>25．<strong>设置水平或者垂直分屏编辑</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps211.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps212.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="26．设置启动idea或打开项目时提示"><a href="#26．设置启动idea或打开项目时提示" class="headerlink" title="26．设置启动idea或打开项目时提示"></a>26．<strong>设置启动idea或打开项目时提示</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps213.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="27．设置代码环绕"><a href="#27．设置代码环绕" class="headerlink" title="27．设置代码环绕"></a>27．<strong>设置代码环绕</strong></h3><p>Ctrl + Alt + T </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps214.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="28．取消更新"><a href="#28．取消更新" class="headerlink" title="28．取消更新"></a>28．<strong>取消更新</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps215.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="29．查看本地文件编辑历史"><a href="#29．查看本地文件编辑历史" class="headerlink" title="29．查看本地文件编辑历史"></a>29．<strong>查看本地文件编辑历史</strong></h3><p>类似ctrl+z功能的升级</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps216.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="30．生成-javadoc"><a href="#30．生成-javadoc" class="headerlink" title="30．生成 javadoc"></a>30．<strong>生成 javadoc</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps217.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps218.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>zh_CN</p>
+<p>-encoding UTF-8 -charset UTF-8</p>
+<h3 id="31．自定义代码模版"><a href="#31．自定义代码模版" class="headerlink" title="31．自定义代码模版"></a>31．<strong>自定义代码模版</strong></h3><p>l 关于模板(Templates)</p>
+<p>代码模板的原理就是配置一些常用代码字母缩写，在输入简写时可以出现你预定义的固定模式的代码，使得开发效率大大提高，同时也可以增加个性化。</p>
+<p>最简单的例子就是在 Java 中输入 sout 会出现 System.out.println();</p>
+<p>l Idea中代码模板有两类Live Templates和Postfix Completion</p>
+<p>二者的区别：Live Templates 可以自定义，而 Postfix Completion 不可以。同时，有些操作二者都提供了模板，Postfix Templates 较 Live Templates 能快 0.01 秒</p>
+<p>l 官方介绍 Live Templates：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/using-live-templates.html">https://www.jetbrains.com/help/idea/using-live-templates.html</a></p>
+<p>l Postfix Completion</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps219.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>Live Templates</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps220.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>Itli遍历集合&#x2F;itar遍历数组（使用较多）</p>
+<p>二者的区别：有些操作二者都提供了模板，Postfix Templates 较 Live Templates 能快 0.01 秒</p>
+<p>举例 ：</p>
+<p>l psvm :  可生成 main  方法 </p>
+<p>l sout : System.out.println()  快捷输出</p>
+<p>类似的：</p>
+<p>soutp&#x3D;System.out.println(“方法形参名 &#x3D; “ + 形参名);</p>
+<p>soutv&#x3D;System.out.println(“变量名 &#x3D; “ + 变量);</p>
+<p>soutm&#x3D;System.out.println(“当前类名.当前方法”);</p>
+<p>“abc”.sout &#x3D;&gt; System.out.println(“abc”);</p>
+<p>l fori :  可生成 for  循环</p>
+<p>类似的：</p>
+<p>iter：可生成增强 for 循环</p>
+<p>itar：可生成普通 for 循环</p>
+<p>l list.for :  可生成集合 list 的 的 for  循环</p>
+<p>List<String> list &#x3D; new ArrayList<String>();</p>
+<p>输入: list.for 即可输出</p>
+<p>for(String s:list){</p>
+<p>}</p>
+<p>又如：list.fori 或 list.forr</p>
+<p>l ifn ：可生成 if(xxx &#x3D; null)</p>
+<p>类似的：</p>
+<p>inn：可生成 if(xxx !&#x3D; null) 或 xxx.nn 或 xxx.null</p>
+<p>l prsf ：可生成 private static final</p>
+<p>类似的：</p>
+<p>psf：可生成 public static final</p>
+<p>psfi：可生成 public static final int</p>
+<p>psfs：可生成 public static final String</p>
+<p>经常使用的如下：</p>
+<p> <img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/1576482299207.png" srcset="/img/loading.gif" lazyload alt="1576482299207"></p>
+<p>l 修改现有模板 修改现有模板:Live Templates</p>
+<p>如果对于现有的模板，感觉不习惯、不适应的，可以修改：</p>
+<p>修改 1 ：</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps222.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>通过调用 psvm 调用 main 方法不习惯，可以改为跟 Eclipse 一样，使用 main 调取。</p>
+<p>修改 2 ：</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps223.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>类似的还可以修改 psfs。</p>
+<p>l 自定义模板 自定义模板</p>
+<p>IDEA 提供了很多现成的 Templates。但你也可以根据自己的需要创建新的Template。</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps224.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>先定义一个模板的组：</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps225.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>选中自定义的模板组，点击”+”来定义模板。</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps226.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps227.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> test$VAR1$()&#123;<br>       $END$ <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>\1. Abbreviatio：模板的缩略名称</p>
+<p>\2. Description：模板的描述</p>
+<p>\3. Template text：模板的代码片段</p>
+<p>\4. 应用范围：比如点击 Define，然后在 java 类文件中应用即可</p>
+<p>类似的可以再配置自己喜欢的Template:</p>
+<h3 id="32-单行注释前加空格"><a href="#32-单行注释前加空格" class="headerlink" title="32. 单行注释前加空格"></a>32. <strong>单行注释前加空格</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/image-20220925163305577.png" srcset="/img/loading.gif" lazyload alt="单行注释默认缩进配置"></p>
+<p>操作如下：</p>
+<p>Settings-&gt;Editor-&gt;Code Style-&gt;Java-&gt;Code Generate</p>
+<p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/image-20220925163433968.png" srcset="/img/loading.gif" lazyload alt="单行注释前加空格配置"></p>
+<h2 id="（六）IDEA快捷键-应用"><a href="#（六）IDEA快捷键-应用" class="headerlink" title="（六）IDEA快捷键[应用]"></a>（六）<strong>IDEA快捷键[应用]</strong></h2><h3 id="1．Idea原生快捷键"><a href="#1．Idea原生快捷键" class="headerlink" title="1．Idea原生快捷键"></a>1．<strong>Idea原生快捷键</strong></h3><table>
+<thead>
+<tr>
+<th><strong>快捷键</strong></th>
+<th><strong>介绍</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alt + Enter</td>
+<td>根据光标处所在的问题，提供快速修复选择，光标放在的位置不同提示的结果也不同（万能修复快捷键，同时可以帮助我们生成本地变量&#x3D;&#x3D;eclipse中的ctrl+1）注意：非个人编码问题导致的错误，都可以尝试使用该快捷键修复</td>
+</tr>
+<tr>
+<td>Alt + Insert</td>
+<td>代码自动生成，如生成对象的 set &#x2F; get 方法，构造函数，toString() 等</td>
+</tr>
+<tr>
+<td>Shift + Shift</td>
+<td>查找所有文件</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>复制当前行到下一行</td>
+</tr>
+<tr>
+<td>Ctrl + Y</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Alt + 左方向键</td>
+<td>向左切换tab</td>
+</tr>
+<tr>
+<td>Alt + 右方向键</td>
+<td>向右切换tab</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + 左方向键</td>
+<td>快速返回上次查看代码的位置（Back）</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + 右方向键</td>
+<td>快速返回上次查看代码的位置（Forward）</td>
+</tr>
+<tr>
+<td>Ctrl + F</td>
+<td>在当前文件进行文本查找</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F</td>
+<td>在当前项目进行文本查找</td>
+</tr>
+<tr>
+<td>Ctrl + R</td>
+<td>在当前文件进行文本替换</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + R</td>
+<td>在当前项目进行文本替换</td>
+</tr>
+<tr>
+<td>Ctrl + &#x2F;</td>
+<td>注释光标所在行代码，会根据当前不同文件类型使用不同的注释符号</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + &#x2F;</td>
+<td>代码块注释</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + L</td>
+<td>格式化代码，可以对当前文件和整个包目录使用</td>
+</tr>
+<tr>
+<td>Alt + 7</td>
+<td>显示当前类中的所有方法、全局常量，方法还包括形参和返回值</td>
+</tr>
+<tr>
+<td>Alt + F7</td>
+<td>可以查看一个Java类、方法或变量的直接使用情况。</td>
+</tr>
+<tr>
+<td>ctrl + alt +b</td>
+<td>查看接口的实现类</td>
+</tr>
+<tr>
+<td>ctrl + h</td>
+<td>查看类或接口的继承关系</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，Step Into</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内，Step Over</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上，Resume</td>
+</tr>
+</tbody></table>
+<h3 id="2．设置eclipse风格快捷键"><a href="#2．设置eclipse风格快捷键" class="headerlink" title="2．设置eclipse风格快捷键"></a>2．<strong>设置eclipse风格快捷键</strong></h3><p><img src="/2022/09/24/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea--%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/wps228.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<p>常用快捷键：</p>
+<table>
+<thead>
+<tr>
+<th>提示补全</th>
+<th>Alt + &#x2F;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单行注释</td>
+<td>ctrl + &#x2F;</td>
+</tr>
+<tr>
+<td>多行注释</td>
+<td>ctrl + shift + &#x2F;</td>
+</tr>
+<tr>
+<td>向下复制一行</td>
+<td>Ctrl + alt + down</td>
+</tr>
+<tr>
+<td>删除一行或选中行</td>
+<td>Ctrl + d</td>
+</tr>
+<tr>
+<td>向下移动行</td>
+<td>Alt + down</td>
+</tr>
+<tr>
+<td>向上移动行</td>
+<td>Alt + up</td>
+</tr>
+<tr>
+<td>万能纠错&#x2F;生成返回值变量</td>
+<td>Alt + enter（依然可用）</td>
+</tr>
+<tr>
+<td>退回到前一个编辑的页面 (back)</td>
+<td>Alt + left</td>
+</tr>
+<tr>
+<td>进入到下一个编辑的页面(针对于上条) (forward)</td>
+<td>Alt + right</td>
+</tr>
+<tr>
+<td>查看继承关系(type hierarchy)</td>
+<td>F4</td>
+</tr>
+<tr>
+<td>格式化代码</td>
+<td>ctrl+shift+F</td>
+</tr>
+<tr>
+<td>选中数行，整体往后移动</td>
+<td>tab</td>
+</tr>
+<tr>
+<td>选中数行，整体往前移动</td>
+<td>shift + tab</td>
+</tr>
+<tr>
+<td>查看类的结构：类似于eclipse 的outline</td>
+<td>ctrl+o</td>
+</tr>
+<tr>
+<td>修改变量名与方法名</td>
+<td>Alt + shift + r</td>
+</tr>
+<tr>
+<td>大写转小写&#x2F; 小写转大写</td>
+<td>Ctrl + shift + y&#x2F;x</td>
+</tr>
+<tr>
+<td>生成构造器&#x2F;get&#x2F;set&#x2F;toString</td>
+<td>Alt + insert（依然可用）</td>
+</tr>
+<tr>
+<td>Shift+shift</td>
+<td>万能搜索（依然可用）</td>
+</tr>
+<tr>
+<td>查找&#x2F;替换(当前)</td>
+<td>Ctrl + f</td>
+</tr>
+<tr>
+<td>查找(全局)</td>
+<td>Ctrl + h</td>
+</tr>
+<tr>
+<td>查看类的继承结构图</td>
+<td>Ctrl + ALT+ u</td>
+</tr>
+<tr>
+<td>打开最近改的文件</td>
+<td>Ctrl + E</td>
+</tr>
+<tr>
+<td>查找方法在哪里被调用</td>
+<td>Ctrl + G</td>
+</tr>
+</tbody></table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6/" class="category-chain-item">软件</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/idea/">#idea</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>idea--开发工具的使用</div>
+      <div>https://xuebaqiang.github.io/2022/09/24/软件或插件/idea/idea--开发工具的使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/24/%E5%90%8E%E7%AB%AF/%E6%93%8D%E4%BD%9C/redis--%E6%93%8D%E4%BD%9C/" title="redis--操作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">redis--操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/20/%E5%B7%A5%E4%BD%9C/%E5%B7%A5%E4%BD%9C--%E4%B8%8A%E4%BC%A0%E8%A7%86%E9%A2%91%E6%88%96%E5%9B%BE%E7%89%87%E6%97%B6%E6%B7%BB%E5%8A%A0%E9%98%B4%E5%BD%B1(jsp)/" title="工作--上传视频或图片时添加阴影(jsp)">
+                        <span class="hidden-mobile">工作--上传视频或图片时添加阴影(jsp)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

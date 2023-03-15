@@ -1,0 +1,1500 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第十七章 IO流IO流的概念和分类io: input  and output【输入 and 输入】【读and写】 流：寒流、水流【水流动的状态】、 io流：数据可以像流一样，从一端到另一端的模型； io的分类： 基础单位不同：字节流（以字节为单位：1个字节）、字符流（以字符为单位：2个字节） 字节流可以读写任意类型的文件（因为字符流可以拆分为字节流） 字符流只能读写文本文件，里面只能是文字，不能读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十七章 IO流">
+<meta property="og:url" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="第十七章 IO流IO流的概念和分类io: input  and output【输入 and 输入】【读and写】 流：寒流、水流【水流动的状态】、 io流：数据可以像流一样，从一端到另一端的模型； io的分类： 基础单位不同：字节流（以字节为单位：1个字节）、字符流（以字符为单位：2个字节） 字节流可以读写任意类型的文件（因为字符流可以拆分为字节流） 字符流只能读写文本文件，里面只能是文字，不能读">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E4%BD%93%E7%B3%BB%E5%9B%BE.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653273935013.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653285447082.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653307751006.png">
+<meta property="og:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="article:published_time" content="1000-01-16T16:14:27.000Z">
+<meta property="article:modified_time" content="2023-03-09T09:45:11.916Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="第一阶段JavaSE">
+<meta property="article:tag" content="模块四-Java核心类库（下）">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E4%BD%93%E7%B3%BB%E5%9B%BE.png">
+  
+  
+  
+  <title>第十七章 IO流 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第十七章 IO流"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="1000-01-17 00:20" pubdate>
+          1000年1月17日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          96 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第十七章 IO流</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第十七章-IO流"><a href="#第十七章-IO流" class="headerlink" title="第十七章 IO流"></a>第十七章 IO流</h1><h2 id="IO流的概念和分类"><a href="#IO流的概念和分类" class="headerlink" title="IO流的概念和分类"></a>IO流的概念和分类</h2><p><strong>io:</strong> input  and output【输入 and 输入】【读and写】</p>
+<p><strong>流：</strong>寒流、水流【水流动的状态】、</p>
+<p><strong>io流：</strong>数据可以像流一样，从一端到另一端的模型；</p>
+<p>io的分类：</p>
+<h3 id="基础单位不同："><a href="#基础单位不同：" class="headerlink" title="基础单位不同："></a><strong>基础单位不同</strong>：</h3><p><strong>字节流</strong>（以字节为单位：1个字节）、<strong>字符流</strong>（以字符为单位：2个字节）</p>
+<p>字节流可以读写任意类型的文件（因为字符流可以拆分为字节流）</p>
+<p>字符流只能读写文本文件，里面只能是文字，不能读取图片、视频等；</p>
+<p>一般读取有汉字的话建议使用字符流，一次可以读取完整的一个汉字；</p>
+<h3 id="按照读写数据的方向不同："><a href="#按照读写数据的方向不同：" class="headerlink" title="按照读写数据的方向不同："></a>按照读写数据的方向不同：</h3><p><strong>输入流</strong>、<strong>输出流</strong></p>
+<p>输入流-读文件  输出流-写文件</p>
+<p>输入流-将数据从文件中读取到内存中；</p>
+<p>输出流【从内存中输出】【写文件】-将内存中的数据写入到文件中；</p>
+<h3 id="按照流的角色不同："><a href="#按照流的角色不同：" class="headerlink" title="按照流的角色不同："></a><strong>按照流的角色不同</strong>：</h3><p><strong>节点流</strong>、<strong>处理流</strong></p>
+<p>节点流：根文件直接关联的流</p>
+<p>处理流：根文件间接关联的流</p>
+<hr>
+<h2 id="IO流的框架结构"><a href="#IO流的框架结构" class="headerlink" title="IO流的框架结构"></a>IO流的框架结构</h2><p><strong>IO流的框架结构可分为四部分：</strong></p>
+<p>字节为单位读，字符为单位读；</p>
+<p>字节为单位写，字符为单位写；</p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E4%BD%93%E7%B3%BB%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="体系结构"></p>
+<p><strong>抽象基类</strong>：是四种分类的顶层分类</p>
+<p>是模板基类，对子类有强制型和规范性，不能new对象，new对象只能通过子类来完成；</p>
+<p>–的意思：没有，没有访问字符串的流，不擅长；</p>
+<p><strong>缓冲流</strong>，对流加了一个缓冲区的流；</p>
+<p><strong>转换流</strong>：可以将字节流转换成字符流，字符流装换成字节流；</p>
+<p><strong>特殊流</strong>：对数据的读写，这里是对基础数据的读写；</p>
+<p>这个不需要背会；</p>
+<p>有些类有些是不需要学的，工作中不会用到</p>
+<p><strong>下面的图需要我们牢记；</strong></p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="IO流的框架图"></p>
+<p>数据输入输出 </p>
+<p>对象输入输出</p>
+<p>都是成对出现的；</p>
+<p>上面这张图需要背会，我们经常要使用的；</p>
+<p>这是io流的框架；</p>
+<hr>
+<h2 id="FileWriter类的概念和基本使用"><a href="#FileWriter类的概念和基本使用" class="headerlink" title="FileWriter类的概念和基本使用"></a>FileWriter类的概念和基本使用</h2><p>先讲解<strong>字符流的输入输出流</strong>；</p>
+<p>主要处理文本文件的；</p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653273935013.png" srcset="/img/loading.gif" lazyload alt="1653273935013"></p>
+<p>构造方法（普通构造方法）；</p>
+<p>构造方法（追加内容）；</p>
+<p>写单个字符；</p>
+<p>写一部分字符；</p>
+<p>将整个字符写进去；</p>
+<p>刷新流；</p>
+<p>关闭流；</p>
+<p>案例：</p>
+<p>1、构造FileWrite类型的对象与d:&#x2F;a.txt文件关联</p>
+<p>2、通过流对象写入数据内容；</p>
+<p>3、关闭流对象并释放有关的资源；</p>
+<p> <a href="FileWriterTest.java" title="FileWriterTest.java">FileWriterTest.java</a> </p>
+<p>类似于那种水管桶到了水桶里；</p>
+<p>输水；</p>
+<p>断开水管和水桶；</p>
+<p>【flush】水管中可能会残留一些水分，将水分给刷新出去</p>
+<p><strong>close自带刷新功能</strong>，所以这里不用写了；</p>
+<p>java虚拟机跟来工作量就很大了，所以我们直接捕获处理；</p>
+<p>ctrl+alt+t：来生成异常的捕获代码等；</p>
+<p>将关闭流的代码写到finally中，避免资源的浪费；</p>
+<p>如果new的时候报了异常，finally中调用close中会报空指针异常；</p>
+<p>需要在funally中处理；</p>
+<p>调用close的时候也可能发生异常，再使用try catch下；</p>
+<p>【重要】若文件不存在，该流会创建一个空的文件；</p>
+<p>若文件已经存在，保留原有的内容还是不保留呢？</p>
+<p>若文件存在，该流会清空文件中的原有内容；</p>
+<p>想要以追加的方式创建对象去关联文件？</p>
+<p>使用图片中第二个构造方法；</p>
+<hr>
+<h2 id="FileWriter类的方法使用"><a href="#FileWriter类的方法使用" class="headerlink" title="FileWriter类的方法使用"></a>FileWriter类的方法使用</h2><p>继续讲解上节的内容；</p>
+<p>写入一部分字符，写入字符数组；</p>
+<p> <a href="FileWriterTest.java" title="FileWriterTest.java">FileWriterTest.java</a> </p>
+<p>管道与水桶关联；</p>
+<p>有：清空；</p>
+<p>没有：创建；</p>
+<p>暂时我们不需要写刷新的方法；</p>
+<hr>
+<h2 id="FileReader类的概念和基本使用"><a href="#FileReader类的概念和基本使用" class="headerlink" title="FileReader类的概念和基本使用"></a>FileReader类的概念和基本使用</h2><p>FileReader从文本文件到读取数据；</p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653285447082.png" srcset="/img/loading.gif" lazyload alt="1653285447082"></p>
+<table>
+<thead>
+<tr>
+<th align="left">方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FileReader(StringfileName)</td>
+<td>【构造函数】根据参数指定的文件名构造对象</td>
+</tr>
+<tr>
+<td align="left">int read()</td>
+<td>【读取单个字符】读取单个字符的数据并返回，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td align="left">int read(char[] cbuf, intoffset, int length)</td>
+<td>【读取一部分字符】从输入流中将最多len个字符的数据读入一个字符数组中，返回读取到的字符个数，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td align="left">int read(char[] cbuf)</td>
+<td>【读取字符数组】从此输入流中将最多 cbuf.length 个字符的数据读入字符数组中，返回读取到的字符个数，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td align="left">void close()</td>
+<td>【关闭流】关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>1、构造FileReader类型的对象与d:&#x2F;a.txt文件关联</p>
+<p>2、读取数据内容并打印</p>
+<p>3、关闭流对象并释放有关资源</p>
+<p>将水管插入到瓶子中；</p>
+<p>从瓶子中抽水；</p>
+<p>将水管中残留的水抽出来并断开瓶子与水管的连接；</p>
+<p> <a href="FileReaderTest.java" title="FileReaderTest.java">FileReaderTest.java</a> </p>
+<hr>
+<h2 id="FileReader类的方法使用"><a href="#FileReader类的方法使用" class="headerlink" title="FileReader类的方法使用"></a>FileReader类的方法使用</h2><p>接着上节的学习；</p>
+<p>读字符数组的一部分；</p>
+<p>读整个字符数组；</p>
+<p> <a href="FileReaderTest.java" title="FileReaderTest.java">FileReaderTest.java</a> </p>
+<p>读取字符数组中的部分字符：</p>
+<p>读取的是哪个数组，读取字符的开始下标，读取多少个字符；</p>
+<p>还是将数据读到原来的字符数组中；</p>
+<p>所有打印出来时：啥也没有，字符1，字符2，字符3，啥也没有</p>
+<hr>
+<h2 id="文件字符流实现文件的拷贝"><a href="#文件字符流实现文件的拷贝" class="headerlink" title="文件字符流实现文件的拷贝"></a>文件字符流实现文件的拷贝</h2><p>对签名字符输出流与字符输入流的总结；</p>
+<p>将a.txt文件中的内容拷贝到b.txt文件中；</p>
+<p>1.创建FileReader类型的对象与d:&#x2F;a.txt文件关联</p>
+<p>2.创建FileWriter类型的对象与d:&#x2F;b.txt文件关联</p>
+<p>3.不断地从输入流中读取数据内容并写入到输出流中</p>
+<p>4.关闭流对象并释放有关的资源</p>
+<p> <a href="FileCharCopyTest.java" title="FileCharCopyTest.java">FileCharCopyTest.java</a> </p>
+<p>不断的读取：</p>
+<p>一个字符一个字符的读和写；</p>
+<p>一个水桶一个管道</p>
+<p>一个水桶一个管道</p>
+<p>管道中流出的水注入到另一个管道中；</p>
+<p>一个字符一个字符感觉太慢了呀！</p>
+<hr>
+<h2 id="文件字节流实现文件的拷贝"><a href="#文件字节流实现文件的拷贝" class="headerlink" title="文件字节流实现文件的拷贝"></a>文件字节流实现文件的拷贝</h2><p>如果使用字符流拷贝图片的话是不行的；</p>
+<p>为什么不可以呢？</p>
+<p>是可以拷贝的，但是文件的大小就不一样了（文件已经损坏）</p>
+<p>字符流只能读取文本文件，图片文件处理不了；</p>
+<p>字节流可以处理任意类型的文件；</p>
+<h3 id="FileOutputStream类（重点）"><a href="#FileOutputStream类（重点）" class="headerlink" title="FileOutputStream类（重点）"></a>FileOutputStream类（重点）</h3><p>java.io.FileOutputStream类主要用于将图像数据之类的原始字节流写入到输出流中。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FileOutputStream(String name)</td>
+<td>根据参数指定的文件名来构造对象</td>
+</tr>
+<tr>
+<td>FileOutputStream(String name,boolean append)</td>
+<td>以追加的方式根据参数指定的文件名来构造对象</td>
+</tr>
+<tr>
+<td>void write(int b)</td>
+<td>将指定字节写入此文件输出流</td>
+</tr>
+<tr>
+<td>void write(byte[] b, int off, int len)</td>
+<td>将指定字节数组中从偏移量off开始的len个字节写入此文件输出流</td>
+</tr>
+<tr>
+<td>void write(byte[] b)</td>
+<td>将 b.length 个字节从指定字节数组写入此文件输出流中</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新此输出流并强制写出任何缓冲的输出字节</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>方法的用法类似，就将char类型的数组，替换成了byte类型的数组；</p>
+<h3 id="FileInputStream类（重点）"><a href="#FileInputStream类（重点）" class="headerlink" title="FileInputStream类（重点）"></a>FileInputStream类（重点）</h3><p>java.io.FileInputStream类主要用于从输入流中以字节流的方式读取图像数据等。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FileInputStream(Stringname)</td>
+<td>根据参数指定的文件路径名来构造对象</td>
+</tr>
+<tr>
+<td>int read()</td>
+<td>从输入流中读取单个字节的数据并返回，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td>int read(byte[] b, intoff, int len)</td>
+<td>从此输入流中将最多len个字节的数据读入字节数组中，返回读取到的字节个数，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td>int read(byte[] b)</td>
+<td>从此输入流中将最多 b.length 个字节的数据读入字节数组中，返回读取到的字节个数，返回-1表示读取到末尾</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+<tr>
+<td>int available()</td>
+<td>获取输入流所关联文件的大小</td>
+</tr>
+</tbody></table>
+<p>方法的用法类似，就将char类型的数组，替换成了byte类型的数组；</p>
+<hr>
+<h3 id="实现图片的拷贝"><a href="#实现图片的拷贝" class="headerlink" title="实现图片的拷贝"></a>实现图片的拷贝</h3><p>1.创建FileInputStream类型的对象与d:&#x2F;03 IO流的框架图.png文件关联</p>
+<p>2.创建FileOutputStream类型的对象与d:&#x2F;IO流的框架图.png文件关联</p>
+<p>3.不断地从输入流中读取数据内容并写入到输出流中</p>
+<p>4.关闭流对象并释放有关的资源</p>
+<p> <a href="FileByteCopyTest.java" title="FileByteCopyTest.java">FileByteCopyTest.java</a> </p>
+<p>没有规定先关闭谁；</p>
+<p>规定，后创建的先关闭；</p>
+<p>读一个字节写进去，读一个字节写进去；</p>
+<p>字符流只能处理文本文件，字节流可以处理任意类型的文件；</p>
+<h2 id="拷贝文件方式一的缺点"><a href="#拷贝文件方式一的缺点" class="headerlink" title="拷贝文件方式一的缺点"></a>拷贝文件方式一的缺点</h2><p>如果想要拷贝一个视频文件；</p>
+<p>如果使用字节流的方法；</p>
+<p>注意：输入输出的文件格式还是要保持一致的；</p>
+<p>会发现一直在拷贝中；</p>
+<p>几M的文件可能就需要花费比较长的时间；</p>
+<p>没拷贝完的文件时无法播放的【文件无法渲染】；</p>
+<p>文件不完整；</p>
+<p>有的视频文件，拷贝不全，但是还是可以播放的，但是不能拖拽的视频文件；</p>
+<p>尽可能的将视频拷贝完成后再播放；</p>
+<p>造成这个现象的原因：是以单个字节为单位进行拷贝的</p>
+<p>文件稍大的时候，文件拷贝的时间比较长【例如：16M】</p>
+<p>如果电影的大小是几个G的话，可能要疯掉了；</p>
+<p>就像买50个，买一个鸡蛋就回家，跑了50次；</p>
+<hr>
+<h2 id="拷贝文件方式二的实现和缺点"><a href="#拷贝文件方式二的实现和缺点" class="headerlink" title="拷贝文件方式二的实现和缺点"></a>拷贝文件方式二的实现和缺点</h2><p>文件一的方式，效率是很低的；</p>
+<p>原因：一个字节为单位的拷贝；</p>
+<p>解决：我们买鸡蛋的时候，可以带一个篮子；一次买回去；</p>
+<p>准备一个和文件大小一样的缓冲区，一次性将文件中的所有内容读取到缓冲区，一次性的写进去；</p>
+<p>available:获取文件的大小；</p>
+<p>byte[] barr&#x3D;new byte[fis.available()];</p>
+<p> <a href="FileByteCopyTest.java" title="FileByteCopyTest.java">FileByteCopyTest.java</a> </p>
+<p>一下子快了很多；</p>
+<p>这个方式也是有缺点的；例如：20G文件大小</p>
+<p>不如让买五万个鸡蛋，一次装回去难为人啊。</p>
+<p>所以，这种方式，能实现，但是不推荐使用</p>
+<hr>
+<h2 id="拷贝文件方式三的实现"><a href="#拷贝文件方式三的实现" class="headerlink" title="拷贝文件方式三的实现"></a>拷贝文件方式三的实现</h2><p>分批次买鸡蛋；</p>
+<p>准备一个相对适应的缓冲区，分很多次拷贝；</p>
+<p>如果没有强制要求的话使用1024或1024的倍数就好；</p>
+<p>五万个鸡蛋，往前挪动一步就很难；</p>
+<p> <a href="FileByteCopyTest.java" title="FileByteCopyTest.java">FileByteCopyTest.java</a> </p>
+<p>这种方法要注意：如果最后一次不是1024的倍数要如何处理；</p>
+<p>实际读多少个字节就写多少个字节就可以；</p>
+<hr>
+<h2 id="缓冲字节流实现文件的拷贝"><a href="#缓冲字节流实现文件的拷贝" class="headerlink" title="缓冲字节流实现文件的拷贝"></a>缓冲字节流实现文件的拷贝</h2><p>要想提高文件传输的效率，需要使用缓冲区；</p>
+<p>如果不缓存，写一个就要跟磁盘进行一个交互；</p>
+<p>需要减少与磁盘的交互；</p>
+<h3 id="BufferedOutputStream类（重点）"><a href="#BufferedOutputStream类（重点）" class="headerlink" title="BufferedOutputStream类（重点）"></a>BufferedOutputStream类（重点）</h3><p>java.io.BufferedOutputStream类主要用于描述缓冲输出流，此时不用为写入的每个字节调用底层系统。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BufferedOutputStream(OutputStream out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>BufferedOutputStream(OutputStream out, intsize)</td>
+<td>根据参数指定的引用和缓冲区大小来构造对象</td>
+</tr>
+<tr>
+<td>void write(int b)</td>
+<td>写入单个字节</td>
+</tr>
+<tr>
+<td>void write(byte[] b, int off, int len)</td>
+<td>写入字节数组中的一部分数据</td>
+</tr>
+<tr>
+<td>void write(byte[] b)</td>
+<td>写入参数指定的整个字节数组</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新流</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>方法跟之前的都是一样的；</p>
+<h3 id="BufferedInputStream类（重点）"><a href="#BufferedInputStream类（重点）" class="headerlink" title="BufferedInputStream类（重点）"></a>BufferedInputStream类（重点）</h3><p>java.io.BufferedInputStream类主要用于描述<strong>缓冲输入流</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BufferedInputStream(InputStream in)</td>
+<td>根据参数指定的引用构造对象</td>
+</tr>
+<tr>
+<td>BufferedInputStream(InputStream in, int size)</td>
+<td>根据参数指定的引用和缓冲区大小构造对象</td>
+</tr>
+<tr>
+<td>int read()</td>
+<td>读取单个字节</td>
+</tr>
+<tr>
+<td>int read(byte[] b, int off, int len)</td>
+<td>读取len个字节</td>
+</tr>
+<tr>
+<td>int read(byte[] b)</td>
+<td>读取b.length个字节</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>传入的是inputStream，因为是抽象类，不能new对象，有要new FileInoutStream</p>
+<hr>
+<h3 id="实现视频文件的复制"><a href="#实现视频文件的复制" class="headerlink" title="实现视频文件的复制"></a>实现视频文件的复制</h3><p>流套在流之上，是处理流；</p>
+<p>缓冲流的内部会提供一个缓冲区，大小为：8192【1024*8】</p>
+<p>java官方测试后，8196是比较合适的；</p>
+<p>内部提供了一个缓冲区，我们又提供了一个缓冲区，效率又更高了；</p>
+<p>里面的就不用关闭了；</p>
+<p>将外面的【缓冲流】关闭了就可以了；</p>
+<p>开发中就使用带有缓冲区的这个，也可以再加一个缓冲区；</p>
+<p> <a href="BufferedByteCopyTest.java" title="BufferedByteCopyTest.java">BufferedByteCopyTest.java</a> </p>
+<p>如果在缓冲区的外面有加了一个缓冲区，这个缓冲区的大小是两个缓冲区的乘积吗？【不理解】；</p>
+<hr>
+<h2 id="缓冲字节流和文件字节流效率比较"><a href="#缓冲字节流和文件字节流效率比较" class="headerlink" title="缓冲字节流和文件字节流效率比较"></a>缓冲字节流和文件字节流效率比较</h2><p>缓冲字节流和文件字节流的效率比较；</p>
+<p>根据获取当前系统时间判断；</p>
+<p>System.currentTimeMillis();</p>
+<p>获取当前时间距1970年1月1日到现在的毫秒数；</p>
+<p>文件字节流：165左右</p>
+<p>缓冲字节流：44</p>
+<p>开发中设计到文件的拷贝，首选缓冲流；</p>
+<hr>
+<h2 id="缓冲字符流的使用"><a href="#缓冲字符流的使用" class="headerlink" title="缓冲字符流的使用"></a>缓冲字符流的使用</h2><p>前面介绍了字节流的缓冲流；</p>
+<p>接下来学习字符流的缓冲流；</p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="IO流的框架图"></p>
+<h3 id="BufferedWriter类（重点）"><a href="#BufferedWriter类（重点）" class="headerlink" title="BufferedWriter类（重点）"></a>BufferedWriter类（重点）</h3><p>java.io.BufferedWriter类主要用于写入单个字符、字符数组以及字符串到输出流中。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BufferedWriter(Writer out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>BufferedWriter(Writer out, int sz)</td>
+<td>根据参数指定的引用和缓冲区大小来构造对象</td>
+</tr>
+<tr>
+<td>void write(int c)</td>
+<td>写入单个字符到输出流中</td>
+</tr>
+<tr>
+<td>void write(char[] cbuf, int off, int len)</td>
+<td>将字符数组cbuf中从下标off开始的len个字符写入输出流中</td>
+</tr>
+<tr>
+<td>void write(char[] cbuf)</td>
+<td>将字符串数组cbuf中所有内容写入输出流中</td>
+</tr>
+<tr>
+<td>void write(String s, int off, int len)</td>
+<td>【写入字符串的一部分】将参数s中下标从off开始的len个字符写入输出流中</td>
+</tr>
+<tr>
+<td>void write(String str)</td>
+<td>【写入字符串】将参数指定的字符串内容写入输出流中</td>
+</tr>
+<tr>
+<td>void newLine()</td>
+<td>【写一行】用于写入行分隔符到输出流中</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新流</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>额外的方法：可写入字符的一部分</p>
+<h3 id="BufferedReader类（重点）"><a href="#BufferedReader类（重点）" class="headerlink" title="BufferedReader类（重点）"></a>BufferedReader类（重点）</h3><p>java.io.BufferedReader类用于从输入流中读取单个字符、字符数组以及字符串。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BufferedReader(Reader in)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>BufferedReader(Reader in, int sz)</td>
+<td>根据参数指定的引用和缓冲区大小来构造对象</td>
+</tr>
+<tr>
+<td>int read()</td>
+<td>从输入流读取单个字符，读取到末尾则返回-1，否则返回实际读取到的字符内容</td>
+</tr>
+<tr>
+<td>int read(char[] cbuf, intoff, int len)</td>
+<td>从输入流中读取len个字符放入数组cbuf中下标从off开始的位置上，若读取到末尾则返回-1，否则返回实际读取到的字符个数</td>
+</tr>
+<tr>
+<td>int read(char[] cbuf)</td>
+<td>从输入流中读满整个数组cbuf</td>
+</tr>
+<tr>
+<td>String readLine()</td>
+<td>【读一行】读取一行字符串并返回，返回null表示读取到末尾</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="实现文件的拷贝"><a href="#实现文件的拷贝" class="headerlink" title="实现文件的拷贝"></a>实现文件的拷贝</h3><p>读的一行；</p>
+<p>写一行；</p>
+<p>readLine()：返回null表示读取到末尾</p>
+<p> <a href="BufferedCharCopyTest.java" title="BufferedCharCopyTest.java">BufferedCharCopyTest.java</a> </p>
+<hr>
+<h2 id="打印流和转换流模拟聊天的功能实现"><a href="#打印流和转换流模拟聊天的功能实现" class="headerlink" title="打印流和转换流模拟聊天的功能实现"></a>打印流和转换流模拟聊天的功能实现</h2><h3 id="PrintStream类"><a href="#PrintStream类" class="headerlink" title="PrintStream类"></a>PrintStream类</h3><p>java.io.PrintStream类主要用于更加方便地打印各种数据内容。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PrintStream(OutputStream out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>void print(String s)</td>
+<td>用于将参数指定的字符串内容打印出来</td>
+</tr>
+<tr>
+<td>void println(String x)</td>
+<td>用于打印字符串后并终止该行</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新流</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>我们从第一天就使用的是println；</p>
+<p>就是下面的pringln；</p>
+<p>可以到javaAPI文档中查找下；</p>
+<p>里面有各种pringln的重载；</p>
+<p>PrintStream不仅可以向控制台中打印，也可以向文件中打印（写入文件）</p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="IO流的框架图"></p>
+<hr>
+<h3 id="PrintWriter类"><a href="#PrintWriter类" class="headerlink" title="PrintWriter类"></a>PrintWriter类</h3><p>java.io.PrintWriter类主要用于将对象的格式化形式打印到文本输出流。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PrintWriter(Writer out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>void print(String s)</td>
+<td>将参数指定的字符串内容打印出来</td>
+</tr>
+<tr>
+<td>void println(String x)</td>
+<td>打印字符串后并终止该行</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新流</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>关闭流对象并释放有关的资源</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="OutputStreamWriter类"><a href="#OutputStreamWriter类" class="headerlink" title="OutputStreamWriter类"></a>OutputStreamWriter类</h3><p>java.io.OutputStreamWriter类主要用于实现从字符流到字节流的转换。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OutputStreamWriter(OutputStream out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>OutputStreamWriter(OutputStream out, StringcharsetName)</td>
+<td>根据参数指定的引用和编码构造对象</td>
+</tr>
+<tr>
+<td>void write(String str)</td>
+<td>将参数指定的字符串写入</td>
+</tr>
+<tr>
+<td>void flush()</td>
+<td>刷新流</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="InputStreamReader类"><a href="#InputStreamReader类" class="headerlink" title="InputStreamReader类"></a>InputStreamReader类</h3><p>java.io.InputStreamReader类主要用于实现从字节流到字符流的转换。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>InputStreamReader(InputStream in)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>InputStreamReader(InputStream in, StringcharsetName)</td>
+<td>根据参数指定的引用和编码来构造对象</td>
+</tr>
+<tr>
+<td>int read(char[] cbuf)</td>
+<td>读取字符数据到参数指定的数组</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="案例题目"><a href="#案例题目" class="headerlink" title="案例题目"></a>案例题目</h3><p>不断地提示用户输入要发送的内容，若发送的内容是”bye”则聊天结束，否则将用户输入的内容写入到文件d:&#x2F;a.txt中。<br>要求使用BufferedReader类来读取键盘的输入 System.in代表键盘输入<strong>要求使用PrintStream类负责将数据写入文件</strong></p>
+<p>提示用户输入内容；</p>
+<p>输入bye 聊天结束；</p>
+<p>如果不是bye将聊天内容输入到文件中；</p>
+<p>java.lang 下 System类，in；</p>
+<p>System.in是InputStream类型的；</p>
+<p>代表键盘输入；</p>
+<p>但是写的话使用的是PrintWriter(Writer out)-&gt;类型不匹配，需要将类型转换</p>
+<p>-》使用InputStreamReader(InputStream in)；</p>
+<p>写入文件的话，PrintStream类；</p>
+<p>-》ps.println(String x);</p>
+<p>不断的-》需要使用循环（没有循环次数）-》where(true);</p>
+<p>如果聊天结束：break;</p>
+<p>new 对象的代码都放在循环的外面；</p>
+<p>否则要不断的new；</p>
+<p> <a href="PrintStreamChatTest.java" title="PrintStreamChatTest.java">PrintStreamChatTest.java</a> </p>
+<hr>
+<h2 id="打印流和转换流模拟聊天的功能优化"><a href="#打印流和转换流模拟聊天的功能优化" class="headerlink" title="打印流和转换流模拟聊天的功能优化"></a>打印流和转换流模拟聊天的功能优化</h2><p>在循环的外面；</p>
+<p>声明一个boolean类型的变量作为发送方的代表；</p>
+<p>如果flag：true 张三说：</p>
+<p>如果flag：false 李四说：</p>
+<p> <a href="PrintStreamChatTest.java" title="PrintStreamChatTest.java">PrintStreamChatTest.java</a> </p>
+<p>显示中的聊天还将聊天时间存储到文件中；</p>
+<p>new Date();</p>
+<p>调整时间格式；</p>
+<p>new SimplateDateFormat(“yyyy-MM-dd HH:mm:ss”);</p>
+<p> <a href="PrintStreamChatTest.java" title="PrintStreamChatTest.java">PrintStreamChatTest.java</a> </p>
+<p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/1653307751006.png" srcset="/img/loading.gif" lazyload alt="1653307751006"></p>
+<p>写入空行与之前的聊天记录隔开；</p>
+<p>设计到打印-》使用打印流   Pringwrite与</p>
+<hr>
+<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>【待补充】</p>
+<p>给我们的字符指定编号；</p>
+<p>因为九三级底层只能识别二进制数据；</p>
+<p>a是一个图案，是无法直接在计算机中存储的</p>
+<p>给图案a指定一个编数-97；</p>
+<p>把字符与整数之间对应关系的表-》编码表；</p>
+<p>每个国家的文字都要将其存到计算机中；</p>
+<p>常见的编码表：</p>
+<p>ASCII：美国标砖信息交换码，使用一个字节的低7位二进制进行表示，因为使用的很少啊；</p>
+<p>ISO8859-1：拉丁码表，欧洲码表，使用的文字比美国人多一些，所以使用一个字节的8位二进制表示；</p>
+<p>文字多，对应的编号也多，使用的二进制位数也多；</p>
+<p>GB2312:中国的中文编码表，汉字比美国人和欧洲人使用的文字要多很多，所以需要编号的范围也比较大，使用的二进制位数也就比较多；<strong>最多</strong>使用的是两个字节，16位二进制进行表示；</p>
+<p>之后对GB2312进行了一个升级-》GBK</p>
+<p>GBK:中国的中文编码表（升级版本），融合了更多的中文文字符号；最多使用两个字节16位二进制位表示；</p>
+<p>对多：对于英文字母，使用两个字节就太浪费了；</p>
+<p>如果出现英文字母还是使用一个字节来表示，如果出现汉字还是两个字节来表示；</p>
+<p>那我们如何知道按一个字节来解析，还是两个字节来解析呢？</p>
+<p>需要一个标识；</p>
+<p>如果二进制位最高位是0：一个字节代表一个编号</p>
+<p>如果二进制位最高位是1：两个字节代表一个编号</p>
+<p>各个国家都制定了编码表；</p>
+<p>如果一个文档中有各个国家的文字，要如何处理呢？</p>
+<p>-》所有出现了一个新的编码表，涵盖各个国家的文字；</p>
+<p>Unicode:国际编码表，兼容和了目前人类使用的所有字符，为每个字符分配唯一的字符码，所有的问题都用两个字节16位二进制来表示；</p>
+<p>这个编码表也有一个问题，使用一个字节还是两个字节来解析呢</p>
+<p>如果将最高位来表示解析标识的话，那么标识编号的范围就少了；</p>
+<p>造成各个国家加起来就不够描述所有的文字了；</p>
+<p>所有这个编码格式还是存在一定的问题；</p>
+<p>UTF标准的出现解决了这个问题；</p>
+<hr>
+<p>英文符号使用一个字节，</p>
+<p>一个字节能够表示编号；</p>
+<p>两个字节也能表示编号；</p>
+<p>三个字节也能表示编号；</p>
+<p><strong>UTF-8</strong>：变长的编码方式，可用1-4个字节来表示符号；</p>
+<p>如果一个字节的最高位是0：代表一个字节代表一个编号；</p>
+<p>如果一个字节的最高为是110：代表两个字节代表一个编号；</p>
+<p>如果一个字节的最高位为1110：代表三个字节代表一个编号；</p>
+<p>可能会看到UTF-18</p>
+<p>区别是：八个位传输，16个位传输；</p>
+<hr>
+<h2 id="数据流的概念和使用"><a href="#数据流的概念和使用" class="headerlink" title="数据流的概念和使用"></a>数据流的概念和使用</h2><p><img src="/1000/01/17/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%20IO%E6%B5%81/IO%E6%B5%81%E7%9A%84%E6%A1%86%E6%9E%B6%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="IO流的框架图"></p>
+<p>DataInputStream</p>
+<h3 id="DataOutputStream类（了解）"><a href="#DataOutputStream类（了解）" class="headerlink" title="DataOutputStream类（了解）"></a>DataOutputStream类（了解）</h3><p>java.io.DataOutputStream类主要用于以适当的方式将基本数据类型写入输出流中。</p>
+<p>将八种基础类型的变量进行写入操作；</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DataOutputStream(OutputStream out)</td>
+<td>根据参数指定的引用构造对象 OutputStream类是个抽象类，实参需要传递子类对象</td>
+</tr>
+<tr>
+<td>void writeInt(int v)</td>
+<td>【int 四个字节，从高到底以此写入】用于将参数指定的整数一次性写入输出流，优先写入高字节</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭文件输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>OutputStream out登层类，抽象类，不能new对象；</p>
+<p>需要使用子类创建对象，例如：FileOutputStream;</p>
+<p>存在各种各样类型的write方法；</p>
+<p> <a href="DataOutputStreamTest.java" title="DataOutputStreamTest.java">DataOutputStreamTest.java</a> </p>
+<p>writeInt(66)-&gt;前面有三个空白，显示的是B</p>
+<p>0000 0000 … 0100 0010</p>
+<p>这里面有个坑，这里面使用的是writeInt，结果使用的write</p>
+<p>writeInt写入的是四个字节；</p>
+<p>write写入的是一个字节</p>
+<p>这个流后续开发中时候的很少，了解下就行；</p>
+<hr>
+<h3 id="DataInputStream类（了解）"><a href="#DataInputStream类（了解）" class="headerlink" title="DataInputStream类（了解）"></a>DataInputStream类（了解）</h3><p>java.io.DataInputStream类主要用于从输入流中读取基本数据类型的数据。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DataInputStream(InputStreamin)</td>
+<td>根据参数指定的引用来构造对象 InputStream类是抽象类，实参需要传递子类对象</td>
+</tr>
+<tr>
+<td>int readInt()</td>
+<td>用于从输入流中一次性读取一个整数数据并返回</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭文件输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p><a href="DataInputStreamTest.java" title="DataInputStreamTest.java">DataInputStreamTest.java</a> </p>
+<p>三个空格一个B，读出的结果是：66；</p>
+<hr>
+<h2 id="ObjectOutputStream类的概念和使用"><a href="#ObjectOutputStream类的概念和使用" class="headerlink" title="ObjectOutputStream类的概念和使用"></a>ObjectOutputStream类的概念和使用</h2><h3 id="ObjectOutputStream类（重点）"><a href="#ObjectOutputStream类（重点）" class="headerlink" title="ObjectOutputStream类（重点）"></a>ObjectOutputStream类（重点）</h3><p>java.io.ObjectOutputStream类主要用于将一个对象的所有内容整体写入到输出流中。【可以将一个对象写入到输出流中】</p>
+<p>只能将支持 java.io.Serializable 接口的对象写入流中。【要写的对象必须要实现serializable接口】【为了启用序列化功能】</p>
+<p>类通过实现 java.io.Serializable 接口以启用其序列化功能。</p>
+<p>所谓序列化主要指将一个对象需要存储的相关信息有效组织成字节序列的转化过程。</p>
+<p>图片可不可以看做一个对象？</p>
+<p>万物皆对象，是一个对象；</p>
+<p>我们复制粘贴图片的时候；</p>
+<p>序列化：将图片要存储的所有信息有效的组织成字节序列的过程；</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ObjectOutputStream(OutputStream out)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>void writeObject(Object obj)</td>
+<td>用于将参数指定的对象整体写入到输出流中</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭输出流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p> 为什么用Object作为参数呢?</p>
+<p>万物皆对象，什么对象都可以写进去；</p>
+<p><strong>类的使用：</strong></p>
+<p>创建一个User对象：用来操作；</p>
+<p><a href="User.java" title="User.java">User.java</a> </p>
+<p>除了实现serialized接口的话，还需要指定一个序列化的版本号；</p>
+<p>否则会报异常 java.io.NotSerializableException</p>
+<p>自定义异常的时候提到过；</p>
+<p><a href="ObjectOutputStreamTest.java" title="ObjectOutputStreamTest.java">ObjectOutputStreamTest.java</a> </p>
+<p>没有提示让显示序列化ID的话怎么办？如何提示显示序列化ID？</p>
+<p>Settings-&gt;Esitor-&gt;inspections-&gt;java-&gt;Serialization issues-&gt;seriaVersionUID 勾选下；</p>
+<p>光标放到实体类上会提示让现实序列化；</p>
+<p>发现文件中有出现乱码怎么办？</p>
+<p>数据时确实写进去了，乱码就让他乱码吧！无所谓；</p>
+<p>因为我们是要用程序读取的；</p>
+<h3 id="ObjectInputStream类（重点）"><a href="#ObjectInputStream类（重点）" class="headerlink" title="ObjectInputStream类（重点）"></a>ObjectInputStream类（重点）</h3><p>java.io.ObjectInputStream类主要用于从输入流中一次性将对象整体读取出来。</p>
+<p>所谓反序列化主要指将有效组织的字节序列恢复为一个对象及相关信息的转化过程。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ObjectInputStream(InputStreamin)</td>
+<td>根据参数指定的引用来构造对象</td>
+</tr>
+<tr>
+<td>Object readObject()</td>
+<td>主要用于从输入流中读取一个对象并返回 无法通过返回值来判断是否读取到文件的末尾</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭输入流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="ObjectInputStream类的使用和补充"><a href="#ObjectInputStream类的使用和补充" class="headerlink" title="ObjectInputStream类的使用和补充"></a>ObjectInputStream类的使用和补充</h2><p><a href="ObjectInputStreamTest.java" title="ObjectInputStreamTest.java">ObjectInputStreamTest.java</a> </p>
+<h3 id="序列化版本号"><a href="#序列化版本号" class="headerlink" title="序列化版本号"></a>序列化版本号</h3><p>为什么需要写序列化版本号呢？</p>
+<p>反序列读的时候，需要和实体列进行比较；</p>
+<p>如果相同是我说需要的；</p>
+<p>对不上，报异常，版本不一致的异常；</p>
+<p>可以比较做暗号；</p>
+<hr>
+<h3 id="transient关键字"><a href="#transient关键字" class="headerlink" title="transient关键字"></a>transient关键字</h3><p>希望有些属性不参与序列化；</p>
+<p>可以使用transient关键字修饰；</p>
+<p>表示该成员变量不参与序列化；</p>
+<p><a href="User.java" title="User.java">User.java</a> </p>
+<p><a href="ObjectOutputStreamTest.java" title="ObjectOutputStreamTest.java">ObjectOutputStreamTest.java</a> </p>
+<p><a href="ObjectInputStreamTest.java" title="ObjectInputStreamTest.java">ObjectInputStreamTest.java</a> </p>
+<hr>
+<h3 id="经验分享"><a href="#经验分享" class="headerlink" title="经验分享"></a>经验分享</h3><p>无法读到是否读到了文件末尾；</p>
+<p>如果读的少了造成数据不全；</p>
+<p>读的数据多了，会造成异常；</p>
+<p>解决：</p>
+<p>可以将所有的对象存储到集合中；</p>
+<p>当这个集合写入到文件中；</p>
+<p>一次性将整个集合写进去，读出来；</p>
+<hr>
+<h2 id="RandomAccessFile类的概念和使用"><a href="#RandomAccessFile类的概念和使用" class="headerlink" title="RandomAccessFile类的概念和使用"></a>RandomAccessFile类的概念和使用</h2><p>Random随机</p>
+<p>Access访问</p>
+<p>之间的流可以对文件的内容进行访问；</p>
+<p>但是：只能从文件的开头读取文件内容；</p>
+<p>读一个，光标往后移动；</p>
+<p>以后的开发中可能涉及，文件打开的时候，想跳过几个字符后读取；</p>
+<p>或者读到某个地方跳结果字符进行读取；</p>
+<p>RandomAccessFile类</p>
+<p>java.io.RandomAccessFile类主要支持对随机访问文件的读写操作。</p>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RandomAccessFile(String name, Stringmode)</td>
+<td>根据参数指定的名称和模式构造对象<br>【关联文件的方式】<br>r: 以只读方式打开<br/>rw：打开以便读取和写入<br/>rwd:打开以便读取和写入，同步文件内容的更新<br/>rws:打开以便读取和写入，同步文件内容和元数据的更新</td>
+</tr>
+<tr>
+<td>int read()</td>
+<td>读取单个字节的数据</td>
+</tr>
+<tr>
+<td>void seek(long pos)</td>
+<td>用于设置从此文件的开头开始测量的文件指针偏移量</td>
+</tr>
+<tr>
+<td>void write(int b)</td>
+<td>【覆盖了光标指向的字符】将参数指定的单个字节写入</td>
+</tr>
+<tr>
+<td>void close()</td>
+<td>用于关闭流并释放有关的资源</td>
+</tr>
+</tbody></table>
+<p>rw：可读可写</p>
+<p>aellhello</p>
+<p>seek 3</p>
+<p>red  l</p>
+<p>write 2  &#x2F;&#x2F; 光标已经到h了</p>
+<p>是覆盖还是插入？</p>
+<p>是将字符给覆盖了；</p>
+<p><a href="RandomAccessFileTest.java" title="RandomAccessFileTest.java">RandomAccessFileTest.java</a> </p>
+<p>以后的开发中有哪些用呢；</p>
+<p>例如：</p>
+<p>文件中保存了好学员的信息；</p>
+<p>修改刘备的学院信息的年龄修改；</p>
+<p>先使用seek调整位置，再写入；</p>
+<p>相当于更新了文件的内容；</p>
+<hr>
+<h2 id="任务总结"><a href="#任务总结" class="headerlink" title="任务总结"></a>任务总结</h2><p>【待补全】</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/" class="category-chain-item">Java就业训练营</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5JavaSE/">#第一阶段JavaSE</a>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E5%9B%9B-Java%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8B%EF%BC%89/">#模块四-Java核心类库（下）</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第十七章 IO流</div>
+      <div>https://xuebaqiang.github.io/1000/01/17/Java就业训练营/第一阶段 JavaSE/模块四-Java核心类库（下）/第十七章 IO流/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>1000年1月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1000/01/21/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%BA%94-Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE/Java%E6%96%B0%E7%89%B9%E6%80%A7%E5%92%8C%E9%A1%B9%E7%9B%AE-%E5%8A%A0%E9%A4%90-NIO%E6%8A%80%E6%9C%AF/" title="Java新特性和项目-加餐-NIO技术">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java新特性和项目-加餐-NIO技术</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1000/01/16/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%20JavaSE/%E6%A8%A1%E5%9D%97%E4%B8%89-Java%20%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93%EF%BC%88%E4%B8%8A%EF%BC%89/%E4%BB%BB%E5%8A%A1%E4%BA%8C%20String%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%E5%92%8C%E4%BD%BF%E7%94%A8/" title="第十一章：常用类的概述和使用">
+                        <span class="hidden-mobile">第十一章：常用类的概述和使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
