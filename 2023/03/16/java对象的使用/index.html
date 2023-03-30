@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="读取字符或者字符串Scanner  使用它效率低下 123456Scanner sc &#x3D; new Scanner(System.in);int n &#x3D; sc.nextInt();  &#x2F;&#x2F; 获取单个字符 空格阻塞String s &#x3D; sc.nextLine(); &#x2F;&#x2F; 获取一行String next &#x3D; sc.next(); &#x2F;&#x2F; 获取一个词&#x2F;&#x2F; sdfds sdfdsfd&#x2F;&#x2F; sdfds    I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java对象的使用">
+<meta property="og:url" content="https://xuebaqiang.github.io/2023/03/16/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="读取字符或者字符串Scanner  使用它效率低下 123456Scanner sc &#x3D; new Scanner(System.in);int n &#x3D; sc.nextInt();  &#x2F;&#x2F; 获取单个字符 空格阻塞String s &#x3D; sc.nextLine(); &#x2F;&#x2F; 获取一行String next &#x3D; sc.next(); &#x2F;&#x2F; 获取一个词&#x2F;&#x2F; sdfds sdfdsfd&#x2F;&#x2F; sdfds    I">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-16T15:33:46.000Z">
+<meta property="article:modified_time" content="2023-03-24T14:06:09.191Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="java对象">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>java对象的使用 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java对象的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-16 23:33" pubdate>
+          2023年3月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java对象的使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="读取字符或者字符串"><a href="#读取字符或者字符串" class="headerlink" title="读取字符或者字符串"></a>读取字符或者字符串</h2><p><strong>Scanner</strong>  使用它效率低下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Scanner</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> sc.nextInt();  <span class="hljs-comment">// 获取单个字符 空格阻塞</span><br><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> sc.nextLine(); <span class="hljs-comment">// 获取一行</span><br><span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> sc.next(); <span class="hljs-comment">// 获取一个词</span><br><span class="hljs-comment">// sdfds sdfdsfd</span><br><span class="hljs-comment">// sdfds</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>InputStream</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">InputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> System.in;<br><span class="hljs-keyword">while</span> (<span class="hljs-string">&#x27;\n&#x27;</span> != (c = (<span class="hljs-type">char</span>)inputStream.read())) <span class="hljs-comment">// throws IOException</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">throws</span> IOException<br><span class="hljs-type">BufferedReader</span> <span class="hljs-variable">br</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(System.in));<br><span class="hljs-type">String</span> <span class="hljs-variable">line</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-keyword">while</span>((line = br.readLine())!=<span class="hljs-literal">null</span>)&#123;<br>    <br>&#125;<br>br.close();<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p><strong>split</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 匹配非字母的字符进行分割</span><br>String[] words = str.split(<span class="hljs-string">&quot;[^A-Za-z]&quot;</span>); <span class="hljs-comment">// [^A-Za-z]+  +号表示一次或多次</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>contains</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">str2.contains(String.valueOf(c)<br></code></pre></td></tr></table></figure>
+
+<p><strong>replaceAll</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">input.replaceAll(<span class="hljs-string">&quot;([0-9]+)&quot;</span>, <span class="hljs-string">&quot;*$1*&quot;</span>); <span class="hljs-comment">//把所有的数字段提取出来，前后加上星号再放回去</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="StringBuilder-StringBuffer"><a href="#StringBuilder-StringBuffer" class="headerlink" title="StringBuilder\StringBuffer"></a>StringBuilder\StringBuffer</h3><p>StringBuffer：线程安全，StringBuilder：线程不安全</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>sb.append(<span class="hljs-string">&quot;XXX&quot;</span>); <span class="hljs-comment">// 填补字符串 遇到整除的情况使用</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(s).reverse().toString() <span class="hljs-comment">// 字符串反转</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>关于字符排序</strong>:</p>
+<p><strong>Arrays</strong>–不去重自然排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">char</span>[] chars = str.toCharArray();<br>        Arrays.sort(chars); <span class="hljs-comment">// 数组不去重自然排序    字符串可以按照字典进行排序</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : chars) &#123;<br>            System.out.print(c);<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>TreeSet</strong>–去重自然排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">TreeSet set=<span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeSet</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> c:inStr.toCharArray())&#123;<br>            set.add(c);<br>        &#125;<br>        StringBuilder sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span>(Object o:set.toArray())&#123;<br>            sb.append(o);<br>        &#125;<br>        System.out.println(sb.toString());<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>ASCII码</strong></p>
+<p>要记得Z-a之间还有一些特殊的字符</p>
+<p>开一个数组，下标对应字符的ASCII码，存储字符出现的次数，最后按数组顺序输出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> a[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">128</span>];<br>            String str=in.next();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;str.length();i++)&#123;<br>                <span class="hljs-type">int</span> k=str.charAt(i);<span class="hljs-comment">//统计出现次数</span><br>                a[k]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">48</span>;j&lt;a.length;j++)&#123;<span class="hljs-comment">//从&#x27;0&#x27;开始输出</span><br>                <span class="hljs-keyword">if</span>(a[j]!=<span class="hljs-number">0</span>)<br>                    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> b=<span class="hljs-number">0</span>;b&lt;a[j];b++)<br>                        System.out.print((<span class="hljs-type">char</span>)j);                                   <br>            &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">char</span>[] chars = str.toCharArray(); <span class="hljs-comment">// for(char c:str.toCharArray())</span><br>s.charAt(i);	<span class="hljs-comment">// a</span><br>s.charAt(i)-<span class="hljs-number">0</span>; <span class="hljs-comment">// 97</span><br>c&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp; c&lt;=<span class="hljs-string">&#x27;9&#x27;</span>; <span class="hljs-comment">//c&gt;=&#x27;A&#x27;&amp;&amp; c&lt;=&#x27;Z&#x27;;</span><br>---------------<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="容器-x2F-映射"><a href="#容器-x2F-映射" class="headerlink" title="容器&#x2F;映射"></a>容器&#x2F;映射</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span>[] flag = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[<span class="hljs-number">4</span>]; <span class="hljs-comment">// 字符串中有几种类型</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">    -- 使用映射 abc <span class="hljs-number">2</span> def <span class="hljs-number">3</span> ghi <span class="hljs-number">4.</span>..<br><span class="hljs-type">char</span>[] array = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[]&#123;<span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;6&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>, <span class="hljs-string">&#x27;6&#x27;</span>, <span class="hljs-string">&#x27;7&#x27;</span>, <span class="hljs-string">&#x27;7&#x27;</span>, <span class="hljs-string">&#x27;7&#x27;</span>, <span class="hljs-string">&#x27;7&#x27;</span>, <span class="hljs-string">&#x27;8&#x27;</span>, <span class="hljs-string">&#x27;8&#x27;</span>, <span class="hljs-string">&#x27;8&#x27;</span>, <span class="hljs-string">&#x27;9&#x27;</span>, <span class="hljs-string">&#x27;9&#x27;</span>, <span class="hljs-string">&#x27;9&#x27;</span>, <span class="hljs-string">&#x27;9&#x27;</span>&#125;; 然后小写字母c直接，res.append(array[c - <span class="hljs-string">&#x27;a&#x27;</span>]);<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>保证元素不重复</p>
+<p><strong>HashSe</strong>t-它不能保证元素的添加顺序</p>
+<p><strong>LinkedHashSe</strong>t-保证元素添加的顺序</p>
+<p><strong>TreeSet</strong>-保证元素自然的顺序【去重自然排序】</p>
+<p><strong>BitSet</strong>-凡是涉及到去重统计都可以用位图实现</p>
+<p>因为每一个不同的数据只需要用二进制的一位存储即可，大大减小了统计所使用的存储空间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Scanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">line</span> <span class="hljs-operator">=</span> scanner.next();<br>        <span class="hljs-comment">//总共有128个字符。字需要用128位</span><br>        <span class="hljs-type">BitSet</span> <span class="hljs-variable">bitSet</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BitSet</span>(<span class="hljs-number">128</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : line.toCharArray()) &#123;<br>            <span class="hljs-comment">//未出现就设置为已出现</span><br>            bitSet.set(c);<br>        &#125;<br>        <span class="hljs-comment">//统计有多少字符已出现过</span><br>        System.out.println(bitSet.cardinality());<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p><strong>TreeMap</strong>–获取有序且不重复的数据；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//统计每个字母的数量</span><br>            HashMap&lt;Character, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> aChar : chars) &#123;<br>                map.put(aChar, (map.getOrDefault(aChar, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>));<br>            &#125;<br>            <span class="hljs-comment">//找到数量最少的字符数量</span><br>            Collection&lt;Integer&gt; values = map.values();<br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Collections.min(values);<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Collections.sort(list); <span class="hljs-comment">// list排序</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Collections.reverse(list) <span class="hljs-comment">// list倒序</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//找到数量最少的字符数量</span><br>            Collection&lt;Integer&gt; values = map.values();<br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Collections.min(values);<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="Integer"><a href="#Integer" class="headerlink" title="Integer"></a>Integer</h2><p>进制转换(16-&gt;10)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer.parseInt(s.substring(<span class="hljs-number">2</span>,s.length()),<span class="hljs-number">16</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Math.round(<span class="hljs-type">double</span>); <span class="hljs-comment">// 四舍五入 Math.floor(double+0.5); (int)(number + 0.5);</span><br>Math.floor(<span class="hljs-type">double</span>); <span class="hljs-comment">// 向下取整</span><br>Math.pow（<span class="hljs-type">double</span> a,<span class="hljs-type">double</span> b）; <span class="hljs-comment">// 求幂（某一个数的n次方）：</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="ASCII值"><a href="#ASCII值" class="headerlink" title="ASCII值"></a>ASCII值</h2><p>&#x2F;&#x2F; 直接用字符-字符（例如：’A’）即可；</p>
+<p>&#x2F;&#x2F; byte[] bytestr &#x3D; str.getBytes();</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//求出字符串的ASCII值和</span><br>		String str=<span class="hljs-string">&quot;hello&quot;</span>;<br>		<span class="hljs-type">byte</span>[] bytestr = str.getBytes();<br>		<span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; bytestr.length; i++)&#123;<br>			sum += bytestr[i];<br>		&#125;<br>		System.out.println(<span class="hljs-string">&quot;hello字符串的ASCII值和:&quot;</span>+sum);<span class="hljs-comment">//532</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="涉及二进制"><a href="#涉及二进制" class="headerlink" title="涉及二进制"></a>涉及二进制</h2><p>使用左移右移</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>((num&amp;<span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)    <span class="hljs-comment">//如果末位为1则计数</span><br>num = num &gt;&gt;&gt; <span class="hljs-number">1</span>;    <span class="hljs-comment">//无符号右移</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="涉及进制转换"><a href="#涉及进制转换" class="headerlink" title="涉及进制转换"></a>涉及进制转换</h2><p>进制转换(16-&gt;10)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer.parseInt(s.substring(<span class="hljs-number">2</span>,s.length()),<span class="hljs-number">16</span>)<br></code></pre></td></tr></table></figure>
+
+<p>进制转换(10-&gt;2)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        <span class="hljs-type">int</span> num=in.nextInt();<br>        <span class="hljs-type">int</span> resultNum=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(num&gt;<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">if</span>(num % <span class="hljs-number">2</span>==<span class="hljs-number">1</span>) resultNum++;<br>            num/=<span class="hljs-number">2</span>;<br>        &#125;<br>        System.out.println(resultNum);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> in.nextInt();    <span class="hljs-comment">//读取数字</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;    <span class="hljs-comment">//计数变量</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)&#123;<br>            <span class="hljs-keyword">if</span>((num&amp;<span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)    <span class="hljs-comment">//如果末位为1则计数</span><br>                n++;<br>            num = num &gt;&gt;&gt; <span class="hljs-number">1</span>;    <span class="hljs-comment">//无符号右移</span><br>        &#125;<br>        System.out.println(n);<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="正则表达式的使用"><a href="#正则表达式的使用" class="headerlink" title="正则表达式的使用"></a>正则表达式的使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Pattern</span> <span class="hljs-variable">pattern</span> <span class="hljs-operator">=</span> Pattern.compile(<span class="hljs-string">&quot;^[WASD]+[0-9]+$&quot;</span>);<br><span class="hljs-comment">// Pattern p1 = Pattern.compile(&quot;[A-Z]&quot;);</span><br><span class="hljs-comment">// Pattern p4 = Pattern.compile(&quot;[^a-zA-Z0-9]&quot;);</span><br><span class="hljs-type">Matcher</span> <span class="hljs-variable">matcher</span> <span class="hljs-operator">=</span> pattern.matcher(s);<br><span class="hljs-keyword">if</span> (!matcher.find()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="日期相关"><a href="#日期相关" class="headerlink" title="日期相关"></a>日期相关</h2><p><strong>Calendar</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">-- 输入的是将是这一年的多少天<br>Calendar c1=Calendar.getInstance();<span class="hljs-comment">//实例化</span><br>        c1.set(y, m-<span class="hljs-number">1</span>, d);<span class="hljs-comment">//注意月份从0开始</span><br>        System.out.println(c1.get(Calendar.DAY_OF_YEAR));<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java%E5%AF%B9%E8%B1%A1/">#java对象</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java对象的使用</div>
+      <div>https://xuebaqiang.github.io/2023/03/16/java对象的使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/17/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%A1%E7%AE%97/" title="基础概念的相关计算">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基础概念的相关计算</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/15/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B0%B1%E4%B8%9A%E8%AE%AD%E7%BB%83%E8%90%A5%E6%A8%A1%E6%9D%BF-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E6%A8%A1%E5%9D%97%E4%BA%8C/%E4%BB%BB%E5%8A%A1%E5%9B%9B_%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
