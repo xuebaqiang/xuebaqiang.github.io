@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xuebaqiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[TOC] 设计模式相关让你开发一个支付功能，你使用什么方式来做？如果原来是微信、支付宝支付、后来又新增了其他支付方式，再使用if else的方式就比价麻烦了，如何来解决呢？ 如何确定付款成功没有成功？ Spring相关介绍下Spring的生命周期？ springBoot相关springBoot与springCloud的区别？springBoot与其他框架相比有什么有点？如何开发springBoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题记录">
+<meta property="og:url" content="https://xuebaqiang.github.io/2023/04/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="myBlog">
+<meta property="og:description" content="[TOC] 设计模式相关让你开发一个支付功能，你使用什么方式来做？如果原来是微信、支付宝支付、后来又新增了其他支付方式，再使用if else的方式就比价麻烦了，如何来解决呢？ 如何确定付款成功没有成功？ Spring相关介绍下Spring的生命周期？ springBoot相关springBoot与springCloud的区别？springBoot与其他框架相比有什么有点？如何开发springBoo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuebaqiang.github.io/2023/04/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230509194903729.png">
+<meta property="article:published_time" content="2023-04-19T15:09:07.000Z">
+<meta property="article:modified_time" content="2023-05-10T09:40:47.249Z">
+<meta property="article:author" content="xuebaqiang">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xuebaqiang.github.io/2023/04/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230509194903729.png">
+  
+  
+  
+  <title>面试题记录 - myBlog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebaqiang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xuebaqiang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面试题记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-19 23:09" pubdate>
+          2023年4月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面试题记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>[TOC]</p>
+<h2 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h2><h3 id="让你开发一个支付功能，你使用什么方式来做？"><a href="#让你开发一个支付功能，你使用什么方式来做？" class="headerlink" title="让你开发一个支付功能，你使用什么方式来做？"></a>让你开发一个支付功能，你使用什么方式来做？</h3><p>如果原来是微信、支付宝支付、后来又新增了其他支付方式，再使用if else的方式就比价麻烦了，如何来解决呢？</p>
+<h3 id="如何确定付款成功没有成功？"><a href="#如何确定付款成功没有成功？" class="headerlink" title="如何确定付款成功没有成功？"></a>如何确定付款成功没有成功？</h3><hr>
+<h2 id="Spring相关"><a href="#Spring相关" class="headerlink" title="Spring相关"></a>Spring相关</h2><h3 id="介绍下Spring的生命周期？"><a href="#介绍下Spring的生命周期？" class="headerlink" title="介绍下Spring的生命周期？"></a>介绍下Spring的生命周期？</h3><hr>
+<h2 id="springBoot相关"><a href="#springBoot相关" class="headerlink" title="springBoot相关"></a>springBoot相关</h2><h3 id="springBoot与springCloud的区别？"><a href="#springBoot与springCloud的区别？" class="headerlink" title="springBoot与springCloud的区别？"></a>springBoot与springCloud的区别？</h3><h3 id="springBoot与其他框架相比有什么有点？"><a href="#springBoot与其他框架相比有什么有点？" class="headerlink" title="springBoot与其他框架相比有什么有点？"></a>springBoot与其他框架相比有什么有点？</h3><h3 id="如何开发springBoot的stars"><a href="#如何开发springBoot的stars" class="headerlink" title="如何开发springBoot的stars?"></a>如何开发springBoot的stars?</h3><h3 id="SpringBoot的默认连接池是什么？"><a href="#SpringBoot的默认连接池是什么？" class="headerlink" title="SpringBoot的默认连接池是什么？"></a>SpringBoot的默认连接池是什么？</h3><ul>
+<li>HikariCP</li>
+</ul>
+<h3 id="SpringBoot项目中使用的连接池是什么？"><a href="#SpringBoot项目中使用的连接池是什么？" class="headerlink" title="SpringBoot项目中使用的连接池是什么？"></a>SpringBoot项目中使用的连接池是什么？</h3><ul>
+<li>Druid连接池</li>
+</ul>
+<h3 id="SpringBoot项目中为什么使用Druid连接池？优点"><a href="#SpringBoot项目中为什么使用Druid连接池？优点" class="headerlink" title="SpringBoot项目中为什么使用Druid连接池？优点"></a>SpringBoot项目中为什么使用Druid连接池？优点</h3><p>Druid连接池与其他连接池相比，有什么优点？</p>
+<ul>
+<li>1、高效性能<ul>
+<li>采用先进的池化技术，能够在高并发下，快速的准确的处理请求；</li>
+<li>Druid能够自动检测和回收空闲连接，避免连接资源的浪费；有效控制连接池的大小，避免连接池中连接数过多或者过少的情况；</li>
+</ul>
+</li>
+<li><strong>2.可扩展性</strong><ul>
+<li>Druid连接池可以通过增加数据源来处理大量的并发请求；</li>
+<li>可以动态的调整连接池的大小、超时时间等参数；</li>
+</ul>
+</li>
+<li><strong>3.高度的可配置性</strong><ul>
+<li>Druid连接池的参数可以通过配置文件进行调整；</li>
+<li>Druid还提供了一套强大的监控和诊断工具，可以帮助开发人员在应用程序中定位和解决连接池的问题；</li>
+</ul>
+</li>
+<li><strong>4.支持多数据源</strong><ul>
+<li>可以同时连接多个不同类型的数据库，并为每个数据源连接池的参数进行配置</li>
+</ul>
+</li>
+<li><strong>5.开源免费</strong><ul>
+<li>由阿里巴巴开源的</li>
+<li>Druid 社区也会不断更新维护</li>
+</ul>
+</li>
+</ul>
+<h3 id="springBoot是如何实现自动配置的？"><a href="#springBoot是如何实现自动配置的？" class="headerlink" title="springBoot是如何实现自动配置的？"></a>springBoot是如何实现自动配置的？</h3><hr>
+<hr>
+<h2 id="sql优化相关"><a href="#sql优化相关" class="headerlink" title="sql优化相关"></a>sql优化相关</h2><h3 id="关于sql优化，你知道那些？"><a href="#关于sql优化，你知道那些？" class="headerlink" title="关于sql优化，你知道那些？"></a>关于sql优化，你知道那些？</h3><ul>
+<li><p>in中包含的值不应过多</p>
+<ul>
+<li>in中的数据是存储在数组中的</li>
+<li>这个数组中的元素是排好序的</li>
+<li>如果in中的元素过多一般使用exist替代in使用</li>
+</ul>
+</li>
+<li><p>区分in和exist、not in 和 not exist的使用</p>
+<ul>
+<li>exist是以外层表作为驱动表，先被访问； exist适用于外表小内表大的情况下；</li>
+<li>in是先执行子查询； in使用了内表小外表达的情况下</li>
+<li>对于not in 和 not exist情况，推荐使用 not exist，not in可能存在逻辑问题</li>
+</ul>
+</li>
+<li><p>select语句查询的时候务必指定字段</p>
+<ul>
+<li>较少不必要的资源消耗</li>
+<li>减少了使用<strong>覆盖索引</strong>（select的数据从索引中就可以获取，不必再读取数据行了）的可能性</li>
+</ul>
+</li>
+<li><p>当只需要一条数据的时候，使用limit 1</p>
+<ul>
+<li>limit是可以停止全表扫描的</li>
+</ul>
+</li>
+<li><p>排序字段尽可能的添加索引</p>
+<ul>
+<li>索引有两种排序方式<ul>
+<li>使用索引扫描：索引本来就是有序的，不必再进行排序</li>
+<li>在内存中排序：会占用CPU资源，如果查询结果太大，还会生成临时文件，在磁盘中排序，还会进行大量的IO操作，性能较差；</li>
+</ul>
+</li>
+<li>不添加索引会占用CPU资源，如果查询结果太大，还会生成临时文件，在磁盘中排序，还会进行大量的IO操作，性能较差；</li>
+</ul>
+</li>
+<li><p>限制条件的其他字段没有索引，尽量少用or</p>
+<ul>
+<li>or两边，如果有一边没有索引，就会造成不走索引的情况；</li>
+</ul>
+</li>
+<li><p>尽量使用union all代理union</p>
+<ul>
+<li>union会将结果集合并后再进行唯一性过滤，这个过程涉及到排序操作，增加大量的CUP运算，影响性能；</li>
+<li>适应union all的前提-结果集没有重复数据；</li>
+</ul>
+</li>
+<li><p>使用合理的分页方式提高分页的效率</p>
+<ul>
+<li>limit m,n 让m尽可能的小</li>
+<li>id&gt;1000 limit 10;</li>
+</ul>
+</li>
+<li><p>如果要查询的数据量过大，可以使用分段查询</p>
+</li>
+<li><p>避免在where子句中对字段进行表达式操作</p>
+<ul>
+<li>where语句中使用了算术运算，会造成引擎放弃索引；</li>
+</ul>
+</li>
+<li><p>避免使用隐式类型转换</p>
+<ul>
+<li>where语句中的字段类型与参数类型不一致时，会发生类型转换</li>
+</ul>
+</li>
+<li><p>对于联合索引，遵守最左前缀法则</p>
+<ul>
+<li>创建联合索引的时候，尽可能的将常用的字段放在前面；例如 字段1，字段2，字段3</li>
+</ul>
+<p>select  字段1 走索引</p>
+<p>select  字段1，字段2 走索引</p>
+<p>select 字段2，字段3 不走索引</p>
+</li>
+<li><p>对于联合索引，注意范围查询语句</p>
+</li>
+<li><p>比如between、&gt;、&lt;等条件时，会造成后面的索引字段失效。</p>
+</li>
+</ul>
+<p>select * from test where a between ? and ? and b&#x3D;?；a列走索引，因a列是范围查询，因此b列是无法使用索引。</p>
+<h2 id="RabbitMq相关"><a href="#RabbitMq相关" class="headerlink" title="RabbitMq相关"></a>RabbitMq相关</h2><h3 id="在开发中什么场景下使用到了RabbitMQ"><a href="#在开发中什么场景下使用到了RabbitMQ" class="headerlink" title="在开发中什么场景下使用到了RabbitMQ?"></a>在开发中什么场景下使用到了RabbitMQ?</h3><p>系统中重置密码的时候；</p>
+<ul>
+<li>需要将重置后的密码，发送到RabbitMq中，其他系统拿到这个密码，同步到他们的系统中；</li>
+<li>发送重置密码短信通知用户；</li>
+</ul>
+<h3 id="RabbitMq是如何保证数据的完整性的？"><a href="#RabbitMq是如何保证数据的完整性的？" class="headerlink" title="RabbitMq是如何保证数据的完整性的？"></a>RabbitMq是如何保证数据的完整性的？</h3><h3 id="死信队列有什么有点？能够用来干什么？"><a href="#死信队列有什么有点？能够用来干什么？" class="headerlink" title="死信队列有什么有点？能够用来干什么？"></a>死信队列有什么有点？能够用来干什么？</h3><h3 id="什么情况下-Transaction注解会失效？"><a href="#什么情况下-Transaction注解会失效？" class="headerlink" title="什么情况下@Transaction注解会失效？"></a>什么情况下@Transaction注解会失效？</h3><p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1661565712893820457&wfr=spider&for=pc">https://baijiahao.baidu.com/s?id=1661565712893820457&amp;wfr=spider&amp;for=pc</a></p>
+<ul>
+<li>标注在Interface上并且配置了Spring AOP 使用CGLib动态代理，将会导致@Transactional注解失效</li>
+<li><strong>@Transactional 应用在非 public 修饰的方法上</strong><ul>
+<li>在Spring AOP 代理的时候，会对目标方法进行拦截，其中有一个方法，如果不是public修饰符修饰的方法，就不会获取到@Transactional注解里属性的配置信息</li>
+</ul>
+</li>
+<li><strong>@Transactional 注解属性 propagation 设置错误</strong><ul>
+<li>错误的设置事务的传播行为</li>
+</ul>
+</li>
+<li><strong>@Transactional 注解属性 rollbackFor 设置错误</strong><ul>
+<li>Spring默认抛出了未检查unchecked异常（继承自 RuntimeException 的异常）或者 Error才回滚事务；其他异常不会触发回滚事务。如果在事务中抛出其他类型的异常，但却期望 Spring 能够回滚事务，就需要指定 <strong>rollbackFor</strong>属性。</li>
+<li>如果发生了IO异常，是不会发生回滚的；</li>
+</ul>
+</li>
+<li><strong>同一个类中方法调用，导致@Transactional失效</strong><ul>
+<li>同一个类中有方法a和b,a没有使用注解，b使用了注解，调用方法a，b的事务不会生效；</li>
+<li>Spring AOP代理造成的，因为只有当事务方法被当前类以外的代码调用时，才会由Spring生成的代理对象来管理。</li>
+</ul>
+</li>
+<li><strong>异常被你的 catch“吃了”导致@Transactional失效</strong><ul>
+<li>手动的捕获这个异常并进行处理，会认为当前事务应该正常commit。</li>
+<li>在业务方法中一般不需要catch异常，如果非要catch一定要抛出throw new RuntimeException()，或者注解中指定抛异常类型</li>
+</ul>
+</li>
+<li><strong>数据库引擎不支持事务</strong><ul>
+<li>MySQL数据库默认使用支持事务的innodb引擎。一旦数据库引擎切换成不支持事务的myisam，那事务就从根本上失效了。</li>
+</ul>
+</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="Docker相关"><a href="#Docker相关" class="headerlink" title="Docker相关"></a>Docker相关</h2><h3 id="为什么使用Docker容器？Docker有什么优点？"><a href="#为什么使用Docker容器？Docker有什么优点？" class="headerlink" title="为什么使用Docker容器？Docker有什么优点？"></a>为什么使用Docker容器？Docker有什么优点？</h3><hr>
+<h2 id="20230509-数字码力"><a href="#20230509-数字码力" class="headerlink" title="20230509-数字码力"></a>20230509-数字码力</h2><h3 id="先介绍一下自己"><a href="#先介绍一下自己" class="headerlink" title="先介绍一下自己"></a>先介绍一下自己</h3><h3 id="多线程使用过吗"><a href="#多线程使用过吗" class="headerlink" title="多线程使用过吗"></a>多线程使用过吗</h3><p>线程池的参数</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_60380027/article/details/124387652">https://blog.csdn.net/m0_60380027/article/details/124387652</a></p>
+<ol>
+<li>corePoolSize：核心线程数，线程池正常情况下保持的线程数，大户人家“长工”的数量。</li>
+<li>maximumPoolSize：最大线程数，当线程池繁忙时最多可以拥有的线程数，大户人家“长工”+“短工”的总数量。</li>
+<li>keepAliveTime：空闲线程存活时间，没有活之后“短工”可以生存的最大时间。</li>
+<li>TimeUnit：时间单位，配合参数 3 一起使用，用于描述参数 3 的时间单位。</li>
+<li>BlockingQueue：线程池的任务队列，用于保存线程池待执行任务的容器。</li>
+<li>ThreadFactory：线程工厂，用于创建线程池中线程的工厂方法，通过它可以设置线程的命名规则、优先级和线程类型。</li>
+<li>RejectedExecutionHandler：拒绝策略，当任务量超过线程池可以保存的最大任务数时，执行的策略。</li>
+</ol>
+<p>什么时候触发策略的？</p>
+<ul>
+<li><strong>拒绝策略：当线程池的任务超出线程池队列可以存储的最大值之后，执行的策略。</strong></li>
+</ul>
+<h3 id="Spring的生命周期"><a href="#Spring的生命周期" class="headerlink" title="Spring的生命周期"></a>Spring的生命周期</h3><p><a target="_blank" rel="noopener" href="http://localhost:4000/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/SpringBean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F&BeanDefinitions.pdf">SpringBean生命周期&amp;BeanDefinitions.pdf</a></p>
+<h3 id="一个编程题"><a href="#一个编程题" class="headerlink" title="一个编程题"></a>一个编程题</h3><p>考编程习惯</p>
+<p><img src="/2023/04/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230509194903729.png" srcset="/img/loading.gif" lazyload alt="image-20230509194903729"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">System.out.println(str2.replace(<span class="hljs-string">&quot;支付宝&quot;</span>, <span class="hljs-string">&quot;&lt;font style=&#x27;color:red;&#x27;&gt;&quot;</span> + <span class="hljs-string">&quot;支付宝&quot;</span> + <span class="hljs-string">&quot;&lt;/font&gt;&quot;</span>).replace(<span class="hljs-string">&quot;支付&quot;</span>,<span class="hljs-string">&quot;&lt;font style=&#x27;color:red;&#x27;&gt;&quot;</span> + <span class="hljs-string">&quot;支付&quot;</span> + <span class="hljs-string">&quot;&lt;/font&gt;&quot;</span>));<br><span class="hljs-comment">// &lt;font style=&#x27;color:red;&#x27;&gt;&lt;font style=&#x27;color:red;&#x27;&gt;支付&lt;/font&gt;宝&lt;/font&gt;使用&lt;font style=&#x27;color:red;&#x27;&gt;&lt;font style=&#x27;color:red;&#x27;&gt;支付&lt;/font&gt;宝&lt;/font&gt;&lt;font style=&#x27;color:red;&#x27;&gt;支付&lt;/font&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 使用标记的方式</span><br>List&lt;String&gt; list=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        list.add(<span class="hljs-string">&quot;支付宝&quot;</span>);<br>        list.add(<span class="hljs-string">&quot;支付&quot;</span>);<br>        String str=<span class="hljs-string">&quot;支付宝使用支付宝支付&quot;</span>;<br>        <span class="hljs-comment">//String mRedText = getMRedText(list, str, null, null);</span><br>        <span class="hljs-comment">//System.out.println(mRedText);</span><br>        <span class="hljs-type">int</span>[] intArr=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[str.length()];<br>        <span class="hljs-keyword">for</span> (String word : list) &#123;<br>            <span class="hljs-type">int</span> thisLen=word.length();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;str.length() &amp;&amp; (i=str.indexOf(word,i))!=-<span class="hljs-number">1</span>;i+=thisLen)&#123;<br>                <span class="hljs-comment">// 将需要高亮显示的标志位制为1</span><br>                setIntArr(i,i+thisLen-<span class="hljs-number">1</span>,intArr);<br>            &#125;<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="介绍下项目比较突出的点"><a href="#介绍下项目比较突出的点" class="headerlink" title="介绍下项目比较突出的点"></a>介绍下项目比较突出的点</h3><p>什么时候付款成功，什么时候付款失败？</p>
+<h3 id="MyBatis的缓存"><a href="#MyBatis的缓存" class="headerlink" title="MyBatis的缓存"></a>MyBatis的缓存</h3><p>myBatis什么时候触发了一级缓存，什么时候触发了二级缓存？</p>
+<p>还有什么需要问我的吗？</p>
+<h3 id="使用Redis做什么"><a href="#使用Redis做什么" class="headerlink" title="使用Redis做什么"></a>使用Redis做什么</h3><h3 id="分布式了解多吗"><a href="#分布式了解多吗" class="headerlink" title="分布式了解多吗"></a>分布式了解多吗</h3><h2 id="20230510科蓝软件"><a href="#20230510科蓝软件" class="headerlink" title="20230510科蓝软件"></a>20230510科蓝软件</h2><h3 id="先介绍下自己？"><a href="#先介绍下自己？" class="headerlink" title="先介绍下自己？"></a>先介绍下自己？</h3><p>介绍下最近做的项目？</p>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><p>seata是跨数据库的吗？</p>
+<p>seata是如何实现事务的？</p>
+<p>是如何保证数据库一数据库2数据的完整性</p>
+<p>是如何进行回滚的？</p>
+<hr>
+<h3 id="微服务用到了哪些技术？"><a href="#微服务用到了哪些技术？" class="headerlink" title="微服务用到了哪些技术？"></a>微服务用到了哪些技术？</h3><p><strong>eureka的生命周期？</strong></p>
+<p><strong>nacos的生命周期？</strong></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:4000/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/Spring_Cloud_%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0.pdf" title="1.1.1 服务注册中⼼⼀般原理">1.1.1 服务注册中⼼⼀般原理</a></p>
+<br>
+
+<p><strong>eureka与nacos的区别？</strong></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:4000/1000/01/21/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5/Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/Spring_Cloud_%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0.pdf" title="1.1.3 主流服务中⼼对⽐">1.1.3 主流服务中⼼对⽐</a></p>
+<p>CAP原理指的是在一个分布式系统中，Consistency（一致性）、 Availability（可用性）、 Partition tolerance（分区容错性）</p>
+<hr>
+<h3 id="强引用与弱引用的区别？"><a href="#强引用与弱引用的区别？" class="headerlink" title="强引用与弱引用的区别？"></a>强引用与弱引用的区别？</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/apricotCandy/article/details/88748068#:~:text=%E5%88%9B%E4%BD%9C%E4%B8%AD%E5%BF%83-,%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%A7%A3%E6%9E%90,-apricotCandy" title="强引用、软引用、弱引用的区别和解析">强引用、软引用、弱引用的区别和解析</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%A2%E8%AF%95/">#面试</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面试题记录</div>
+      <div>https://xuebaqiang.github.io/2023/04/19/面试题记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xuebaqiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/26/%E6%95%B0%E6%8D%AE%E5%BA%93/PlSql-%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/" title="PlSql相关操作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PlSql相关操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/28/%E8%B5%84%E6%BA%90%E4%B8%8B%E8%BD%BD-IDM%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="软件-IDM软件安装与使用">
+                        <span class="hidden-mobile">软件-IDM软件安装与使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

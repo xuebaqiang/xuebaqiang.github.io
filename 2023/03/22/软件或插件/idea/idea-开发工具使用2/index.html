@@ -16,15 +16,15 @@
   <meta name="author" content="xuebaqiang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="idea快捷键Alt+shift+F–将方法添加到收藏夹  收藏夹的使用 查看收藏夹 findaction→favorites(alt+2) 可以看到我们的书签、收藏夹。 单独添加到收藏夹（自定义收藏夹） findaction → add to favorites(Alt+shift+F) 我们可以光标定位到某个函数、或是某个类添加到自定义的收藏夹中（add to new favorites li">
+    <meta name="description" content="idea快捷键   快捷键 快捷键描述    Alt+shift+F 将方法添加到收藏夹   ctrl+shift+i 预览某个类的代码   F4 查看java类的继承结构(Hierarchy)   idea插件    插件名称 插件描述    Sequence Diagram 查看代码调用链路图插件(真的很好用)   Translation 翻译引擎    收藏夹的使用 查看收藏夹 findac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="idea-开发工具使用2">
 <meta property="og:url" content="https://xuebaqiang.github.io/2023/03/22/%E8%BD%AF%E4%BB%B6%E6%88%96%E6%8F%92%E4%BB%B6/idea/idea-%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A82/index.html">
 <meta property="og:site_name" content="myBlog">
-<meta property="og:description" content="idea快捷键Alt+shift+F–将方法添加到收藏夹  收藏夹的使用 查看收藏夹 findaction→favorites(alt+2) 可以看到我们的书签、收藏夹。 单独添加到收藏夹（自定义收藏夹） findaction → add to favorites(Alt+shift+F) 我们可以光标定位到某个函数、或是某个类添加到自定义的收藏夹中（add to new favorites li">
+<meta property="og:description" content="idea快捷键   快捷键 快捷键描述    Alt+shift+F 将方法添加到收藏夹   ctrl+shift+i 预览某个类的代码   F4 查看java类的继承结构(Hierarchy)   idea插件    插件名称 插件描述    Sequence Diagram 查看代码调用链路图插件(真的很好用)   Translation 翻译引擎    收藏夹的使用 查看收藏夹 findac">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-22T02:12:03.000Z">
-<meta property="article:modified_time" content="2023-03-29T09:36:12.938Z">
+<meta property="article:modified_time" content="2023-04-26T16:52:32.028Z">
 <meta property="article:author" content="xuebaqiang">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          187 字
+          701 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          2 分钟
+          6 分钟
         
       </span>
     
@@ -273,7 +273,43 @@
             
               <div class="markdown-body">
                 
-                <h3 id="idea快捷键"><a href="#idea快捷键" class="headerlink" title="idea快捷键"></a>idea快捷键</h3><p><strong>Alt+shift+F</strong>–将方法添加到收藏夹</p>
+                <h3 id="idea快捷键"><a href="#idea快捷键" class="headerlink" title="idea快捷键"></a>idea快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>快捷键描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Alt+shift+F</strong></td>
+<td>将方法添加到收藏夹</td>
+</tr>
+<tr>
+<td><strong>ctrl+shift+i</strong></td>
+<td>预览某个类的代码</td>
+</tr>
+<tr>
+<td><strong>F4</strong></td>
+<td>查看java类的继承结构(Hierarchy)</td>
+</tr>
+</tbody></table>
+<p>idea插件</p>
+<table>
+<thead>
+<tr>
+<th>插件名称</th>
+<th>插件描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sequence Diagram</td>
+<td>查看代码调用链路图插件(真的很好用)</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td>翻译引擎</td>
+</tr>
+</tbody></table>
 <hr>
 <h3 id="收藏夹的使用"><a href="#收藏夹的使用" class="headerlink" title="收藏夹的使用"></a>收藏夹的使用</h3><ul>
 <li>查看收藏夹 findaction→favorites(<strong>alt+2</strong>)<ul>
@@ -286,7 +322,25 @@
 </ul>
 </li>
 </ul>
+<hr>
+<h3 id="问题解决方案"><a href="#问题解决方案" class="headerlink" title="问题解决方案"></a>问题解决方案</h3><p>【1】解决Idea中项目模块没有蓝色方块</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://www.zhangshengrong.com/p/x7XRM6MxNz/">https://www.zhangshengrong.com/p/x7XRM6MxNz/</a></p>
+<p>在modual.xml中配置模块信息(需要指定.iml文件)</p>
+<p>或者在compiler.xml中配置模块信息</p>
+<br/>
 
+<p>【2】pom.xml文件中导入了jar包，但是项目中还是使用不了对应的jar包中的类</p>
+<p>需要重新生成iml文件-》进入对应的项目下，执行<code>mvn idea:module</code>命令</p>
+<ul>
+<li>类中找不到指定的包，可能是iml文件存在问题</li>
+</ul>
+<br/>
+
+<p>【3】IDEA 工程能编译成功，但是显示找不到类</p>
+<p>这种情况是IDEA的索引缓存出问题，需要清理重新建立。</p>
+<p>方式：点击idea的左上角file—选择<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Invalidate&spm=1001.2101.3001.7020">Invalidate</a> caches即可刷新项目和清除项目缓存并重启</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/calm_diligence/article/details/125892088">https://blog.csdn.net/calm_diligence/article/details/125892088</a></p>
+<br/>
                 
               </div>
             
