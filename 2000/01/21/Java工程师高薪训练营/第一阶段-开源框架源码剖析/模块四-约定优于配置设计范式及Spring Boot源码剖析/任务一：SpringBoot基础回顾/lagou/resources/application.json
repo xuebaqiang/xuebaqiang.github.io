@@ -1,1 +1,0 @@
-{"server":{"port":8090},"person":{"id":2,"name":"lucy","hobby":["吃饭","睡觉","打王者"],"family":["father","mother"],"map":{"k1":"v1","k2":"v2"},"pet":{"type":"pig","name":"佩奇"}},"acme":{"myPerson":{"person":{"FIRST_NAME":"泰森"}}}}
